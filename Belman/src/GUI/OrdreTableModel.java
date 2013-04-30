@@ -4,7 +4,7 @@
  */
 package gui;
 
-import BE.OrdreInfo;
+import BE.Order;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,16 +24,16 @@ public class OrdreTableModel extends AbstractTableModel
     private final Class[] columnTypes = {String.class};
 
 
-    private ArrayList<OrdreInfo> info;
+    private ArrayList<Order> info;
 
-    public OrdreTableModel(ArrayList<OrdreInfo> allInfo)
+    public OrdreTableModel(ArrayList<Order> allInfo)
     {
         info = allInfo;
     }
 
-    public OrdreTableModel(List<OrdreInfo> all)
+    public OrdreTableModel(List<Order> all)
     {
-        info = (ArrayList<OrdreInfo>) all;
+        info = (ArrayList<Order>) all;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class OrdreTableModel extends AbstractTableModel
     @Override
     public Object getValueAt(int row, int col)
     {
-       OrdreInfo e = info.get(row);
+       Order e = info.get(row);
        switch (col)
        {
 //           case 0: return e.getTitle();
@@ -80,19 +80,19 @@ public class OrdreTableModel extends AbstractTableModel
     @Override
     public void setValueAt(Object o, int row, int col)
     {
-        OrdreInfo e = info.get(row);
+        Order e = info.get(row);
         switch (col)
         {
            // case 0: e.getTitle();
         }
     }
 
-    public OrdreInfo getEventsByRow(int row)
+    public Order getEventsByRow(int row)
     {
         return info.get(row);
     }
 
-    public void setCollection(Collection<OrdreInfo> clubEvents)
+    public void setCollection(Collection<Order> clubEvents)
     {
         info = new ArrayList<>(clubEvents);
         fireTableDataChanged();
