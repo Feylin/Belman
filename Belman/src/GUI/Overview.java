@@ -4,8 +4,12 @@
  */
 package GUI;
 
+import BLL.OrderManager;
+import GUI.Tablemodels.OrderTablemodel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class Overview extends javax.swing.JFrame
 {
-
+    static OrderManager omgr = null;
+    private OrderTablemodel omodel = null;
     private static Overview instance = null;
     
     /** Creates new form Overview */
@@ -22,6 +27,19 @@ public class Overview extends javax.swing.JFrame
     {
         initComponents();
         windowClose();
+        
+        try
+        {
+            omgr = OrderManager.getInstance();
+            omgr.addObserver(this);
+            
+            omodel = new OrderTablemodel(omgr.getAll());
+            orderTable.setModel(omodel);
+        }
+        catch (Exception e)
+        {
+            
+        }
     }
     
     public static Overview getInstance()
@@ -53,8 +71,24 @@ public class Overview extends javax.swing.JFrame
                 closePressed();
             }
         });
-    }  
-
+    }
+    
+    @Override
+    public void update(Observable o, Object arg)
+    {
+        if (o instanceof OrderManager)
+        {
+            try
+            {
+                omodel.setCollection(omgr.getAll());
+            }
+            catch (Exception e)
+            {
+                
+            }
+        }
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -109,6 +143,14 @@ public class Overview extends javax.swing.JFrame
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener()
+        {
+            public void stateChanged(javax.swing.event.ChangeEvent evt)
+            {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -602,6 +644,11 @@ public class Overview extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
         closePressed();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
+    {//GEN-HEADEREND:event_jTabbedPane1StateChanged
+        
+    }//GEN-LAST:event_jTabbedPane1StateChanged
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

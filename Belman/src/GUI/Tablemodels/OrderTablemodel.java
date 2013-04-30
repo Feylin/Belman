@@ -20,7 +20,7 @@ public class OrderTablemodel extends AbstractTableModel
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-    private final String[] header = {"Ordre"};
+    private final String[] header = {"Order"};
     private final Class[] columnTypes = {String.class};
 
 
