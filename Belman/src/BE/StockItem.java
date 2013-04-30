@@ -10,29 +10,44 @@ package BE;
  */
 public class StockItem
 {
-    private final int ID;
-    private String Code;
-    private int MaterialID;
-    private double MaterialName;
-    private double MaterialDensity;
-    private String ChargeNr;
-    private int Length;
-    private int Width;
-    private double Thickness;
-    private double StockQuantity;
-   
-    public StockItem(int ID, String Code,int MaterialID, double MaterialName, double MaterialDensity, String ChargeNr, int Length, int Width, double Thickness, double StockQuantity)
+
+    private int id;
+    private String code;
+    private int materialId;
+    private double materialName;
+    private double materialDensity;
+    private String chargeNr;
+    private double length;
+    private double width;
+    private double thickness;
+    private double stockQuantity;
+
+    public StockItem(int Id, String Code, int materialId, double materialName, double materialDensity, String chargeNr, double length, double width, double thickness, double stockQuantity)
     {
-        this.ID = ID;
-        this.Code = Code;
-        this.MaterialID = MaterialID;
-        this.MaterialName = MaterialName;
-        this.MaterialDensity = MaterialDensity;
-        this.ChargeNr = ChargeNr;
-        this.Length = Length;
-        this.Width = Width;
-        this.Thickness = Thickness;
-        this.StockQuantity = StockQuantity;        
+        this.id = Id;
+        this.code = Code;
+        this.materialId = materialId;
+        this.materialName = materialName;
+        this.materialDensity = materialDensity;
+        this.chargeNr = chargeNr;
+        this.length = length;
+        this.width = width;
+        this.thickness = thickness;
+        this.stockQuantity = stockQuantity;
+    }
+
+    public StockItem(int id, StockItem item)
+    {
+        this(id,
+                item.getCode(),
+                item.getMaterialId(),
+                item.getMaterialName(),
+                item.getMaterialDensity(),
+                item.getChargeNr(),
+                item.getLength(),
+                item.getWidth(),
+                item.getThickness(),
+                item.getStockQuantity());
     }
 
     /**
@@ -40,7 +55,7 @@ public class StockItem
      */
     public int getID()
     {
-        return ID;
+        return id;
     }
 
     /**
@@ -48,31 +63,31 @@ public class StockItem
      */
     public String getCode()
     {
-        return Code;
+        return code;
     }
 
     /**
-     * @param Code the Code to set
+     * @param code the Code to set
      */
-    public void setCode(String Code)
+    public void setCode(String code)
     {
-        this.Code = Code;
+        this.code = code;
     }
 
     /**
      * @return the MaterialID
      */
-    public int getMaterialID()
+    public int getMaterialId()
     {
-        return MaterialID;
+        return materialId;
     }
 
     /**
-     * @param MaterialID the MaterialID to set
+     * @param materialId the MaterialID to set
      */
-    public void setMaterialID(int MaterialID)
+    public void setMaterialId(int materialId)
     {
-        this.MaterialID = MaterialID;
+        this.materialId = materialId;
     }
 
     /**
@@ -80,15 +95,15 @@ public class StockItem
      */
     public double getMaterialName()
     {
-        return MaterialName;
+        return materialName;
     }
 
     /**
-     * @param MaterialName the MaterialName to set
+     * @param materialName the MaterialName to set
      */
-    public void setMaterialName(double MaterialName)
+    public void setMaterialName(double materialName)
     {
-        this.MaterialName = MaterialName;
+        this.materialName = materialName;
     }
 
     /**
@@ -96,15 +111,15 @@ public class StockItem
      */
     public double getMaterialDensity()
     {
-        return MaterialDensity;
+        return materialDensity;
     }
 
     /**
-     * @param MaterialDensity the MaterialDensity to set
+     * @param materialDensity the MaterialDensity to set
      */
-    public void setMaterialDensity(double MaterialDensity)
+    public void setMaterialDensity(double materialDensity)
     {
-        this.MaterialDensity = MaterialDensity;
+        this.materialDensity = materialDensity;
     }
 
     /**
@@ -112,47 +127,47 @@ public class StockItem
      */
     public String getChargeNr()
     {
-        return ChargeNr;
+        return chargeNr;
     }
 
     /**
-     * @param ChargeNr the ChargeNr to set
+     * @param chargeNr the ChargeNr to set
      */
-    public void setChargeNr(String ChargeNr)
+    public void setChargeNr(String chargeNr)
     {
-        this.ChargeNr = ChargeNr;
+        this.chargeNr = chargeNr;
     }
 
     /**
      * @return the Length
      */
-    public int getLength()
+    public double getLength()
     {
-        return Length;
+        return length;
     }
 
     /**
-     * @param Length the Length to set
+     * @param length the Length to set
      */
-    public void setLength(int Length)
+    public void setLength(double length)
     {
-        this.Length = Length;
+        this.length = length;
     }
 
     /**
      * @return the Width
      */
-    public int getWidth()
+    public double getWidth()
     {
-        return Width;
+        return width;
     }
 
     /**
-     * @param Width the Width to set
+     * @param width the Width to set
      */
-    public void setWidth(int Width)
+    public void setWidth(double width)
     {
-        this.Width = Width;
+        this.width = width;
     }
 
     /**
@@ -160,15 +175,15 @@ public class StockItem
      */
     public double getThickness()
     {
-        return Thickness;
+        return thickness;
     }
 
     /**
-     * @param Thickness the Thickness to set
+     * @param thickness the Thickness to set
      */
-    public void setThickness(double Thickness)
+    public void setThickness(double thickness)
     {
-        this.Thickness = Thickness;
+        this.thickness = thickness;
     }
 
     /**
@@ -176,15 +191,14 @@ public class StockItem
      */
     public double getStockQuantity()
     {
-        return StockQuantity;
+        return stockQuantity;
     }
 
     /**
-     * @param StockQuantity the StockQuantity to set
+     * @param stockQuantity the StockQuantity to set
      */
-    public void setStockQuantity(double StockQuantity)
+    public void setStockQuantity(double stockQuantity)
     {
-        this.StockQuantity = StockQuantity;
+        this.stockQuantity = stockQuantity;
     }
-    
 }

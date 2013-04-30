@@ -43,17 +43,17 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO Order(sOrder, pOrderId, pOrder, dueDate, quantity, materialId, thickness, width, circumference) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Order(sOrderId, sOrder, pOrder, dueDate, quantity, materialId,"
+                    + " thickness, width, circumference) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDouble(1, order.getOrder());
-            ps.setInt(2, order.getProdOrderID());
-            ps.setDouble(3, order.getProdOrder());
-            ps.setString(4, convertDateToSQL(order.getDueDate()));
-            ps.setInt(5, order.getQuantity());
-            ps.setInt(6, order.getMaterialID());
-            ps.setDouble(7, order.getThickness());
-            ps.setDouble(8, order.getWidth());
-            ps.setDouble(9, order.getCircumference());
+            ps.setDouble(2, order.getProdOrder());
+            ps.setString(3, convertDateToSQL(order.getDueDate()));
+            ps.setInt(4, order.getQuantity());
+            ps.setInt(5, order.getMaterialID());
+            ps.setDouble(6, order.getThickness());
+            ps.setDouble(7, order.getWidth());
+            ps.setDouble(8, order.getCircumference());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
