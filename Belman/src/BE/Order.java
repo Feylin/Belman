@@ -13,8 +13,9 @@ import java.util.GregorianCalendar;
 public class Order
 {
     private final int orderID;
-    private String order;
-    private String prodOrder;
+    private double sOrder;
+    private int prodOrderID;
+    private double prodOrder;
     private GregorianCalendar dueDate;
     private int quantity;
     private int materialID;
@@ -22,10 +23,11 @@ public class Order
     private double width;
     private double circumference;
     
-    public Order(int sOrderID,String sOrder, String prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
+    public Order(int sOrderID,double sOrder,int prodOrderID, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
     {
         this.orderID = sOrderID;
-        this.order = sOrder;
+        this.sOrder = sOrder;
+        this.prodOrderID = prodOrderID;
         this.prodOrder = prodOrder;
         this.dueDate = dueDate;
         this.quantity = quantity;
@@ -34,6 +36,11 @@ public class Order
         this.width = width;
         this.circumference = circumference;
         
+    }
+    
+    public Order(double sOrder,int prodOrderID, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
+    {
+        this(-1, sOrder, prodOrderID, prodOrder, dueDate, quantity, materialID, thickness, width, circumference);
     }
 
     /**
@@ -47,23 +54,23 @@ public class Order
     /**
      * @return the order
      */
-    public String getOrder()
+    public double getOrder()
     {
-        return order;
+        return sOrder;
     }
 
     /**
      * @param order the order to set
      */
-    public void setOrder(String order)
+    public void setOrder(double order)
     {
-        this.order = order;
+        this.sOrder = order;
     }
 
     /**
      * @return the prodOrder
      */
-    public String getProdOrder()
+    public double getProdOrder()
     {
         return prodOrder;
     }
@@ -71,7 +78,7 @@ public class Order
     /**
      * @param prodOrder the prodOrder to set
      */
-    public void setProdOrder(String prodOrder)
+    public void setProdOrder(double prodOrder)
     {
         this.prodOrder = prodOrder;
     }
@@ -170,6 +177,22 @@ public class Order
     public void setCircumference(double circumference)
     {
         this.circumference = circumference;
+    }
+
+    /**
+     * @return the prodOrderID
+     */
+    public int getProdOrderID()
+    {
+        return prodOrderID;
+    }
+
+    /**
+     * @param prodOrderID the prodOrderID to set
+     */
+    public void setProdOrderID(int prodOrderID)
+    {
+        this.prodOrderID = prodOrderID;
     }
     
 }
