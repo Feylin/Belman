@@ -39,7 +39,7 @@ public class ProductionOrderDBManager
         return instance;
     }
 
-    public void add(Order order) throws SQLException
+    public Order add(Order order) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
@@ -60,7 +60,12 @@ public class ProductionOrderDBManager
             {
                 throw new SQLException("Unable to add an Order");
             }
-        }
+            ResultSet keys = ps.getGeneratedKeys();
+            keys.next();
+            int id = keys.getInt( 1 );
+
+            return new Order( id, order);
+        }      
     }
 
     public ArrayList<Order> getAll() throws SQLException, IOException
@@ -80,12 +85,27 @@ public class ProductionOrderDBManager
         }
     }
     
+    public void remove(int prodOrderId) throws SQLException            
+    {
+        try(Connection con = connector.getConnection())
+        {
+            String sql = "DELETE * FROM ProductionOrder WHERE pOrderId = ?";    
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, prodOrderId);  
+            
+            int affectedRows = ps.executeUpdate();
+            if( affectedRows == 0 ){
+                throw new SQLException( "Unable to remove Order!" );
+            }
+        }
+    }
+    
     
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
     {
 
-
+        int sOrderID = rs.getInt("sOrderId");
         double sOrder = rs.getDouble("sOrder");
         int prodOrderId = rs.getInt("pOrderId");
         double prodOrder = rs.getDouble("pOrder");
@@ -97,7 +117,7 @@ public class ProductionOrderDBManager
         double width = rs.getDouble("width");
         double circumference = rs.getDouble("circumference");
 
-        return new Order(sOrder, prodOrderId,prodOrder, gc, quantity, materialId, thickness, width, circumference);  
+        return new Order(sOrderID, sOrder, prodOrderId,prodOrder, gc, quantity, materialId, thickness, width, circumference);  
     }
 
     protected String convertDateToSQL(GregorianCalendar date)

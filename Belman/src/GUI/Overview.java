@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author Rashid
  */
-public class Overview extends javax.swing.JFrame
+public class Overview extends javax.swing.JFrame implements Observer
 {
     static OrderManager omgr = null;
     private OrderTablemodel omodel = null;
@@ -33,7 +33,7 @@ public class Overview extends javax.swing.JFrame
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
             
-            omodel = new OrderTablemodel(omgr.allOrders());
+            omodel = new OrderTablemodel(omgr.getAll());
             orderTable.setModel(omodel);
         }
         catch (Exception e)
@@ -80,7 +80,7 @@ public class Overview extends javax.swing.JFrame
         {
             try
             {
-                omodel.setCollection(omgr.allOrders());
+                omodel.setCollection(omgr.getAll());
             }
             catch (Exception e)
             {

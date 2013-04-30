@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
  */
 public class Order
 {
+
     private final int orderID;
     private double sOrder;
     private int prodOrderID;
@@ -22,8 +23,8 @@ public class Order
     private double thickness;
     private double width;
     private double circumference;
-    
-    public Order(int sOrderID,double sOrder,int prodOrderID, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
+
+    public Order(int sOrderID, double sOrder, int prodOrderID, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
     {
         this.orderID = sOrderID;
         this.sOrder = sOrder;
@@ -35,12 +36,30 @@ public class Order
         this.thickness = thickness;
         this.width = width;
         this.circumference = circumference;
-        
+
     }
-    
-    public Order(double sOrder,int prodOrderID, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
+
+//    public Order(double sOrderID, double sOrder, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
+//    {
+//        this(sOrderID, sOrder, prodOrder, dueDate, quantity, materialID, thickness, width, circumference);
+//    }
+
+    public Order(int prodOrderId, Order o)
     {
-        this(-1, sOrder, prodOrderID, prodOrder, dueDate, quantity, materialID, thickness, width, circumference);
+        this(
+                o.getOrderID(),
+                o.getOrder(),
+                prodOrderId,
+                o.getProdOrder(),
+                o.getDueDate(),
+                o.getQuantity(),
+                o.getMaterialID(),
+                o.getThickness(),
+                o.getWidth(),
+                o.getCircumference());
+
+
+
     }
 
     /**
@@ -194,5 +213,4 @@ public class Order
     {
         this.prodOrderID = prodOrderID;
     }
-    
 }
