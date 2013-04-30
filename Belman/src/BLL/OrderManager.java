@@ -22,6 +22,10 @@ public class OrderManager
         
     }
     
+    /**
+     *
+     * @return
+     */
     public Order getOrderById()
     {
         return ODB.getOrder();
