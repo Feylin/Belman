@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rashid
@@ -17,6 +21,7 @@ public class Overview extends javax.swing.JFrame
     private Overview()
     {
         initComponents();
+        windowClose();
     }
     
     public static Overview getInstance()
@@ -28,6 +33,27 @@ public class Overview extends javax.swing.JFrame
         return instance;
     }
     
+    private void closePressed()
+    {
+        String message = "Are you sure you want to exit?";
+        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION)
+        {
+            System.exit(0);
+        }
+    }
+    
+    private void windowClose()
+    {
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                closePressed();
+            }
+        });
+    }  
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -43,7 +69,7 @@ public class Overview extends javax.swing.JFrame
         jPanel13 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        orderTable = new javax.swing.JTable();
         txtQuantity = new javax.swing.JPanel();
         lblOrder = new javax.swing.JLabel();
         txtOrder = new javax.swing.JTextField();
@@ -77,10 +103,14 @@ public class Overview extends javax.swing.JFrame
         jPanel9 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null},
@@ -125,7 +155,7 @@ public class Overview extends javax.swing.JFrame
                 return types [columnIndex];
             }
         });
-        jScrollPane11.setViewportView(jTable5);
+        jScrollPane11.setViewportView(orderTable);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -523,6 +553,26 @@ public class Overview extends javax.swing.JFrame
 
         jTabbedPane1.addTab("To Be Cut", jPanel7);
 
+        jMenu1.setText("File");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setText("Exit");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Help");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -548,20 +598,25 @@ public class Overview extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaterialIDActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem1ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
+        closePressed();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -571,15 +626,10 @@ public class Overview extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
@@ -590,6 +640,7 @@ public class Overview extends javax.swing.JFrame
     private javax.swing.JLabel lblMaterial;
     private javax.swing.JLabel lblOrder;
     private javax.swing.JLabel lblThickness;
+    private javax.swing.JTable orderTable;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtMaterialID;
     private javax.swing.JTextField txtMaterialName;

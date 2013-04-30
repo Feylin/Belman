@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package GUI.Tablemodels;
 
 import BE.Order;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author bhp
  */
-public class OrdreTableModel extends AbstractTableModel
+public class OrderTablemodel extends AbstractTableModel
 {
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
@@ -26,12 +26,12 @@ public class OrdreTableModel extends AbstractTableModel
 
     private ArrayList<Order> info;
 
-    public OrdreTableModel(ArrayList<Order> allInfo)
+    public OrderTablemodel(ArrayList<Order> allInfo)
     {
         info = allInfo;
     }
 
-    public OrdreTableModel(List<Order> all)
+    public OrderTablemodel(List<Order> all)
     {
         info = (ArrayList<Order>) all;
     }
