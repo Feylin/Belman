@@ -4,6 +4,10 @@
  */
 package belman.project;
 
+import GUI.BelmanStartside;
+import java.awt.EventQueue;
+import javax.swing.UIManager;
+
 /**
  *
  * @author Rashid
@@ -16,6 +20,21 @@ public class BelmanProject
      */
     public static void main(String[] args)
     {
-        // TODO code application logic here
+        EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    Overview.getInstance().setVisible(true);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
