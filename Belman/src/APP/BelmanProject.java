@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package belman.project;
+package APP;
 
-import GUI.BelmanStartside;
+import GUI.Overview;
 import java.awt.EventQueue;
 import javax.swing.UIManager;
 
