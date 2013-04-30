@@ -4,7 +4,7 @@
  */
 package belman.project;
 
-import GUI.BelmanStartside;
+import GUI.Overview;
 import java.awt.EventQueue;
 import javax.swing.UIManager;
 
