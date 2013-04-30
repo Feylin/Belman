@@ -7,6 +7,7 @@ package BLL;
 import BE.Order;
 import DAL.ProductionOrderDBManager;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *

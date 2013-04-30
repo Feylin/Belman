@@ -33,7 +33,7 @@ public class Overview extends javax.swing.JFrame
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
             
-            omodel = new OrderTablemodel(omgr.getAll());
+            omodel = new OrderTablemodel(omgr.allOrders());
             orderTable.setModel(omodel);
         }
         catch (Exception e)
@@ -80,7 +80,7 @@ public class Overview extends javax.swing.JFrame
         {
             try
             {
-                omodel.setCollection(omgr.getAll());
+                omodel.setCollection(omgr.allOrders());
             }
             catch (Exception e)
             {
