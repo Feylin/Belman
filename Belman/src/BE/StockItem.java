@@ -41,7 +41,7 @@ public class StockItem
     {
         this.id = Id;
         this.code = Code;
-        this.material = material;
+        this.material = material;      
         this.chargeNr = chargeNr;
         this.length = length;
         this.width = width;
@@ -93,7 +93,7 @@ public class StockItem
      */
     public int getMaterialId()
     {
-        return materialId;
+        return material.getId();
     }
 
     /**
@@ -109,7 +109,7 @@ public class StockItem
      */
     public double getMaterialName()
     {
-        return materialName;
+        return material.getName();
     }
 
     /**
@@ -125,7 +125,7 @@ public class StockItem
      */
     public double getMaterialDensity()
     {
-        return materialDensity;
+        return material.getDensity();
     }
 
     /**

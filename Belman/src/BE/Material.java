@@ -72,5 +72,29 @@ public class Material
         this.quality = quality;
     }
 
+    /**
+     * @return the density
+     */
+    public double getDensity()
+    {
+        return density;
+    }
+
+    /**
+     * @param density the density to set
+     */
+    public void setDensity(double density)
+    {
+        this.density = density;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId()
+    {
+        return id;
+    }
+
 
 }

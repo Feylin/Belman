@@ -101,14 +101,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                     int selectedRow = tblInStock.getSelectedRow();
                     if (es.getValueIsAdjusting() || selectedRow < 0)
                     {
-                        txtOrder.setText("");
-                        txtQuantity.setText("");
-                        txtDate.setText("");
-                        txtMaterialID.setText("");
-                        txtMaterialName.setText("");
-                        txtThickness.setText("");
-                        txtWidth.setText("");
-                        txtCircumference.setText("");
+                        txtMaterialName1.setText("");
+                        txtMaterialID1.setText("");
+                        txtCode.setText("");
+                        txtMaterialDenisity.setText("");
+                        txtQuantity1.setText("");
+                        txtCharge.setText("");
+                        txtThickness1.setText("");
+                        txtWidth1.setText("");
+                        txtLength1.setText("");
+                        
                         return;
                     }
 
@@ -119,15 +121,15 @@ public class Overview extends javax.swing.JFrame implements Observer
                     {
 //                        txtOrder.setLineWrap(true);
                         
-                        txtName.setText(String.valueOf(s.getMaterialName()));   
+                        txtMaterialName1.setText(String.valueOf(s.getMaterialName()));   
                         txtMaterialID1.setText(String.valueOf(s.getMaterialId()));
                         txtCode.setText(String.valueOf(s.getCode()));
                         txtMaterialDenisity.setText(String.valueOf(s.getMaterialDensity()));
                         txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
                         txtCharge.setText(String.valueOf(s.getChargeNr()));
                         txtThickness1.setText(String.valueOf(s.getThickness()));
-                        txtWidth.setText(String.valueOf(s.getWidth()));
-                        txtLength1.setText(String.valueOf(s.getWidth()));
+                        txtWidth1.setText(String.valueOf(s.getWidth()));
+                        txtLength1.setText(String.valueOf(s.getLength()));
                     }
                     catch (Exception ex)
                     {
@@ -258,7 +260,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         tblInStock = new javax.swing.JTable();
         JPanalStockInfo = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
+        txtMaterialName1 = new javax.swing.JTextField();
         lblMaterialID = new javax.swing.JLabel();
         txtMaterialID1 = new javax.swing.JTextField();
         lblCode = new javax.swing.JLabel();
@@ -270,7 +272,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblThickness1 = new javax.swing.JLabel();
         lblWidth1 = new javax.swing.JLabel();
         txtWidth1 = new javax.swing.JTextField();
-        lblLength = new javax.swing.JLabel();
+        lblLength1 = new javax.swing.JLabel();
         txtLength1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -608,7 +610,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblName.setText("Material Name: ");
 
-        txtName.setEditable(false);
+        txtMaterialName1.setEditable(false);
 
         lblMaterialID.setText("Material ID: ");
 
@@ -632,7 +634,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         txtWidth1.setEditable(false);
 
-        lblLength.setText("Length: ");
+        lblLength1.setText("Length: ");
 
         txtLength1.setEditable(false);
 
@@ -645,7 +647,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblThickness1)
                     .addComponent(lblWidth1)
-                    .addComponent(lblLength))
+                    .addComponent(lblLength1))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtWidth1)
@@ -666,7 +668,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(txtWidth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLength)
+                    .addComponent(lblLength1)
                     .addComponent(txtLength1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -724,7 +726,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMaterialID1)
                             .addComponent(txtCode)
-                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMaterialName1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(JPanalStockInfoLayout.createSequentialGroup()
                                 .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtMaterialDenisity)
@@ -742,7 +744,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMaterialName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMaterialID)
@@ -929,8 +931,6 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.getAccessibleContext().setAccessibleName("Orders and Sleeves created from the chosen material");
-
         jTabbedPane1.addTab("To Be Cut", jPanel7);
 
         jButton4.setText("Luk");
@@ -1062,7 +1062,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDensity;
-    private javax.swing.JLabel lblLength;
+    private javax.swing.JLabel lblLength1;
     private javax.swing.JLabel lblMaterial;
     private javax.swing.JLabel lblMaterialID;
     private javax.swing.JLabel lblName;
@@ -1082,7 +1082,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JTextField txtMaterialID;
     private javax.swing.JTextField txtMaterialID1;
     private javax.swing.JTextField txtMaterialName;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtMaterialName1;
     private javax.swing.JTextField txtOrder;
     private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtQuantity1;

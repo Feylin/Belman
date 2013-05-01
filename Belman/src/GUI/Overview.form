@@ -542,7 +542,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtMaterialID1" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtCode" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtName" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="txtMaterialName1" alignment="1" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="txtMaterialDenisity" max="32767" attributes="0"/>
@@ -568,7 +568,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMaterialName1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -620,7 +620,7 @@
                     <Property name="text" type="java.lang.String" value="Material Name: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtName">
+                <Component class="javax.swing.JTextField" name="txtMaterialName1">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
@@ -676,7 +676,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblThickness1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblWidth1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLength" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblLength1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -703,7 +703,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblLength" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblLength1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtLength1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="17" max="32767" attributes="0"/>
@@ -732,7 +732,7 @@
                         <Property name="editable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lblLength">
+                    <Component class="javax.swing.JLabel" name="lblLength1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Length: "/>
                       </Properties>
@@ -898,9 +898,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Orders and Sleeves created from the chosen material"/>
-              </AccessibilityProperties>
 
               <Layout>
                 <DimensionLayout dim="0">
