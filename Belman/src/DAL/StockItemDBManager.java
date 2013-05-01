@@ -72,7 +72,7 @@ public class StockItemDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem";
+            String sql = "SELECT * FROM StockItem, Material WHERE StockItem.MaterialId = Material.id";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -125,15 +125,15 @@ public class StockItemDBManager
 
         int id = rs.getInt("id");
         String code = rs.getString("code");
-        int materialId = rs.getInt("materialId");
-        double materialName = rs.getDouble("materialName");
-        double materialDensity = rs.getDouble("materialDensity");
+        int materialId = rs.getInt("id");
+        double materialName = rs.getDouble("name");
+        double materialDensity = rs.getDouble("density");
         String chargeNo = rs.getString("chargeNo");
         double length = rs.getDouble("length");
         double width = rs.getDouble("width");
         double thickness = rs.getDouble("thickness");
         double stockQuantity = rs.getDouble("stockQuantity");
 
-        return new StockItem(id, code, materialId, materialName, materialDensity, chargeNo, length, width, thickness, stockQuantity);
+        return new StockItem(id, code, new Material(materialId, materialName, materialDensity), chargeNo, length, width, thickness, stockQuantity);
     }
 }

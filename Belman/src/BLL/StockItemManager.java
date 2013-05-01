@@ -7,6 +7,7 @@ package BLL;
 
 import BE.StockItem;
 import DAL.StockItemDBManager;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,6 +25,11 @@ public class StockItemManager extends Observable
     public StockItemManager() throws IOException
     {
         accessor = StockItemDBManager.getInstance();
+    }
+    
+    public static StockItemManager getInstance() throws FileNotFoundException, IOException{
+        if( instance == null ) instance = new StockItemManager();
+        return instance;
     }
     
     public StockItem add(StockItem item) throws SQLException

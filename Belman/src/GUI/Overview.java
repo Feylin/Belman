@@ -6,8 +6,11 @@ package GUI;
 
 import BE.Material;
 import BE.Order;
+import BE.StockItem;
 import BLL.OrderManager;
+import BLL.StockItemManager;
 import GUI.Tablemodels.OrderTablemodel;
+import GUI.Tablemodels.StockListTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
@@ -23,8 +26,10 @@ import javax.swing.event.ListSelectionListener;
 public class Overview extends javax.swing.JFrame implements Observer
 {
     static OrderManager omgr = null;
+    static StockItemManager smgr = null;
     private OrderTablemodel omodel = null;
     private static Overview instance = null;
+    private StockListTableModel smodel = null;
     
     /** Creates new form Overview */
     private Overview()
@@ -34,9 +39,12 @@ public class Overview extends javax.swing.JFrame implements Observer
         
         try
         {
+            
+            
+            
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
-                        
+            
             omodel = new OrderTablemodel(omgr.getAll());
             tblOrderList.setModel(omodel);
             tblOrderList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
@@ -73,6 +81,53 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtThickness.setText(String.valueOf(o.getThickness()));
                         txtWidth.setText(String.valueOf(o.getWidth()));
                         txtCircumference.setText(String.valueOf(o.getCircumference()));
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+                }
+            });
+            smgr = StockItemManager.getInstance();
+            smodel = new StockListTableModel(smgr.getAll());
+            smgr.addObserver(this);
+            tblInStock.setModel(smodel);
+            
+            tblInStock.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent es)
+                {
+                    int selectedRow = tblInStock.getSelectedRow();
+                    if (es.getValueIsAdjusting() || selectedRow < 0)
+                    {
+                        txtOrder.setText("");
+                        txtQuantity.setText("");
+                        txtDate.setText("");
+                        txtMaterialID.setText("");
+                        txtMaterialName.setText("");
+                        txtThickness.setText("");
+                        txtWidth.setText("");
+                        txtCircumference.setText("");
+                        return;
+                    }
+
+                    StockItem s = smodel.getEventsByRow(selectedRow);
+                    
+
+                    try
+                    {
+//                        txtOrder.setLineWrap(true);
+                        
+                        txtName.setText(String.valueOf(s.getMaterialName()));   
+                        txtMaterialID1.setText(String.valueOf(s.getMaterialId()));
+                        txtCode.setText(String.valueOf(s.getCode()));
+                        txtMaterialDenisity.setText(String.valueOf(s.getMaterialDensity()));
+                        txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
+                        txtCharge.setText(String.valueOf(s.getChargeNr()));
+                        txtThickness1.setText(String.valueOf(s.getThickness()));
+                        txtWidth.setText(String.valueOf(s.getWidth()));
+                        txtLength1.setText(String.valueOf(s.getWidth()));
                     }
                     catch (Exception ex)
                     {
@@ -200,10 +255,31 @@ public class Overview extends javax.swing.JFrame implements Observer
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jPanel9 = new javax.swing.JPanel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        tblInStock = new javax.swing.JTable();
+        JPanalStockInfo = new javax.swing.JPanel();
+        lblName = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        lblMaterialID = new javax.swing.JLabel();
+        txtMaterialID1 = new javax.swing.JTextField();
+        lblCode = new javax.swing.JLabel();
+        txtCode = new javax.swing.JTextField();
+        lblDensity = new javax.swing.JLabel();
+        txtMaterialDenisity = new javax.swing.JTextField();
+        jPanel11 = new javax.swing.JPanel();
+        txtThickness1 = new javax.swing.JTextField();
+        lblThickness1 = new javax.swing.JLabel();
+        lblWidth1 = new javax.swing.JLabel();
+        txtWidth1 = new javax.swing.JTextField();
+        lblLength = new javax.swing.JLabel();
+        txtLength1 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        lblQuantity = new javax.swing.JLabel();
+        txtQuantity1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        lblCharge = new javax.swing.JLabel();
+        txtCharge = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -463,7 +539,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         jTabbedPane1.addTab("Order Information", jPanel13);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblInStock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null},
@@ -508,7 +584,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 return types [columnIndex];
             }
         });
-        jScrollPane9.setViewportView(jTable3);
+        jScrollPane9.setViewportView(tblInStock);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -526,26 +602,176 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Measurements"));
+        JPanalStockInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Info"));
+        JPanalStockInfo.setEnabled(false);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane10.setViewportView(jTextArea4);
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblName.setText("Material Name: ");
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        txtName.setEditable(false);
+
+        lblMaterialID.setText("Material ID: ");
+
+        txtMaterialID1.setEditable(false);
+
+        lblCode.setText("Code: ");
+
+        txtCode.setEditable(false);
+
+        lblDensity.setText("Material Density: ");
+
+        txtMaterialDenisity.setEditable(false);
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Mesurements"));
+
+        txtThickness1.setEditable(false);
+
+        lblThickness1.setText("Thickness: ");
+
+        lblWidth1.setText("Width: ");
+
+        txtWidth1.setEditable(false);
+
+        lblLength.setText("Length: ");
+
+        txtLength1.setEditable(false);
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblThickness1)
+                    .addComponent(lblWidth1)
+                    .addComponent(lblLength))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtWidth1)
+                    .addComponent(txtThickness1)
+                    .addComponent(txtLength1))
                 .addContainerGap())
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtThickness1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblThickness1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWidth1)
+                    .addComponent(txtWidth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLength)
+                    .addComponent(txtLength1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jButton5.setText("Afslut");
+
+        jButton6.setText("Pause");
+
+        jButton7.setText("Start");
+
+        lblQuantity.setText("Stock Quantity: ");
+
+        txtQuantity1.setEditable(false);
+        txtQuantity1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtQuantity1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Kg");
+
+        lblCharge.setText("ChargeNo");
+
+        txtCharge.setEditable(false);
+
+        javax.swing.GroupLayout JPanalStockInfoLayout = new javax.swing.GroupLayout(JPanalStockInfo);
+        JPanalStockInfo.setLayout(JPanalStockInfoLayout);
+        JPanalStockInfoLayout.setHorizontalGroup(
+            JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanalStockInfoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                        .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblName)
+                                    .addComponent(lblMaterialID)
+                                    .addComponent(lblCode)))
+                            .addComponent(lblDensity)
+                            .addComponent(lblQuantity)
+                            .addComponent(lblCharge))
+                        .addGap(18, 18, 18)
+                        .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMaterialID1)
+                            .addComponent(txtCode)
+                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMaterialDenisity)
+                                    .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                                        .addComponent(txtQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6))
+                                    .addComponent(txtCharge, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        JPanalStockInfoLayout.setVerticalGroup(
+            JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMaterialID)
+                    .addComponent(txtMaterialID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCode)
+                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDensity)
+                    .addComponent(txtMaterialDenisity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblQuantity)
+                    .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCharge)
+                    .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6)
+                    .addComponent(jButton7))
                 .addContainerGap())
         );
 
@@ -556,8 +782,8 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(JPanalStockInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(11, 11, 11))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,7 +792,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(JPanalStockInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -788,23 +1014,34 @@ public class Overview extends javax.swing.JFrame implements Observer
         logout();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void txtQuantity1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtQuantity1ActionPerformed
+    {//GEN-HEADEREND:event_txtQuantity1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantity1ActionPerformed
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanelOrderInfo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
@@ -812,31 +1049,46 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JLabel lblCharge;
+    private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblDensity;
+    private javax.swing.JLabel lblLength;
     private javax.swing.JLabel lblMaterial;
+    private javax.swing.JLabel lblMaterialID;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrder;
+    private javax.swing.JLabel lblQuantity;
     private javax.swing.JLabel lblThickness;
+    private javax.swing.JLabel lblThickness1;
+    private javax.swing.JLabel lblWidth1;
+    private javax.swing.JTable tblInStock;
     private javax.swing.JTable tblOrderList;
+    private javax.swing.JTextField txtCharge;
     private javax.swing.JTextField txtCircumference;
+    private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtLength1;
+    private javax.swing.JTextField txtMaterialDenisity;
     private javax.swing.JTextField txtMaterialID;
+    private javax.swing.JTextField txtMaterialID1;
     private javax.swing.JTextField txtMaterialName;
+    private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtOrder;
     private javax.swing.JTextField txtQuantity;
+    private javax.swing.JTextField txtQuantity1;
     private javax.swing.JTextField txtThickness;
+    private javax.swing.JTextField txtThickness1;
     private javax.swing.JTextField txtWidth;
+    private javax.swing.JTextField txtWidth1;
     // End of variables declaration//GEN-END:variables
 }

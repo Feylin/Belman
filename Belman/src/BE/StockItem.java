@@ -16,6 +16,7 @@ public class StockItem
     private int materialId;
     private double materialName;
     private double materialDensity;
+    private Material material;
     private String chargeNr;
     private double length;
     private double width;
@@ -34,6 +35,19 @@ public class StockItem
         this.width = width;
         this.thickness = thickness;
         this.stockQuantity = stockQuantity;
+    }
+
+    public StockItem(int Id, String Code, Material material, String chargeNr, double length, double width, double thickness, double stockQuantity)
+    {
+        this.id = Id;
+        this.code = Code;
+        this.material = material;
+        this.chargeNr = chargeNr;
+        this.length = length;
+        this.width = width;
+        this.thickness = thickness;
+        this.stockQuantity = stockQuantity;
+
     }
 
     public StockItem(int id, StockItem item)
