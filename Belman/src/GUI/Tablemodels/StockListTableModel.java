@@ -4,7 +4,7 @@
  */
 package GUI.Tablemodels;
 
-import BE.Order;
+import BE.StockItem;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,25 +15,25 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author bhp
  */
-public class OrderTablemodel extends AbstractTableModel
+public class StockListTableModel extends AbstractTableModel
 {
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-    private final String[] header = {"Order"};
+    private final String[] header = {"Stock List"};
     private final Class[] columnTypes = {String.class};
 
 
-    private ArrayList<Order> info;
+    private ArrayList<StockItem> info;
 
-    public OrderTablemodel(ArrayList<Order> allInfo)
+    public StockListTableModel(ArrayList<StockItem> allInfo)
     {
         info = allInfo;
     }
 
-    public OrderTablemodel(List<Order> all)
+    public StockListTableModel(List<StockItem> all)
     {
-        info = (ArrayList<Order>) all;
+        info = (ArrayList<StockItem>) all;
     }
 
     @Override
@@ -51,11 +51,10 @@ public class OrderTablemodel extends AbstractTableModel
     @Override
     public Object getValueAt(int row, int col)
     {
-       
-       Order o = info.get(row);
+       StockItem e = info.get(row);
        switch (col)
        {
-           case 0 : return o.getProdOrderID();
+//           case 0: return e.getTitle();
        }
        return null;
     }
@@ -81,21 +80,21 @@ public class OrderTablemodel extends AbstractTableModel
     @Override
     public void setValueAt(Object o, int row, int col)
     {
-        Order or = info.get(row);
+        StockItem e = info.get(row);
         switch (col)
         {
-            case 0 : or.getProdOrderID(); break;
+           // case 0: e.getTitle();
         }
     }
 
-    public Order getEventsByRow(int row)
+    public StockItem getEventsByRow(int row)
     {
         return info.get(row);
     }
 
-    public void setCollection(Collection<Order> order)
+    public void setCollection(Collection<StockItem> stockItem)
     {
-        info = new ArrayList<>(order);
+        info = new ArrayList<>(stockItem);
         fireTableDataChanged();
     }
 }

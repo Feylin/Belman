@@ -4,7 +4,7 @@
  */
 package GUI.Tablemodels;
 
-import BE.Order;
+import BE.Material;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author bhp
  */
-public class OrderTablemodel extends AbstractTableModel
+public class MaterielTableModel extends AbstractTableModel
 {
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
@@ -24,16 +24,16 @@ public class OrderTablemodel extends AbstractTableModel
     private final Class[] columnTypes = {String.class};
 
 
-    private ArrayList<Order> info;
+    private ArrayList<Material> info;
 
-    public OrderTablemodel(ArrayList<Order> allInfo)
+    public MaterielTableModel(ArrayList<Material> allInfo)
     {
         info = allInfo;
     }
 
-    public OrderTablemodel(List<Order> all)
+    public MaterielTableModel(List<Material> all)
     {
-        info = (ArrayList<Order>) all;
+        info = (ArrayList<Material>) all;
     }
 
     @Override
@@ -51,11 +51,10 @@ public class OrderTablemodel extends AbstractTableModel
     @Override
     public Object getValueAt(int row, int col)
     {
-       
-       Order o = info.get(row);
+       Material e = info.get(row);
        switch (col)
        {
-           case 0 : return o.getProdOrderID();
+//           case 0: return e.getTitle();
        }
        return null;
     }
@@ -81,21 +80,21 @@ public class OrderTablemodel extends AbstractTableModel
     @Override
     public void setValueAt(Object o, int row, int col)
     {
-        Order or = info.get(row);
+        Material e = info.get(row);
         switch (col)
         {
-            case 0 : or.getProdOrderID(); break;
+           // case 0: e.getTitle();
         }
     }
 
-    public Order getEventsByRow(int row)
+    public Material getEventsByRow(int row)
     {
         return info.get(row);
     }
 
-    public void setCollection(Collection<Order> order)
+    public void setCollection(Collection<Material> material)
     {
-        info = new ArrayList<>(order);
+        info = new ArrayList<>(material);
         fireTableDataChanged();
     }
 }
