@@ -19,6 +19,11 @@ public class Material
         this.quality = quality;       
     }
 
+    public Material(double name)
+    {
+        this.name = name;
+    }
+
     /**
      * @return the name
      */

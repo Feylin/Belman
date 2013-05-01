@@ -51,10 +51,11 @@ public class OrderTablemodel extends AbstractTableModel
     @Override
     public Object getValueAt(int row, int col)
     {
-       Order e = info.get(row);
+       
+       Order o = info.get(row);
        switch (col)
        {
-//           case 0: return e.getTitle();
+           case 0 : return o.getProdOrderID();
        }
        return null;
     }
@@ -80,10 +81,10 @@ public class OrderTablemodel extends AbstractTableModel
     @Override
     public void setValueAt(Object o, int row, int col)
     {
-        Order e = info.get(row);
+        Order or = info.get(row);
         switch (col)
         {
-           // case 0: e.getTitle();
+            case 0 : or.getProdOrderID(); break;
         }
     }
 

@@ -4,6 +4,7 @@
  */
 package BE;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -20,6 +21,7 @@ public class Order
     private GregorianCalendar dueDate;
     private int quantity;
     private int materialID;
+    private Material material;
     private double thickness;
     private double width;
     private double circumference;
@@ -61,6 +63,22 @@ public class Order
 
 
     }
+    
+    public Order(int sOrderID, double sOrder, int prodOrderID, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID,Material material, double thickness, double width, double circumference)
+    {
+        this.orderID = sOrderID;
+        this.sOrder = sOrder;
+        this.prodOrderID = prodOrderID;
+        this.prodOrder = prodOrder;
+        this.dueDate = dueDate;
+        this.quantity = quantity;
+        this.materialID = materialID;
+        this.material = material;
+        this.thickness = thickness;
+        this.width = width;
+        this.circumference = circumference;
+
+    }
 
     /**
      * @return the orderID
@@ -84,6 +102,11 @@ public class Order
     public void setOrder(double order)
     {
         this.sOrder = order;
+    }
+    
+    public double getMaterialName()
+    {
+        return material.getName();
     }
 
     /**
@@ -212,5 +235,13 @@ public class Order
     public void setProdOrderID(int prodOrderID)
     {
         this.prodOrderID = prodOrderID;
+    }
+    
+    public String printDate(GregorianCalendar gc)
+    {
+        return String.format("%02d-%02d-%04d",
+                gc.get(Calendar.DAY_OF_MONTH),
+                gc.get(Calendar.MONTH),
+                gc.get(Calendar.YEAR));                
     }
 }

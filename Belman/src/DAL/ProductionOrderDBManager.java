@@ -4,6 +4,7 @@
  */
 package DAL;
 
+import BE.Material;
 import BE.Order;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -72,7 +73,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder";
+            String sql = "SELECT * FROM ProductionOrder, Material";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -113,11 +114,12 @@ public class ProductionOrderDBManager
         gc.setTime(rs.getTimestamp("dueDate"));
         int quantity = rs.getInt("quantity");
         int materialId = rs.getInt("materialId");
+        double name = rs.getDouble("name");
         double thickness = rs.getDouble("thickness");
         double width = rs.getDouble("width");
         double circumference = rs.getDouble("circumference");
 
-        return new Order(sOrderID, sOrder, prodOrderId,prodOrder, gc, quantity, materialId, thickness, width, circumference);  
+        return new Order(sOrderID, sOrder, prodOrderId,prodOrder, gc, quantity, materialId,new Material(name), thickness, width, circumference);  
     }
 
     protected String convertDateToSQL(GregorianCalendar date)
