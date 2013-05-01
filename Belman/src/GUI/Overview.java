@@ -73,6 +73,34 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
     }
     
+    
+        private void logout()
+    {
+        String message = "Are you sure you want to log out?";
+        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION)
+        {
+            dispose();
+//            if (EditMember.getInstance().isVisible())
+//            {
+//                EditMember.getInstance().dispose();
+//            }
+//            if (AddMember.getInstance().isVisible())
+//            {
+//                AddMember.getInstance().dispose();
+//            }
+//            if (AddEvent.getInstance().isVisible())
+//            {
+//                AddEvent.getInstance().dispose();
+//            }
+//            if (ReserveCourt.getInstance().isVisible())
+//            {
+//                ReserveCourt.getInstance().dispose();
+//            }
+//            Welcome.getInstance().setVisible(true);
+        }
+    }
+    
     @Override
     public void update(Observable o, Object arg)
     {
@@ -642,6 +670,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
 
         jButton4.setText("Luk");
+        jButton4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -709,6 +744,11 @@ public class Overview extends javax.swing.JFrame implements Observer
     {//GEN-HEADEREND:event_jLocaleChooser1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLocaleChooser1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
+    {//GEN-HEADEREND:event_jButton4ActionPerformed
+        logout();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
