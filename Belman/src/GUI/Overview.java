@@ -34,7 +34,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             omgr.addObserver(this);
             
             omodel = new OrderTablemodel(omgr.getAll());
-            orderTable.setModel(omodel);
+            tblOrderList.setModel(omodel);
         }
         catch (Exception e)
         {
@@ -131,7 +131,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         jPanel13 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        orderTable = new javax.swing.JTable();
+        tblOrderList = new javax.swing.JTable();
         txtQuantity = new javax.swing.JPanel();
         lblOrder = new javax.swing.JLabel();
         txtOrder = new javax.swing.JTextField();
@@ -186,7 +186,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
-        orderTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblOrderList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null},
@@ -231,7 +231,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 return types [columnIndex];
             }
         });
-        jScrollPane11.setViewportView(orderTable);
+        jScrollPane11.setViewportView(tblOrderList);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -321,7 +321,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Afslut");
 
         jButton2.setText("Pause");
 
@@ -661,6 +661,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         jTabbedPane1.addTab("To Be Cut", jPanel7);
 
         jButton4.setText("Luk");
+        jButton4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dansk (Danmark)", "English (United Kingdom)", "Russian (Russia)", "Irish (Ireland)" }));
 
@@ -729,6 +736,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaterialIDActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
+    {//GEN-HEADEREND:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -772,7 +784,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel lblMaterial;
     private javax.swing.JLabel lblOrder;
     private javax.swing.JLabel lblThickness;
-    private javax.swing.JTable orderTable;
+    private javax.swing.JTable tblOrderList;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtMaterialID;
     private javax.swing.JTextField txtMaterialName;
