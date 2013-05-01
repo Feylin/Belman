@@ -51,10 +51,10 @@ public class StockListTableModel extends AbstractTableModel
     @Override
     public Object getValueAt(int row, int col)
     {
-       StockItem e = info.get(row);
+       StockItem s = info.get(row);
        switch (col)
        {
-//           case 0: return e.getTitle();
+           case 0: return s.getMaterialName();
        }
        return null;
     }
@@ -80,10 +80,10 @@ public class StockListTableModel extends AbstractTableModel
     @Override
     public void setValueAt(Object o, int row, int col)
     {
-        StockItem e = info.get(row);
+        StockItem s = info.get(row);
         switch (col)
         {
-           // case 0: e.getTitle();
+            case 0 : s.getMaterialName();
         }
     }
 

@@ -10,8 +10,24 @@ package BE;
  */
 public class Material
 {
+    private double density;
     private double name;
     private String quality;
+    private int id;
+    
+    /**
+     *
+     * @param id
+     * @param density
+     * @param name
+     */
+    public Material(int id, double density, double name )
+    {
+        this.id = id;
+        this.density = density;
+        this.name = name;
+        
+    }
     
     public Material(double name, String quality)
     {
