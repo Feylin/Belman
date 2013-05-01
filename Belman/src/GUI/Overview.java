@@ -738,7 +738,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
     {//GEN-HEADEREND:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        logout();
     }//GEN-LAST:event_jButton4ActionPerformed
 
    
