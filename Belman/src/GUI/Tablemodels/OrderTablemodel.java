@@ -92,9 +92,9 @@ public class OrderTablemodel extends AbstractTableModel
         return info.get(row);
     }
 
-    public void setCollection(Collection<Order> clubEvents)
+    public void setCollection(Collection<Order> order)
     {
-        info = new ArrayList<>(clubEvents);
+        info = new ArrayList<>(order);
         fireTableDataChanged();
     }
 }
