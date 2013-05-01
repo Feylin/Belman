@@ -646,7 +646,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
         jScrollPane4.setViewportView(jTable1);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Orders and Sleeves created from the chosen"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Orders and Sleeves created from the chosen material"));
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -702,6 +702,8 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel3.getAccessibleContext().setAccessibleName("Orders and Sleeves created from the chosen material");
 
         jTabbedPane1.addTab("To Be Cut", jPanel7);
 
