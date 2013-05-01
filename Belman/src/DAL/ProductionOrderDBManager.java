@@ -73,7 +73,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, Material";
+            String sql = "SELECT * FROM ProductionOrder, Material WHERE Material.ID = ProductionOrder.materialID";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
