@@ -55,10 +55,11 @@ public class MaterialDBManager
     
     protected Material getOneMaterial(ResultSet rs) throws SQLException
     {
-        double name = rs.getDouble("name");
-        String quality = rs.getString("quality");
+        int id = rs.getInt("id");
+        String name = rs.getString("name");
+        double density = rs.getDouble("density");
         
-        return new Material(name, quality);
+        return new Material(id, density, name);
     }
     
 }

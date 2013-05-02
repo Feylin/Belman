@@ -14,7 +14,7 @@ public class StockItem
     private int id;
     private String code;
     private int materialId;
-    private double materialName;
+    private String materialName;
     private double materialDensity;
     private Material material;
     private String chargeNr;
@@ -23,7 +23,7 @@ public class StockItem
     private double thickness;
     private double stockQuantity;
 
-    public StockItem(int Id, String Code, int materialId, double materialName, double materialDensity, String chargeNr, double length, double width, double thickness, double stockQuantity)
+    public StockItem(int Id, String Code, int materialId, String materialName, double materialDensity, String chargeNr, double length, double width, double thickness, double stockQuantity)
     {
         this.id = Id;
         this.code = Code;
@@ -107,7 +107,7 @@ public class StockItem
     /**
      * @return the MaterialName
      */
-    public double getMaterialName()
+    public String getMaterialName()
     {
         return material.getName();
     }
@@ -115,7 +115,7 @@ public class StockItem
     /**
      * @param materialName the MaterialName to set
      */
-    public void setMaterialName(double materialName)
+    public void setMaterialName(String materialName)
     {
         this.materialName = materialName;
     }

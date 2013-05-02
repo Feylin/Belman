@@ -11,8 +11,7 @@ package BE;
 public class Material
 {
     private double density;
-    private double name;
-    private String quality;
+    private String name; 
     private int id;
     
     /**
@@ -21,21 +20,16 @@ public class Material
      * @param density
      * @param name
      */
-    public Material(int id, double density, double name )
+    public Material(int id, double density, String name )
     {
         this.id = id;
         this.density = density;
-        this.name = name;
-        
-    }
+        this.name = name;        
+    } 
     
-    public Material(double name, String quality)
-    {
-        this.name = name;
-        this.quality = quality;       
-    }
-
-    public Material(double name)
+ 
+    
+    public Material(String name)
     {
         this.name = name;
     }
@@ -43,7 +37,7 @@ public class Material
     /**
      * @return the name
      */
-    public double getName()
+    public String getName()
     {
         return name;
     }
@@ -51,26 +45,12 @@ public class Material
     /**
      * @param name the name to set
      */
-    public void setName(double name)
+    public void setName(String name)
     {
         this.name = name;
     }
 
-    /**
-     * @return the quality
-     */
-    public String getQuality()
-    {
-        return quality;
-    }
 
-    /**
-     * @param quality the quality to set
-     */
-    public void setQuality(String quality)
-    {
-        this.quality = quality;
-    }
 
     /**
      * @return the density

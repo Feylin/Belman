@@ -86,6 +86,25 @@ public class ProductionOrderDBManager
         }
     }
     
+    public ArrayList<Order> getOrderByMaterial(Material m) throws SQLException, IOException
+    {
+        try(Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM ProductionOrder, Material WHERE ProductionOrder.MaterialId = ? AND ProductionOrder.MaterialId = Material.id";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, m.getId());
+            
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Order> orders = new ArrayList<>();
+            while (rs.next())
+            {
+                orders.add(getOneOrder(rs));
+            }
+            return orders;
+        }
+    }
+    
     public void remove(int prodOrderId) throws SQLException            
     {
         try(Connection con = connector.getConnection())
@@ -114,7 +133,7 @@ public class ProductionOrderDBManager
         gc.setTime(rs.getTimestamp("dueDate"));
         int quantity = rs.getInt("quantity");
         int materialId = rs.getInt("materialId");
-        double name = rs.getDouble("name");
+        String name = rs.getString("name");
         double thickness = rs.getDouble("thickness");
         double width = rs.getDouble("width");
         double circumference = rs.getDouble("circumference");

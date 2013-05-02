@@ -104,7 +104,7 @@ public class Order
         this.sOrder = order;
     }
     
-    public double getMaterialName()
+    public String getMaterialName()
     {
         return material.getName();
     }

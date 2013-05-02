@@ -47,7 +47,7 @@ public class StockItemDBManager
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, item.getCode());
             ps.setInt(2, item.getMaterialId());
-            ps.setDouble(3, item.getMaterialName());
+            ps.setString(3, item.getMaterialName());
             ps.setDouble(4, item.getMaterialDensity());
             ps.setString(5, item.getChargeNr());
             ps.setDouble(6, item.getLength());
@@ -126,7 +126,7 @@ public class StockItemDBManager
         int id = rs.getInt("id");
         String code = rs.getString("code");
         int materialId = rs.getInt("id");
-        double materialName = rs.getDouble("name");
+        String materialName = rs.getString("name");
         double materialDensity = rs.getDouble("density");
         String chargeNo = rs.getString("chargeNo");
         double length = rs.getDouble("length");
@@ -134,6 +134,6 @@ public class StockItemDBManager
         double thickness = rs.getDouble("thickness");
         double stockQuantity = rs.getDouble("stockQuantity");
 
-        return new StockItem(id, code, new Material(materialId, materialName, materialDensity), chargeNo, length, width, thickness, stockQuantity);
+        return new StockItem(id, code, new Material(materialId, materialDensity, materialName), chargeNo, length, width, thickness, stockQuantity);
     }
 }

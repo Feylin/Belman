@@ -7,17 +7,25 @@ package GUI;
 import BE.Material;
 import BE.Order;
 import BE.StockItem;
+import BLL.MaterialManager;
 import BLL.OrderManager;
 import BLL.StockItemManager;
+import GUI.Tablemodels.MaterielTableModel;
 import GUI.Tablemodels.OrderTablemodel;
 import GUI.Tablemodels.StockListTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,26 +33,32 @@ import javax.swing.event.ListSelectionListener;
  */
 public class Overview extends javax.swing.JFrame implements Observer
 {
+
     static OrderManager omgr = null;
     static StockItemManager smgr = null;
+    static MaterialManager mmgr = null;
     private OrderTablemodel omodel = null;
     private static Overview instance = null;
     private StockListTableModel smodel = null;
-    
-    /** Creates new form Overview */
+    private MaterielTableModel mmodel = null;
+    private OrderTablemodel omodel2 = null;
+
+    /**
+     * Creates new form Overview
+     */
     private Overview()
     {
         initComponents();
         windowClose();
-        
+
         try
         {
-            
-            
-            
+
+
+
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
-            
+
             omodel = new OrderTablemodel(omgr.getAll());
             tblOrderList.setModel(omodel);
             tblOrderList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
@@ -67,24 +81,23 @@ public class Overview extends javax.swing.JFrame implements Observer
                     }
 
                     Order o = omodel.getEventsByRow(selectedRow);
-                    
+
 
                     try
                     {
 //                        txtOrder.setLineWrap(true);
-                        
-                        txtOrder.setText(String.valueOf(o.getOrder()));   
+
+                        txtOrder.setText(String.valueOf(o.getOrder()));
                         txtQuantity.setText(String.valueOf(o.getQuantity()));
                         txtDate.setText(String.valueOf(o.printDate(o.getDueDate())));
                         txtMaterialID.setText(String.valueOf(o.getMaterialID()));
-                        txtMaterialName.setText(String.valueOf(o.getMaterialName()));
+                        txtMaterialName.setText(o.getMaterialName());
                         txtThickness.setText(String.valueOf(o.getThickness()));
                         txtWidth.setText(String.valueOf(o.getWidth()));
                         txtCircumference.setText(String.valueOf(o.getCircumference()));
                     }
                     catch (Exception ex)
                     {
-                        
                     }
                 }
             });
@@ -92,7 +105,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             smodel = new StockListTableModel(smgr.getAll());
             smgr.addObserver(this);
             tblInStock.setModel(smodel);
-            
+
             tblInStock.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
@@ -110,18 +123,18 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtThickness1.setText("");
                         txtWidth1.setText("");
                         txtLength1.setText("");
-                        
+
                         return;
                     }
 
                     StockItem s = smodel.getEventsByRow(selectedRow);
-                    
+
 
                     try
                     {
 //                        txtOrder.setLineWrap(true);
-                        
-                        txtMaterialName1.setText(String.valueOf(s.getMaterialName()));   
+
+                        txtMaterialName1.setText(String.valueOf(s.getMaterialName()));
                         txtMaterialID1.setText(String.valueOf(s.getMaterialId()));
                         txtCode.setText(String.valueOf(s.getCode()));
                         txtMaterialDenisity.setText(String.valueOf(s.getMaterialDensity()));
@@ -133,17 +146,49 @@ public class Overview extends javax.swing.JFrame implements Observer
                     }
                     catch (Exception ex)
                     {
-                        
+                    }
+                }
+            });
+            mmgr = MaterialManager.getInstance();
+            mmodel = new MaterielTableModel(mmgr.getAllMaterials());
+            mmgr.addObserver(this);
+            tblMaterial.setModel(mmodel);
+
+
+
+            tblMaterial.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent es)
+                {
+                    int selectedRow = tblMaterial.getSelectedRow();
+                    Material m = mmodel.getEventsByRow(selectedRow);
+                    try
+                    {
+                        if (!omgr.getOrderByMaterial(m).isEmpty())
+                        {
+                            omodel2 = new OrderTablemodel(omgr.getOrderByMaterial(m));
+
+                        }
+                        else
+                        {
+                            omodel2 = new OrderTablemodel(new ArrayList<Order>());
+                            tblOrderList1.setModel(omodel2);                       
+                        }
+                        tblOrderList1.setModel(omodel2);
+                    }                   
+                    catch (Exception ex)
+                    {
+                        Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
         }
         catch (Exception e)
         {
-            
         }
     }
-    
+
     public static Overview getInstance()
     {
         if (instance == null)
@@ -152,7 +197,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
         return instance;
     }
-    
+
     private void closePressed()
     {
         String message = "Are you sure you want to exit?";
@@ -162,7 +207,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             System.exit(0);
         }
     }
-    
+
     private void windowClose()
     {
         addWindowListener(new WindowAdapter()
@@ -174,9 +219,8 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
     }
-    
-    
-        private void logout()
+
+    private void logout()
     {
         String message = "Are you sure you want to log out?";
         int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
@@ -202,7 +246,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 //            Welcome.getInstance().setVisible(true);
         }
     }
-    
+
     @Override
     public void update(Observable o, Object arg)
     {
@@ -214,15 +258,14 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
             catch (Exception e)
             {
-                
             }
         }
     }
-    
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -286,18 +329,20 @@ public class Overview extends javax.swing.JFrame implements Observer
         jPanel8 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMaterial = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        tblOrderList1 = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -795,7 +840,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(JPanalStockInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("In Stock", jPanel1);
@@ -827,7 +872,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMaterial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null},
@@ -872,39 +917,71 @@ public class Overview extends javax.swing.JFrame implements Observer
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tblMaterial);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Orders and Sleeves created from the chosen material"));
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setPreferredSize(new java.awt.Dimension(186, 94));
-        jScrollPane6.setViewportView(jTextArea2);
+        tblOrderList1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String []
+            {
+                "Order List:"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.String.class
+            };
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jTextArea3.setPreferredSize(new java.awt.Dimension(175, 94));
-        jScrollPane1.setViewportView(jTextArea3);
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane12.setViewportView(tblOrderList1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addGap(181, 181, 181))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE))
-                .addGap(12, 12, 12))
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -942,8 +1019,6 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dansk (Danmark)", "English (United Kingdom)", "Russian (Russia)", "Irish (Ireland)" }));
-
         jMenu1.setText("File");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
@@ -962,6 +1037,43 @@ public class Overview extends javax.swing.JFrame implements Observer
         jMenu2.setText("Help");
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Language");
+
+        jMenuItem2.setText("Danish (Dansk)");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("English (United Kingdom)");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuItem4.setText("Russian (Russia)");
+        jMenu3.add(jMenuItem4);
+
+        jMenuItem5.setText("German (Germany)");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -974,18 +1086,12 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1001,7 +1107,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
     {//GEN-HEADEREND:event_jTabbedPane1StateChanged
-
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void txtMaterialIDActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtMaterialIDActionPerformed
@@ -1019,7 +1124,21 @@ public class Overview extends javax.swing.JFrame implements Observer
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQuantity1ActionPerformed
 
-   
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem3ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem5ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanelOrderInfo;
@@ -1030,15 +1149,19 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1049,15 +1172,11 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JLabel lblCharge;
     private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblDate;
@@ -1072,7 +1191,9 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel lblThickness1;
     private javax.swing.JLabel lblWidth1;
     private javax.swing.JTable tblInStock;
+    private javax.swing.JTable tblMaterial;
     private javax.swing.JTable tblOrderList;
+    private javax.swing.JTable tblOrderList1;
     private javax.swing.JTextField txtCharge;
     private javax.swing.JTextField txtCircumference;
     private javax.swing.JTextField txtCode;

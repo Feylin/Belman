@@ -4,6 +4,7 @@
  */
 package BLL;
 
+import BE.Material;
 import BE.Order;
 import DAL.ProductionOrderDBManager;
 import java.io.FileNotFoundException;
@@ -43,6 +44,11 @@ public class OrderManager extends Observable
     public ArrayList<Order> getAll() throws IOException, SQLException
     {
        return accessor.getAll();        
+    }
+    
+    public ArrayList<Order> getOrderByMaterial(Material m) throws SQLException, IOException
+    {
+        return accessor.getOrderByMaterial(m);
     }
     
     public void remove(int prodOrderId) throws SQLException

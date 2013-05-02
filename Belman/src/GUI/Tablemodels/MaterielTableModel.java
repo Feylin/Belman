@@ -20,8 +20,8 @@ public class MaterielTableModel extends AbstractTableModel
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-    private final String[] header = {"Order"};
-    private final Class[] columnTypes = {String.class};
+    private final String[] header = {"Material Id"," Material Name"};
+    private final Class[] columnTypes = {Integer.class, String.class};
 
 
     private ArrayList<Material> info;
@@ -41,7 +41,8 @@ public class MaterielTableModel extends AbstractTableModel
     {
         return info.size();
     }
-
+    
+    
     @Override
     public int getColumnCount()
     {
@@ -51,10 +52,11 @@ public class MaterielTableModel extends AbstractTableModel
     @Override
     public Object getValueAt(int row, int col)
     {
-       Material e = info.get(row);
+       Material m = info.get(row);
        switch (col)
        {
-//           case 0: return e.getTitle();
+           case 0 : return m.getId();
+           case 1 : return m.getName();
        }
        return null;
     }
@@ -80,10 +82,11 @@ public class MaterielTableModel extends AbstractTableModel
     @Override
     public void setValueAt(Object o, int row, int col)
     {
-        Material e = info.get(row);
+        Material m = info.get(row);
         switch (col)
         {
-           // case 0: e.getTitle();
+            case 0 : m.getId();
+            case 1 : m.getName();
         }
     }
 
@@ -96,5 +99,10 @@ public class MaterielTableModel extends AbstractTableModel
     {
         info = new ArrayList<>(material);
         fireTableDataChanged();
+    }
+     public Material getMaterialByRow(int row)
+    {
+        if( row < 0 ) return null;
+        return info.get(row);
     }
 }
