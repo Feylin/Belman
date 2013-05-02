@@ -4,6 +4,7 @@
  */
 package APP;
 
+import GUI.Login;
 import GUI.Overview;
 import java.awt.EventQueue;
 import javax.swing.UIManager;
@@ -29,6 +30,7 @@ public class BelmanProject
                 {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                     Overview.getInstance().setVisible(true);
+//                    Login.getInstance().setVisible(true);
                 }
                 catch (Exception e)
                 {
