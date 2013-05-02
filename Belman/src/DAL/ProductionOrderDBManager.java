@@ -105,6 +105,8 @@ public class ProductionOrderDBManager
         }
     }
     
+    
+    
     public void remove(int prodOrderId) throws SQLException            
     {
         try(Connection con = connector.getConnection())
