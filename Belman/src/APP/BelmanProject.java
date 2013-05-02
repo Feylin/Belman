@@ -11,7 +11,7 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class BelmanProject
 {

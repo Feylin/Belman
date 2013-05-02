@@ -6,21 +6,22 @@ package BE;
 
 /**
  *
- * @author Daniel
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class Material
-{
+{ 
+    private int id;
     private double density;
     private String name; 
-    private int id;
+   
     
     /**
-     *
+     * Den overordnede konstruktør til Material
      * @param id
      * @param density
      * @param name
      */
-    public Material(int id, double density, String name )
+    public Material(int id, double density, String name)
     {
         this.id = id;
         this.density = density;
@@ -69,7 +70,7 @@ public class Material
     }
 
     /**
-     * @return the id
+     * @returnerne materialets id.
      */
     public int getId()
     {

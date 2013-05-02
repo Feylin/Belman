@@ -9,120 +9,95 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Daniel
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class Order
 {
 
-    private final int orderID;
-    private double sOrder;
-    private int prodOrderID;
-    private double prodOrder;
+    private final int sOrderId;
+    private final int orderId;
+    private String orderName;
     private GregorianCalendar dueDate;
     private int quantity;
-    private int materialID;
-    private Material material;
     private double thickness;
     private double width;
-    private double circumference;
+    private String status;
 
-    public Order(int sOrderID, double sOrder, int prodOrderID, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
+    /**
+     * Overodnede konstruktør for Order.
+     *
+     * @param sOrderId
+     * @param orderId
+     * @param orderName
+     * @param dueDate
+     * @param quantity
+     * @param thickness
+     * @param width
+     * @param status
+     */
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, String status)
     {
-        this.orderID = sOrderID;
-        this.sOrder = sOrder;
-        this.prodOrderID = prodOrderID;
-        this.prodOrder = prodOrder;
+        this.sOrderId = sOrderId;
+        this.orderId = orderId;
+        this.orderName = orderName;
         this.dueDate = dueDate;
         this.quantity = quantity;
-        this.materialID = materialID;
         this.thickness = thickness;
         this.width = width;
-        this.circumference = circumference;
+        this.status = status;
 
     }
 
-//    public Order(double sOrderID, double sOrder, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID, double thickness, double width, double circumference)
-//    {
-//        this(sOrderID, sOrder, prodOrder, dueDate, quantity, materialID, thickness, width, circumference);
-//    }
-
-    public Order(int prodOrderId, Order o)
+    public Order(int orderId, Order o)
     {
-        this(
-                o.getOrderID(),
-                o.getOrder(),
-                prodOrderId,
-                o.getProdOrder(),
+        this(orderId,
+                o.getOrderId(),
+                o.getOrderName(),
                 o.getDueDate(),
                 o.getQuantity(),
-                o.getMaterialID(),
                 o.getThickness(),
                 o.getWidth(),
-                o.getCircumference());
-
-
-
+                o.getStatus());
     }
-    
-    public Order(int sOrderID, double sOrder, int prodOrderID, double prodOrder, GregorianCalendar dueDate, int quantity, int materialID,Material material, double thickness, double width, double circumference)
-    {
-        this.orderID = sOrderID;
-        this.sOrder = sOrder;
-        this.prodOrderID = prodOrderID;
-        this.prodOrder = prodOrder;
-        this.dueDate = dueDate;
-        this.quantity = quantity;
-        this.materialID = materialID;
-        this.material = material;
-        this.thickness = thickness;
-        this.width = width;
-        this.circumference = circumference;
 
+    public String printDate(GregorianCalendar gc)
+    {
+        return String.format("%02d-%02d-%04d",
+                gc.get(Calendar.DAY_OF_MONTH),
+                gc.get(Calendar.MONTH),
+                gc.get(Calendar.YEAR));
     }
 
     /**
-     * @return the orderID
+     * @return the sOrderId
      */
-    public int getOrderID()
+    public int getsOrderId()
     {
-        return orderID;
+        return sOrderId;
     }
 
     /**
-     * @return the order
+     * @return the orderId
      */
-    public double getOrder()
+    public int getOrderId()
     {
-        return sOrder;
+        return orderId;
     }
 
     /**
-     * @param order the order to set
+     * @return the orderName
      */
-    public void setOrder(double order)
+    public String getOrderName()
     {
-        this.sOrder = order;
-    }
-    
-    public String getMaterialName()
-    {
-        return material.getName();
+        return orderName;
     }
 
     /**
-     * @return the prodOrder
+     * @param orderName the orderName to set
      */
-    public double getProdOrder()
+    public void setOrderName(String orderName)
     {
-        return prodOrder;
-    }
-
-    /**
-     * @param prodOrder the prodOrder to set
-     */
-    public void setProdOrder(double prodOrder)
-    {
-        this.prodOrder = prodOrder;
+        this.orderName = orderName;
     }
 
     /**
@@ -158,22 +133,6 @@ public class Order
     }
 
     /**
-     * @return the materialID
-     */
-    public int getMaterialID()
-    {
-        return materialID;
-    }
-
-    /**
-     * @param materialID the materialID to set
-     */
-    public void setMaterialID(int materialID)
-    {
-        this.materialID = materialID;
-    }
-
-    /**
      * @return the thickness
      */
     public double getThickness()
@@ -206,42 +165,18 @@ public class Order
     }
 
     /**
-     * @return the circumference
+     * @return the status
      */
-    public double getCircumference()
+    public String getStatus()
     {
-        return circumference;
+        return status;
     }
 
     /**
-     * @param circumference the circumference to set
+     * @param status the status to set
      */
-    public void setCircumference(double circumference)
+    public void setStatus(String status)
     {
-        this.circumference = circumference;
-    }
-
-    /**
-     * @return the prodOrderID
-     */
-    public int getProdOrderID()
-    {
-        return prodOrderID;
-    }
-
-    /**
-     * @param prodOrderID the prodOrderID to set
-     */
-    public void setProdOrderID(int prodOrderID)
-    {
-        this.prodOrderID = prodOrderID;
-    }
-    
-    public String printDate(GregorianCalendar gc)
-    {
-        return String.format("%02d-%02d-%04d",
-                gc.get(Calendar.DAY_OF_MONTH),
-                gc.get(Calendar.MONTH),
-                gc.get(Calendar.YEAR));                
+        this.status = status;
     }
 }
