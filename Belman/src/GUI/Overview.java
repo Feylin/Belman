@@ -50,6 +50,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
         initComponents();
         windowClose();
+        setLocationRelativeTo(null);
 
         try
         {
@@ -227,23 +228,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         if (reply == JOptionPane.YES_OPTION)
         {
             dispose();
-//            if (EditMember.getInstance().isVisible())
-//            {
-//                EditMember.getInstance().dispose();
-//            }
-//            if (AddMember.getInstance().isVisible())
-//            {
-//                AddMember.getInstance().dispose();
-//            }
-//            if (AddEvent.getInstance().isVisible())
-//            {
-//                AddEvent.getInstance().dispose();
-//            }
-//            if (ReserveCourt.getInstance().isVisible())
-//            {
-//                ReserveCourt.getInstance().dispose();
-//            }
-//            Welcome.getInstance().setVisible(true);
+            Login.getInstance().setVisible(true);
         }
     }
 
