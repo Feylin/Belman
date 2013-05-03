@@ -37,22 +37,16 @@ public class CoilTypeDBManager
         return instance;
     }
 
-    public CoilType add(CoilType coilType) throws SQLException
+    public CoilType add(CoilType c) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO StockItem(code, materialId, materialName, materialDensity, chargeNo,"
-                    + " length, width, thickness, stockQuantity) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO CoilType(code, width, thickness, materialId) VALUES (?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, item.getCode());
-            ps.setInt(2, item.getMaterialId());
-            ps.setString(3, item.getMaterialName());
-            ps.setDouble(4, item.getMaterialDensity());
-            ps.setString(5, item.getChargeNr());
-            ps.setDouble(6, item.getLength());
-            ps.setDouble(7, item.getWidth());
-            ps.setDouble(8, item.getThickness());
-            ps.setDouble(9, item.getStockQuantity());
+            ps.setString(1, c.getCode());
+            ps.setDouble(2, c.getWidth());
+            ps.setDouble(3, c.getThickness());
+            ps.setInt(4, c.getMaterialId());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -63,24 +57,24 @@ public class CoilTypeDBManager
             keys.next();
             int id = keys.getInt(1);
 
-            return new CoilType(id, coilType);
+            return new CoilType(id, c);
         }
     }
 
-    public ArrayList<StockItem> getAllItems() throws SQLException, IOException
+    public ArrayList<CoilType> getAllItems() throws SQLException, IOException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem, Material WHERE StockItem.MaterialId = Material.id";
+            String sql = "SELECT * FROM CoilType";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<StockItem> items = new ArrayList<>();
+            ArrayList<CoilType> types = new ArrayList<>();
             while (rs.next())
             {
-                items.add(getOneItem(rs));
+                types.add(getOneItem(rs));
             }
-            return items;
+            return types;
         }
 
     }
@@ -101,15 +95,15 @@ public class CoilTypeDBManager
 //        }
 //    }
 
-    public ArrayList<StockItem> getItemByMaterial(double materialName) throws SQLException, IOException
+    public ArrayList<CoilType> getCoilTypeByStockItem(StockItem s) throws SQLException, IOException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem WHERE materialName = ?";
+            String sql = "SELECT * FROM CoilType, StockItem WHERE StockItem.ID = ? AND StockItem.CoiltypeId = CoilType.Id";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDouble(1, materialName);
+            ps.setDouble(1, s.getId());
 
-            ArrayList<StockItem> items = new ArrayList<>();
+            ArrayList<CoilType> items = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next())
             {
@@ -124,15 +118,11 @@ public class CoilTypeDBManager
 
         int id = rs.getInt("id");
         String code = rs.getString("code");
-        int materialId = rs.getInt("id");
-        String materialName = rs.getString("name");
-        double materialDensity = rs.getDouble("density");
-        String chargeNo = rs.getString("chargeNo");
-        double length = rs.getDouble("length");
-        double width = rs.getDouble("width");
+        double width = rs.getInt("width");
         double thickness = rs.getDouble("thickness");
-        double stockQuantity = rs.getDouble("stockQuantity");
+        int materialId = rs.getInt("materialId");
 
-        return new StockItem(id, code, new CoilType(materialId, materialDensity, materialName), chargeNo, length, width, thickness, stockQuantity);
+
+        return new CoilType(id, code, width, thickness, materialId);
     }
 }
