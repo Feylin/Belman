@@ -1255,8 +1255,9 @@ public class Overview extends javax.swing.JFrame implements Observer
             tblSleeveList.setModel(slmodel);
                        
             omgr = OrderManager.getInstance();
-            omgr.addObserver(this);
-            
+            omgr.addObserver(this);           
+//          omodel2 = new OrderTablemodel(omgr.getAll());
+//          tblOrderList1.setModel(omodel2);
             
   
             tblSleeveList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
@@ -1270,11 +1271,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                     {
                     if (!omgr.getOrdersBySleeve(s).isEmpty())
                     {
-//                       omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
-                        omodel2 = new OrderTablemodel(omgr.getAll());
-              tblOrderList1.setModel(omodel2); 
-                       
-                       
+                       omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
+                       tblOrderList1.setModel(omodel2);                        
+                          
 //                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
                     }                   
 
