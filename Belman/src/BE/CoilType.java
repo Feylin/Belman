@@ -35,6 +35,16 @@ public class CoilType
         
     }
 
+    public CoilType(int id, CoilType c)
+    {
+        this(id, 
+                c.getCode(), 
+                c.getWidth(), 
+                c.getThickness(), 
+                c.getMaterialId());
+        
+    }
+
     /**
      * @return the id
      */
