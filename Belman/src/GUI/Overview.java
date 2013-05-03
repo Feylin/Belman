@@ -7,12 +7,15 @@ package GUI;
 import BE.Material;
 import BE.Order;
 import BE.OrderType;
+import BE.Sleeve;
 import BE.StockItem;
 import BLL.MaterialManager;
 import BLL.OrderManager;
+import BLL.SleeveManager;
 import BLL.StockItemManager;
 import GUI.Tablemodels.MaterielTableModel;
 import GUI.Tablemodels.OrderTablemodel;
+import GUI.Tablemodels.SleeveTableModel;
 import GUI.Tablemodels.StockListTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -38,11 +41,14 @@ public class Overview extends javax.swing.JFrame implements Observer
     static OrderManager omgr = null;
     static StockItemManager smgr = null;
     static MaterialManager mmgr = null;
+    static SleeveManager slmgr = null;
     private OrderTablemodel omodel = null;
     private static Overview instance = null;
     private StockListTableModel smodel = null;
     private MaterielTableModel mmodel = null;
     private OrderTablemodel omodel2 = null;
+    private SleeveTableModel slmodel = null;
+    
     Order o;
 
     /**
@@ -53,194 +59,9 @@ public class Overview extends javax.swing.JFrame implements Observer
         initComponents();
         windowClose();
         setLocationRelativeTo(null);
-
-        try
-        {
-
-
-
-            omgr = OrderManager.getInstance();
-            omgr.addObserver(this);
-
-            omodel = new OrderTablemodel(omgr.getAll());
-            tblOrderList.setModel(omodel);
-            tblOrderList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-            {
-                @Override
-                public void valueChanged(ListSelectionEvent es)
-                {
-                    int selectedRow = tblOrderList.getSelectedRow();
-                    if (es.getValueIsAdjusting() || selectedRow < 0)
-                    {
-                        txtOrder.setText("");
-                        txtQuantity.setText("");
-                        txtDate.setText("");
-                        txtMaterialID.setText("");
-                        txtMaterialName.setText("");
-                        txtThickness.setText("");
-                        txtWidth.setText("");
-                        txtCircumference.setText("");
-                        return;
-                    }
-
-                    Order o = omodel.getEventsByRow(selectedRow);
-
-
-                    try
-                    {
-//                        txtOrder.setLineWrap(true);
-
-                        txtOrder.setText(String.valueOf(o.getOrder()));
-                        txtQuantity.setText(String.valueOf(o.getQuantity()));
-                        txtDate.setText(String.valueOf(o.printDate(o.getDueDate())));
-                        txtMaterialID.setText(String.valueOf(o.getMaterialID()));
-                        txtMaterialName.setText(o.getMaterialName());
-                        txtThickness.setText(String.valueOf(o.getThickness()));
-                        txtWidth.setText(String.valueOf(o.getWidth()));
-                        txtCircumference.setText(String.valueOf(o.getCircumference()));
-                        switch (o.getType())
-                        {
-                            case START:
-                                rbtnStart.setSelected(true);
-                                break;
-                            case PAUSE:
-                                rbtnPause.setSelected(true);
-                                break;
-                            case AFSLUT:
-                                rbtnAfslut.setSelected(true);
-                                break;
-                            default:
-                                rbtnProgress.setSelected(true);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-                }
-            });
-                   }
-        catch (Exception e)
-        {
-        }
+//        orderListSelectioner();
+        sleeveListSelectioner();
     }
-//            smgr = StockItemManager.getInstance();
-//            smodel = new StockListTableModel(smgr.getAll());
-//            smgr.addObserver(this);
-//            tblInStock.setModel(smodel);
-//
-//            tblInStock.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-//            {
-//                @Override
-//                public void valueChanged(ListSelectionEvent es)
-//                {
-//                    int selectedRow = tblInStock.getSelectedRow();
-//                    if (es.getValueIsAdjusting() || selectedRow < 0)
-//                    {
-//                        txtMaterialName1.setText("");
-//                        txtMaterialID1.setText("");
-//                        txtCode.setText("");
-//                        txtMaterialDenisity.setText("");
-//                        txtQuantity1.setText("");
-//                        txtCharge.setText("");
-//                        txtThickness1.setText("");
-//                        txtWidth1.setText("");
-//                        txtLength1.setText("");
-//
-//                        return;
-//                    }
-//
-//                    StockItem s = smodel.getEventsByRow(selectedRow);
-//
-//
-//                    try
-//                    {
-////                        txtOrder.setLineWrap(true);
-//
-//                        txtMaterialName1.setText(String.valueOf(s.getMaterialName()));
-//                        txtMaterialID1.setText(String.valueOf(s.getMaterialId()));
-//                        txtCode.setText(String.valueOf(s.getCode()));
-//                        txtMaterialDenisity.setText(String.valueOf(s.getMaterialDensity()));
-//                        txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
-//                        txtCharge.setText(String.valueOf(s.getChargeNr()));
-//                        txtThickness1.setText(String.valueOf(s.getThickness()));
-//                        txtWidth1.setText(String.valueOf(s.getWidth()));
-//                        txtLength1.setText(String.valueOf(s.getLength()));
-//                    }
-//                    catch (Exception ex)
-//                    {
-//                    }
-//                }
-//            });
-//            mmgr = MaterialManager.getInstance();
-//            mmodel = new MaterielTableModel(mmgr.getAllMaterials());
-//            mmgr.addObserver(this);
-//            tblMaterial.setModel(mmodel);
-//
-//
-//
-//            tblMaterial.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-//            {
-//                @Override
-//                public void valueChanged(ListSelectionEvent es)
-//                {
-//                    int selectedRow = tblMaterial.getSelectedRow();
-//                    Material m = mmodel.getEventsByRow(selectedRow);
-//                    try
-//                    {
-//                        if (!omgr.getOrderByMaterial(m).isEmpty())
-//                        {
-//                            omodel2 = new OrderTablemodel(omgr.getOrderByMaterial(m));
-//                            tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-//            {
-//                @Override
-//                public void valueChanged(ListSelectionEvent es)
-//                {
-//                    int selectedRow = tblOrderList1.getSelectedRow();                    
-//                    if (es.getValueIsAdjusting() || selectedRow < 0)
-//                    {
-//                       txtOrder2.setText("");
-//                        return;
-//                    }
-//
-//                    Order o = omodel.getEventsByRow(selectedRow);
-//
-//
-//                    try
-//                    {
-////                        txtOrder.setLineWrap(true);
-//
-//                        txtOrder2.setText(String.valueOf(o.getProdOrder()));
-//                        txtQuantity2.setText(String.valueOf(o.getQuantity()));
-//                        txtDueDate2.setText(String.valueOf(o.printDate(o.getDueDate())));                      
-//                        txtThickness2.setText(String.valueOf(o.getThickness()));
-//                        txtWidth2.setText(String.valueOf(o.getWidth()));
-//                        txtCircumference2.setText(String.valueOf(o.getCircumference()));
-//                    }
-//                    catch (Exception ex)
-//                    {
-//                    }
-//                }
-//            });
-//
-//                        }
-//                        else
-//                        {
-//                            omodel2 = new OrderTablemodel(new ArrayList<Order>());
-//                            tblOrderList1.setModel(omodel2);                       
-//                        }
-//                        tblOrderList1.setModel(omodel2);
-//                    }                   
-//                    catch (Exception ex)
-//                    {
-//                        Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                }
-//            });
-//        }
-//        catch (Exception e)
-//        {
-//        }
-//    }
 
     public static Overview getInstance()
     {
@@ -273,24 +94,24 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
     }
     
-     private void btnSavePressed()
-    {
-        try
-        {
-        
-        OrderType type = rbtnStart.isSelected() ? OrderType.START
-                    : rbtnPause.isSelected() ? OrderType.PAUSE
-                    : rbtnAfslut.isSelected() ? OrderType.AFSLUT
-                    : OrderType.PROGRESS;
-            o.setType(type);
-
-            omgr.update(o);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+//     private void btnSavePressed()
+//    {
+//        try
+//        {
+//        
+//        OrderType type = rbtnStart.isSelected() ? OrderType.START
+//                    : rbtnPause.isSelected() ? OrderType.PAUSE
+//                    : rbtnAfslut.isSelected() ? OrderType.AFSLUT
+//                    : OrderType.PROGRESS;
+//            o.setType(type);
+//
+//            omgr.update(o);
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 //
 //    private void logout()
 //    {
@@ -383,7 +204,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         txtCharge = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tblMaterial = new javax.swing.JTable();
+        tblSleeveList = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
         tblOrderList1 = new javax.swing.JTable();
@@ -913,7 +734,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         jTabbedPane1.addTab("In Stock", jPanel1);
 
-        tblMaterial.setModel(new javax.swing.table.DefaultTableModel(
+        tblSleeveList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null},
@@ -958,7 +779,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(tblMaterial);
+        jScrollPane4.setViewportView(tblSleeveList);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Orders and Sleeves created from the chosen material"));
 
@@ -1271,7 +1092,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnOKActionPerformed
     {//GEN-HEADEREND:event_btnOKActionPerformed
-        btnSavePressed();
+//        btnSavePressed();
     }//GEN-LAST:event_btnOKActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1329,9 +1150,9 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JRadioButton rbtnProgress;
     private javax.swing.JRadioButton rbtnStart;
     private javax.swing.JTable tblInStock;
-    private javax.swing.JTable tblMaterial;
     private javax.swing.JTable tblOrderList;
     private javax.swing.JTable tblOrderList1;
+    private javax.swing.JTable tblSleeveList;
     private javax.swing.JTextField txtCharge;
     private javax.swing.JTextField txtCircumference;
     private javax.swing.JTextField txtCode;
@@ -1350,4 +1171,120 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JTextField txtWidth;
     private javax.swing.JTextField txtWidth1;
     // End of variables declaration//GEN-END:variables
+
+//    private void orderListSelectioner()
+//    {
+//        try
+//        {
+//
+//
+//
+//            omgr = OrderManager.getInstance();
+//            omgr.addObserver(this);
+//
+//            omodel = new OrderTablemodel(omgr.getAll());
+//            tblOrderList.setModel(omodel);
+//            tblOrderList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+//            {
+//                @Override
+//                public void valueChanged(ListSelectionEvent es)
+//                {
+//                    int selectedRow = tblOrderList.getSelectedRow();
+//                    if (es.getValueIsAdjusting() || selectedRow < 0)
+//                    {
+//                        txtOrder.setText("");
+//                        txtQuantity.setText("");
+//                        txtDate.setText("");
+//                        txtMaterialID.setText("");
+//                        txtMaterialName.setText("");
+//                        txtThickness.setText("");
+//                        txtWidth.setText("");
+//                        txtCircumference.setText("");
+//                        return;
+//                    }
+//
+//                    Order o = omodel.getEventsByRow(selectedRow);
+//
+//
+//                    try
+//                    {
+////                        txtOrder.setLineWrap(true);
+//
+//                        txtOrder.setText(String.valueOf(o.getOrder()));
+//                        txtQuantity.setText(String.valueOf(o.getQuantity()));
+//                        txtDate.setText(String.valueOf(o.printDate(o.getDueDate())));
+//                        txtMaterialID.setText(String.valueOf(o.getMaterialID()));
+//                        txtMaterialName.setText(o.getMaterialName());
+//                        txtThickness.setText(String.valueOf(o.getThickness()));
+//                        txtWidth.setText(String.valueOf(o.getWidth()));
+//                        txtCircumference.setText(String.valueOf(o.getCircumference()));
+//                        switch (o.getType())
+//                        {
+//                            case START:
+//                                rbtnStart.setSelected(true);
+//                                break;
+//                            case PAUSE:
+//                                rbtnPause.setSelected(true);
+//                                break;
+//                            case AFSLUT:
+//                                rbtnAfslut.setSelected(true);
+//                                break;
+//                            default:
+//                                rbtnProgress.setSelected(true);
+//                        }
+//                    }
+//                    catch (Exception ex)
+//                    {
+//                    }
+//                }
+//            });
+//                   }
+//        catch (Exception e)
+//        {
+//        }
+//    }
+    
+    private void sleeveListSelectioner()
+    {
+        try
+        {
+            slmgr = SleeveManager.getInstance();
+            slmgr.addObserver(this);
+
+            slmodel = new SleeveTableModel(slmgr.getAll());
+            tblSleeveList.setModel(slmodel);
+            tblSleeveList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent es)
+                {
+                    int selectedRow = tblSleeveList.getSelectedRow();
+                    if (es.getValueIsAdjusting() || selectedRow < 0)
+                    {
+                       
+                        return;
+                    }
+
+                    Sleeve s = slmodel.getEventsByRow(selectedRow);
+
+
+//                    try
+//                    {
+////                        
+//
+//                       
+//                        }
+//                    }
+//                    catch (Exception ex)
+//                    {
+//                    }
+                }
+            });
+                   }
+        catch (Exception e)
+        {
+        }
+    }
+    
+    
 }
