@@ -41,18 +41,12 @@ public class CoilTypeDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO StockItem(code, materialId, materialName, materialDensity, chargeNo,"
-                    + " length, width, thickness, stockQuantity) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO CoilType(code, width, thickness, materialId) VALUES (?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, item.getCode());
-            ps.setInt(2, item.getMaterialId());
-            ps.setString(3, item.getMaterialName());
-            ps.setDouble(4, item.getMaterialDensity());
-            ps.setString(5, item.getChargeNr());
-            ps.setDouble(6, item.getLength());
-            ps.setDouble(7, item.getWidth());
-            ps.setDouble(8, item.getThickness());
-            ps.setDouble(9, item.getStockQuantity());
+            ps.setString(1, coilType.getCode());
+            ps.setDouble(2, coilType.getWidth());
+            ps.setDouble(3, coilType.getThickness());
+            ps.setInt(4, coilType.getMaterialId());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -67,20 +61,20 @@ public class CoilTypeDBManager
         }
     }
 
-    public ArrayList<StockItem> getAllItems() throws SQLException, IOException
+    public ArrayList<CoilType> getAllItems() throws SQLException, IOException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem, Material WHERE StockItem.MaterialId = Material.id";
+            String sql = "SELECT * FROM CoilType WHERE StockItem.MaterialId = Material.id";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<StockItem> items = new ArrayList<>();
+            ArrayList<CoilType> types = new ArrayList<>();
             while (rs.next())
             {
-                items.add(getOneItem(rs));
+                types.add(getOneItem(rs));
             }
-            return items;
+            return types;
         }
 
     }
