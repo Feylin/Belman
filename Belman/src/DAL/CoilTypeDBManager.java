@@ -41,8 +41,7 @@ public class CoilTypeDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO StockItem(code, width, thickness, materialeId,"
-                    + " ) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO CoilType(code, width, thickness, materialId) VALUES (?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, c.getCode());
             ps.setDouble(2, c.getWidth());
@@ -73,9 +72,9 @@ public class CoilTypeDBManager
             ArrayList<CoilType> items = new ArrayList<>();
             while (rs.next())
             {
-                items.add(getOneItem(rs));
+                types.add(getOneItem(rs));
             }
-            return items;
+            return types;
         }
 
     }

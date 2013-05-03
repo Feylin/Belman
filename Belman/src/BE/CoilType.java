@@ -2,23 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package BE;
 
 /**
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
-public class CoilType 
+public class CoilType
 {
+
     private final int id;
     private String code;
     private double width;
     private double thickness;
     private int materialId;
-    
+
     /**
      * Den overordnede konstruktør til CoilType.
+     *
      * @param id
      * @param code
      * @param width
@@ -32,7 +33,12 @@ public class CoilType
         this.width = width;
         this.thickness = thickness;
         this.materialId = materialId;
-        
+
+    }
+
+    public CoilType(int id, CoilType type)
+    {
+        this(id, type.getCode(), type.getWidth(), type.getThickness(), type.getMaterialId());
     }
 
     public CoilType(int id, CoilType c)
