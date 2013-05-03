@@ -6,6 +6,8 @@ package DAL;
 
 import BE.Material;
 import BE.Order;
+import BE.SalesOrder;
+import BE.Sleeve;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -54,7 +56,7 @@ public class ProductionOrderDBManager
             ps.setInt(4, order.getQuantity());
             ps.setDouble(5, order.getThickness());
             ps.setDouble(6, order.getWidth());
-            ps.setInt(7, order.getStatus());
+            ps.setString(7, order.getStatus());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -74,7 +76,7 @@ public class ProductionOrderDBManager
         try (Connection con = connector.getConnection())
         {
             String sql = "SELECT * FROM ProductionOrder, SalesOrder WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId";
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement( sql );
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Order> orders = new ArrayList<>();
@@ -105,6 +107,27 @@ public class ProductionOrderDBManager
             return orders;
         }
     }
+    
+    public ArrayList<Order> getOrderBySleeve (Sleeve s) throws SQLException, IOException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM ProductionOrder, Sleeve WHERE ProductionOrder.materialId = Sleeve.materialId AND Sleeve.id = ?";        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, s.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Order> orders = new ArrayList<>();
+            while (rs.next())
+            {
+                orders.add(getOneOrder(rs));
+            }
+            return orders;
+        }
+    }
+    
+    
 
     public void remove(int prodOrderId) throws SQLException
     {
@@ -135,8 +158,8 @@ public class ProductionOrderDBManager
             ps.setInt(4, o.getQuantity());
             ps.setDouble(5, o.getThickness());
             ps.setDouble(7, o.getWidth());
-            ps.setInt(8, o.getStatus());
-            ps.setInt (9, o.getOrderId());
+            ps.setString(8, o.getStatus());
+            ps.setInt (9, o.getOrderId());            
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -161,9 +184,14 @@ public class ProductionOrderDBManager
 //        String name = rs.getString("name");
         double thickness = rs.getDouble("thickness");
         double width = rs.getDouble("width");
-        int status = rs.getInt("status");
+        String status = rs.getString("status");
+        int sOrderId = rs.getInt("sOrderId");
+        String custName = rs.getString("sOrder");
 
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, thickness, width, status);
+        String email = rs.getString("email");
+        int phone = rs.getInt("phone");
+
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, thickness, width, status, new SalesOrder(sOrderId, custName, email, phone));
     }
 
     protected String convertDateToSQL(GregorianCalendar date)

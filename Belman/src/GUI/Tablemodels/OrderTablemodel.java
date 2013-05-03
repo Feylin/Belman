@@ -20,8 +20,8 @@ public class OrderTablemodel extends AbstractTableModel
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-    private final String[] header = {"Order"};
-    private final Class[] columnTypes = {String.class};
+    private final String[] header = {"Order", "Status"};
+    private final Class[] columnTypes = {String.class, String.class};
 
 
     private ArrayList<Order> info;
@@ -55,7 +55,7 @@ public class OrderTablemodel extends AbstractTableModel
        Order o = info.get(row);
        switch (col)
        {
-           case 0 : return o.getOrderId();
+           case 0 : return o.getOrderName();
            case 1 : return o.getStatus();
        }
        return null;
@@ -85,7 +85,8 @@ public class OrderTablemodel extends AbstractTableModel
         Order or = info.get(row);
         switch (col)
         {
-            case 0 : or.getOrderId(); break;
+            case 0 : or.getOrderName(); break;
+            case 1 : or.getStatus(); break;
         }
     }
 

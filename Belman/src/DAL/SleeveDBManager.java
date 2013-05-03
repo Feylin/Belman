@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import sun.util.calendar.Gregorian;
+
 
 /**
  *
@@ -45,7 +45,7 @@ public class SleeveDBManager
     {
          try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Sleeve, Material WHERE Sleeve.materialId = Material.id";
+            String sql = "SELECT * FROM Sleeve, Material WHERE Sleeve.id = Material.id";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
