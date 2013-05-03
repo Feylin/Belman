@@ -4,6 +4,7 @@
  */
 package DAL;
 
+import BE.CoilType;
 import BE.Material;
 import BE.StockItem;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -42,18 +43,14 @@ public class StockItemDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO StockItem(code, materialId, materialName, materialDensity, chargeNo,"
-                    + " length, width, thickness, stockQuantity) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO StockItem(chargeNo, length, stockQuantity, coilTypeId, sleeveId) VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, item.getCode());
-            ps.setInt(2, item.getMaterialId());
-            ps.setString(3, item.getMaterialName());
-            ps.setDouble(4, item.getMaterialDensity());
-            ps.setString(5, item.getChargeNr());
-            ps.setDouble(6, item.getLength());
-            ps.setDouble(7, item.getWidth());
-            ps.setDouble(8, item.getThickness());
-            ps.setDouble(9, item.getStockQuantity());
+            ps.setString(1, item.getChargeNo());
+            ps.setDouble(2, item.getLength());
+            ps.setDouble(3, item.getStockQuantity());
+            ps.setDouble(4, item.getCoilTypeId());
+            ps.setInt(5, item.getSleeveId());
+
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -72,7 +69,7 @@ public class StockItemDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem, Material WHERE StockItem.MaterialId = Material.id";
+            String sql = "SELECT * FROM StockItem, CoilType, Material WHERE Coiltype.MaterialId = Material.Id AND CoilType.Id = StockItem.coilTypeId";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -124,16 +121,15 @@ public class StockItemDBManager
     {
 
         int id = rs.getInt("id");
-        String code = rs.getString("code");
-        int materialId = rs.getInt("id");
-        String materialName = rs.getString("name");
-        double materialDensity = rs.getDouble("density");
         String chargeNo = rs.getString("chargeNo");
         double length = rs.getDouble("length");
+        int stockQuantity = rs.getInt("stockQuantity");
+        String code = rs.getString("code");
         double width = rs.getDouble("width");
         double thickness = rs.getDouble("thickness");
-        double stockQuantity = rs.getDouble("stockQuantity");
+        double density = rs.getDouble("density");
+        String name = rs.getString("name");
 
-        return new StockItem(id, code, new Material(materialId, materialDensity, materialName), chargeNo, length, width, thickness, stockQuantity);
+        return new StockItem(id, chargeNo, length, stockQuantity, new CoilType(code, width, thickness), new Material(density, name));
     }
 }
