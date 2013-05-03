@@ -98,7 +98,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtThickness.setText(String.valueOf(o.getThickness()));
                         txtWidth.setText(String.valueOf(o.getWidth()));
                         txtCircumference.setText(String.valueOf(o.getCircumference()));
-                        switch (o.getType())
+                        switch (o.getStatus())
                         {
                             case START:
                                 rbtnStart.setSelected(true);
@@ -279,10 +279,10 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
         
         OrderType type = rbtnStart.isSelected() ? OrderType.START
-                    : rbtnPause.isSelected() ? OrderType.PAUSE
-                    : rbtnAfslut.isSelected() ? OrderType.AFSLUT
-                    : OrderType.PROGRESS;
-            o.setType(type);
+                       : rbtnPause.isSelected() ? OrderType.PAUSE
+                       : rbtnAfslut.isSelected() ? OrderType.AFSLUT
+                       : OrderType.PROGRESS;
+                       o.setStatus(status);
 
             omgr.update(o);
         }
@@ -392,7 +392,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        btnLuk = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -1134,12 +1134,12 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         jTabbedPane1.addTab("Cutting method 3", jPanel5);
 
-        jButton4.setText("Luk");
-        jButton4.addActionListener(new java.awt.event.ActionListener()
+        btnLuk.setText("Luk");
+        btnLuk.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton4ActionPerformed(evt);
+                btnLukActionPerformed(evt);
             }
         });
 
@@ -1208,8 +1208,8 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(468, Short.MAX_VALUE))
+                    .addComponent(btnLuk, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1217,7 +1217,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(jButton4)
+                .addComponent(btnLuk)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1229,10 +1229,10 @@ public class Overview extends javax.swing.JFrame implements Observer
         closePressed();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
-    {//GEN-HEADEREND:event_jButton4ActionPerformed
+    private void btnLukActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLukActionPerformed
+    {//GEN-HEADEREND:event_btnLukActionPerformed
         closePressed();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnLukActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
     {//GEN-HEADEREND:event_jMenuItem2ActionPerformed
@@ -1277,9 +1277,9 @@ public class Overview extends javax.swing.JFrame implements Observer
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanelOrderInfo;
+    private javax.swing.JButton btnLuk;
     private javax.swing.JButton btnOK;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
