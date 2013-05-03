@@ -38,12 +38,18 @@ public class CoilType
 
     public CoilType(int id, CoilType c)
     {
-        this(id, 
-                c.getCode(), 
-                c.getWidth(), 
-                c.getThickness(), 
+        this(id,
+                c.getCode(),
+                c.getWidth(),
+                c.getThickness(),
                 c.getMaterialId());
-        
+
+    }
+
+    public CoilType(String code, double width, double thickness)
+    {
+        this(-1, code, width, thickness, -1);
+
     }
 
     /**
