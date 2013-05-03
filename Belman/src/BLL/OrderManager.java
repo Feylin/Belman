@@ -20,28 +20,33 @@ import java.util.Observable;
  */
 public class OrderManager extends Observable
 {
+
     private ProductionOrderDBManager accessor;
     private static OrderManager instance;
-    
+
     private OrderManager() throws IOException
     {
         accessor = ProductionOrderDBManager.getInstance();
     }
-    
-    public static OrderManager getInstance() throws FileNotFoundException, IOException{
-        if( instance == null ) instance = new OrderManager();
+
+    public static OrderManager getInstance() throws FileNotFoundException, IOException
+    {
+        if (instance == null)
+        {
+            instance = new OrderManager();
+        }
         return instance;
     }
-    
+
     public Order add(Order order) throws SQLException
     {
-        Order o = accessor.add(order); 
+        Order o = accessor.add(order);
         setChanged();
         notifyObservers();
         return o;
     }
-    
-      /**
+
+    /**
      * Opdaterer en ordre i databasen
      *
      * @param member Medlemsobjektet for det medlem der skal opdateres. Dete
@@ -61,17 +66,17 @@ public class OrderManager extends Observable
         {
         }
     }
-    
+
     public ArrayList<Order> getAll() throws IOException, SQLException
     {
-       return accessor.getAll();        
+        return accessor.getAll();
     }
-    
+
     public ArrayList<Order> getOrderByMaterial(Material m) throws SQLException, IOException
     {
         return accessor.getOrderByMaterial(m);
     }
-    
+
     public void remove(int prodOrderId) throws SQLException
     {
         accessor.remove(prodOrderId);
