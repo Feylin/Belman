@@ -18,8 +18,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class SleeveTableModel extends AbstractTableModel
 {   
-    private final String[] header = {"Sleeve Id"};
-    private final Class[] columnTypes = {Integer.class};
+    private final String[] header = {"Sleeve Id", "Material", "Thickness"};
+    private final Class[] columnTypes = {Integer.class, String.class, double.class};
 
 
     private ArrayList<Sleeve> s;
@@ -53,7 +53,9 @@ public class SleeveTableModel extends AbstractTableModel
        Sleeve sleeve = s.get(row);
        switch (col)
        {
-           case 0 : return sleeve.getId();   
+           case 0 : return sleeve.getId();  
+           case 1 : return sleeve.getMaterialName();
+           case 2 : return sleeve.getThickness();
        }
        return null;
     }
@@ -83,6 +85,8 @@ public class SleeveTableModel extends AbstractTableModel
         switch (col)
         {
             case 0 : sleeve.getId(); break;
+            case 1 : sleeve.getMaterialName(); break;
+            case 2 : sleeve.getThickness(); break;
         }
     }
 

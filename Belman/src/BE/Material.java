@@ -78,4 +78,10 @@ public class Material
     {
         return id;
     }
+    
+    @Override
+    public String toString()
+    {
+        return String.format(" %-5s", name);
+    }
 }

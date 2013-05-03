@@ -20,6 +20,7 @@ public class Sleeve
     private double circumference;
     private int materialId;
     private int pOrderId;
+    private Material material;    
     
     /**
      * Den overordnede konstruktør til Sleeve.
@@ -31,7 +32,7 @@ public class Sleeve
      * @param materialId
      * @param pOrderId
      */
-    public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId)
+    public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
     {
         this.id = id;
         this.startTime = startTime;
@@ -39,8 +40,21 @@ public class Sleeve
         this.thickness = thickness;
         this.circumference = circumference;
         this.materialId = materialId;
-        this.pOrderId = pOrderId;        
+        this.pOrderId = pOrderId; 
+        this.material = material;
     }
+    
+//    public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
+//    {
+//        this(id,
+//                startTime,
+//                endTime,
+//                thickness,
+//                circumference,
+//                materialId,
+//                pOrderId,
+//                material);        
+//    }
 
     /**
      * @return the id
@@ -145,4 +159,11 @@ public class Sleeve
     {
         this.pOrderId = pOrderId;
     }
+    
+    public Material getMaterialName()
+    {
+        return material;
+    }
+    
+    
 }

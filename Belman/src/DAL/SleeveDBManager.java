@@ -5,6 +5,7 @@
 
 package DAL;
 
+import BE.Material;
 import BE.Sleeve;
 import java.io.IOException;
 import java.sql.Connection;
@@ -44,7 +45,7 @@ public class SleeveDBManager
     {
          try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Sleeve";
+            String sql = "SELECT * FROM Sleeve, Material WHERE Sleeve.materialId = Material.id";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -68,8 +69,9 @@ public class SleeveDBManager
         double circumference = rs.getDouble("circumference");
         int materialId = rs.getInt("materialId");
         int pOrderId = rs.getInt("pOrderId");
+        String materialName = rs.getString("name");
         
-        return new Sleeve(id, gc, gc2, thickness, circumference, materialId, pOrderId);
+        return new Sleeve(id, gc, gc2, thickness, circumference, materialId, pOrderId, new Material(materialName));
     }
     
     protected String convertDateToSQL(GregorianCalendar date)
