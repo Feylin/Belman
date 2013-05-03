@@ -54,7 +54,7 @@ public class ProductionOrderDBManager
             ps.setInt(4, order.getQuantity());
             ps.setDouble(5, order.getThickness());
             ps.setDouble(6, order.getWidth());
-            ps.setString(7, order.getStatus());
+            ps.setInt(7, order.getStatus());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -73,7 +73,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -135,7 +135,7 @@ public class ProductionOrderDBManager
             ps.setInt(4, o.getQuantity());
             ps.setDouble(5, o.getThickness());
             ps.setDouble(7, o.getWidth());
-            ps.setString(8, o.getStatus());
+            ps.setInt(8, o.getStatus());
             ps.setInt (9, o.getOrderId());
 
             int affectedRows = ps.executeUpdate();
@@ -161,7 +161,7 @@ public class ProductionOrderDBManager
 //        String name = rs.getString("name");
         double thickness = rs.getDouble("thickness");
         double width = rs.getDouble("width");
-        String status = rs.getString("status");
+        int status = rs.getInt("status");
 
         return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, thickness, width, status);
     }

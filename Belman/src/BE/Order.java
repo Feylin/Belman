@@ -21,7 +21,7 @@ public class Order
     private int quantity;
     private double thickness;
     private double width;
-    private String status;
+    private int status;
 
     /**
      * Overodnede konstruktør for Order.
@@ -35,7 +35,7 @@ public class Order
      * @param width
      * @param status
      */
-    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, String status)
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, int status)
     {
         this.sOrderId = sOrderId;
         this.orderId = orderId;
@@ -168,7 +168,7 @@ public class Order
     /**
      * @return the status
      */
-    public String getStatus()
+    public int getStatus()
     {
         return status;
     }
@@ -176,7 +176,7 @@ public class Order
     /**
      * @param status the status to set
      */
-    public void setStatus(String status)
+    public void setStatus(int status)
     {
         this.status = status;
     } 
