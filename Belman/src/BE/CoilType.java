@@ -36,11 +36,6 @@ public class CoilType
 
     }
 
-    public CoilType(int id, CoilType type)
-    {
-        this(id, type.getCode(), type.getWidth(), type.getThickness(), type.getMaterialId());
-    }
-
     public CoilType(int id, CoilType c)
     {
         this(id, 

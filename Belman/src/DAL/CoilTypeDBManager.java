@@ -69,7 +69,7 @@ public class CoilTypeDBManager
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<CoilType> items = new ArrayList<>();
+            ArrayList<CoilType> types = new ArrayList<>();
             while (rs.next())
             {
                 types.add(getOneItem(rs));
