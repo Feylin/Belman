@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -122,6 +123,42 @@ public class ProductionOrderDBManager
         }
     }
     
+    
+     public void update(Order o) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE ProductionOrder SET sOrderId = ?, sOrder = ?, pOrder = ?, dueDate = ?, quantity = ?, materialId = ?, thickness = ?, widch = ?, circumference = ?, type = ? WHERE pOrderId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);   
+            
+            ps.setDouble(1, o.getOrder());
+            ps.setDouble(2, o.getProdOrder());
+            ps.setString(3, convertDateToSQL(o.getDueDate()));
+            ps.setInt(4, o.getQuantity());
+            ps.setInt(5, o.getMaterialID());
+            ps.setDouble(6, o.getThickness());
+            ps.setDouble(7, o.getWidth());
+            ps.setDouble(8, o.getCircumference());
+            int typeID = o.getType().ID;
+            if (typeID == 0)
+            {
+                ps.setNull(9, Types.INTEGER);
+            }
+            else
+            {
+                ps.setInt(9, o.getType().ID);
+            }
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0)
+            {
+                throw new SQLException("Unable to update order");
+            }
+//            ps.setString(9, o.getType().toString());
+        }
+
+    }
+
     
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException

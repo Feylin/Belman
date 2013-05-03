@@ -54,7 +54,7 @@ public class StockListTableModel extends AbstractTableModel
        StockItem s = info.get(row);
        switch (col)
        {
-           case 0: return s.getMaterialName();
+//           case 0: return s.getMaterialName();
        }
        return null;
     }
@@ -83,7 +83,7 @@ public class StockListTableModel extends AbstractTableModel
         StockItem s = info.get(row);
         switch (col)
         {
-            case 0 : s.getMaterialName();
+//            case 0 : s.getMaterialName();
         }
     }
 

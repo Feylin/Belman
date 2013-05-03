@@ -6,6 +6,7 @@ package GUI;
 
 import BE.Material;
 import BE.Order;
+import BE.OrderType;
 import BE.StockItem;
 import BLL.MaterialManager;
 import BLL.OrderManager;
@@ -42,6 +43,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private StockListTableModel smodel = null;
     private MaterielTableModel mmodel = null;
     private OrderTablemodel omodel2 = null;
+    Order o;
 
     /**
      * Creates new form Overview
@@ -96,130 +98,149 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtThickness.setText(String.valueOf(o.getThickness()));
                         txtWidth.setText(String.valueOf(o.getWidth()));
                         txtCircumference.setText(String.valueOf(o.getCircumference()));
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-                }
-            });
-            smgr = StockItemManager.getInstance();
-            smodel = new StockListTableModel(smgr.getAll());
-            smgr.addObserver(this);
-            tblInStock.setModel(smodel);
-
-            tblInStock.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-            {
-                @Override
-                public void valueChanged(ListSelectionEvent es)
-                {
-                    int selectedRow = tblInStock.getSelectedRow();
-                    if (es.getValueIsAdjusting() || selectedRow < 0)
-                    {
-                        txtMaterialName1.setText("");
-                        txtMaterialID1.setText("");
-                        txtCode.setText("");
-                        txtMaterialDenisity.setText("");
-                        txtQuantity1.setText("");
-                        txtCharge.setText("");
-                        txtThickness1.setText("");
-                        txtWidth1.setText("");
-                        txtLength1.setText("");
-
-                        return;
-                    }
-
-                    StockItem s = smodel.getEventsByRow(selectedRow);
-
-
-                    try
-                    {
-//                        txtOrder.setLineWrap(true);
-
-                        txtMaterialName1.setText(String.valueOf(s.getMaterialName()));
-                        txtMaterialID1.setText(String.valueOf(s.getMaterialId()));
-                        txtCode.setText(String.valueOf(s.getCode()));
-                        txtMaterialDenisity.setText(String.valueOf(s.getMaterialDensity()));
-                        txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
-                        txtCharge.setText(String.valueOf(s.getChargeNr()));
-                        txtThickness1.setText(String.valueOf(s.getThickness()));
-                        txtWidth1.setText(String.valueOf(s.getWidth()));
-                        txtLength1.setText(String.valueOf(s.getLength()));
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-                }
-            });
-            mmgr = MaterialManager.getInstance();
-            mmodel = new MaterielTableModel(mmgr.getAllMaterials());
-            mmgr.addObserver(this);
-            tblMaterial.setModel(mmodel);
-
-
-
-            tblMaterial.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-            {
-                @Override
-                public void valueChanged(ListSelectionEvent es)
-                {
-                    int selectedRow = tblMaterial.getSelectedRow();
-                    Material m = mmodel.getEventsByRow(selectedRow);
-                    try
-                    {
-                        if (!omgr.getOrderByMaterial(m).isEmpty())
+                        switch (o.getType())
                         {
-                            omodel2 = new OrderTablemodel(omgr.getOrderByMaterial(m));
-                            tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-            {
-                @Override
-                public void valueChanged(ListSelectionEvent es)
-                {
-                    int selectedRow = tblOrderList1.getSelectedRow();                    
-                    if (es.getValueIsAdjusting() || selectedRow < 0)
-                    {
-                       txtOrder2.setText("");
-                        return;
-                    }
-
-                    Order o = omodel.getEventsByRow(selectedRow);
-
-
-                    try
-                    {
-//                        txtOrder.setLineWrap(true);
-
-                        txtOrder2.setText(String.valueOf(o.getProdOrder()));
-                        txtQuantity2.setText(String.valueOf(o.getQuantity()));
-                        txtDueDate2.setText(String.valueOf(o.printDate(o.getDueDate())));                      
-                        txtThickness2.setText(String.valueOf(o.getThickness()));
-                        txtWidth2.setText(String.valueOf(o.getWidth()));
-                        txtCircumference2.setText(String.valueOf(o.getCircumference()));
+                            case START:
+                                rbtnStart.setSelected(true);
+                                break;
+                            case PAUSE:
+                                rbtnPause.setSelected(true);
+                                break;
+                            case AFSLUT:
+                                rbtnAfslut.setSelected(true);
+                                break;
+                            default:
+                                rbtnProgress.setSelected(true);
+                        }
                     }
                     catch (Exception ex)
                     {
                     }
                 }
             });
-
-                        }
-                        else
-                        {
-                            omodel2 = new OrderTablemodel(new ArrayList<Order>());
-                            tblOrderList1.setModel(omodel2);                       
-                        }
-                        tblOrderList1.setModel(omodel2);
-                    }                   
-                    catch (Exception ex)
-                    {
-                        Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-        }
+                   }
         catch (Exception e)
         {
         }
     }
+//            smgr = StockItemManager.getInstance();
+//            smodel = new StockListTableModel(smgr.getAll());
+//            smgr.addObserver(this);
+//            tblInStock.setModel(smodel);
+//
+//            tblInStock.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+//            {
+//                @Override
+//                public void valueChanged(ListSelectionEvent es)
+//                {
+//                    int selectedRow = tblInStock.getSelectedRow();
+//                    if (es.getValueIsAdjusting() || selectedRow < 0)
+//                    {
+//                        txtMaterialName1.setText("");
+//                        txtMaterialID1.setText("");
+//                        txtCode.setText("");
+//                        txtMaterialDenisity.setText("");
+//                        txtQuantity1.setText("");
+//                        txtCharge.setText("");
+//                        txtThickness1.setText("");
+//                        txtWidth1.setText("");
+//                        txtLength1.setText("");
+//
+//                        return;
+//                    }
+//
+//                    StockItem s = smodel.getEventsByRow(selectedRow);
+//
+//
+//                    try
+//                    {
+////                        txtOrder.setLineWrap(true);
+//
+//                        txtMaterialName1.setText(String.valueOf(s.getMaterialName()));
+//                        txtMaterialID1.setText(String.valueOf(s.getMaterialId()));
+//                        txtCode.setText(String.valueOf(s.getCode()));
+//                        txtMaterialDenisity.setText(String.valueOf(s.getMaterialDensity()));
+//                        txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
+//                        txtCharge.setText(String.valueOf(s.getChargeNr()));
+//                        txtThickness1.setText(String.valueOf(s.getThickness()));
+//                        txtWidth1.setText(String.valueOf(s.getWidth()));
+//                        txtLength1.setText(String.valueOf(s.getLength()));
+//                    }
+//                    catch (Exception ex)
+//                    {
+//                    }
+//                }
+//            });
+//            mmgr = MaterialManager.getInstance();
+//            mmodel = new MaterielTableModel(mmgr.getAllMaterials());
+//            mmgr.addObserver(this);
+//            tblMaterial.setModel(mmodel);
+//
+//
+//
+//            tblMaterial.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+//            {
+//                @Override
+//                public void valueChanged(ListSelectionEvent es)
+//                {
+//                    int selectedRow = tblMaterial.getSelectedRow();
+//                    Material m = mmodel.getEventsByRow(selectedRow);
+//                    try
+//                    {
+//                        if (!omgr.getOrderByMaterial(m).isEmpty())
+//                        {
+//                            omodel2 = new OrderTablemodel(omgr.getOrderByMaterial(m));
+//                            tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+//            {
+//                @Override
+//                public void valueChanged(ListSelectionEvent es)
+//                {
+//                    int selectedRow = tblOrderList1.getSelectedRow();                    
+//                    if (es.getValueIsAdjusting() || selectedRow < 0)
+//                    {
+//                       txtOrder2.setText("");
+//                        return;
+//                    }
+//
+//                    Order o = omodel.getEventsByRow(selectedRow);
+//
+//
+//                    try
+//                    {
+////                        txtOrder.setLineWrap(true);
+//
+//                        txtOrder2.setText(String.valueOf(o.getProdOrder()));
+//                        txtQuantity2.setText(String.valueOf(o.getQuantity()));
+//                        txtDueDate2.setText(String.valueOf(o.printDate(o.getDueDate())));                      
+//                        txtThickness2.setText(String.valueOf(o.getThickness()));
+//                        txtWidth2.setText(String.valueOf(o.getWidth()));
+//                        txtCircumference2.setText(String.valueOf(o.getCircumference()));
+//                    }
+//                    catch (Exception ex)
+//                    {
+//                    }
+//                }
+//            });
+//
+//                        }
+//                        else
+//                        {
+//                            omodel2 = new OrderTablemodel(new ArrayList<Order>());
+//                            tblOrderList1.setModel(omodel2);                       
+//                        }
+//                        tblOrderList1.setModel(omodel2);
+//                    }                   
+//                    catch (Exception ex)
+//                    {
+//                        Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//            });
+//        }
+//        catch (Exception e)
+//        {
+//        }
+//    }
 
     public static Overview getInstance()
     {
@@ -251,17 +272,36 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
     }
-
-    private void logout()
+    
+     private void btnSavePressed()
     {
-        String message = "Are you sure you want to log out?";
-        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION)
+        try
         {
-            dispose();
-            Login.getInstance().setVisible(true);
+        
+        OrderType type = rbtnStart.isSelected() ? OrderType.START
+                    : rbtnPause.isSelected() ? OrderType.PAUSE
+                    : rbtnAfslut.isSelected() ? OrderType.AFSLUT
+                    : OrderType.PROGRESS;
+            o.setType(type);
+
+            omgr.update(o);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
+//
+//    private void logout()
+//    {
+//        String message = "Are you sure you want to log out?";
+//        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
+//        if (reply == JOptionPane.YES_OPTION)
+//        {
+//            dispose();
+//            Login.getInstance().setVisible(true);
+//        }
+//    }
 
     @Override
     public void update(Observable o, Object arg)
@@ -311,9 +351,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         jLabel3 = new javax.swing.JLabel();
         txtCircumference = new javax.swing.JTextField();
         txtMaterialID = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        rbtnProgress = new javax.swing.JRadioButton();
+        rbtnStart = new javax.swing.JRadioButton();
+        rbtnPause = new javax.swing.JRadioButton();
+        rbtnAfslut = new javax.swing.JRadioButton();
+        btnOK = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -334,9 +376,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         txtWidth1 = new javax.swing.JTextField();
         lblLength1 = new javax.swing.JLabel();
         txtLength1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         lblQuantity = new javax.swing.JLabel();
         txtQuantity1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -348,25 +387,8 @@ public class Overview extends javax.swing.JFrame implements Observer
         jPanel3 = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
         tblOrderList1 = new javax.swing.JTable();
-        JPanelMeasurements = new javax.swing.JPanel();
-        lblOrder2 = new javax.swing.JLabel();
-        lblQuantity2 = new javax.swing.JLabel();
-        lblDueDate2 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        txtThickness2 = new javax.swing.JTextField();
-        lblThickness2 = new javax.swing.JLabel();
-        lblWidth2 = new javax.swing.JLabel();
-        txtWidth2 = new javax.swing.JTextField();
-        lblCircumference2 = new javax.swing.JLabel();
-        txtCircumference2 = new javax.swing.JTextField();
-        txtOrder2 = new javax.swing.JTextField();
-        txtQuantity2 = new javax.swing.JTextField();
-        txtDueDate2 = new javax.swing.JTextField();
-        btnFinishOrder = new javax.swing.JButton();
-        JpanelRButtons = new javax.swing.JPanel();
-        rbtnPending = new javax.swing.JRadioButton();
-        rbtnInProgress = new javax.swing.JRadioButton();
-        rbtnUrgent = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -528,11 +550,33 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
-        jButton1.setText("Afslut");
+        buttonGroup2.add(rbtnProgress);
+        rbtnProgress.setText("Progress");
 
-        jButton2.setText("Pause");
+        buttonGroup2.add(rbtnStart);
+        rbtnStart.setText("Start");
+        rbtnStart.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                rbtnStartActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Start");
+        buttonGroup2.add(rbtnPause);
+        rbtnPause.setText("Pause");
+
+        buttonGroup2.add(rbtnAfslut);
+        rbtnAfslut.setText("Afslut");
+
+        btnOK.setText("OK");
+        btnOK.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnOKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPanelOrderInfoLayout = new javax.swing.GroupLayout(JPanelOrderInfo);
         JPanelOrderInfo.setLayout(JPanelOrderInfoLayout);
@@ -565,11 +609,12 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelOrderInfoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbtnProgress)
+                            .addComponent(rbtnStart)
+                            .addComponent(rbtnPause)
+                            .addComponent(rbtnAfslut)
+                            .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         JPanelOrderInfoLayout.setVerticalGroup(
@@ -594,11 +639,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(txtMaterialID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbtnProgress)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbtnStart)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbtnPause)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbtnAfslut)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnOK)
                 .addContainerGap())
         );
 
@@ -619,7 +669,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JPanelOrderInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JPanelOrderInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -757,12 +807,6 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jButton5.setText("Afslut");
-
-        jButton6.setText("Pause");
-
-        jButton7.setText("Start");
-
         lblQuantity.setText("Stock Quantity: ");
 
         txtQuantity1.setEditable(false);
@@ -788,13 +832,6 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanalStockInfoLayout.createSequentialGroup()
-                        .addGap(0, 243, Short.MAX_VALUE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JPanalStockInfoLayout.createSequentialGroup()
                         .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(JPanalStockInfoLayout.createSequentialGroup()
@@ -813,7 +850,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                             .addComponent(txtMaterialName1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtMaterialDenisity)
                             .addGroup(JPanalStockInfoLayout.createSequentialGroup()
-                                .addComponent(txtQuantity1)
+                                .addComponent(txtQuantity1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6))
                             .addComponent(txtCharge))))
@@ -850,12 +887,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addContainerGap())
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -912,7 +944,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             },
             new String []
             {
-                "Material"
+                "Sleeve"
             }
         )
         {
@@ -977,179 +1009,74 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
         jScrollPane12.setViewportView(tblOrderList1);
 
-        JPanelMeasurements.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Order Information"));
-
-        lblOrder2.setText("Order: ");
-
-        lblQuantity2.setText("Quantity:");
-
-        lblDueDate2.setText("Due Date:");
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Mesurements"));
-
-        txtThickness2.setEditable(false);
-
-        lblThickness2.setText("Thickness: ");
-
-        lblWidth2.setText("Width: ");
-
-        txtWidth2.setEditable(false);
-
-        lblCircumference2.setText("Circumference: ");
-
-        txtCircumference2.setEditable(false);
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblThickness2)
-                    .addComponent(lblWidth2)
-                    .addComponent(lblCircumference2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCircumference2)
-                    .addComponent(txtWidth2)
-                    .addComponent(txtThickness2))
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtThickness2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblThickness2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblWidth2)
-                    .addComponent(txtWidth2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCircumference2)
-                    .addComponent(txtCircumference2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout JPanelMeasurementsLayout = new javax.swing.GroupLayout(JPanelMeasurements);
-        JPanelMeasurements.setLayout(JPanelMeasurementsLayout);
-        JPanelMeasurementsLayout.setHorizontalGroup(
-            JPanelMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanelMeasurementsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(JPanelMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblOrder2)
-                    .addComponent(lblQuantity2)
-                    .addComponent(lblDueDate2))
-                .addGap(33, 33, 33)
-                .addGroup(JPanelMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtOrder2)
-                    .addComponent(txtQuantity2)
-                    .addComponent(txtDueDate2))
-                .addContainerGap())
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        JPanelMeasurementsLayout.setVerticalGroup(
-            JPanelMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanelMeasurementsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(JPanelMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblOrder2)
-                    .addComponent(txtOrder2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(JPanelMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblQuantity2)
-                    .addComponent(txtQuantity2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPanelMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDueDate2)
-                    .addComponent(txtDueDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        btnFinishOrder.setText("Finish Order");
-        btnFinishOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
             {
-                btnFinishOrderActionPerformed(evt);
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String []
+            {
+                "Stock Item"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
             }
         });
-
-        JpanelRButtons.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Order Status"));
-
-        buttonGroup2.add(rbtnPending);
-        rbtnPending.setText("Pending");
-
-        buttonGroup2.add(rbtnInProgress);
-        rbtnInProgress.setText("In Progress");
-
-        buttonGroup2.add(rbtnUrgent);
-        rbtnUrgent.setText("Urgent");
-
-        javax.swing.GroupLayout JpanelRButtonsLayout = new javax.swing.GroupLayout(JpanelRButtons);
-        JpanelRButtons.setLayout(JpanelRButtonsLayout);
-        JpanelRButtonsLayout.setHorizontalGroup(
-            JpanelRButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JpanelRButtonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(JpanelRButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbtnInProgress)
-                    .addComponent(rbtnPending)
-                    .addComponent(rbtnUrgent))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        JpanelRButtonsLayout.setVerticalGroup(
-            JpanelRButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JpanelRButtonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rbtnPending)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rbtnInProgress)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbtnUrgent)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JPanelMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JpanelRButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(btnFinishOrder)
-                        .addContainerGap(126, Short.MAX_VALUE))))
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(325, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(JPanelMeasurements, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JpanelRButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFinishOrder)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(56, 56, 56))
         );
 
-        jLabel4.setText("Select a Material: ");
+        jLabel4.setText("Select a Sleeve: ");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1169,13 +1096,13 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1282,14 +1209,14 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(468, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1304,7 +1231,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
     {//GEN-HEADEREND:event_jButton4ActionPerformed
-        logout();
+        closePressed();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -1327,11 +1254,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void btnFinishOrderActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnFinishOrderActionPerformed
-    {//GEN-HEADEREND:event_btnFinishOrderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFinishOrderActionPerformed
-
     private void txtQuantity1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtQuantity1ActionPerformed
     {//GEN-HEADEREND:event_txtQuantity1ActionPerformed
         // TODO add your handling code here:
@@ -1342,20 +1264,22 @@ public class Overview extends javax.swing.JFrame implements Observer
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaterialIDActionPerformed
 
+    private void rbtnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rbtnStartActionPerformed
+    {//GEN-HEADEREND:event_rbtnStartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnStartActionPerformed
+
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnOKActionPerformed
+    {//GEN-HEADEREND:event_btnOKActionPerformed
+        btnSavePressed();
+    }//GEN-LAST:event_btnOKActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
-    private javax.swing.JPanel JPanelMeasurements;
     private javax.swing.JPanel JPanelOrderInfo;
-    private javax.swing.JPanel JpanelRButtons;
-    private javax.swing.JButton btnFinishOrder;
+    private javax.swing.JButton btnOK;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1380,44 +1304,38 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCharge;
-    private javax.swing.JLabel lblCircumference2;
     private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDensity;
-    private javax.swing.JLabel lblDueDate2;
     private javax.swing.JLabel lblLength1;
     private javax.swing.JLabel lblMaterial;
     private javax.swing.JLabel lblMaterialID;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrder;
-    private javax.swing.JLabel lblOrder2;
     private javax.swing.JLabel lblQuantity;
-    private javax.swing.JLabel lblQuantity2;
     private javax.swing.JLabel lblThickness;
     private javax.swing.JLabel lblThickness1;
-    private javax.swing.JLabel lblThickness2;
     private javax.swing.JLabel lblWidth1;
-    private javax.swing.JLabel lblWidth2;
-    private javax.swing.JRadioButton rbtnInProgress;
-    private javax.swing.JRadioButton rbtnPending;
-    private javax.swing.JRadioButton rbtnUrgent;
+    private javax.swing.JRadioButton rbtnAfslut;
+    private javax.swing.JRadioButton rbtnPause;
+    private javax.swing.JRadioButton rbtnProgress;
+    private javax.swing.JRadioButton rbtnStart;
     private javax.swing.JTable tblInStock;
     private javax.swing.JTable tblMaterial;
     private javax.swing.JTable tblOrderList;
     private javax.swing.JTable tblOrderList1;
     private javax.swing.JTextField txtCharge;
     private javax.swing.JTextField txtCircumference;
-    private javax.swing.JTextField txtCircumference2;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtDate;
-    private javax.swing.JTextField txtDueDate2;
     private javax.swing.JTextField txtLength1;
     private javax.swing.JTextField txtMaterialDenisity;
     private javax.swing.JTextField txtMaterialID;
@@ -1425,15 +1343,11 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JTextField txtMaterialName;
     private javax.swing.JTextField txtMaterialName1;
     private javax.swing.JTextField txtOrder;
-    private javax.swing.JTextField txtOrder2;
     private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtQuantity1;
-    private javax.swing.JTextField txtQuantity2;
     private javax.swing.JTextField txtThickness;
     private javax.swing.JTextField txtThickness1;
-    private javax.swing.JTextField txtThickness2;
     private javax.swing.JTextField txtWidth;
     private javax.swing.JTextField txtWidth1;
-    private javax.swing.JTextField txtWidth2;
     // End of variables declaration//GEN-END:variables
 }

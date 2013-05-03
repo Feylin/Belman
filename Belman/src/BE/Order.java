@@ -45,6 +45,7 @@ public class Order
         this.thickness = thickness;
         this.width = width;
         this.status = status;
+        
 
     }
 
@@ -178,5 +179,6 @@ public class Order
     public void setStatus(String status)
     {
         this.status = status;
-    }
+    } 
+    
 }

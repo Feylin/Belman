@@ -56,6 +56,7 @@ public class OrderTablemodel extends AbstractTableModel
        switch (col)
        {
            case 0 : return o.getProdOrderID();
+           case 1 : return o.getType();
        }
        return null;
     }

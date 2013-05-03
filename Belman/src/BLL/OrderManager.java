@@ -41,6 +41,27 @@ public class OrderManager extends Observable
         return o;
     }
     
+      /**
+     * Opdaterer en ordre i databasen
+     *
+     * @param member Medlemsobjektet for det medlem der skal opdateres. Dete
+     * objekt bør indeholde de nye informationer (navn, adresse, telefonnummer
+     * m.v.)
+     * @throws TBSQLException
+     */
+    public void update(Order order) throws SQLException
+    {
+        try
+        {
+            accessor.update(order);
+            setChanged();
+            notifyObservers();
+        }
+        catch (SQLException e)
+        {
+        }
+    }
+    
     public ArrayList<Order> getAll() throws IOException, SQLException
     {
        return accessor.getAll();        
