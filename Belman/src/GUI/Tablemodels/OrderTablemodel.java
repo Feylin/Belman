@@ -55,8 +55,8 @@ public class OrderTablemodel extends AbstractTableModel
        Order o = info.get(row);
        switch (col)
        {
-           case 0 : return o.getProdOrderID();
-           case 1 : return o.getType();
+           case 0 : return o.getOrderId();
+           case 1 : return o.getStatus();
        }
        return null;
     }
@@ -85,7 +85,7 @@ public class OrderTablemodel extends AbstractTableModel
         Order or = info.get(row);
         switch (col)
         {
-            case 0 : or.getProdOrderID(); break;
+            case 0 : or.getOrderId(); break;
         }
     }
 

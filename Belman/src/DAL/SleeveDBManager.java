@@ -17,23 +17,23 @@ import java.util.ArrayList;
  *
  * @author Rashid
  */
-public class SleevManagerDBManager
+public class SleeveDBManager
 {
     
 
     private Connector connector;
     private static CoilTypeDBManager instance;
 
-    public SleevManagerDBManager() throws IOException
+    public SleeveDBManager() throws IOException
     {
         connector = Connector.getInstance();
     }
 
-    public static SleevManagerDBManager getInstance() throws IOException
+    public static SleeveDBManager getInstance() throws IOException
     {
         if (instance == null)
         {
-            instance = new SleevManagerDBManager();
+            instance = new SleeveDBManager();
         }
         return instance;
     }
