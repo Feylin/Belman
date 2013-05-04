@@ -1204,8 +1204,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                       
                     }
 
-                    Order o = omodel.getEventsByRow(selectedRow);
-                    SalesOrder s;
+                    Order o = omodel.getEventsByRow(selectedRow);                    
 
                     try
                     {
@@ -1214,10 +1213,10 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtQuantity.setText(String.valueOf(o.getQuantity()));
                         txtThickness.setText(String.valueOf(o.getThickness()));
                         txtWidth.setText(String.valueOf(o.getWidth()));
-                        txtSalesOrderId.setText(String.valueOf(o.getSalesOrder()));
-                        txtCustomerName.setText(String.valueOf(o.getSalesOrder()));
-                        txtEmail.setText(String.valueOf(o.getSalesOrder()));
-                        txtPhone.setText(String.valueOf(o.getSalesOrder()));
+                        txtSalesOrderId.setText(String.valueOf(o.getSalesOrder().getsOrderId()));
+                        txtCustomerName.setText(String.valueOf(o.getSalesOrder().getCustName()));
+                        txtEmail.setText(String.valueOf(o.getSalesOrder().getEmail()));
+                        txtPhone.setText(String.valueOf(o.getSalesOrder().getPhone()));
                         
 //                        switch (o.getType())
 //                        {
@@ -1266,7 +1265,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 public void valueChanged(ListSelectionEvent es)
                 {
                     int selectedRow = tblSleeveList.getSelectedRow();
-                    Sleeve s = slmodel.getEventsByRow(selectedRow);
+                    Sleeve s = slmodel.getEventsByRow(selectedRow);                    
                     try
                     {
                     if (!omgr.getOrdersBySleeve(s).isEmpty())

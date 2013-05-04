@@ -94,6 +94,7 @@ public class OrderTablemodel extends AbstractTableModel
     {
         return info.get(row);
     }
+     
 
     public void setCollection(Collection<Order> order)
     {
