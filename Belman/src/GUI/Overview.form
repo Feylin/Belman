@@ -224,7 +224,7 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtOrder" pref="433" max="32767" attributes="0"/>
+                                      <Component id="txtOrderId" pref="433" max="32767" attributes="0"/>
                                       <Component id="txtQuantity" max="32767" attributes="0"/>
                                       <Component id="txtDate" max="32767" attributes="0"/>
                                   </Group>
@@ -240,7 +240,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblOrder" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtOrder" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtOrderId" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -270,7 +270,7 @@
                     <Property name="text" type="java.lang.String" value="Order ID: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtOrder">
+                <Component class="javax.swing.JTextField" name="txtOrderId">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>

@@ -21,7 +21,8 @@ public class Order
     private int quantity;
     private double thickness;
     private double width;
-    private int status;
+    private String status;
+    private SalesOrder salesOrder;
 
     /**
      * Overodnede konstruktør for Order.
@@ -35,7 +36,7 @@ public class Order
      * @param width
      * @param status
      */
-    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, int status)
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, String status, SalesOrder salesOrder)
     {
         this.sOrderId = sOrderId;
         this.orderId = orderId;
@@ -45,6 +46,7 @@ public class Order
         this.thickness = thickness;
         this.width = width;
         this.status = status;
+        this.salesOrder = salesOrder;
         
 
     }
@@ -58,7 +60,8 @@ public class Order
                 o.getQuantity(),
                 o.getThickness(),
                 o.getWidth(),
-                o.getStatus());
+                o.getStatus(),
+                o.getSalesOrder());
     }
 
     public String printDate(GregorianCalendar gc)
@@ -168,15 +171,20 @@ public class Order
     /**
      * @return the status
      */
-    public int getStatus()
+    public String getStatus()
     {
         return status;
+    }
+    
+    public SalesOrder getSalesOrder()
+    {
+        return salesOrder;
     }
 
     /**
      * @param status the status to set
      */
-    public void setStatus(int status)
+    public void setStatus(String status)
     {
         this.status = status;
     } 

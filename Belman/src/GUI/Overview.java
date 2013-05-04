@@ -7,6 +7,7 @@ package GUI;
 import BE.Material;
 import BE.Order;
 import BE.OrderType;
+import BE.SalesOrder;
 import BE.Sleeve;
 import BE.StockItem;
 import BLL.MaterialManager;
@@ -61,6 +62,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         setLocationRelativeTo(null);
         orderListSelectioner();
         sleeveListSelectioner();
+            
     }
 
     public static Overview getInstance()
@@ -157,7 +159,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         tblOrderList = new javax.swing.JTable();
         JPanelOrderInfo = new javax.swing.JPanel();
         lblOrder = new javax.swing.JLabel();
-        txtOrder = new javax.swing.JTextField();
+        txtOrderId = new javax.swing.JTextField();
         lblQuantity = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
         lblDate = new javax.swing.JLabel();
@@ -297,7 +299,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblOrder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblOrder.setText("Order ID: ");
 
-        txtOrder.setEditable(false);
+        txtOrderId.setEditable(false);
 
         lblQuantity.setText("Quantity:");
 
@@ -449,7 +451,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                             .addComponent(lblQuantity))
                         .addGap(18, 18, 18)
                         .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                            .addComponent(txtOrderId, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                             .addComponent(txtQuantity)
                             .addComponent(txtDate))))
                 .addContainerGap())
@@ -460,7 +462,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOrder)
-                    .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate)
@@ -1162,7 +1164,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JTextField txtMaterialDenisity;
     private javax.swing.JTextField txtMaterialID1;
     private javax.swing.JTextField txtMaterialName1;
-    private javax.swing.JTextField txtOrder;
+    private javax.swing.JTextField txtOrderId;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtQuantity1;
@@ -1190,7 +1192,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     int selectedRow = tblOrderList.getSelectedRow();
                     if (es.getValueIsAdjusting() || selectedRow < 0)
                     {
-                        txtOrder.setText("");                        
+                        txtOrderId.setText("");                    
                         txtDate.setText("");
                         txtQuantity.setText("");
                         txtThickness.setText("");
@@ -1199,35 +1201,37 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtCustomerName.setText("");
                         txtEmail.setText("");
                         txtPhone.setText("");
-                        return;
+                      
                     }
 
-                    Order o = omodel.getEventsByRow(selectedRow);
-
+                    Order o = omodel.getEventsByRow(selectedRow);                    
 
                     try
                     {
-//                        txtOrder.setLineWrap(true);
-
-                        txtOrder.setText(String.valueOf(o.getOrderId()));                        
+                        txtOrderId.setText(String.valueOf(o.getOrderId()));                        
                         txtDate.setText(String.valueOf(o.printDate(o.getDueDate())));
                         txtQuantity.setText(String.valueOf(o.getQuantity()));
                         txtThickness.setText(String.valueOf(o.getThickness()));
+                        txtWidth.setText(String.valueOf(o.getWidth()));
+                        txtSalesOrderId.setText(String.valueOf(o.getSalesOrder().getsOrderId()));
+                        txtCustomerName.setText(String.valueOf(o.getSalesOrder().getCustName()));
+                        txtEmail.setText(String.valueOf(o.getSalesOrder().getEmail()));
+                        txtPhone.setText(String.valueOf(o.getSalesOrder().getPhone()));
                         
-                        switch (o.getType())
-                        {
-                            case START:
-                                rbtnStart.setSelected(true);
-                                break;
-                            case PAUSE:
-                                rbtnPause.setSelected(true);
-                                break;
-                            case AFSLUT:
-                                rbtnAfslut.setSelected(true);
-                                break;
-                            default:
-                                rbtnProgress.setSelected(true);
-                        }
+//                        switch (o.getType())
+//                        {
+//                            case START:
+//                                rbtnStart.setSelected(true);
+//                                break;
+//                            case PAUSE:
+//                                rbtnPause.setSelected(true);
+//                                break;
+//                            case AFSLUT:
+//                                rbtnAfslut.setSelected(true);
+//                                break;
+//                            default:
+//                                rbtnProgress.setSelected(true);
+//                        }
                     }
                     catch (Exception ex)
                     {
@@ -1246,34 +1250,38 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
-
             slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
+                       
+            omgr = OrderManager.getInstance();
+            omgr.addObserver(this);           
+//          omodel2 = new OrderTablemodel(omgr.getAll());
+//          tblOrderList1.setModel(omodel2);
+            
+  
             tblSleeveList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
                 public void valueChanged(ListSelectionEvent es)
                 {
                     int selectedRow = tblSleeveList.getSelectedRow();
-                    if (es.getValueIsAdjusting() || selectedRow < 0)
+                    Sleeve s = slmodel.getEventsByRow(selectedRow);                    
+                    try
                     {
-                       
-                        return;
-                    }
+                    if (!omgr.getOrdersBySleeve(s).isEmpty())
+                    {
+                       omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
+                       tblOrderList1.setModel(omodel2);                        
+                          
+//                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
+                    }                   
 
-                    Sleeve s = slmodel.getEventsByRow(selectedRow);
-
-
-//                    try
-//                    {
-////                        
-//
-//                       
-//                        }
-//                    }
-//                    catch (Exception ex)
-//                    {
-//                    }
+//                    Sleeve s = slmodel.getEventsByRow(selectedRow);
+                }
+                    catch(Exception e)
+                            {
+                                
+                            }
                 }
             });
                    }

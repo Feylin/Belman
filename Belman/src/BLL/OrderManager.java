@@ -6,6 +6,7 @@ package BLL;
 
 import BE.Material;
 import BE.Order;
+import BE.Sleeve;
 import DAL.ProductionOrderDBManager;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -75,6 +76,11 @@ public class OrderManager extends Observable
     public ArrayList<Order> getOrderByMaterial(Material m) throws SQLException, IOException
     {
         return accessor.getOrderByMaterial(m);
+    }
+    
+    public ArrayList<Order> getOrdersBySleeve(Sleeve s) throws IOException, SQLException
+    {
+        return accessor.getOrderBySleeve(s);
     }
 
     public void remove(int prodOrderId) throws SQLException
