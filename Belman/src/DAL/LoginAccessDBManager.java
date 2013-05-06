@@ -29,14 +29,14 @@ public class LoginAccessDBManager
         return instance;
     }
 
-    public void addLogin(int memberID, String encryptedPass) throws SQLServerException, SQLException
+    public void addLogin(int operatorId, String encryptedPass) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
         {
             String sql = "INSERT INTO Login VALUES(?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, memberID);
+            ps.setInt(1, operatorId);
             ps.setString(2, encryptedPass);
 
             int affectedRows = ps.executeUpdate();
@@ -47,15 +47,15 @@ public class LoginAccessDBManager
         }
     }
 
-    public void updateLogin(int memberID, String newPass) throws SQLServerException, SQLException
+    public void updateLogin(int operatorId, String newPass) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "UPDATE Login SET password = ? WHERE memberId = ?";
+            String sql = "UPDATE Login SET password = ? WHERE operatorId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, newPass);
-            ps.setInt(2, memberID);
+            ps.setInt(2, operatorId);
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows <= 0)
@@ -65,14 +65,14 @@ public class LoginAccessDBManager
         }
     }
 
-    public boolean checkLogin(int memberID, String hash) throws SQLException
+    public boolean checkLogin(int operatorId, String hash) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Login WHERE memberId = ? AND password = ?";
+            String sql = "SELECT * FROM Login WHERE operatorId = ? AND password = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, memberID);
+            ps.setInt(1, operatorId);
             ps.setString(2, hash);
 
             ResultSet rs = ps.executeQuery();
@@ -81,14 +81,14 @@ public class LoginAccessDBManager
     }
 
     @Deprecated
-    public int getSalt(int memberID) throws SQLServerException, SQLException
+    public int getSalt(int operatorId) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT Salt FROM Login WHERE memberId = ?";
+            String sql = "SELECT Salt FROM Login WHERE operatorId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, memberID);
+            ps.setInt(1, operatorId);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next())

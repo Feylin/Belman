@@ -18,6 +18,7 @@ import GUI.Tablemodels.MaterielTableModel;
 import GUI.Tablemodels.OrderTablemodel;
 import GUI.Tablemodels.SleeveTableModel;
 import GUI.Tablemodels.StockListTableModel;
+import com.toedter.components.JLocaleChooser;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -78,7 +79,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private void closePressed()
     {
         String message = "Are you sure you want to exit?";
-        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, message, getTitle(), JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION)
         {
             System.exit(0);
@@ -232,6 +233,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Belman Manager");
         setResizable(false);
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener()

@@ -28,7 +28,10 @@ public class MaterialManager extends Observable{
     }
     
      public static MaterialManager getInstance() throws FileNotFoundException, IOException{
-        if( instance == null ) instance = new MaterialManager();
+        if( instance == null )
+         {
+             instance = new MaterialManager();
+         }
         return instance;
     }
      
