@@ -21,11 +21,22 @@ public class Test
         try
         {
             int id = 1;
-            int newId = 3;
+            String newId = "Klaus Roswall";
             String password = "a";
-            String newPassword = "4ads3";
-//            LoginManager.getInstance().addLogin(newId, password);
-            LoginManager.getInstance().updateLogin(newId, newPassword);
+            String newPassword = "admin";
+//            LoginManager.getInstance().addLogin("Mak Jakubovic", newPassword);
+//            LoginManager.getInstance().addLogin("Klaus Andresen", newPassword);
+//            LoginManager.getInstance().addLogin("Daniel Foght Jensen", newPassword);
+//            LoginManager.getInstance().addLogin("Rashid Abdel-Majid", newPassword);
+            if (LoginManager.getInstance().checkLogin("Klaus Andresen", newPassword) == true)
+            {
+                System.out.println("correct");
+            }
+            else
+            {
+                System.out.println("false");
+            }
+//            LoginManager.getInstance().updateLogin(newId, newPassword);
         }
         catch (Exception e)
         {

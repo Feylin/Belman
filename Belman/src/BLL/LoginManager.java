@@ -34,32 +34,32 @@ public class LoginManager
         return instance;
     }
 
-    public void addLogin(int operatorId, String password) throws SQLServerException, SQLException
+    public void addLogin(String username, String password) throws SQLServerException, SQLException
     {
-        String encryptPass = encryptPass(operatorId, password);
-        access.addLogin(operatorId, encryptPass);
+        String encryptPass = encryptPass(username, password);
+        access.addLogin(username, encryptPass);
     }
 
-    public void updateLogin(int operatorId, String newPassword) throws SQLServerException, SQLException
+    public void updateLogin(String username, String newPassword) throws SQLServerException, SQLException
     {
-        String encryptPass = encryptPass(operatorId, newPassword);
-        access.updateLogin(operatorId, encryptPass);
+        String encryptPass = encryptPass(username, newPassword);
+        access.updateLogin(username, encryptPass);
     }
 
-    public boolean checkLogin(int operatorId, String password) throws SQLException
+    public boolean checkLogin(String username, String password) throws SQLException
     {
-        String encryptPass = encryptPass(operatorId, password);
-        return access.checkLogin(operatorId, encryptPass);
+        String encryptPass = encryptPass(username, password);
+        return access.checkLogin(username, encryptPass);
     }
 
-    public String encryptPass(int operatorId, String password)
+    public String encryptPass(String username, String password)
     {
         StringBuilder stringbuilder = new StringBuilder();
         char[] passwordChars = password.toCharArray();
         int counter = 1;
         for (Character c : passwordChars)
         {
-            stringbuilder.append("").append(c.hashCode() * (operatorId / counter));
+            stringbuilder.append("").append(c.hashCode() * (username.length() / counter));
             counter++;
         }
         return stringbuilder.toString();

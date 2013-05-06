@@ -44,24 +44,24 @@ public class Overview extends javax.swing.JFrame implements Observer
     private SleeveTableModel slmodel = null;
     private ResourceBundle rb = null;
     private StockListTableModel smodel2 = null;
-    
     Order o;
 
     /**
      * Creates new form Overview
      */
     private Overview()
-    {      
-               rb = ResourceBundle.getBundle("GUI/Bundle.properties");
-               initComponents();
+    {
+//        rb = ResourceBundle.getBundle("GUI/Bundle.properties");
+        initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
+        loggedInAs();
         windowClose();
         setLocationRelativeTo(null);
         orderListSelectioner();
         sleeveListSelectioner();
         stockItemListSelectioner();
- 
-        updateGUILanguage();
-            
+//        updateGUILanguage();
+
     }
 
     public static Overview getInstance()
@@ -72,10 +72,16 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
         return instance;
     }
-    
+
     private void updateGUILanguage()
     {
         btnClose.setText(rb.getString("Overview.btnClose.text"));
+    }
+    
+    private void loggedInAs()
+    {
+        String operator = Login.getInstance().getOperator();
+        jLabel1.setText("Logged in as " +operator);
     }
 
     private void closePressed()
@@ -85,6 +91,17 @@ public class Overview extends javax.swing.JFrame implements Observer
         if (reply == JOptionPane.YES_OPTION)
         {
             System.exit(0);
+        }
+    }
+    
+    private void logoutPressed()
+    {
+        String message = "Are you sure you want to log out?";
+        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION)
+        {
+            dispose();
+            Login.getInstance().setVisible(true);
         }
     }
 
@@ -99,7 +116,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
     }
-    
+
 //     private void btnSavePressed()
 //    {
 //        try
@@ -129,7 +146,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 //            Login.getInstance().setVisible(true);
 //        }
 //    }
-
     @Override
     public void update(Observable o, Object arg)
     {
@@ -225,13 +241,17 @@ public class Overview extends javax.swing.JFrame implements Observer
         jPanel5 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         jLocaleChooser1 = new com.toedter.components.JLocaleChooser();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Belman Manager");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
+        setTitle(bundle.getString("Overview.title")); // NOI18N
         setResizable(false);
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener()
@@ -300,7 +320,6 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
         JPanelOrderInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.JPanelOrderInfo.border.title"))); // NOI18N
 
         lblOrder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1035,6 +1054,34 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
+        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel8.setPreferredSize(new java.awt.Dimension(245, 19));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText(bundle.getString("Overview.jLabel1.text")); // NOI18N
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 200, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1)
+        );
+
+        btnLogout.setText(bundle.getString("Overview.btnLogout.text")); // NOI18N
+        btnLogout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText(bundle.getString("Overview.jMenu1.text")); // NOI18N
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
@@ -1061,23 +1108,34 @@ public class Overview extends javax.swing.JFrame implements Observer
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLocaleChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLocaleChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLocaleChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 3, Short.MAX_VALUE)
+                        .addComponent(jLocaleChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnClose)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClose)
+                    .addComponent(btnLogout))
                 .addGap(5, 5, 5))
         );
 
@@ -1086,7 +1144,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem1ActionPerformed
     {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
-        closePressed();
+        closePressed();        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCloseActionPerformed
@@ -1096,7 +1154,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
     {//GEN-HEADEREND:event_jTabbedPane1StateChanged
-
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void txtQuantity1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtQuantity1ActionPerformed
@@ -1130,12 +1187,19 @@ public class Overview extends javax.swing.JFrame implements Observer
         updateGUILanguage();
     }//GEN-LAST:event_jLocaleChooser1ActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLogoutActionPerformed
+    {//GEN-HEADEREND:event_btnLogoutActionPerformed
+        logoutPressed();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanelOrderInfo;
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnLogout;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private com.toedter.components.JLocaleChooser jLocaleChooser1;
@@ -1153,6 +1217,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -1224,7 +1289,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     int selectedRow = tblOrderList.getSelectedRow();
                     if (es.getValueIsAdjusting() || selectedRow < 0)
                     {
-                        txtOrderId.setText("");                    
+                        txtOrderId.setText("");
                         txtDate.setText("");
                         txtQuantity.setText("");
                         txtThickness.setText("");
@@ -1233,14 +1298,14 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtCustomerName.setText("");
                         txtEmail.setText("");
                         txtPhone.setText("");
-                      
+
                     }
 
-                    Order o = omodel.getEventsByRow(selectedRow);                    
+                    Order o = omodel.getEventsByRow(selectedRow);
 
                     try
                     {
-                        txtOrderId.setText(String.valueOf(o.getOrderId()));                        
+                        txtOrderId.setText(String.valueOf(o.getOrderId()));
                         txtDate.setText(String.valueOf(o.printDate(o.getDueDate())));
                         txtQuantity.setText(String.valueOf(o.getQuantity()));
                         txtThickness.setText(String.valueOf(o.getThickness()));
@@ -1249,7 +1314,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtCustomerName.setText(String.valueOf(o.getSalesOrder().getCustName()));
                         txtEmail.setText(String.valueOf(o.getSalesOrder().getEmail()));
                         txtPhone.setText(String.valueOf(o.getSalesOrder().getPhone()));
-                        
+
 //                        switch (o.getType())
 //                        {
 //                            case START:
@@ -1270,12 +1335,12 @@ public class Overview extends javax.swing.JFrame implements Observer
                     }
                 }
             });
-                   }
+        }
         catch (Exception e)
         {
         }
     }
-    
+
     private void sleeveListSelectioner()
     {
         try
@@ -1284,40 +1349,40 @@ public class Overview extends javax.swing.JFrame implements Observer
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
-            
+
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
-                       
+
             omgr = OrderManager.getInstance();
-            omgr.addObserver(this);         
-            
+            omgr.addObserver(this);
+
 
 //          omodel2 = new OrderTablemodel(omgr.getAll());
 //          tblOrderList1.setModel(omodel2);
-            
-  
+
+
             tblSleeveList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
                 public void valueChanged(ListSelectionEvent es)
                 {
                     int selectedRow = tblSleeveList.getSelectedRow();
-                    Sleeve s = slmodel.getEventsByRow(selectedRow);                    
+                    Sleeve s = slmodel.getEventsByRow(selectedRow);
                     try
                     {
-                    if (!omgr.getOrdersBySleeve(s).isEmpty())
-                    {
-                       omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
-                       tblOrderList1.setModel(omodel2);   
-                       
-                    if(!smgr.getItemBySleeve(s).isEmpty())
-                    {
-                        smodel2 = new StockListTableModel(smgr.getItemBySleeve(s));
-                        tblStockItem.setModel(smodel2);
-                    }
-                          
+                        if (!omgr.getOrdersBySleeve(s).isEmpty())
+                        {
+                            omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
+                            tblOrderList1.setModel(omodel2);
+
+                            if (!smgr.getItemBySleeve(s).isEmpty())
+                            {
+                                smodel2 = new StockListTableModel(smgr.getItemBySleeve(s));
+                                tblStockItem.setModel(smodel2);
+                            }
+
 //                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
-                    }
+                        }
 //                    else
 //                    {
 ////                        omodel2.
@@ -1325,19 +1390,18 @@ public class Overview extends javax.swing.JFrame implements Observer
 //                    }
 
 //                    Sleeve s = slmodel.getEventsByRow(selectedRow);
-                }
-                    catch(Exception e)
-                            {
-                                
-                            }
+                    }
+                    catch (Exception e)
+                    {
+                    }
                 }
             });
-                   }
+        }
         catch (Exception e)
         {
         }
     }
-    
+
     private void stockItemListSelectioner()
     {
         try
@@ -1355,8 +1419,8 @@ public class Overview extends javax.swing.JFrame implements Observer
                     int selectedRow = tblInStock.getSelectedRow();
                     if (es.getValueIsAdjusting() || selectedRow < 0)
                     {
-                        txtMaterialName1.setText("");                         
-                        txtMaterialID1.setText("");                  
+                        txtMaterialName1.setText("");
+                        txtMaterialID1.setText("");
                         txtCode.setText("");
                         txtMaterialDenisity.setText("");
                         txtQuantity1.setText("");
@@ -1364,14 +1428,14 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtThickness1.setText("");
                         txtWidth1.setText("");
                         txtLength1.setText("");
-                      
+
                     }
 
-                    StockItem s = smodel.getEventsByRow(selectedRow);                    
+                    StockItem s = smodel.getEventsByRow(selectedRow);
 
                     try
                     {
-                        txtMaterialName1.setText(String.valueOf(s.getMaterial().getName()));                        
+                        txtMaterialName1.setText(String.valueOf(s.getMaterial().getName()));
                         txtMaterialID1.setText(String.valueOf(s.getCoilType().getMaterialId()));
                         txtCode.setText(String.valueOf(s.getCoilType().getCode()));
                         txtMaterialDenisity.setText(String.valueOf(s.getMaterial().getDensity()));
@@ -1380,18 +1444,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtThickness1.setText(String.valueOf(s.getCoilType().getThickness()));
                         txtWidth1.setText(String.valueOf(s.getCoilType().getWidth()));
                         txtLength1.setText(String.valueOf(s.getLength()));
-                        
+
                     }
                     catch (Exception ex)
                     {
                     }
                 }
             });
-                   }
+        }
         catch (Exception e)
         {
         }
     }
-    
-    
 }

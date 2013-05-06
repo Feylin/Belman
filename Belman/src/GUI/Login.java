@@ -4,9 +4,19 @@
  */
 package GUI;
 
+import BE.Operator;
+import BLL.LoginManager;
+import BLL.OperatorManager;
+import GUI.Tablemodels.OperatorListModel;
+import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -14,16 +24,40 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame
 {
+    
+    private String operator;
     private static Login instance = null;
+    private static OperatorManager mgr = null;
+    private static LoginManager lmgr = null;
+    private OperatorListModel model = null;
+
     /**
      * Creates new form Login
      */
     private Login()
-    {
+    {        
+        loadManagers();
         setUndecorated(true);
         initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
+        addEnterKeyListener();
+        jList1.grabFocus();
         setLocationRelativeTo(null);
         windowClose();
+        listSelection();
+    }
+    
+    private void loadManagers()
+    {
+        try
+        {
+            lmgr = LoginManager.getInstance();
+            mgr = OperatorManager.getInstance();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public static Login getInstance()
@@ -33,6 +67,81 @@ public class Login extends javax.swing.JFrame
             instance = new Login();
         }
         return instance;
+    }
+    
+    public String getOperator()
+    {
+        return operator;
+    }
+    
+    private void addEnterKeyListener()
+    {
+        KeyListener enterKey = new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent ke)
+            {
+                if (ke.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    loginPressed();
+                }
+            }
+        };
+        jPasswordField1.addKeyListener(enterKey);
+        jList1.addKeyListener(enterKey);
+    }
+    
+    private void defaultCursor()
+    {
+//        Welcome.getFrames()[0].setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void loadingCursor()
+    {
+//        Welcome.getFrames()[0].setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+    }
+    
+    private void loginPressed()
+    {
+        if (jTextField1.getText().length() != 0)
+        {
+            String username = jTextField1.getText();
+            char[] pass = jPasswordField1.getPassword();
+            String password = new String(pass);
+            loadingCursor();
+            
+            try
+            {
+                if (lmgr.checkLogin(username, password) == true)
+                {
+                    operator = username;
+                    Overview.getInstance().setVisible(true);
+                    jPasswordField1.setText("");
+                    dispose();
+                }
+                else
+                {
+                    jPasswordField1.setText("");
+                    String message = "Wrong Password";
+                    JOptionPane.showMessageDialog(this, message, getTitle(), JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                defaultCursor();
+            }
+        }
+        else
+        {
+            String message = "Please pick an operator";
+            JOptionPane.showMessageDialog(this, message, getTitle(), JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void closePressed()
@@ -55,6 +164,40 @@ public class Login extends javax.swing.JFrame
                 closePressed();
             }
         });
+    }
+    
+    private void selectedOperator()
+    {
+        Operator selectedOperator = (Operator) jList1.getSelectedValue();
+        if (selectedOperator != null)
+        {
+            jTextField1.setText(selectedOperator.toString());
+        }
+    }
+    
+    private void listSelection()
+    {        
+        try
+        {
+            model = new OperatorListModel(mgr.getAllOperators());
+            jList1.setModel(model);
+            
+            jList1.addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent lse)
+                {
+                    if (!(lse.getValueIsAdjusting() || jList1.isSelectionEmpty()))
+                    {
+                        selectedOperator();
+                    }
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -81,7 +224,7 @@ public class Login extends javax.swing.JFrame
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Belman");
+        setTitle("Belman Manager");
         setResizable(false);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Belman logo_02.2010.png"))); // NOI18N
@@ -90,10 +233,12 @@ public class Login extends javax.swing.JFrame
         jLabel1.setText("Login");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Employee");
+        jLabel3.setText("Operator");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Password");
+
+        jTextField1.setEnabled(false);
 
         jButton1.setText("Sign up");
 
@@ -116,12 +261,6 @@ public class Login extends javax.swing.JFrame
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel()
-        {
-            String[] strings = { "Operator 1", "Operator 2", "Operator 3", "Operator 4", "Operator 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -143,10 +282,9 @@ public class Login extends javax.swing.JFrame
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jPasswordField1)
@@ -203,13 +341,11 @@ public class Login extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jButton3ActionPerformed
         closePressed();
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-        dispose();
-        Overview.getInstance().setVisible(true);
+        loginPressed();
     }//GEN-LAST:event_jButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

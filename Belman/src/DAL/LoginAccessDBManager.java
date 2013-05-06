@@ -29,14 +29,14 @@ public class LoginAccessDBManager
         return instance;
     }
 
-    public void addLogin(int operatorId, String encryptedPass) throws SQLServerException, SQLException
+    public void addLogin(String username, String encryptedPass) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
         {
             String sql = "INSERT INTO Login VALUES(?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, operatorId);
+            ps.setString(1, username);
             ps.setString(2, encryptedPass);
 
             int affectedRows = ps.executeUpdate();
@@ -47,15 +47,15 @@ public class LoginAccessDBManager
         }
     }
 
-    public void updateLogin(int operatorId, String newPass) throws SQLServerException, SQLException
+    public void updateLogin(String username, String newPass) throws SQLServerException, SQLException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "UPDATE Login SET password = ? WHERE operatorId = ?";
+            String sql = "UPDATE Login SET password = ? WHERE username = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, newPass);
-            ps.setInt(2, operatorId);
+            ps.setString(2, username);
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows <= 0)
@@ -65,14 +65,14 @@ public class LoginAccessDBManager
         }
     }
 
-    public boolean checkLogin(int operatorId, String hash) throws SQLException
+    public boolean checkLogin(String username, String hash) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Login WHERE operatorId = ? AND password = ?";
+            String sql = "SELECT * FROM Login WHERE username = ? AND password = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, operatorId);
+            ps.setString(1, username);
             ps.setString(2, hash);
 
             ResultSet rs = ps.executeQuery();
