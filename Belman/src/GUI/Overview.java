@@ -62,6 +62,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         setLocationRelativeTo(null);
         orderListSelectioner();
         sleeveListSelectioner();
+        stockItemListSelectioner();
             
     }
 
@@ -151,7 +152,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private void initComponents()
     {
 
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel13 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -210,7 +211,12 @@ public class Overview extends javax.swing.JFrame implements Observer
         jScrollPane12 = new javax.swing.JScrollPane();
         tblOrderList1 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblStockItem = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -397,7 +403,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
                         .addComponent(lblSalesOrderId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSalesOrderId, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
+                        .addComponent(txtSalesOrderId, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE))
                     .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
                         .addComponent(lblPhone)
                         .addGap(48, 48, 48)
@@ -675,7 +681,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                             .addComponent(txtMaterialName1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtMaterialDenisity)
                             .addGroup(JPanalStockInfoLayout.createSequentialGroup()
-                                .addComponent(txtQuantity1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                                .addComponent(txtQuantity1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6))
                             .addComponent(txtCharge))))
@@ -833,7 +839,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
         jScrollPane12.setViewportView(tblOrderList1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblStockItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null},
@@ -878,7 +884,57 @@ public class Overview extends javax.swing.JFrame implements Observer
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblStockItem);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Controle Panel"));
+
+        jButton1.setText("Finish Order");
+
+        buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setText("Urgent");
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("In Progress");
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Pending");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(25, 25, 25))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(jRadioButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(15, 15, 15))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -889,16 +945,19 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jLabel4.setText("Select a Sleeve: ");
@@ -914,7 +973,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -935,7 +994,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 840, Short.MAX_VALUE)
+            .addGap(0, 844, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -948,7 +1007,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 840, Short.MAX_VALUE)
+            .addGap(0, 844, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1099,11 +1158,17 @@ public class Overview extends javax.swing.JFrame implements Observer
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCustomerNameActionPerformed
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jRadioButton1ActionPerformed
+    {//GEN-HEADEREND:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanelOrderInfo;
     private javax.swing.JButton btnLuk;
-    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
@@ -1123,14 +1188,17 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCharge;
     private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblCustomerName;
@@ -1155,6 +1223,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JTable tblOrderList;
     private javax.swing.JTable tblOrderList1;
     private javax.swing.JTable tblSleeveList;
+    private javax.swing.JTable tblStockItem;
     private javax.swing.JTextField txtCharge;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtCustomerName;
@@ -1282,6 +1351,61 @@ public class Overview extends javax.swing.JFrame implements Observer
                             {
                                 
                             }
+                }
+            });
+                   }
+        catch (Exception e)
+        {
+        }
+    }
+    
+    private void stockItemListSelectioner()
+    {
+        try
+        {
+            smgr = StockItemManager.getInstance();
+            smgr.addObserver(this);
+
+            smodel = new StockListTableModel(smgr.getAll());
+            tblInStock.setModel(smodel);
+            tblInStock.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent es)
+                {
+                    int selectedRow = tblInStock.getSelectedRow();
+                    if (es.getValueIsAdjusting() || selectedRow < 0)
+                    {
+                        txtMaterialName1.setText("");                         
+                        txtMaterialID1.setText("");                  
+                        txtCode.setText("");
+                        txtMaterialDenisity.setText("");
+                        txtQuantity1.setText("");
+                        txtCharge.setText("");
+                        txtThickness1.setText("");
+                        txtWidth1.setText("");
+                        txtLength1.setText("");
+                      
+                    }
+
+                    StockItem s = smodel.getEventsByRow(selectedRow);                    
+
+                    try
+                    {
+                        txtMaterialName1.setText(String.valueOf(s.getMaterial().getName()));                        
+                        txtMaterialID1.setText(String.valueOf(s.getMaterial().getId()));
+                        txtCode.setText(String.valueOf(s.getCoilType().getCode()));
+                        txtMaterialDenisity.setText(String.valueOf(s.getMaterial().getDensity()));
+                        txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
+                        txtCharge.setText(String.valueOf(s.getChargeNo()));
+                        txtThickness1.setText(String.valueOf(s.getCoilType().getThickness()));
+                        txtWidth1.setText(String.valueOf(s.getCoilType().getWidth()));
+                        txtLength1.setText(String.valueOf(s.getLength()));
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                 }
             });
                    }
