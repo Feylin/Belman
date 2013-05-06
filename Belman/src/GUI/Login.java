@@ -118,12 +118,12 @@ public class Login extends javax.swing.JFrame
                 {
                     operator = username;
                     Overview.getInstance().setVisible(true);
-                    jPasswordField1.setText("");
+                    clearFields();
                     dispose();
                 }
                 else
                 {
-                    jPasswordField1.setText("");
+                    clearFields();
                     String message = "Wrong Password";
                     JOptionPane.showMessageDialog(this, message, getTitle(), JOptionPane.ERROR_MESSAGE);
                 }
@@ -164,6 +164,13 @@ public class Login extends javax.swing.JFrame
                 closePressed();
             }
         });
+    }
+    
+    private void clearFields()
+    {
+        jPasswordField1.setText("");
+        jTextField1.setText("");
+        jList1.clearSelection();
     }
     
     private void selectedOperator()
