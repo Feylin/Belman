@@ -82,6 +82,7 @@ public class OrderManager extends Observable
     {
         return accessor.getOrderBySleeve(s);
     }
+    
 
     public void remove(int prodOrderId) throws SQLException
     {

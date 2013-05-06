@@ -15,6 +15,7 @@ import GUI.Tablemodels.MaterielTableModel;
 import GUI.Tablemodels.OrderTablemodel;
 import GUI.Tablemodels.SleeveTableModel;
 import GUI.Tablemodels.StockListTableModel;
+import com.toedter.components.JLocaleChooser;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
@@ -79,7 +80,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private void closePressed()
     {
         String message = "Are you sure you want to exit?";
-        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, message, getTitle(), JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION)
         {
             System.exit(0);
@@ -229,6 +230,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Belman Manager");
         setResizable(false);
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener()
@@ -1281,9 +1283,14 @@ public class Overview extends javax.swing.JFrame implements Observer
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
+            
+            smgr = StockItemManager.getInstance();
+            smgr.addObserver(this);
                        
             omgr = OrderManager.getInstance();
-            omgr.addObserver(this);           
+            omgr.addObserver(this);         
+            
+
 //          omodel2 = new OrderTablemodel(omgr.getAll());
 //          tblOrderList1.setModel(omodel2);
             
@@ -1300,10 +1307,21 @@ public class Overview extends javax.swing.JFrame implements Observer
                     if (!omgr.getOrdersBySleeve(s).isEmpty())
                     {
                        omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
-                       tblOrderList1.setModel(omodel2);                        
+                       tblOrderList1.setModel(omodel2);   
+                       
+                    if(!smgr.getItemBySleeve(s).isEmpty())
+                    {
+                        smodel2 = new StockListTableModel(smgr.getItemBySleeve(s));
+                        tblStockItem.setModel(smodel2);
+                    }
                           
 //                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
-                    }                   
+                    }
+//                    else
+//                    {
+////                        omodel2.
+//                        tblOrderList1.setModel(omodel2);
+//                    }
 
 //                    Sleeve s = slmodel.getEventsByRow(selectedRow);
                 }
@@ -1353,7 +1371,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     try
                     {
                         txtMaterialName1.setText(String.valueOf(s.getMaterial().getName()));                        
-                        txtMaterialID1.setText(String.valueOf(s.getMaterial().getId()));
+                        txtMaterialID1.setText(String.valueOf(s.getCoilType().getMaterialId()));
                         txtCode.setText(String.valueOf(s.getCoilType().getCode()));
                         txtMaterialDenisity.setText(String.valueOf(s.getMaterial().getDensity()));
                         txtQuantity1.setText(String.valueOf(s.getStockQuantity()));

@@ -6,6 +6,7 @@ package DAL;
 
 import BE.CoilType;
 import BE.Material;
+import BE.Sleeve;
 import BE.StockItem;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -116,6 +117,25 @@ public class StockItemDBManager
             return items;
         }
     }
+    
+    public ArrayList<StockItem> getItemBySleeve(Sleeve s) throws SQLServerException, SQLException, IOException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve WHERE Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND Sleeve.id = ?";        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, s.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<StockItem> items = new ArrayList<>();
+            while (rs.next())
+            {
+                items.add(getOneItem(rs));
+            }
+            return items;
+        }
+    }
 
     protected StockItem getOneItem(ResultSet rs) throws SQLException, IOException
     {
@@ -131,7 +151,8 @@ public class StockItemDBManager
         double thickness = rs.getDouble("thickness");
         double density = rs.getDouble("density");
         String name = rs.getString("name");
+        int materialId = rs.getInt("materialId");
 
-        return new StockItem(id, chargeNo, length, stockQuantity, coilTypeId, sleeveId, new CoilType(code, width, thickness), new Material(density, name));
+        return new StockItem(id, chargeNo, length, stockQuantity, coilTypeId, sleeveId, new CoilType(code, width, thickness, materialId), new Material(density, name));
     }
 }
