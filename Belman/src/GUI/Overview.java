@@ -1340,10 +1340,14 @@ public class Overview extends javax.swing.JFrame implements Observer
                     if (!omgr.getOrdersBySleeve(s).isEmpty())
                     {
                        omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
-                       tblOrderList1.setModel(omodel2);                        
+                       tblOrderList1.setModel(omodel2);                   
                           
 //                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
-                    }                   
+                    }
+                    else
+                    {
+                       
+                    }
 
 //                    Sleeve s = slmodel.getEventsByRow(selectedRow);
                 }
