@@ -112,7 +112,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, Sleeve, SalesOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND ProductionOrder.sOrderId = SalesOrder.sOrderId AND Sleeve.id = ?";        
+            String sql = "SELECT * FROM ProductionOrder, Sleeve, SalesOrder WHERE ProductionOrder.thickness = Sleeve.thickness AND ProductionOrder.sOrderId = SalesOrder.sOrderId AND Sleeve.id = ?";        
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, s.getId());
 
@@ -144,6 +144,8 @@ public class ProductionOrderDBManager
             }
         }
     }
+    
+    
 
     public void update(Order o) throws SQLException
     {

@@ -131,7 +131,8 @@ public class StockItemDBManager
         double thickness = rs.getDouble("thickness");
         double density = rs.getDouble("density");
         String name = rs.getString("name");
+        int materialId = rs.getInt("materialId");
 
-        return new StockItem(id, chargeNo, length, stockQuantity, coilTypeId, sleeveId, new CoilType(code, width, thickness), new Material(density, name));
+        return new StockItem(id, chargeNo, length, stockQuantity, coilTypeId, sleeveId, new CoilType(code, width, thickness, materialId), new Material(density, name));
     }
 }

@@ -1397,7 +1397,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     try
                     {
                         txtMaterialName1.setText(String.valueOf(s.getMaterial().getName()));                        
-                        txtMaterialID1.setText(String.valueOf(s.getMaterial().getId()));
+                        txtMaterialID1.setText(String.valueOf(s.getCoilType().getMaterialId()));
                         txtCode.setText(String.valueOf(s.getCoilType().getCode()));
                         txtMaterialDenisity.setText(String.valueOf(s.getMaterial().getDensity()));
                         txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
