@@ -5,6 +5,7 @@
 
 package BLL;
 
+import BE.Sleeve;
 import BE.StockItem;
 import DAL.StockItemDBManager;
 import java.io.FileNotFoundException;
@@ -43,6 +44,11 @@ public class StockItemManager extends Observable
     public ArrayList<StockItem> getAll() throws IOException, SQLException
     {
        return accessor.getAllItems();        
+    }
+    
+    public ArrayList<StockItem> getItemBySleeve(Sleeve s) throws IOException, SQLException
+    {
+        return accessor.getItemBySleeve(s);
     }
     
     public void remove(int id) throws SQLException

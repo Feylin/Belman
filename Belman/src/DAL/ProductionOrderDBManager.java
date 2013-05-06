@@ -112,7 +112,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, Sleeve, SalesOrder WHERE ProductionOrder.thickness = Sleeve.thickness AND ProductionOrder.sOrderId = SalesOrder.sOrderId AND Sleeve.id = ?";        
+            String sql = "SELECT * FROM ProductionOrder, StockItem, CoilType, Material, Sleeve, SalesOrder WHERE ProductionOrder.thickness = Sleeve.thickness AND Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId AND Sleeve.id = ?";        
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, s.getId());
 
