@@ -43,6 +43,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private OrderTablemodel omodel2 = null;
     private SleeveTableModel slmodel = null;
     private ResourceBundle rb = null;
+    private StockListTableModel smodel2 = null;
     
     Order o;
 
