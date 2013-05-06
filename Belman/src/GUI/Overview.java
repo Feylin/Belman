@@ -4,10 +4,7 @@
  */
 package GUI;
 
-import BE.Material;
 import BE.Order;
-import BE.OrderType;
-import BE.SalesOrder;
 import BE.Sleeve;
 import BE.StockItem;
 import BLL.MaterialManager;
@@ -20,17 +17,12 @@ import GUI.Tablemodels.SleeveTableModel;
 import GUI.Tablemodels.StockListTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -49,6 +41,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private MaterielTableModel mmodel = null;
     private OrderTablemodel omodel2 = null;
     private SleeveTableModel slmodel = null;
+    private ResourceBundle rb = null;
     
     Order o;
 
@@ -57,12 +50,15 @@ public class Overview extends javax.swing.JFrame implements Observer
      */
     private Overview()
     {      
-        initComponents();
+               rb = ResourceBundle.getBundle("GUI/Bundle.properties");
+               initComponents();
         windowClose();
         setLocationRelativeTo(null);
         orderListSelectioner();
         sleeveListSelectioner();
         stockItemListSelectioner();
+ 
+        updateGUILanguage();
             
     }
 
@@ -73,6 +69,11 @@ public class Overview extends javax.swing.JFrame implements Observer
             instance = new Overview();
         }
         return instance;
+    }
+    
+    private void updateGUILanguage()
+    {
+        btnClose.setText(rb.getString("Overview.btnClose.text"));
     }
 
     private void closePressed()
@@ -220,16 +221,12 @@ public class Overview extends javax.swing.JFrame implements Observer
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        btnLuk = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
+        jLocaleChooser1 = new com.toedter.components.JLocaleChooser();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -300,14 +297,15 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        JPanelOrderInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Order Information:"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
+        JPanelOrderInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.JPanelOrderInfo.border.title"))); // NOI18N
 
         lblOrder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblOrder.setText("Order ID: ");
+        lblOrder.setText(bundle.getString("Overview.lblOrder.text")); // NOI18N
 
         txtOrderId.setEditable(false);
 
-        lblQuantity.setText("Quantity:");
+        lblQuantity.setText(bundle.getString("Overview.lblQuantity.text")); // NOI18N
 
         txtQuantity.setEditable(false);
         txtQuantity.addActionListener(new java.awt.event.ActionListener()
@@ -318,17 +316,17 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
-        lblDate.setText("DueDate: ");
+        lblDate.setText(bundle.getString("Overview.lblDate.text")); // NOI18N
 
         txtDate.setEditable(false);
 
-        pnlMeasurements.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Mesurements"));
+        pnlMeasurements.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlMeasurements.border.title"))); // NOI18N
 
         txtThickness.setEditable(false);
 
-        lblThickness.setText("Thickness: ");
+        lblThickness.setText(bundle.getString("Overview.lblThickness.text")); // NOI18N
 
-        lblWidth.setText("Width: ");
+        lblWidth.setText(bundle.getString("Overview.lblWidth.text")); // NOI18N
 
         txtWidth.setEditable(false);
 
@@ -361,15 +359,15 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        pnlCustomerInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Customer Information"));
+        pnlCustomerInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlCustomerInfo.border.title"))); // NOI18N
 
-        lblSalesOrderId.setText("Sales order ID:");
+        lblSalesOrderId.setText(bundle.getString("Overview.lblSalesOrderId.text")); // NOI18N
 
-        lblCustomerName.setText("Customer name:");
+        lblCustomerName.setText(bundle.getString("Overview.lblCustomerName.text")); // NOI18N
 
-        lblEmail.setText("Email:");
+        lblEmail.setText(bundle.getString("Overview.lblEmail.text")); // NOI18N
 
-        lblPhone.setText("Phone:");
+        lblPhone.setText(bundle.getString("Overview.lblPhone.text")); // NOI18N
 
         txtSalesOrderId.setEditable(false);
         txtSalesOrderId.addActionListener(new java.awt.event.ActionListener()
@@ -505,7 +503,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Order Information", jPanel13);
+        jTabbedPane1.addTab(bundle.getString("Overview.jPanel13.TabConstraints.tabTitle"), jPanel13); // NOI18N
 
         tblInStock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -569,37 +567,37 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        JPanalStockInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Info"));
+        JPanalStockInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.JPanalStockInfo.border.title"))); // NOI18N
         JPanalStockInfo.setEnabled(false);
 
         lblName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblName.setText("Material Name: ");
+        lblName.setText(bundle.getString("Overview.lblName.text")); // NOI18N
 
         txtMaterialName1.setEditable(false);
 
-        lblMaterialID.setText("Material ID: ");
+        lblMaterialID.setText(bundle.getString("Overview.lblMaterialID.text")); // NOI18N
 
         txtMaterialID1.setEditable(false);
 
-        lblCode.setText("Code: ");
+        lblCode.setText(bundle.getString("Overview.lblCode.text")); // NOI18N
 
         txtCode.setEditable(false);
 
-        lblDensity.setText("Material Density: ");
+        lblDensity.setText(bundle.getString("Overview.lblDensity.text")); // NOI18N
 
         txtMaterialDenisity.setEditable(false);
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Mesurements"));
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.jPanel11.border.title"))); // NOI18N
 
         txtThickness1.setEditable(false);
 
-        lblThickness1.setText("Thickness: ");
+        lblThickness1.setText(bundle.getString("Overview.lblThickness1.text")); // NOI18N
 
-        lblWidth1.setText("Width: ");
+        lblWidth1.setText(bundle.getString("Overview.lblWidth1.text")); // NOI18N
 
         txtWidth1.setEditable(false);
 
-        lblLength1.setText("Length: ");
+        lblLength1.setText(bundle.getString("Overview.lblLength1.text")); // NOI18N
 
         txtLength1.setEditable(false);
 
@@ -638,7 +636,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        lblQuantity2.setText("Stock Quantity: ");
+        lblQuantity2.setText(bundle.getString("Overview.lblQuantity2.text")); // NOI18N
 
         txtQuantity1.setEditable(false);
         txtQuantity1.addActionListener(new java.awt.event.ActionListener()
@@ -649,9 +647,9 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
-        jLabel6.setText("Kg");
+        jLabel6.setText(bundle.getString("Overview.jLabel6.text")); // NOI18N
 
-        lblCharge.setText("ChargeNo");
+        lblCharge.setText(bundle.getString("Overview.lblCharge.text")); // NOI18N
 
         txtCharge.setEditable(false);
 
@@ -741,7 +739,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("In Stock", jPanel1);
+        jTabbedPane1.addTab(bundle.getString("Overview.jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
 
         tblSleeveList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -790,7 +788,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
         jScrollPane4.setViewportView(tblSleeveList);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Orders and stock items relevant to the selected sleeve"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.jPanel3.border.title"))); // NOI18N
 
         tblOrderList1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -886,18 +884,18 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
         jScrollPane1.setViewportView(tblStockItem);
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Controle Panel"));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.jPanel6.border.title"))); // NOI18N
 
-        jButton1.setText("Finish Order");
+        jButton1.setText(bundle.getString("Overview.jButton1.text")); // NOI18N
 
         buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Urgent");
+        jRadioButton3.setText(bundle.getString("Overview.jRadioButton3.text")); // NOI18N
 
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("In Progress");
+        jRadioButton2.setText(bundle.getString("Overview.jRadioButton2.text")); // NOI18N
 
         buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Pending");
+        jRadioButton1.setText(bundle.getString("Overview.jRadioButton1.text")); // NOI18N
         jRadioButton1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -960,7 +958,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jLabel4.setText("Select a Sleeve: ");
+        jLabel4.setText(bundle.getString("Overview.jLabel4.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -988,7 +986,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Cutting method 1", jPanel7);
+        jTabbedPane1.addTab(bundle.getString("Overview.jPanel7.TabConstraints.tabTitle"), jPanel7); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -998,10 +996,10 @@ public class Overview extends javax.swing.JFrame implements Observer
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
+            .addGap(0, 406, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Cutting method 2", jPanel4);
+        jTabbedPane1.addTab(bundle.getString("Overview.jPanel4.TabConstraints.tabTitle"), jPanel4); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1011,24 +1009,33 @@ public class Overview extends javax.swing.JFrame implements Observer
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
+            .addGap(0, 406, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Cutting method 3", jPanel5);
+        jTabbedPane1.addTab(bundle.getString("Overview.jPanel5.TabConstraints.tabTitle"), jPanel5); // NOI18N
 
-        btnLuk.setText("Luk");
-        btnLuk.addActionListener(new java.awt.event.ActionListener()
+        btnClose.setText(bundle.getString("Overview.btnClose.text")); // NOI18N
+        btnClose.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnLukActionPerformed(evt);
+                btnCloseActionPerformed(evt);
             }
         });
 
-        jMenu1.setText("File");
+        jLocaleChooser1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dansk (Danmark)", "English (United Kingdom)", "Russian (Russia)", "Irish (Ireland)" }));
+        jLocaleChooser1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jLocaleChooser1ActionPerformed(evt);
+            }
+        });
+
+        jMenu1.setText(bundle.getString("Overview.jMenu1.text")); // NOI18N
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItem1.setText("Exit");
+        jMenuItem1.setText(bundle.getString("Overview.jMenuItem1.text")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -1040,45 +1047,8 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Help");
+        jMenu2.setText(bundle.getString("Overview.jMenu2.text")); // NOI18N
         jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Language");
-
-        jMenuItem2.setText("Danish (Dansk)");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem3.setText("English (United Kingdom)");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem3);
-
-        jMenuItem4.setText("Russian (Russia)");
-        jMenu3.add(jMenuItem4);
-
-        jMenuItem5.setText("German (Germany)");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem5);
-
-        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -1092,16 +1062,19 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(jTabbedPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLuk, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLocaleChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLocaleChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLuk)
+                .addComponent(btnClose)
                 .addGap(5, 5, 5))
         );
 
@@ -1113,25 +1086,10 @@ public class Overview extends javax.swing.JFrame implements Observer
         closePressed();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void btnLukActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLukActionPerformed
-    {//GEN-HEADEREND:event_btnLukActionPerformed
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCloseActionPerformed
+    {//GEN-HEADEREND:event_btnCloseActionPerformed
         closePressed();
-    }//GEN-LAST:event_btnLukActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
-    {//GEN-HEADEREND:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem3ActionPerformed
-    {//GEN-HEADEREND:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem5ActionPerformed
-    {//GEN-HEADEREND:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
     {//GEN-HEADEREND:event_jTabbedPane1StateChanged
@@ -1163,23 +1121,25 @@ public class Overview extends javax.swing.JFrame implements Observer
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void jLocaleChooser1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jLocaleChooser1ActionPerformed
+    {//GEN-HEADEREND:event_jLocaleChooser1ActionPerformed
+        rb = ResourceBundle.getBundle("Bundle.properties", jLocaleChooser1.getLocale());
+        updateGUILanguage();
+    }//GEN-LAST:event_jLocaleChooser1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanelOrderInfo;
-    private javax.swing.JButton btnLuk;
+    private javax.swing.JButton btnClose;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private com.toedter.components.JLocaleChooser jLocaleChooser1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
