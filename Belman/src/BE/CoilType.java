@@ -46,9 +46,9 @@ public class CoilType
 
     }
 
-    public CoilType(String code, double width, double thickness)
+    public CoilType(String code, double width, double thickness, int materialId)
     {
-        this(-1, code, width, thickness, -1);
+        this(-1, code, width, thickness, materialId);
 
     }
 

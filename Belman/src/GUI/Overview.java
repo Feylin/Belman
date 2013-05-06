@@ -1343,7 +1343,12 @@ public class Overview extends javax.swing.JFrame implements Observer
                        tblOrderList1.setModel(omodel2);                        
                           
 //                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
-                    }                   
+                    }
+                    else
+                    {
+//                        omodel2.
+                        tblOrderList1.setModel(omodel2);
+                    }
 
 //                    Sleeve s = slmodel.getEventsByRow(selectedRow);
                 }
@@ -1393,7 +1398,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     try
                     {
                         txtMaterialName1.setText(String.valueOf(s.getMaterial().getName()));                        
-                        txtMaterialID1.setText(String.valueOf(s.getMaterial().getId()));
+                        txtMaterialID1.setText(String.valueOf(s.getCoilType().getMaterialId()));
                         txtCode.setText(String.valueOf(s.getCoilType().getCode()));
                         txtMaterialDenisity.setText(String.valueOf(s.getMaterial().getDensity()));
                         txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
