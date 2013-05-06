@@ -49,6 +49,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private MaterielTableModel mmodel = null;
     private OrderTablemodel omodel2 = null;
     private SleeveTableModel slmodel = null;
+    private StockListTableModel smodel2 = null;
     
     Order o;
 
@@ -1321,9 +1322,14 @@ public class Overview extends javax.swing.JFrame implements Observer
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
+            
+            smgr = StockItemManager.getInstance();
+            smgr.addObserver(this);
                        
             omgr = OrderManager.getInstance();
-            omgr.addObserver(this);           
+            omgr.addObserver(this);         
+            
+
 //          omodel2 = new OrderTablemodel(omgr.getAll());
 //          tblOrderList1.setModel(omodel2);
             
@@ -1340,15 +1346,21 @@ public class Overview extends javax.swing.JFrame implements Observer
                     if (!omgr.getOrdersBySleeve(s).isEmpty())
                     {
                        omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
-                       tblOrderList1.setModel(omodel2);                        
+                       tblOrderList1.setModel(omodel2);   
+                       
+                    if(!smgr.getItemBySleeve(s).isEmpty())
+                    {
+                        smodel2 = new StockListTableModel(smgr.getItemBySleeve(s));
+                        tblStockItem.setModel(smodel2);
+                    }
                           
 //                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
                     }
-                    else
-                    {
-//                        omodel2.
-                        tblOrderList1.setModel(omodel2);
-                    }
+//                    else
+//                    {
+////                        omodel2.
+//                        tblOrderList1.setModel(omodel2);
+//                    }
 
 //                    Sleeve s = slmodel.getEventsByRow(selectedRow);
                 }

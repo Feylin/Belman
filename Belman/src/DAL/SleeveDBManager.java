@@ -45,7 +45,7 @@ public class SleeveDBManager
     {
          try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Sleeve, Material WHERE Sleeve.id = Material.id";
+            String sql = "SELECT Sleeve.*, Material.name FROM Sleeve, Material WHERE Sleeve.materialId = Material.id";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
