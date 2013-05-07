@@ -121,7 +121,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblThickness.setText(rb.getString("Overview.lblThickness.text"));
         lblWidth.setText(rb.getString("Overview.lblWidth.text"));
         lblOrder.setText(rb.getString("Overview.lblOrder.text"));
-        lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text"));
+        lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") +Login.getInstance().getOperator());
         lblPhone.setText(rb.getString("Overview.lblPhone.text"));
         lblEmail.setText(rb.getString("Overview.lblEmail.text"));
         lblSleeve.setText(rb.getString("Overview.lblSleeve.text"));
@@ -369,7 +369,9 @@ public class Overview extends javax.swing.JFrame implements Observer
         );
         pnlOrderListLayout.setVerticalGroup(
             pnlOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrOrderList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(pnlOrderListLayout.createSequentialGroup()
+                .addComponent(scrOrderList, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pnlOrderInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlOrderInfo.border.title"))); // NOI18N
@@ -530,8 +532,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlMeasurements, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlCustomerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
+                .addComponent(pnlCustomerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlOrderLayout = new javax.swing.GroupLayout(pnlOrder);
@@ -542,16 +543,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addComponent(pnlOrderList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlOrderLayout.setVerticalGroup(
             pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                    .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1096,7 +1097,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             pnlLoggedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoggedInLayout.createSequentialGroup()
                 .addComponent(lblLoggedIn)
-                .addGap(0, 147, Short.MAX_VALUE))
+                .addGap(0, 168, Short.MAX_VALUE))
         );
         pnlLoggedInLayout.setVerticalGroup(
             pnlLoggedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
