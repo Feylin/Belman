@@ -253,7 +253,7 @@ public class Login extends javax.swing.JFrame
 
         btnSignup.setText("Sign up");
 
-        btnLogin.setText("Login");
+        btnLogin.setText("Log in");
         btnLogin.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)

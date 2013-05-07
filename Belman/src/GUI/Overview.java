@@ -79,29 +79,18 @@ public class Overview extends javax.swing.JFrame implements Observer
         btnClose.setText(rb.getString("Overview.btnClose.text"));
         btnLogout.setText(rb.getString("Overview.btnLogout.text"));
         btnFinishOrder.setText(rb.getString("Overview.btnFinishOrder.text"));
-        
+
         menuFile.setText(rb.getString("Overview.menuFile.text"));
         menuSettings.setText(rb.getString("Overview.menuSettings.text"));
-        
+
         lblKg.setText(rb.getString("Overview.jLabel6.text"));
-        
-//        pnlCutting1.setLocale(Locale.UK);Overview.pnlCutting1.TabConstraints.tabTitle
-//        pnlControlPanel.setT(Locale.UK);Overview.pnlControlPanel.border.title
-//        pnlMeasurements.setTitle(Overview.pnlMeasurements.border.title);
-//        pnlCustomerInfo.setLocale(Locale.UK);Overview.pnlCustomerInfo.border.title
-//        pnlOrderStock.setLocale(Locale.UK);Overview.pnlOrderStock.border.title
-//        pnlOrderInfo.setLocale(Locale.UK);Overview.pnlOrderInfo.border.title
-//        pnlOrder.setLocale(Locale.UK);Overview.pnlOrder.TabConstraints.tabTitle
-//        pnlInstock.setLocale(Locale.UK);Overview.pnlInstock.TabConstraints.tabTitle
-//        pnlCutting3.setLocale(Locale.UK);Overview.pnlCutting3.TabConstraints.tabTitle
-//        pnlCutting2.setLocale(Locale.UK);Overview.pnlCutting2.TabConstraints.tabTitle
-        
+
         jTabbedPane1.setTitleAt(0, rb.getString("Overview.pnlOrder.TabConstraints.tabTitle"));
         jTabbedPane1.setTitleAt(1, rb.getString("Overview.pnlInstock.TabConstraints.tabTitle"));
         jTabbedPane1.setTitleAt(2, rb.getString("Overview.pnlCutting1.TabConstraints.tabTitle"));
         jTabbedPane1.setTitleAt(3, rb.getString("Overview.pnlCutting2.TabConstraints.tabTitle"));
         jTabbedPane1.setTitleAt(4, rb.getString("Overview.pnlCutting3.TabConstraints.tabTitle"));
-        
+
         TitledBorder border = (TitledBorder) pnlControlPanel.getBorder();
         border.setTitle(rb.getString("Overview.pnlControlPanel.border.title"));
         TitledBorder border2 = (TitledBorder) pnlMeasurements2.getBorder();
@@ -112,21 +101,18 @@ public class Overview extends javax.swing.JFrame implements Observer
         border4.setTitle(rb.getString("Overview.pnlCustomerInfo.border.title"));
         TitledBorder border5 = (TitledBorder) pnlOrderInfo.getBorder();
         border5.setTitle(rb.getString("Overview.pnlOrderInfo.border.title"));
-        
+        TitledBorder border6 = (TitledBorder) pnlOrderStock.getBorder();
+        border6.setTitle(rb.getString("Overview.pnlOrderStock.border.title"));
+
         rbtnUrgent.setText(rb.getString("Overview.rbtnUrgent.text"));
         rbtnPending.setText(rb.getString("Overview.rbtnPending.text"));
         rbtnInProgress.setText(rb.getString("Overview.rbtnInProgress.text"));
 
-//        pnlMeasurements.
-//        pnlOrderInfo.set        
-        
-//        JPanalStockInfo.set
-               
         itemHelp.setText(rb.getString("Overview.itemHelp.text_1"));
         itemSettings.setText(rb.getString("Overview.itemSettings.text"));
         itemLogOut.setText(rb.getString("Overview.itemLogOut.text_1"));
         itemExit.setText(rb.getString("Overview.itemExit.text"));
-        
+
         lblCharge.setText(rb.getString("Overview.lblCharge.text"));
         lblQuantity.setText(rb.getString("Overview.lblQuantity.text"));
         lblLength1.setText(rb.getString("Overview.lblLength1.text"));
@@ -138,7 +124,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblThickness.setText(rb.getString("Overview.lblThickness.text"));
         lblWidth.setText(rb.getString("Overview.lblWidth.text"));
         lblOrder.setText(rb.getString("Overview.lblOrder.text"));
-        lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") +Login.getInstance().getOperator());
+        lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") + Login.getInstance().getOperator());
         lblPhone.setText(rb.getString("Overview.lblPhone.text"));
         lblEmail.setText(rb.getString("Overview.lblEmail.text"));
         lblSleeve.setText(rb.getString("Overview.lblSleeve.text"));
@@ -146,15 +132,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblCode.setText(rb.getString("Overview.lblCode.text"));
         lblDensity.setText(rb.getString("Overview.lblDensity.text"));
         lblName.setText(rb.getString("Overview.lblName.text"));
-        lblMaterialID.setText(rb.getString("Overview.lblMaterialID.text"));       
-        
-        
+        lblMaterialID.setText(rb.getString("Overview.lblMaterialID.text"));
     }
-    
+
     private void loggedInAs()
     {
         String operator = Login.getInstance().getOperator();
-        lblLoggedIn.setText("Logged in as " +operator);
+        lblLoggedIn.setText("Logged in as " + operator);
     }
 
     private void closePressed()
@@ -166,7 +150,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             System.exit(0);
         }
     }
-    
+
     private void logoutPressed()
     {
         String message = "Are you sure you want to log out?";
@@ -1210,7 +1194,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void itemExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemExitActionPerformed
     {//GEN-HEADEREND:event_itemExitActionPerformed
-        closePressed();        
+        closePressed();
     }//GEN-LAST:event_itemExitActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCloseActionPerformed
@@ -1238,7 +1222,6 @@ public class Overview extends javax.swing.JFrame implements Observer
     {//GEN-HEADEREND:event_itemLogOutActionPerformed
         logoutPressed();
     }//GEN-LAST:event_itemLogOutActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JButton btnClose;
