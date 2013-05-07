@@ -113,7 +113,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblQuantity.setText(rb.getString("Overview.lblQuantity.text"));
         lblLength1.setText(rb.getString("Overview.lblLength1.text"));
         lblWidth1.setText(rb.getString("Overview.lblWidth1.text"));
-        lblStockQuantity.setText(rb.getString("Overview.lblQuantity2.text"));
+        lblStockQuantity.setText(rb.getString("Overview.lblStockQuantity.text"));
         lblSalesOrderId.setText(rb.getString("Overview.lblSalesOrderId.text"));
         lblCustomerName.setText(rb.getString("Overview.lblCustomerName.text"));
         lblDate.setText(rb.getString("Overview.lblDate.text"));
