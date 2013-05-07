@@ -51,7 +51,7 @@ public class Overview extends javax.swing.JFrame implements Observer
      */
     private Overview()
     {
-//        rb = ResourceBundle.getBundle("GUI/Bundle.properties");
+        rb = ResourceBundle.getBundle("GUI.Bundle");
         initComponents();
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
         loggedInAs();
@@ -60,7 +60,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         orderListSelectioner();
         sleeveListSelectioner();
         stockItemListSelectioner();
-//        updateGUILanguage();
+        updateGUILanguage();
 
     }
 
@@ -1153,7 +1153,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
     {//GEN-HEADEREND:event_localeLanguageActionPerformed
-        rb = ResourceBundle.getBundle("Bundle.properties", localeLanguage.getLocale());
+        rb = ResourceBundle.getBundle("Bundle", localeLanguage.getLocale());
         updateGUILanguage();
     }//GEN-LAST:event_localeLanguageActionPerformed
 

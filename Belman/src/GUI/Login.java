@@ -24,7 +24,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class Login extends javax.swing.JFrame
 {
-    
+
     private String operator;
     private static Login instance = null;
     private static OperatorManager mgr = null;
@@ -35,7 +35,7 @@ public class Login extends javax.swing.JFrame
      * Creates new form Login
      */
     private Login()
-    {        
+    {
         loadManagers();
         setUndecorated(true);
         initComponents();
@@ -46,7 +46,7 @@ public class Login extends javax.swing.JFrame
         windowClose();
         listSelection();
     }
-    
+
     private void loadManagers()
     {
         try
@@ -59,7 +59,7 @@ public class Login extends javax.swing.JFrame
             e.printStackTrace();
         }
     }
-    
+
     public static Login getInstance()
     {
         if (instance == null)
@@ -68,12 +68,12 @@ public class Login extends javax.swing.JFrame
         }
         return instance;
     }
-    
+
     public String getOperator()
     {
         return operator;
     }
-    
+
     private void addEnterKeyListener()
     {
         KeyListener enterKey = new KeyAdapter()
@@ -90,19 +90,19 @@ public class Login extends javax.swing.JFrame
         jpfPassword.addKeyListener(enterKey);
         lstOperators.addKeyListener(enterKey);
     }
-    
+
     private void defaultCursor()
     {
 //        Welcome.getFrames()[0].setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void loadingCursor()
     {
 //        Welcome.getFrames()[0].setCursor(new Cursor(Cursor.WAIT_CURSOR));
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     }
-    
+
     private void loginPressed()
     {
         if (txtOperator.getText().length() != 0)
@@ -110,13 +110,17 @@ public class Login extends javax.swing.JFrame
             String username = txtOperator.getText();
             char[] pass = jpfPassword.getPassword();
             String password = new String(pass);
-            loadingCursor();
-            
+
             try
             {
                 if (lmgr.checkLogin(username, password) == true)
                 {
                     operator = username;
+
+                    String message = "Welcome back " + operator + "\nBe productive =)";
+                    JOptionPane.showMessageDialog(this, message, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+
+                    loadingCursor();
                     Overview.getInstance().setVisible(true);
                     clearFields();
                     dispose();
@@ -143,7 +147,7 @@ public class Login extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, message, getTitle(), JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void closePressed()
     {
         String message = "Are you sure you want to exit?";
@@ -153,7 +157,7 @@ public class Login extends javax.swing.JFrame
             System.exit(0);
         }
     }
-    
+
     private void windowClose()
     {
         addWindowListener(new WindowAdapter()
@@ -165,14 +169,14 @@ public class Login extends javax.swing.JFrame
             }
         });
     }
-    
+
     private void clearFields()
     {
         jpfPassword.setText("");
         txtOperator.setText("");
         lstOperators.clearSelection();
     }
-    
+
     private void selectedOperator()
     {
         Operator selectedOperator = (Operator) lstOperators.getSelectedValue();
@@ -181,14 +185,14 @@ public class Login extends javax.swing.JFrame
             txtOperator.setText(selectedOperator.toString());
         }
     }
-    
+
     private void listSelection()
-    {        
+    {
         try
         {
             model = new OperatorListModel(mgr.getAllOperators());
             lstOperators.setModel(model);
-            
+
             lstOperators.addListSelectionListener(new ListSelectionListener()
             {
                 @Override
@@ -348,7 +352,7 @@ public class Login extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnCloseActionPerformed
         closePressed();
     }//GEN-LAST:event_btnCloseActionPerformed
-    
+
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLoginActionPerformed
     {//GEN-HEADEREND:event_btnLoginActionPerformed
         loginPressed();
