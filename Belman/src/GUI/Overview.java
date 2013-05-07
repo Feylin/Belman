@@ -96,6 +96,23 @@ public class Overview extends javax.swing.JFrame implements Observer
 //        pnlCutting3.setLocale(Locale.UK);Overview.pnlCutting3.TabConstraints.tabTitle
 //        pnlCutting2.setLocale(Locale.UK);Overview.pnlCutting2.TabConstraints.tabTitle
         
+        jTabbedPane1.setTitleAt(0, rb.getString("Overview.pnlOrder.TabConstraints.tabTitle"));
+        jTabbedPane1.setTitleAt(1, rb.getString("Overview.pnlInstock.TabConstraints.tabTitle"));
+        jTabbedPane1.setTitleAt(2, rb.getString("Overview.pnlCutting1.TabConstraints.tabTitle"));
+        jTabbedPane1.setTitleAt(3, rb.getString("Overview.pnlCutting2.TabConstraints.tabTitle"));
+        jTabbedPane1.setTitleAt(4, rb.getString("Overview.pnlCutting3.TabConstraints.tabTitle"));
+        
+        TitledBorder border = (TitledBorder) pnlControlPanel.getBorder();
+        border.setTitle(rb.getString("Overview.pnlControlPanel.border.title"));
+        TitledBorder border2 = (TitledBorder) pnlMeasurements2.getBorder();
+        border2.setTitle(rb.getString("Overview.pnlMeasurements2.border.title"));
+        TitledBorder border3 = (TitledBorder) pnlMeasurements.getBorder();
+        border3.setTitle(rb.getString("Overview.pnlMeasurements.border.title"));
+        TitledBorder border4 = (TitledBorder) pnlCustomerInfo.getBorder();
+        border4.setTitle(rb.getString("Overview.pnlCustomerInfo.border.title"));
+        TitledBorder border5 = (TitledBorder) pnlOrderInfo.getBorder();
+        border5.setTitle(rb.getString("Overview.pnlOrderInfo.border.title"));
+        
         rbtnUrgent.setText(rb.getString("Overview.rbtnUrgent.text"));
         rbtnPending.setText(rb.getString("Overview.rbtnPending.text"));
         rbtnInProgress.setText(rb.getString("Overview.rbtnInProgress.text"));
@@ -267,7 +284,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         txtCode = new javax.swing.JTextField();
         lblDensity = new javax.swing.JLabel();
         txtMaterialDenisity = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
+        pnlMeasurements2 = new javax.swing.JPanel();
         txtThickness1 = new javax.swing.JTextField();
         lblThickness1 = new javax.swing.JLabel();
         lblWidth1 = new javax.swing.JLabel();
@@ -454,9 +471,8 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblSalesOrderId)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(txtSalesOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
                         .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -543,7 +559,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addComponent(pnlOrderList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+                .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlOrderLayout.setVerticalGroup(
@@ -551,8 +567,8 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                    .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
+                    .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -641,7 +657,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         txtMaterialDenisity.setEditable(false);
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.jPanel11.border.title"))); // NOI18N
+        pnlMeasurements2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlMeasurements2.border.title"))); // NOI18N
 
         txtThickness1.setEditable(false);
 
@@ -655,36 +671,36 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         txtLength1.setEditable(false);
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlMeasurements2Layout = new javax.swing.GroupLayout(pnlMeasurements2);
+        pnlMeasurements2.setLayout(pnlMeasurements2Layout);
+        pnlMeasurements2Layout.setHorizontalGroup(
+            pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMeasurements2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblThickness1)
                     .addComponent(lblWidth1)
                     .addComponent(lblLength1))
                 .addGap(27, 27, 27)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtWidth1)
                     .addComponent(txtThickness1)
                     .addComponent(txtLength1))
                 .addContainerGap())
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        pnlMeasurements2Layout.setVerticalGroup(
+            pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMeasurements2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtThickness1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblThickness1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWidth1)
                     .addComponent(txtWidth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLength1)
                     .addComponent(txtLength1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -714,7 +730,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(JPanalStockInfoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlMeasurements2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(JPanalStockInfoLayout.createSequentialGroup()
                         .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(JPanalStockInfoLayout.createSequentialGroup()
@@ -769,7 +785,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(lblCharge)
                     .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlMeasurements2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1159,7 +1175,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1233,7 +1249,6 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JMenuItem itemHelp;
     private javax.swing.JMenuItem itemLogOut;
     private javax.swing.JMenuItem itemSettings;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCharge;
     private javax.swing.JLabel lblCode;
@@ -1269,6 +1284,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel pnlInstock;
     private javax.swing.JPanel pnlLoggedIn;
     private javax.swing.JPanel pnlMeasurements;
+    private javax.swing.JPanel pnlMeasurements2;
     private javax.swing.JPanel pnlOrder;
     private javax.swing.JPanel pnlOrderInfo;
     private javax.swing.JPanel pnlOrderList;
