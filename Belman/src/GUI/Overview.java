@@ -247,7 +247,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         menuBar = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         itemExit = new javax.swing.JMenuItem();
-        menuHelp = new javax.swing.JMenu();
+        menuSettings = new javax.swing.JMenu();
+        itemSettings = new javax.swing.JMenuItem();
+        itemLogOut = new javax.swing.JMenuItem();
+        seperatorSettings = new javax.swing.JPopupMenu.Separator();
+        itemHelp = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
@@ -1037,7 +1041,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             pnlLoggedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoggedInLayout.createSequentialGroup()
                 .addComponent(lblLoggedIn)
-                .addGap(0, 200, Short.MAX_VALUE))
+                .addGap(0, 147, Short.MAX_VALUE))
         );
         pnlLoggedInLayout.setVerticalGroup(
             pnlLoggedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1068,8 +1072,27 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         menuBar.add(menuFile);
 
-        menuHelp.setText(bundle.getString("Overview.menuHelp.text")); // NOI18N
-        menuBar.add(menuHelp);
+        menuSettings.setText(bundle.getString("Overview.menuSettings.text")); // NOI18N
+
+        itemSettings.setText(bundle.getString("Overview.itemSettings.text")); // NOI18N
+        menuSettings.add(itemSettings);
+
+        itemLogOut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        itemLogOut.setText(bundle.getString("Overview.itemLogOut.text_1")); // NOI18N
+        itemLogOut.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                itemLogOutActionPerformed(evt);
+            }
+        });
+        menuSettings.add(itemLogOut);
+        menuSettings.add(seperatorSettings);
+
+        itemHelp.setText(bundle.getString("Overview.itemHelp.text_1")); // NOI18N
+        menuSettings.add(itemHelp);
+
+        menuBar.add(menuSettings);
 
         setJMenuBar(menuBar);
 
@@ -1139,6 +1162,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         logoutPressed();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void itemLogOutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemLogOutActionPerformed
+    {//GEN-HEADEREND:event_itemLogOutActionPerformed
+        logoutPressed();
+    }//GEN-LAST:event_itemLogOutActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanelOrderInfo;
@@ -1147,6 +1175,9 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JButton btnLogout;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenuItem itemExit;
+    private javax.swing.JMenuItem itemHelp;
+    private javax.swing.JMenuItem itemLogOut;
+    private javax.swing.JMenuItem itemSettings;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1174,7 +1205,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private com.toedter.components.JLocaleChooser localeLanguage;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuFile;
-    private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenu menuSettings;
     private javax.swing.JPanel pnlControlPanel;
     private javax.swing.JPanel pnlCustomerInfo;
     private javax.swing.JPanel pnlCuting2;
@@ -1194,6 +1225,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JScrollPane scrOrderList;
     private javax.swing.JScrollPane scrOrderStock;
     private javax.swing.JScrollPane scrStockOrder;
+    private javax.swing.JPopupMenu.Separator seperatorSettings;
     private javax.swing.JTable tblInStock;
     private javax.swing.JTable tblOrderList;
     private javax.swing.JTable tblOrderList1;
