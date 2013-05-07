@@ -177,7 +177,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         pnlOrderList = new javax.swing.JPanel();
         scrOrderList = new javax.swing.JScrollPane();
         tblOrderList = new javax.swing.JTable();
-        JPanelOrderInfo = new javax.swing.JPanel();
+        pnlOrderInfo = new javax.swing.JPanel();
         lblOrder = new javax.swing.JLabel();
         txtOrderId = new javax.swing.JTextField();
         lblQuantity = new javax.swing.JLabel();
@@ -224,7 +224,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblCharge = new javax.swing.JLabel();
         txtCharge = new javax.swing.JTextField();
         pnlCutting1 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        scrSleeve = new javax.swing.JScrollPane();
         tblSleeveList = new javax.swing.JTable();
         pnlOrderStock = new javax.swing.JPanel();
         scrOrderStock = new javax.swing.JScrollPane();
@@ -237,7 +237,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         rbtnInProgress = new javax.swing.JRadioButton();
         rbtnPending = new javax.swing.JRadioButton();
         lblSleeve = new javax.swing.JLabel();
-        pnlCuting2 = new javax.swing.JPanel();
+        pnlCutting2 = new javax.swing.JPanel();
         pnlCutting3 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         localeLanguage = new com.toedter.components.JLocaleChooser();
@@ -316,7 +316,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addComponent(scrOrderList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        JPanelOrderInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.JPanelOrderInfo.border.title"))); // NOI18N
+        pnlOrderInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlOrderInfo.border.title"))); // NOI18N
 
         lblOrder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblOrder.setText(bundle.getString("Overview.lblOrder.text")); // NOI18N
@@ -435,41 +435,41 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout JPanelOrderInfoLayout = new javax.swing.GroupLayout(JPanelOrderInfo);
-        JPanelOrderInfo.setLayout(JPanelOrderInfoLayout);
-        JPanelOrderInfoLayout.setHorizontalGroup(
-            JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanelOrderInfoLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlOrderInfoLayout = new javax.swing.GroupLayout(pnlOrderInfo);
+        pnlOrderInfo.setLayout(pnlOrderInfoLayout);
+        pnlOrderInfoLayout.setHorizontalGroup(
+            pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrderInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlCustomerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelOrderInfoLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderInfoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDate)
                             .addComponent(lblOrder)
                             .addComponent(lblQuantity))
                         .addGap(18, 18, 18)
-                        .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtOrderId, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                             .addComponent(txtQuantity)
                             .addComponent(txtDate))))
                 .addContainerGap())
         );
-        JPanelOrderInfoLayout.setVerticalGroup(
-            JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanelOrderInfoLayout.createSequentialGroup()
+        pnlOrderInfoLayout.setVerticalGroup(
+            pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrderInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOrder)
                     .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate)
                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(JPanelOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuantity)
                     .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -487,7 +487,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addComponent(pnlOrderList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JPanelOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlOrderLayout.setVerticalGroup(
@@ -495,7 +495,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(pnlOrderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JPanelOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -786,7 +786,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(tblSleeveList);
+        scrSleeve.setViewportView(tblSleeveList);
 
         pnlOrderStock.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlOrderStock.border.title"))); // NOI18N
 
@@ -964,7 +964,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addGroup(pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSleeve)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scrSleeve, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlOrderStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -975,7 +975,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGap(14, 14, 14)
                 .addComponent(lblSleeve)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrSleeve, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlCutting1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -985,18 +985,18 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         jTabbedPane1.addTab(bundle.getString("Overview.pnlCutting1.TabConstraints.tabTitle"), pnlCutting1); // NOI18N
 
-        javax.swing.GroupLayout pnlCuting2Layout = new javax.swing.GroupLayout(pnlCuting2);
-        pnlCuting2.setLayout(pnlCuting2Layout);
-        pnlCuting2Layout.setHorizontalGroup(
-            pnlCuting2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlCutting2Layout = new javax.swing.GroupLayout(pnlCutting2);
+        pnlCutting2.setLayout(pnlCutting2Layout);
+        pnlCutting2Layout.setHorizontalGroup(
+            pnlCutting2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 844, Short.MAX_VALUE)
         );
-        pnlCuting2Layout.setVerticalGroup(
-            pnlCuting2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlCutting2Layout.setVerticalGroup(
+            pnlCutting2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 406, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab(bundle.getString("Overview.pnlCuting2.TabConstraints.tabTitle"), pnlCuting2); // NOI18N
+        jTabbedPane1.addTab(bundle.getString("Overview.pnlCutting2.TabConstraints.tabTitle"), pnlCutting2); // NOI18N
 
         javax.swing.GroupLayout pnlCutting3Layout = new javax.swing.GroupLayout(pnlCutting3);
         pnlCutting3.setLayout(pnlCutting3Layout);
@@ -1169,7 +1169,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
-    private javax.swing.JPanel JPanelOrderInfo;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnFinishOrder;
     private javax.swing.JButton btnLogout;
@@ -1180,7 +1179,6 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JMenuItem itemSettings;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCharge;
     private javax.swing.JLabel lblCode;
@@ -1208,14 +1206,15 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JMenu menuSettings;
     private javax.swing.JPanel pnlControlPanel;
     private javax.swing.JPanel pnlCustomerInfo;
-    private javax.swing.JPanel pnlCuting2;
     private javax.swing.JPanel pnlCutting1;
+    private javax.swing.JPanel pnlCutting2;
     private javax.swing.JPanel pnlCutting3;
     private javax.swing.JPanel pnlInStockList;
     private javax.swing.JPanel pnlInstock;
     private javax.swing.JPanel pnlLoggedIn;
     private javax.swing.JPanel pnlMeasurements;
     private javax.swing.JPanel pnlOrder;
+    private javax.swing.JPanel pnlOrderInfo;
     private javax.swing.JPanel pnlOrderList;
     private javax.swing.JPanel pnlOrderStock;
     private javax.swing.JRadioButton rbtnInProgress;
@@ -1224,6 +1223,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JScrollPane sclInStock;
     private javax.swing.JScrollPane scrOrderList;
     private javax.swing.JScrollPane scrOrderStock;
+    private javax.swing.JScrollPane scrSleeve;
     private javax.swing.JScrollPane scrStockOrder;
     private javax.swing.JPopupMenu.Separator seperatorSettings;
     private javax.swing.JTable tblInStock;
