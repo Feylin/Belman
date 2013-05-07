@@ -61,7 +61,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         sleeveListSelectioner();
         stockItemListSelectioner();
         updateGUILanguage();
-
     }
 
     public static Overview getInstance()
@@ -1153,7 +1152,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
     {//GEN-HEADEREND:event_localeLanguageActionPerformed
-        rb = ResourceBundle.getBundle("Bundle", localeLanguage.getLocale());
+        rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
         updateGUILanguage();
     }//GEN-LAST:event_localeLanguageActionPerformed
 
