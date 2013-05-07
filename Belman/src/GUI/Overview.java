@@ -56,7 +56,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         rb = ResourceBundle.getBundle("GUI.Bundle");
         initComponents();
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
-        loggedInAs();
+//        loggedInAs();
         windowClose();
         setLocationRelativeTo(null);
         orderListSelectioner();
@@ -1131,6 +1131,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         menuSettings.setText(bundle.getString("Overview.menuSettings.text")); // NOI18N
 
         itemSettings.setText(bundle.getString("Overview.itemSettings.text")); // NOI18N
+        itemSettings.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                itemSettingsActionPerformed(evt);
+            }
+        });
         menuSettings.add(itemSettings);
 
         itemLogOut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
@@ -1159,7 +1166,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1222,6 +1229,12 @@ public class Overview extends javax.swing.JFrame implements Observer
     {//GEN-HEADEREND:event_itemLogOutActionPerformed
         logoutPressed();
     }//GEN-LAST:event_itemLogOutActionPerformed
+
+    private void itemSettingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSettingsActionPerformed
+    {//GEN-HEADEREND:event_itemSettingsActionPerformed
+        OperatorSettings.getInstance().setVisible(true);
+    }//GEN-LAST:event_itemSettingsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JButton btnClose;
