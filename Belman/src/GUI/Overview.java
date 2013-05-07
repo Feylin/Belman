@@ -62,7 +62,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         sleeveListSelectioner();
         stockItemListSelectioner();
         updateGUILanguage();
-
     }
 
     public static Overview getInstance()
@@ -274,9 +273,9 @@ public class Overview extends javax.swing.JFrame implements Observer
         txtWidth1 = new javax.swing.JTextField();
         lblLength1 = new javax.swing.JLabel();
         txtLength1 = new javax.swing.JTextField();
-        lblQuantity2 = new javax.swing.JLabel();
-        txtQuantity1 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblStockQuantity = new javax.swing.JLabel();
+        txtStockQuantity = new javax.swing.JTextField();
+        lblKg = new javax.swing.JLabel();
         lblCharge = new javax.swing.JLabel();
         txtCharge = new javax.swing.JTextField();
         pnlCutting1 = new javax.swing.JPanel();
@@ -406,9 +405,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblThickness)
                     .addComponent(lblWidth))
-                .addGap(27, 27, 27)
-                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtWidth)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtWidth, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                     .addComponent(txtThickness))
                 .addContainerGap())
         );
@@ -452,21 +451,20 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap()
                 .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblSalesOrderId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSalesOrderId, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSalesOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
-                        .addComponent(lblPhone)
-                        .addGap(48, 48, 48)
-                        .addComponent(txtPhone))
-                    .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
-                        .addComponent(lblCustomerName)
-                        .addGap(3, 3, 3)
-                        .addComponent(txtCustomerName))
-                    .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
-                        .addComponent(lblEmail)
-                        .addGap(54, 54, 54)
-                        .addComponent(txtEmail)))
+                        .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEmail)
+                            .addComponent(lblCustomerName)
+                            .addComponent(lblPhone))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                            .addComponent(txtPhone)
+                            .addComponent(txtCustomerName, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         pnlCustomerInfoLayout.setVerticalGroup(
@@ -690,18 +688,18 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        lblQuantity2.setText(bundle.getString("Overview.lblQuantity2.text")); // NOI18N
+        lblStockQuantity.setText(bundle.getString("Overview.lblStockQuantity.text")); // NOI18N
 
-        txtQuantity1.setEditable(false);
-        txtQuantity1.addActionListener(new java.awt.event.ActionListener()
+        txtStockQuantity.setEditable(false);
+        txtStockQuantity.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                txtQuantity1ActionPerformed(evt);
+                txtStockQuantityActionPerformed(evt);
             }
         });
 
-        jLabel6.setText(bundle.getString("Overview.jLabel6.text")); // NOI18N
+        lblKg.setText(bundle.getString("Overview.lblKg.text")); // NOI18N
 
         lblCharge.setText(bundle.getString("Overview.lblCharge.text")); // NOI18N
 
@@ -724,7 +722,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                                     .addComponent(lblMaterialID)
                                     .addComponent(lblCode)))
                             .addComponent(lblDensity)
-                            .addComponent(lblQuantity2)
+                            .addComponent(lblStockQuantity)
                             .addComponent(lblCharge))
                         .addGap(18, 18, 18)
                         .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -733,9 +731,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                             .addComponent(txtMaterialName1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtMaterialDenisity)
                             .addGroup(JPanalStockInfoLayout.createSequentialGroup()
-                                .addComponent(txtQuantity1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                                .addComponent(txtStockQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6))
+                                .addComponent(lblKg))
                             .addComponent(txtCharge))))
                 .addContainerGap())
         );
@@ -760,10 +758,10 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(txtMaterialDenisity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblQuantity2)
+                    .addComponent(lblStockQuantity)
                     .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)))
+                        .addComponent(txtStockQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblKg)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCharge)
@@ -1202,14 +1200,14 @@ public class Overview extends javax.swing.JFrame implements Observer
         closePressed();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void txtQuantity1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtQuantity1ActionPerformed
-    {//GEN-HEADEREND:event_txtQuantity1ActionPerformed
+    private void txtStockQuantityActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtStockQuantityActionPerformed
+    {//GEN-HEADEREND:event_txtStockQuantityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantity1ActionPerformed
+    }//GEN-LAST:event_txtStockQuantityActionPerformed
 
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
     {//GEN-HEADEREND:event_localeLanguageActionPerformed
-        rb = ResourceBundle.getBundle("GUI/Bundle", localeLanguage.getLocale());
+        rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
         updateGUILanguage();
     }//GEN-LAST:event_localeLanguageActionPerformed
 
@@ -1233,7 +1231,6 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JMenuItem itemHelp;
     private javax.swing.JMenuItem itemLogOut;
     private javax.swing.JMenuItem itemSettings;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCharge;
@@ -1242,6 +1239,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDensity;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblKg;
     private javax.swing.JLabel lblLength1;
     private javax.swing.JLabel lblLoggedIn;
     private javax.swing.JLabel lblMaterialID;
@@ -1249,9 +1247,9 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel lblOrder;
     private javax.swing.JLabel lblPhone;
     private javax.swing.JLabel lblQuantity;
-    private javax.swing.JLabel lblQuantity2;
     private javax.swing.JLabel lblSalesOrderId;
     private javax.swing.JLabel lblSleeve;
+    private javax.swing.JLabel lblStockQuantity;
     private javax.swing.JLabel lblThickness;
     private javax.swing.JLabel lblThickness1;
     private javax.swing.JLabel lblWidth;
@@ -1299,8 +1297,8 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JTextField txtOrderId;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtQuantity;
-    private javax.swing.JTextField txtQuantity1;
     private javax.swing.JTextField txtSalesOrderId;
+    private javax.swing.JTextField txtStockQuantity;
     private javax.swing.JTextField txtThickness;
     private javax.swing.JTextField txtThickness1;
     private javax.swing.JTextField txtWidth;
@@ -1458,7 +1456,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtMaterialID1.setText("");
                         txtCode.setText("");
                         txtMaterialDenisity.setText("");
-                        txtQuantity1.setText("");
+                        txtStockQuantity.setText("");
                         txtCharge.setText("");
                         txtThickness1.setText("");
                         txtWidth1.setText("");
@@ -1474,7 +1472,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtMaterialID1.setText(String.valueOf(s.getCoilType().getMaterialId()));
                         txtCode.setText(String.valueOf(s.getCoilType().getCode()));
                         txtMaterialDenisity.setText(String.valueOf(s.getMaterial().getDensity()));
-                        txtQuantity1.setText(String.valueOf(s.getStockQuantity()));
+                        txtStockQuantity.setText(String.valueOf(s.getStockQuantity()));
                         txtCharge.setText(String.valueOf(s.getChargeNo()));
                         txtThickness1.setText(String.valueOf(s.getCoilType().getThickness()));
                         txtWidth1.setText(String.valueOf(s.getCoilType().getWidth()));
