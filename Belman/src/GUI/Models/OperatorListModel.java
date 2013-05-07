@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.Tablemodels;
+package GUI.Models;
 
 import BE.Operator;
 import java.util.ArrayList;

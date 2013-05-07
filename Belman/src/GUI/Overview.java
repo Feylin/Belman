@@ -11,10 +11,10 @@ import BLL.MaterialManager;
 import BLL.OrderManager;
 import BLL.SleeveManager;
 import BLL.StockItemManager;
-import GUI.Tablemodels.MaterielTableModel;
-import GUI.Tablemodels.OrderTablemodel;
-import GUI.Tablemodels.SleeveTableModel;
-import GUI.Tablemodels.StockListTableModel;
+import GUI.Models.MaterialTableModel;
+import GUI.Models.OrderTablemodel;
+import GUI.Models.SleeveTableModel;
+import GUI.Models.StockListTableModel;
 import com.toedter.components.JLocaleChooser;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -39,7 +39,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private OrderTablemodel omodel = null;
     private static Overview instance = null;
     private StockListTableModel smodel = null;
-    private MaterielTableModel mmodel = null;
+    private MaterialTableModel mmodel = null;
     private OrderTablemodel omodel2 = null;
     private SleeveTableModel slmodel = null;
     private ResourceBundle rb = null;
@@ -254,14 +254,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         setTitle(bundle.getString("Overview.title")); // NOI18N
         setResizable(false);
 
-        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener()
-        {
-            public void stateChanged(javax.swing.event.ChangeEvent evt)
-            {
-                jTabbedPane1StateChanged(evt);
-            }
-        });
-
         tblOrderList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -330,13 +322,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblQuantity.setText(bundle.getString("Overview.lblQuantity.text")); // NOI18N
 
         txtQuantity.setEditable(false);
-        txtQuantity.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtQuantityActionPerformed(evt);
-            }
-        });
 
         lblDate.setText(bundle.getString("Overview.lblDate.text")); // NOI18N
 
@@ -392,22 +377,8 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblPhone.setText(bundle.getString("Overview.lblPhone.text")); // NOI18N
 
         txtSalesOrderId.setEditable(false);
-        txtSalesOrderId.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtSalesOrderIdActionPerformed(evt);
-            }
-        });
 
         txtCustomerName.setEditable(false);
-        txtCustomerName.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtCustomerNameActionPerformed(evt);
-            }
-        });
 
         txtEmail.setEditable(false);
 
@@ -921,13 +892,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         buttonGroup1.add(rbtnPending);
         rbtnPending.setText(bundle.getString("Overview.rbtnPending.text")); // NOI18N
-        rbtnPending.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                rbtnPendingActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlControlPanelLayout = new javax.swing.GroupLayout(pnlControlPanel);
         pnlControlPanel.setLayout(pnlControlPanelLayout);
@@ -1159,34 +1123,10 @@ public class Overview extends javax.swing.JFrame implements Observer
         closePressed();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
-    {//GEN-HEADEREND:event_jTabbedPane1StateChanged
-    }//GEN-LAST:event_jTabbedPane1StateChanged
-
     private void txtQuantity1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtQuantity1ActionPerformed
     {//GEN-HEADEREND:event_txtQuantity1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQuantity1ActionPerformed
-
-    private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtQuantityActionPerformed
-    {//GEN-HEADEREND:event_txtQuantityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantityActionPerformed
-
-    private void txtSalesOrderIdActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtSalesOrderIdActionPerformed
-    {//GEN-HEADEREND:event_txtSalesOrderIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSalesOrderIdActionPerformed
-
-    private void txtCustomerNameActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtCustomerNameActionPerformed
-    {//GEN-HEADEREND:event_txtCustomerNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCustomerNameActionPerformed
-
-    private void rbtnPendingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rbtnPendingActionPerformed
-    {//GEN-HEADEREND:event_rbtnPendingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtnPendingActionPerformed
 
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
     {//GEN-HEADEREND:event_localeLanguageActionPerformed

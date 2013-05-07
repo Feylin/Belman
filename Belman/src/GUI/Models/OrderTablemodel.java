@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.Tablemodels;
+package GUI.Models;
 
-import BE.Material;
+import BE.Order;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,25 +15,25 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author bhp
  */
-public class MaterielTableModel extends AbstractTableModel
+public class OrderTablemodel extends AbstractTableModel
 {
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-    private final String[] header = {"Material Id"," Material Name"};
-    private final Class[] columnTypes = {Integer.class, String.class};
+    private final String[] header = {"Order", "Status"};
+    private final Class[] columnTypes = {String.class, String.class};
 
 
-    private ArrayList<Material> info;
+    private ArrayList<Order> info;
 
-    public MaterielTableModel(ArrayList<Material> allInfo)
+    public OrderTablemodel(ArrayList<Order> allInfo)
     {
         info = allInfo;
     }
 
-    public MaterielTableModel(List<Material> all)
+    public OrderTablemodel(List<Order> all)
     {
-        info = (ArrayList<Material>) all;
+        info = (ArrayList<Order>) all;
     }
 
     @Override
@@ -41,8 +41,7 @@ public class MaterielTableModel extends AbstractTableModel
     {
         return info.size();
     }
-    
-    
+
     @Override
     public int getColumnCount()
     {
@@ -52,11 +51,12 @@ public class MaterielTableModel extends AbstractTableModel
     @Override
     public Object getValueAt(int row, int col)
     {
-       Material m = info.get(row);
+       
+       Order o = info.get(row);
        switch (col)
        {
-           case 0 : return m.getId();
-           case 1 : return m.getName();
+           case 0 : return o.getOrderName();
+           case 1 : return o.getStatus();
        }
        return null;
     }
@@ -73,36 +73,32 @@ public class MaterielTableModel extends AbstractTableModel
         return columnTypes[col];
     }
 
-    @Override
-    public boolean isCellEditable(int row, int col)
-    {
-        return (col > 0);
-    }
+//    @Override
+//    public boolean isCellEditable(int row, int col)
+//    {
+//        return (col > 0);
+//    }
 
     @Override
     public void setValueAt(Object o, int row, int col)
     {
-        Material m = info.get(row);
+        Order or = info.get(row);
         switch (col)
         {
-            case 0 : m.getId();
-            case 1 : m.getName();
+            case 0 : or.getOrderName(); break;
+            case 1 : or.getStatus(); break;
         }
     }
 
-    public Material getEventsByRow(int row)
+    public Order getEventsByRow(int row)
     {
         return info.get(row);
     }
+     
 
-    public void setCollection(Collection<Material> material)
+    public void setCollection(Collection<Order> order)
     {
-        info = new ArrayList<>(material);
+        info = new ArrayList<>(order);
         fireTableDataChanged();
-    }
-     public Material getMaterialByRow(int row)
-    {
-        if( row < 0 ) return null;
-        return info.get(row);
     }
 }

@@ -7,7 +7,7 @@ package GUI;
 import BE.Operator;
 import BLL.LoginManager;
 import BLL.OperatorManager;
-import GUI.Tablemodels.OperatorListModel;
+import GUI.Models.OperatorListModel;
 import java.awt.Cursor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
