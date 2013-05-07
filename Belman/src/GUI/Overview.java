@@ -18,6 +18,7 @@ import GUI.Models.StockListTableModel;
 import com.toedter.components.JLocaleChooser;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -76,6 +77,61 @@ public class Overview extends javax.swing.JFrame implements Observer
     private void updateGUILanguage()
     {
         btnClose.setText(rb.getString("Overview.btnClose.text"));
+        btnLogout.setText(rb.getString("Overview.btnLogout.text"));
+        btnFinishOrder.setText(rb.getString("Overview.btnFinishOrder.text"));
+        
+        menuFile.setText(rb.getString("Overview.menuFile.text"));
+        menuSettings.setText(rb.getString("Overview.menuSettings.text"));
+        
+        lblKg.setText(rb.getString("Overview.jLabel6.text"));
+        
+//        pnlCutting1.setLocale(Locale.UK);Overview.pnlCutting1.TabConstraints.tabTitle
+//        pnlControlPanel.setT(Locale.UK);Overview.pnlControlPanel.border.title
+//        pnlMeasurements.setTitle(Overview.pnlMeasurements.border.title);
+//        pnlCustomerInfo.setLocale(Locale.UK);Overview.pnlCustomerInfo.border.title
+//        pnlOrderStock.setLocale(Locale.UK);Overview.pnlOrderStock.border.title
+//        pnlOrderInfo.setLocale(Locale.UK);Overview.pnlOrderInfo.border.title
+//        pnlOrder.setLocale(Locale.UK);Overview.pnlOrder.TabConstraints.tabTitle
+//        pnlInstock.setLocale(Locale.UK);Overview.pnlInstock.TabConstraints.tabTitle
+//        pnlCutting3.setLocale(Locale.UK);Overview.pnlCutting3.TabConstraints.tabTitle
+//        pnlCutting2.setLocale(Locale.UK);Overview.pnlCutting2.TabConstraints.tabTitle
+        
+        rbtnUrgent.setText(rb.getString("Overview.rbtnUrgent.text"));
+        rbtnPending.setText(rb.getString("Overview.rbtnPending.text"));
+        rbtnInProgress.setText(rb.getString("Overview.rbtnInProgress.text"));
+
+//        pnlMeasurements.
+//        pnlOrderInfo.set        
+        
+//        JPanalStockInfo.set
+               
+        itemHelp.setText(rb.getString("Overview.itemHelp.text_1"));
+        itemSettings.setText(rb.getString("Overview.itemSettings.text"));
+        itemLogOut.setText(rb.getString("Overview.itemLogOut.text_1"));
+        itemExit.setText(rb.getString("Overview.itemExit.text"));
+        
+        lblCharge.setText(rb.getString("Overview.lblCharge.text"));
+        lblQuantity.setText(rb.getString("Overview.lblQuantity.text"));
+        lblLength1.setText(rb.getString("Overview.lblLength1.text"));
+        lblWidth1.setText(rb.getString("Overview.lblWidth1.text"));
+        lblStockQuantity.setText(rb.getString("Overview.lblQuantity2.text"));
+        lblSalesOrderId.setText(rb.getString("Overview.lblSalesOrderId.text"));
+        lblCustomerName.setText(rb.getString("Overview.lblCustomerName.text"));
+        lblDate.setText(rb.getString("Overview.lblDate.text"));
+        lblThickness.setText(rb.getString("Overview.lblThickness.text"));
+        lblWidth.setText(rb.getString("Overview.lblWidth.text"));
+        lblOrder.setText(rb.getString("Overview.lblOrder.text"));
+        lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text"));
+        lblPhone.setText(rb.getString("Overview.lblPhone.text"));
+        lblEmail.setText(rb.getString("Overview.lblEmail.text"));
+        lblSleeve.setText(rb.getString("Overview.lblSleeve.text"));
+        lblThickness1.setText(rb.getString("Overview.lblThickness1.text"));
+        lblCode.setText(rb.getString("Overview.lblCode.text"));
+        lblDensity.setText(rb.getString("Overview.lblDensity.text"));
+        lblName.setText(rb.getString("Overview.lblName.text"));
+        lblMaterialID.setText(rb.getString("Overview.lblMaterialID.text"));       
+        
+        
     }
     
     private void loggedInAs()
