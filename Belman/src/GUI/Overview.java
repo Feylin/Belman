@@ -82,7 +82,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         menuFile.setText(rb.getString("Overview.menuFile.text"));
         menuSettings.setText(rb.getString("Overview.menuSettings.text"));
         
-        jLabel6.setText(rb.getString("Overview.jLabel6.text"));
+        lblKg.setText(rb.getString("Overview.jLabel6.text"));
         
 //        pnlCutting1.setLocale(Locale.UK);Overview.pnlCutting1.TabConstraints.tabTitle
 //        pnlControlPanel.setT(Locale.UK);Overview.pnlControlPanel.border.title
@@ -113,7 +113,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblQuantity.setText(rb.getString("Overview.lblQuantity.text"));
         lblLength1.setText(rb.getString("Overview.lblLength1.text"));
         lblWidth1.setText(rb.getString("Overview.lblWidth1.text"));
-        lblQuantity2.setText(rb.getString("Overview.lblQuantity2.text"));
+        lblStockQuantity.setText(rb.getString("Overview.lblQuantity2.text"));
         lblSalesOrderId.setText(rb.getString("Overview.lblSalesOrderId.text"));
         lblCustomerName.setText(rb.getString("Overview.lblCustomerName.text"));
         lblDate.setText(rb.getString("Overview.lblDate.text"));
