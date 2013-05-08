@@ -27,7 +27,7 @@ import javax.swing.KeyStroke;
  *
  * @author Administrator
  */
-public class OperatorSettings extends javax.swing.JFrame
+public class OperatorSettings extends javax.swing.JDialog
 {
 
     private static OperatorSettings instance = null;
@@ -49,6 +49,7 @@ public class OperatorSettings extends javax.swing.JFrame
         showPassword();
         setLocationRelativeTo(null);
         operatorSettings();
+        setModal(true);
     }
 
     public static OperatorSettings getInstance()
