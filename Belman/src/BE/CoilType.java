@@ -33,7 +33,6 @@ public class CoilType
         this.width = width;
         this.thickness = thickness;
         this.materialId = materialId;
-
     }
 
     public CoilType(int id, CoilType c)
@@ -43,13 +42,11 @@ public class CoilType
                 c.getWidth(),
                 c.getThickness(),
                 c.getMaterialId());
-
     }
 
     public CoilType(String code, double width, double thickness, int materialId)
     {
         this(-1, code, width, thickness, materialId);
-
     }
 
     /**

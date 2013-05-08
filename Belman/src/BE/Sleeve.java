@@ -163,7 +163,5 @@ public class Sleeve
     public Material getMaterialName()
     {
         return material;
-    }
-    
-    
+    }   
 }

@@ -21,7 +21,6 @@ import java.util.Observable;
  */
 public class OrderManager extends Observable
 {
-
     private ProductionOrderDBManager accessor;
     private static OrderManager instance;
 

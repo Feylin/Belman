@@ -17,7 +17,6 @@ import java.util.ArrayList;
  */
 public class OperatorManager
 {
-
     private OperatorDBManager accessor;
     private static OperatorManager instance;
 

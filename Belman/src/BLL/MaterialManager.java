@@ -38,6 +38,5 @@ public class MaterialManager extends Observable{
      public ArrayList<Material> getAllMaterials() throws IOException, SQLException             
     {
        return accessor.getAllMaterials();      
-    }
-     
+    }    
 }

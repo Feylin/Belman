@@ -10,7 +10,6 @@ package BE;
  */
 public class StockItem
 {
-
     private final int id;
     private String chargeNo;
     private double length;
@@ -30,7 +29,6 @@ public class StockItem
         this.sleeveId = sleeveId;
         this.coilType = coilType;
         this.material = material;
-
     }
 
     public StockItem(int id, StockItem item)

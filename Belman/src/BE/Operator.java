@@ -10,7 +10,6 @@ package BE;
  */
 public class Operator
 {
-
     private int id;
     private String username;
     private String firstName;

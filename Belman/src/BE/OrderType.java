@@ -2,9 +2,7 @@ package BE;
 
 public enum OrderType
 
-
 {
-
     START (1),
     PAUSE (2),
     AFSLUT (3),
