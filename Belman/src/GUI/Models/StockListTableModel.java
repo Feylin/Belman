@@ -23,7 +23,6 @@ public class StockListTableModel extends AbstractTableModel
     private final String[] header = {"Stock List"};
     private final Class[] columnTypes = {String.class};
 
-
     private ArrayList<StockItem> info;
 
     public StockListTableModel(ArrayList<StockItem> allInfo)

@@ -20,9 +20,9 @@ import javax.swing.JFrame;
 /**
  * JLocaleChooser is a bean for choosing locales.
  * 
- * @author Kai Toedter
- * @version $LastChangedRevision: 85 $
- * @version $LastChangedDate: 2006-04-28 13:50:52 +0200 (Fr, 28 Apr 2006) $
+ *
+ * 
+ * 
  */
 public class JLocaleClass extends JComboBox implements ItemListener {
   private static final long serialVersionUID = 8152430789764877431L;

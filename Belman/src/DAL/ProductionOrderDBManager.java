@@ -182,8 +182,8 @@ public class ProductionOrderDBManager
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTime(rs.getTimestamp("dueDate"));
         int quantity = rs.getInt("quantity");
-//        int materialId = rs.getInt("materialId");
-//        String name = rs.getString("name");
+//      int materialId = rs.getInt("materialId");
+//      String name = rs.getString("name");
         double thickness = rs.getDouble("thickness");
         double width = rs.getDouble("width");
         String status = rs.getString("status");

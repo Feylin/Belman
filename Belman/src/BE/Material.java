@@ -10,7 +10,6 @@ package BE;
  */
 public class Material
 {
-
     private int id;
     private double density;
     private String name;

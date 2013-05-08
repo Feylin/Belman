@@ -4,7 +4,6 @@
  */
 package DAL;
 
-
 import BE.CoilType;
 import BE.StockItem;
 import java.io.IOException;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
  */
 public class CoilTypeDBManager
 {
-
     private Connector connector;
     private static CoilTypeDBManager instance;
 
@@ -121,7 +119,6 @@ public class CoilTypeDBManager
         double width = rs.getInt("width");
         double thickness = rs.getDouble("thickness");
         int materialId = rs.getInt("materialId");
-
 
         return new CoilType(id, code, width, thickness, materialId);
     }

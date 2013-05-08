@@ -13,7 +13,6 @@ import java.util.GregorianCalendar;
  */
 public class Order
 {
-
     private final int sOrderId;
     private final int orderId;
     private String orderName;
@@ -47,8 +46,6 @@ public class Order
         this.width = width;
         this.status = status;
         this.salesOrder = salesOrder;
-        
-
     }
 
     public Order(int orderId, Order o)

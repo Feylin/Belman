@@ -61,7 +61,5 @@ public class StockItemManager extends Observable
     public ArrayList<StockItem> getItemByMaterial(double materialName) throws IOException, SQLException
     {
         return accessor.getItemByMaterial(materialName);
-    }
-    
-    
+    }  
 }

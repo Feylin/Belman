@@ -22,7 +22,6 @@ import java.util.ArrayList;
  */
 public class StockItemDBManager
 {
-
     private Connector connector;
     private static StockItemDBManager instance;
 
@@ -52,7 +51,6 @@ public class StockItemDBManager
             ps.setDouble(4, item.getCoilTypeId());
             ps.setInt(5, item.getSleeveId());
 
-
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
             {
@@ -81,7 +79,6 @@ public class StockItemDBManager
             }
             return items;
         }
-
     }
 
     public void remove(int id) throws SQLException
@@ -139,7 +136,6 @@ public class StockItemDBManager
 
     protected StockItem getOneItem(ResultSet rs) throws SQLException, IOException
     {
-
         int id = rs.getInt("id");
         String chargeNo = rs.getString("chargeNo");
         double length = rs.getDouble("length");

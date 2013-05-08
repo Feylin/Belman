@@ -22,8 +22,7 @@ import java.util.GregorianCalendar;
  * @author Mak
  */
 public class SleeveDBManager 
-{
-    
+{    
     private Connector connector;
     private static SleeveDBManager instance;
 
