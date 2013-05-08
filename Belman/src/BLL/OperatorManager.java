@@ -38,4 +38,9 @@ public class OperatorManager
     {
         return accessor.getAllOperators();
     }
+    
+    public Operator get(String username) throws SQLException
+    {
+        return accessor.get(username);
+    }
 }

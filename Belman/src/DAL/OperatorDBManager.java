@@ -6,6 +6,7 @@ package DAL;
 
 import BE.Material;
 import BE.Operator;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,5 +62,22 @@ public class OperatorDBManager
         String lastName = rs.getString("lastName");
         
         return new Operator(id, username, firstName, lastName);
+    }
+
+    public Operator get(String username) throws SQLServerException, SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM Operator WHERE username = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                return getOneOperator(rs);
+            }
+            return null;
+        }
     }
 }
