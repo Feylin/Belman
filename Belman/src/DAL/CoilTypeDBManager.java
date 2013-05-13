@@ -18,6 +18,12 @@ import java.util.ArrayList;
  */
 public class CoilTypeDBManager
 {
+    private static final String ID = "id";
+    private static final String CODE = "code";
+    private static final String WIDTH = "width";
+    private static final String THICKNESS = "thickness";
+    private static final String MATERIAL_ID = "materialId";
+    
     private Connector connector;
     private static CoilTypeDBManager instance;
 
@@ -114,11 +120,11 @@ public class CoilTypeDBManager
     protected CoilType getOneItem(ResultSet rs) throws SQLException, IOException
     {
 
-        int id = rs.getInt("id");
-        String code = rs.getString("code");
-        double width = rs.getInt("width");
-        double thickness = rs.getDouble("thickness");
-        int materialId = rs.getInt("materialId");
+        int id = rs.getInt(ID);
+        String code = rs.getString(CODE);
+        double width = rs.getInt(WIDTH);
+        double thickness = rs.getDouble(THICKNESS);
+        int materialId = rs.getInt(MATERIAL_ID);
 
         return new CoilType(id, code, width, thickness, materialId);
     }

@@ -22,6 +22,19 @@ import java.util.ArrayList;
  */
 public class StockItemDBManager
 {
+    private static final String ID = "id";
+    private static final String CHARGE_NO = "chargeNo";
+    private static final String LENGTH = "length";
+    private static final String STOCK_QUANTITY = "stockQuantity";
+    private static final String COIL_TYPE_ID = "coilTypeId";
+    private static final String SLEEVE_ID = "sleeveId";
+    private static final String CODE = "code";
+    private static final String WIDTH = "width";
+    private static final String THICKNESS = "thickness";
+    private static final String DENSITY = "density";
+    private static final String NAME = "name";
+    private static final String MATERIAL_ID = "materialId";    
+    
     private Connector connector;
     private static StockItemDBManager instance;
 
@@ -136,18 +149,18 @@ public class StockItemDBManager
 
     protected StockItem getOneItem(ResultSet rs) throws SQLException, IOException
     {
-        int id = rs.getInt("id");
-        String chargeNo = rs.getString("chargeNo");
-        double length = rs.getDouble("length");
-        int stockQuantity = rs.getInt("stockQuantity");
-        int coilTypeId = rs.getInt("coilTypeId");
-        int sleeveId = rs.getInt("sleeveId");
-        String code = rs.getString("code");
-        double width = rs.getDouble("width");
-        double thickness = rs.getDouble("thickness");
-        double density = rs.getDouble("density");
-        String name = rs.getString("name");
-        int materialId = rs.getInt("materialId");
+        int id = rs.getInt(ID);
+        String chargeNo = rs.getString(CHARGE_NO);
+        double length = rs.getDouble(LENGTH);
+        int stockQuantity = rs.getInt(STOCK_QUANTITY);
+        int coilTypeId = rs.getInt(COIL_TYPE_ID);
+        int sleeveId = rs.getInt(SLEEVE_ID);
+        String code = rs.getString(CODE);
+        double width = rs.getDouble(WIDTH);
+        double thickness = rs.getDouble(THICKNESS);
+        double density = rs.getDouble(DENSITY);
+        String name = rs.getString(NAME);
+        int materialId = rs.getInt(MATERIAL_ID);
 
         return new StockItem(id, chargeNo, length, stockQuantity, coilTypeId, sleeveId, new CoilType(code, width, thickness, materialId), new Material(density, name));
     }

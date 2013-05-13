@@ -23,6 +23,15 @@ import java.util.GregorianCalendar;
  */
 public class SleeveDBManager 
 {    
+    private static final String ID = "id";
+    private static final String START_TIME = "startTime";
+    private static final String END_TIME = "endTime";
+    private static final String THICKNESS = "thickness";
+    private static final String CIRCUMFERENCE = "circumference";
+    private static final String MATERIAL_ID = "materialId";
+    private static final String P_ORDER_ID = "pOrderId";
+    private static final String NAME = "name";
+    
     private Connector connector;
     private static SleeveDBManager instance;
 
@@ -59,16 +68,16 @@ public class SleeveDBManager
     
     public Sleeve getOneSleeve(ResultSet rs) throws SQLException
     {
-        int id = rs.getInt("id");
+        int id = rs.getInt(ID);
         GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(rs.getTimestamp("startTime"));
+        gc.setTime(rs.getTimestamp(START_TIME));
         GregorianCalendar gc2 = new GregorianCalendar();
-        gc2.setTime(rs.getTimestamp("endTime"));
-        double thickness = rs.getDouble("thickness");
-        double circumference = rs.getDouble("circumference");
-        int materialId = rs.getInt("materialId");
-        int pOrderId = rs.getInt("pOrderId");
-        String materialName = rs.getString("name");
+        gc2.setTime(rs.getTimestamp(END_TIME));
+        double thickness = rs.getDouble(THICKNESS);
+        double circumference = rs.getDouble(CIRCUMFERENCE);
+        int materialId = rs.getInt(MATERIAL_ID);
+        int pOrderId = rs.getInt(P_ORDER_ID);
+        String materialName = rs.getString(NAME);
         
         return new Sleeve(id, gc, gc2, thickness, circumference, materialId, pOrderId, new Material(materialName));
     }

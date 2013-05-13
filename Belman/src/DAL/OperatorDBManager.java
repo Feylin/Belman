@@ -20,6 +20,11 @@ import java.util.ArrayList;
  */
 public class OperatorDBManager
 {
+    private static final String ID = "id";
+    private static final String USERNAME = "username";
+    private static final String FIRST_NAME = "firstName";
+    private static final String LAST_NAME = "lastName";
+    
     private Connector connector;
     private static OperatorDBManager instance;
     
@@ -52,17 +57,7 @@ public class OperatorDBManager
             }
             return operators;
         }
-    }
-
-    private Operator getOneOperator(ResultSet rs) throws SQLException
-    {
-        int id = rs.getInt("id");
-        String username = rs.getString("username");
-        String firstName = rs.getString("firstName");
-        String lastName = rs.getString("lastName");
-        
-        return new Operator(id, username, firstName, lastName);
-    }
+    }   
 
     public Operator get(String username) throws SQLServerException, SQLException
     {
@@ -79,5 +74,15 @@ public class OperatorDBManager
             }
             return null;
         }
+    }
+    
+    private Operator getOneOperator(ResultSet rs) throws SQLException
+    {
+        int id = rs.getInt(ID);
+        String username = rs.getString(USERNAME);
+        String firstName = rs.getString(FIRST_NAME);
+        String lastName = rs.getString(LAST_NAME);
+        
+        return new Operator(id, username, firstName, lastName);
     }
 }
