@@ -6,6 +6,7 @@ package DAL;
 
 import BE.CoilType;
 import BE.Material;
+import BE.Order;
 import BE.Sleeve;
 import BE.StockItem;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -135,6 +136,25 @@ public class StockItemDBManager
             String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve WHERE Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND Sleeve.id = ?";        
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, s.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<StockItem> items = new ArrayList<>();
+            while (rs.next())
+            {
+                items.add(getOneItem(rs));
+            }
+            return items;
+        }
+    }
+    
+    public ArrayList<StockItem> getItemByOrder(Order o) throws SQLServerException, SQLException, IOException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve WHERE ProductionOrder.thickness = Sleeve.thickness AND Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND ProductionOrder.pOrder = ?";        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, o.getOrderName());
 
             ResultSet rs = ps.executeQuery();
 

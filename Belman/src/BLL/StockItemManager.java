@@ -5,6 +5,7 @@
 
 package BLL;
 
+import BE.Order;
 import BE.Sleeve;
 import BE.StockItem;
 import DAL.StockItemDBManager;
@@ -49,6 +50,11 @@ public class StockItemManager extends Observable
     public ArrayList<StockItem> getItemBySleeve(Sleeve s) throws IOException, SQLException
     {
         return accessor.getItemBySleeve(s);
+    }
+    
+    public ArrayList<StockItem> getItemByOrder(Order o) throws IOException, SQLException
+    {
+        return accessor.getItemByOrder(o);
     }
     
     public void remove(int id) throws SQLException

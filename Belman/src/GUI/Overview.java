@@ -65,6 +65,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         orderListSelectioner();
         sleeveListSelectioner();
         stockItemListSelectioner();
+        ordreListSelectioner2();
         updateGUILanguage();
     }
 
@@ -300,9 +301,14 @@ public class Overview extends javax.swing.JFrame implements Observer
 
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
+            smodel2 = new StockListTableModel(smgr.getAll());
+            tblStockItem.setModel(smodel2);
+            
 
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
+            omodel2 = new OrderTablemodel(omgr.getAll());
+            tblOrderList1.setModel(omodel2);
 
 
 //          omodel2 = new OrderTablemodel(omgr.getAll());
@@ -393,6 +399,67 @@ public class Overview extends javax.swing.JFrame implements Observer
 
                     }
                     catch (Exception ex)
+                    {
+                    }
+                }
+            });
+        }
+        catch (Exception e)
+        {
+        }
+    }
+    
+    private void ordreListSelectioner2()
+    {
+        try
+        {
+            
+            slmgr = SleeveManager.getInstance();
+            slmgr.addObserver(this);
+            
+
+            smgr = StockItemManager.getInstance();
+            smgr.addObserver(this);
+          
+            
+
+            omgr = OrderManager.getInstance();
+            omgr.addObserver(this);
+           
+
+//          omodel2 = new OrderTablemodel(omgr.getAll());
+//          tblOrderList1.setModel(omodel2);
+
+            tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent es)
+                {
+                    int selectedRow = tblOrderList1.getSelectedRow();
+                    Order o = omodel2.getEventsByRow(selectedRow);
+                    try
+                    {
+                        if (!smgr.getItemByOrder(o).isEmpty())
+                        {
+                            smodel2 = new StockListTableModel(smgr.getItemByOrder(o));
+                            tblStockItem.setModel(smodel2);
+//
+//                            if (!smgr.getItemBySleeve(s).isEmpty())
+//                            {
+//                                smodel2 = new StockListTableModel(smgr.getItemBySleeve(s));
+//                                tblStockItem.setModel(smodel2);
+//                            }
+
+//                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
+                        }
+//                    else
+//                    {
+////                        omodel2.
+//                        tblOrderList1.setModel(omodel2);
+//                    }
+//                    Sleeve s = slmodel.getEventsByRow(selectedRow);
+                    }
+                    catch (Exception e)
                     {
                     }
                 }
@@ -1444,12 +1511,16 @@ public class Overview extends javax.swing.JFrame implements Observer
        
         try
         {   
-            tblSleeveList.clearSelection();               
+            tblOrderList1.clearSelection();
+            tblStockItem.clearSelection();
+            tblSleeveList.clearSelection();  
+            slmodel = new SleeveTableModel(slmgr.getAll());
+            tblStockItem.setModel(slmodel);
             smodel = new StockListTableModel(smgr.getAll()); 
             tblStockItem.setModel(smodel);
             omodel2 = new OrderTablemodel(omgr.getAll());
             tblOrderList1.setModel(omodel);               
-            tblSleeveList.repaint(); 
+//            tblSleeveList.repaint(); 
             
         }
         catch (Exception ex)
