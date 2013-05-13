@@ -95,7 +95,7 @@ public class LoginAccessDBManager
             {
                 return rs.getInt(1);
             }
-            throw new SQLException("The specified member does not have a login!");
+            throw new SQLException("The specified operator does not have a login!");
         }
     }
 }
