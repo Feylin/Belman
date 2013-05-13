@@ -22,6 +22,8 @@ public class Sleeve
     private int pOrderId;
     private Material material;    
     
+    
+    
     /**
      * Den overordnede konstruktør til Sleeve.
      * @param id
@@ -42,7 +44,35 @@ public class Sleeve
         this.materialId = materialId;
         this.pOrderId = pOrderId; 
         this.material = material;
+   
     }
+
+    public Sleeve(int id, Sleeve s)
+    {
+        this(id,
+                s.getStartTime(),
+                s.getEndTime(),
+                s.getThickness(),
+                s.getCircumference(),
+                s.getMaterialId(),
+                s.getpOrderId(),
+                s.getMaterial());                               
+    }
+    
+    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
+    {
+        this(-1, null, null, -1, circumference, -1, -1,material);
+    }
+
+//    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
+//    {
+//        this(-1, -1, -1, -1, circumference, -1, -1, material);
+//    }
+    
+//    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
+//    {        
+//        this(-1, null, null, -1, circumference, -1, -1, material);
+//    }
     
 //    public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
 //    {
@@ -162,6 +192,22 @@ public class Sleeve
     
     public Material getMaterialName()
     {
+        return getMaterial();
+    }
+
+    /**
+     * @return the material
+     */
+    public Material getMaterial()
+    {
         return material;
     }   
+
+    /**
+     * @param material the material to set
+     */
+    public void setMaterial(Material material)
+    {
+        this.material = material;
+    }
 }

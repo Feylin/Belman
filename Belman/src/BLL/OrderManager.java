@@ -7,6 +7,7 @@ package BLL;
 import BE.Material;
 import BE.Order;
 import BE.Sleeve;
+import BE.StockItem;
 import DAL.ProductionOrderDBManager;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -72,9 +73,9 @@ public class OrderManager extends Observable
         return accessor.getAll();
     }
 
-    public ArrayList<Order> getOrderByMaterial(Material m) throws SQLException, IOException
+    public ArrayList<Order> getOrderByMaterial(StockItem s) throws SQLException, IOException
     {
-        return accessor.getOrderByMaterial(m);
+        return accessor.getOrderByStock(s);
     }
     
     public ArrayList<Order> getOrdersBySleeve(Sleeve s) throws IOException, SQLException

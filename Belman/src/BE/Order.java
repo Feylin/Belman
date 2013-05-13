@@ -22,6 +22,7 @@ public class Order
     private double width;
     private String status;
     private SalesOrder salesOrder;
+    private Sleeve sleeve;
 
     /**
      * Overodnede konstruktør for Order.
@@ -35,7 +36,7 @@ public class Order
      * @param width
      * @param status
      */
-    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, String status, SalesOrder salesOrder)
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, String status, SalesOrder salesOrder, Sleeve sleeve)
     {
         this.sOrderId = sOrderId;
         this.orderId = orderId;
@@ -46,6 +47,7 @@ public class Order
         this.width = width;
         this.status = status;
         this.salesOrder = salesOrder;
+        this.sleeve = sleeve;
     }
 
     public Order(int orderId, Order o)
@@ -58,7 +60,8 @@ public class Order
                 o.getThickness(),
                 o.getWidth(),
                 o.getStatus(),
-                o.getSalesOrder());
+                o.getSalesOrder(),
+                o.getSleeve());
     }
 
     public String printDate(GregorianCalendar gc)
@@ -185,5 +188,21 @@ public class Order
     {
         this.status = status;
     } 
+
+    /**
+     * @return the sleeve
+     */
+    public Sleeve getSleeve()
+    {
+        return sleeve;
+    }
+
+    /**
+     * @param sleeve the sleeve to set
+     */
+    public void setSleeve(Sleeve sleeve)
+    {
+        this.sleeve = sleeve;
+    }
     
 }

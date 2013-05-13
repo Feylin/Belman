@@ -8,6 +8,7 @@ import BE.Material;
 import BE.Order;
 import BE.SalesOrder;
 import BE.Sleeve;
+import BE.StockItem;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -75,7 +76,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, SalesOrder WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id";
             PreparedStatement ps = con.prepareStatement( sql );
             ResultSet rs = ps.executeQuery();
 
@@ -88,14 +89,13 @@ public class ProductionOrderDBManager
         }
     }
 
-    public ArrayList<Order> getOrderByMaterial(Material m) throws SQLException, IOException
+    public ArrayList<Order> getOrderByStock(StockItem s) throws SQLException, IOException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, Material, Sleeve WHERE ProductionOrder.sOrderId = Sleeve.Id AND Sleeve.materialId = ?";
-            // SELECT * FROM ProductionOrder, Material WHERE ProductionOrder.MaterialId = ? AND ProductionOrder.MaterialId = Material.id
+            String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve, ProductionOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = CoilType.materialId AND Sleeve.thickness = CoilType.thickness AND Sleeve.materialId = Material.id AND Sleeve.Id = StockItem.sleeveId AND StockItem.Id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, m.getId());
+            ps.setInt(1, s.getId());
 
             ResultSet rs = ps.executeQuery();
 
@@ -187,13 +187,18 @@ public class ProductionOrderDBManager
         double thickness = rs.getDouble("thickness");
         double width = rs.getDouble("width");
         String status = rs.getString("status");
+        
         int sOrderId = rs.getInt("sOrderId");
         String custName = rs.getString("sOrder");
-
         String email = rs.getString("email");
         int phone = rs.getInt("phone");
+        
+       
+        double circumference = rs.getDouble("circumference");
+        String materialName = rs.getString("name");                     
+        
 
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, thickness, width, status, new SalesOrder(sOrderId, custName, email, phone));
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, thickness, width, status, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, -1, circumference, -1, -1, new Material(materialName)));
     }
 
     protected String convertDateToSQL(GregorianCalendar date)
