@@ -992,9 +992,18 @@
                           <Component id="scrOrderStock" min="-2" pref="190" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="scrStockOrder" min="-2" pref="189" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pnlControlPanel" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="pnlControlPanel" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="btnReset" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1005,9 +1014,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="scrStockOrder" pref="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="scrOrderStock" min="-2" pref="360" max="-2" attributes="0"/>
-                                      <Component id="pnlControlPanel" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="btnReset" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="pnlControlPanel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -1143,6 +1156,16 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="btnReset">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="GUI/Bundle.properties" key="Overview.btnReset.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JLabel" name="lblSleeve">

@@ -17,9 +17,13 @@ import GUI.Models.SleeveTableModel;
 import GUI.Models.StockListTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -473,6 +477,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         rbtnUrgent = new javax.swing.JRadioButton();
         rbtnInProgress = new javax.swing.JRadioButton();
         rbtnPending = new javax.swing.JRadioButton();
+        btnReset = new javax.swing.JButton();
         lblSleeve = new javax.swing.JLabel();
         pnlCutting2 = new javax.swing.JPanel();
         pnlCutting3 = new javax.swing.JPanel();
@@ -1163,6 +1168,15 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGap(15, 15, 15))
         );
 
+        btnReset.setText(bundle.getString("Overview.btnReset.text")); // NOI18N
+        btnReset.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlOrderStockLayout = new javax.swing.GroupLayout(pnlOrderStock);
         pnlOrderStock.setLayout(pnlOrderStockLayout);
         pnlOrderStockLayout.setHorizontalGroup(
@@ -1172,9 +1186,15 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addComponent(scrOrderStock, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scrStockOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlControlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlOrderStockLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlControlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(pnlOrderStockLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(btnReset)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlOrderStockLayout.setVerticalGroup(
             pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1183,9 +1203,12 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGroup(pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrStockOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(pnlOrderStockLayout.createSequentialGroup()
-                        .addGroup(pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(scrOrderStock, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlOrderStockLayout.createSequentialGroup()
+                                .addComponent(btnReset)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pnlControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(1, 1, 1))
         );
@@ -1415,11 +1438,32 @@ public class Overview extends javax.swing.JFrame implements Observer
         OperatorSettings.getInstance().setVisible(true);
     }//GEN-LAST:event_itemSettingsActionPerformed
 
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
+    {//GEN-HEADEREND:event_btnResetActionPerformed
+       
+        try
+        {   
+            tblSleeveList.clearSelection();               
+            smodel = new StockListTableModel(smgr.getAll()); 
+            tblStockItem.setModel(smodel);
+            omodel2 = new OrderTablemodel(omgr.getAll());
+            tblOrderList1.setModel(omodel);               
+            tblSleeveList.repaint(); 
+            
+        }
+        catch (Exception ex)
+        {
+           ex.getMessage();
+        }            
+        
+    }//GEN-LAST:event_btnResetActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnFinishOrder;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenuItem itemExit;
     private javax.swing.JMenuItem itemHelp;
