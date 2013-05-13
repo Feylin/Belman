@@ -320,7 +320,13 @@ public class Overview extends javax.swing.JFrame implements Observer
                 public void valueChanged(ListSelectionEvent es)
                 {
                     int selectedRow = tblSleeveList.getSelectedRow();
+                    if (selectedRow == -1)
+                    {
+                        return;
+                    }
+                    
                     Sleeve s = slmodel.getEventsByRow(selectedRow);
+                    
                     try
                     {
                         if (!omgr.getOrdersBySleeve(s).isEmpty())
@@ -1506,16 +1512,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         OperatorSettings.getInstance().setVisible(true);
     }//GEN-LAST:event_itemSettingsActionPerformed
 
+    // RESET BUTTON DOES NOT WORK!!!!!!
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
        
         try
         {   
-            tblOrderList1.clearSelection();
-            tblStockItem.clearSelection();
-            tblSleeveList.clearSelection();  
-            slmodel = new SleeveTableModel(slmgr.getAll());
-            tblStockItem.setModel(slmodel);
+                         
             smodel = new StockListTableModel(smgr.getAll()); 
             tblStockItem.setModel(smodel);
             omodel2 = new OrderTablemodel(omgr.getAll());
@@ -1526,7 +1529,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         catch (Exception ex)
         {
            ex.getMessage();
-        }            
+        }
+        finally
+        {
+            tblSleeveList.clearSelection();  
+        }
         
     }//GEN-LAST:event_btnResetActionPerformed
 
