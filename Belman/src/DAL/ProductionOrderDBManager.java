@@ -76,7 +76,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id ORDER BY ProductionOrder.dueDate, Sleeve.materialId, ProductionOrder.thickness";
             PreparedStatement ps = con.prepareStatement( sql );
             ResultSet rs = ps.executeQuery();
 
@@ -93,9 +93,9 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve, ProductionOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = CoilType.materialId AND Sleeve.thickness = CoilType.thickness AND Sleeve.materialId = Material.id AND Sleeve.Id = StockItem.sleeveId AND StockItem.Id = ?";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material, StockItem WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND Sleeve.id = StockItem.sleeveId AND StockItem.chargeNo = ? ORDER BY ProductionOrder.dueDate, Sleeve.materialId, ProductionOrder.thickness";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, s.getId());
+            ps.setString(1, s.getChargeNo());
 
             ResultSet rs = ps.executeQuery();
 
