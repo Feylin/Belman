@@ -25,56 +25,14 @@ public class StockListTableModel extends AbstractTableModel
 
     private ArrayList<StockItem> info;
 
-    public StockListTableModel(ArrayList<StockItem> allInfo)
+    public StockListTableModel()
     {
-        info = allInfo;
+        
     }
 
-    public StockListTableModel(List<StockItem> all)
-    {
-        info = (ArrayList<StockItem>) all;
-    }
+    
 
-    @Override
-    public int getRowCount()
-    {
-        return info.size();
-    }
-
-    @Override
-    public int getColumnCount()
-    {
-        return header.length;
-    }
-
-    @Override
-    public Object getValueAt(int row, int col)
-    {
-       StockItem s = info.get(row);
-       switch (col)
-       {
-           case 0: return s.getId();
-       }
-       return null;
-    }
-
-    @Override
-    public String getColumnName(int col)
-    {
-        return header[col];
-    }
-
-    @Override
-    public Class<?> getColumnClass(int col)
-    {
-        return columnTypes[col];
-    }
-
-    @Override
-    public boolean isCellEditable(int row, int col)
-    {
-        return (col > 0);
-    }
+   
 
     @Override
     public void setValueAt(Object o, int row, int col)
@@ -86,14 +44,23 @@ public class StockListTableModel extends AbstractTableModel
         }
     }
 
-    public StockItem getEventsByRow(int row)
+    @Override
+    public int getRowCount()
     {
-        return info.get(row);
+        return 0;
     }
 
-    public void setCollection(Collection<StockItem> stockItem)
+    @Override
+    public int getColumnCount()
     {
-        info = new ArrayList<>(stockItem);
-        fireTableDataChanged();
+        return 0;
     }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+  
 }

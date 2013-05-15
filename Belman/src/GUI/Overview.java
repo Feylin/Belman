@@ -17,11 +17,17 @@ import GUI.Models.ProductionSleeveTableModel;
 import GUI.Models.SleeveTableModel;
 import GUI.Models.StockList2TableModel;
 import GUI.Models.StockListTableModel;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -29,6 +35,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -54,14 +61,21 @@ public class Overview extends javax.swing.JFrame implements Observer
     private StockListTableModel smodel2 = null;
     private ProductionSleeveTableModel psmodel = null;
     private StockList2TableModel smodel3 = null;
+    private int clickCount;
+    private boolean doubleClick;
+    private boolean leftClick;
+    
+    
     
     Order o;
+    private Timer timer;
 
     /**
      * Creates new form Overview
      */
     private Overview()
     {
+        Locale locale = Locale.getDefault();
         rb = ResourceBundle.getBundle("GUI.Bundle");
         initComponents();
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
@@ -70,8 +84,9 @@ public class Overview extends javax.swing.JFrame implements Observer
         setLocationRelativeTo(null); 
         productionSleeveListSelectioner();
         orderListSelectioner();
-        sleeveListSelectioner();
-        stockItemListSelectioner();
+        localeLanguage.setLocale(locale);
+        mouseListener();
+
        
         updateGUILanguage();
        
@@ -311,7 +326,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
-            smodel2 = new StockListTableModel(smgr.getAll());
+          
             tblStockList2.setModel(smodel2);
             
 
@@ -346,7 +361,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
                             if (!smgr.getItemBySleeve(s).isEmpty())
                             {
-                                smodel2 = new StockListTableModel(smgr.getItemBySleeve(s));
+                              
                                 tblStockList2.setModel(smodel2);
                             }
 
@@ -370,60 +385,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
     }
 
-    private void stockItemListSelectioner()
-    {
-        try
-        {
-            smgr = StockItemManager.getInstance();
-            smgr.addObserver(this);
 
-            smodel = new StockListTableModel(smgr.getAll());
-            tblStockList.setModel(smodel);
-            tblStockList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-            {
-                @Override
-                public void valueChanged(ListSelectionEvent es)
-                {
-                    int selectedRow = tblStockList.getSelectedRow();
-                    if (es.getValueIsAdjusting() || selectedRow < 0)
-                    {
-                        txtMaterialName1.setText("");
-                        txtMaterialID1.setText("");
-                        txtCode.setText("");
-                        txtMaterialDenisity.setText("");
-                        txtStockQuantity.setText("");
-                        txtCharge.setText("");
-                        txtThickness1.setText("");
-                        txtWidth1.setText("");
-                        txtLength1.setText("");
-
-                    }
-
-                    StockItem s = smodel.getEventsByRow(selectedRow);
-
-                    try
-                    {
-                        txtMaterialName1.setText(String.valueOf(s.getMaterial().getName()));
-                        txtMaterialID1.setText(String.valueOf(s.getCoilType().getMaterialId()));
-                        txtCode.setText(String.valueOf(s.getCoilType().getCode()));
-                        txtMaterialDenisity.setText(String.valueOf(s.getMaterial().getDensity()));
-                        txtStockQuantity.setText(String.valueOf(s.getStockQuantity()));
-                        txtCharge.setText(String.valueOf(s.getChargeNo()));
-                        txtThickness1.setText(String.valueOf(s.getCoilType().getThickness()));
-                        txtWidth1.setText(String.valueOf(s.getCoilType().getWidth()));
-                        txtLength1.setText(String.valueOf(s.getLength()));
-
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-                }
-            });
-        }
-        catch (Exception e)
-        {
-        }
-    }
     
     private void productionSleeveListSelectioner()
     {
@@ -471,6 +433,11 @@ public class Overview extends javax.swing.JFrame implements Observer
 ////                        omodel2.
 //                        tblOrderList1.setModel(omodel2);
                     }
+                        else
+                        {
+                            smodel2 = new StockListTableModel();            
+                            tblStockList3.setModel(smodel2);
+                        }
 //                    Sleeve s = slmodel.getEventsByRow(selectedRow);
                     }
                     catch (Exception e)
@@ -513,6 +480,11 @@ public class Overview extends javax.swing.JFrame implements Observer
 ////                        omodel2.
 //                        tblOrderList1.setModel(omodel2);
                     }
+                        else
+                        {
+                            smodel2 = new StockListTableModel();            
+                            tblStockList3.setModel(smodel2);
+                        }
                     }
                     catch (Exception e)
                     {
@@ -524,6 +496,54 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
         }
     }
+    private void mouseListener()
+    {
+        tblProductionSleeve.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent me)
+            {
+                if (me.getClickCount() == 2)
+                {                    
+                    OrderInfo.getInstance().setVisible(true);
+                }
+            }
+        });
+    }
+    
+    // SKAL MÅSKE BRUGES!!!!!!!!
+//    
+//      public void mouseClicked(MouseEvent evt) { 
+//    if (evt.getButton()==MouseEvent.BUTTON1){
+//        leftClick = true; clickCount = 0;
+//        if(evt.getClickCount() == 2) doubleClick=true;
+//        Integer timerinterval = (Integer)Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval");
+//
+//                   timer = new Timer(timerinterval, new ActionListener() {
+//                    public void actionPerformed(ActionEvent evt) {  
+//                        if(doubleClick){
+//                           
+//                            clickCount++;
+//                            if(clickCount == 2){
+//                                rfbProto.capture();
+//                                clickCount=0;
+//                                doubleClick = false;
+//                            }
+//
+//                        } else {
+//
+//                            sb = new StringBuffer();
+//                            sb.append("Left Mouse");
+//                            System.out.println("single click.");
+//                            rfbProto.capture();
+//                        }
+//                    }               
+//                });
+//                timer.setRepeats(false);
+//                timer.start();
+//                if(evt.getID()==MouseEvent.MOUSE_RELEASED) timer.stop();
+//    }           
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -611,11 +631,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         jLabel2 = new javax.swing.JLabel();
         pnlCutting3 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
-        localeLanguage = new com.toedter.components.JLocaleChooser();
         pnlLoggedIn = new javax.swing.JPanel();
         lblLoggedIn = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         btnReset1 = new javax.swing.JButton();
+        localeLanguage = new com.toedter.components.JLocaleChooser();
         menuBar = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         itemExit = new javax.swing.JMenuItem();
@@ -1463,15 +1483,6 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
-        localeLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dansk (Danmark)", "English (United Kingdom)", "Russian (Russia)", "Irish (Ireland)" }));
-        localeLanguage.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                localeLanguageActionPerformed(evt);
-            }
-        });
-
         pnlLoggedIn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlLoggedIn.setPreferredSize(new java.awt.Dimension(245, 19));
 
@@ -1506,6 +1517,14 @@ public class Overview extends javax.swing.JFrame implements Observer
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 btnReset1ActionPerformed(evt);
+            }
+        });
+
+        localeLanguage.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                localeLanguageActionPerformed(evt);
             }
         });
 
@@ -1561,8 +1580,8 @@ public class Overview extends javax.swing.JFrame implements Observer
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1581,10 +1600,10 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlLoggedIn, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 3, Short.MAX_VALUE)
-                        .addComponent(localeLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlLoggedIn, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                        .addComponent(localeLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 3, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1613,12 +1632,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockQuantityActionPerformed
 
-    private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
-    {//GEN-HEADEREND:event_localeLanguageActionPerformed
-        rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
-        updateGUILanguage();
-    }//GEN-LAST:event_localeLanguageActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLogoutActionPerformed
     {//GEN-HEADEREND:event_btnLogoutActionPerformed
         logoutPressed();
@@ -1642,7 +1655,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {   
             slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
-            smodel = new StockListTableModel(smgr.getAll()); 
+            
             tblStockList2.setModel(smodel);
             omodel2 = new OrderTablemodel(omgr.getAll());
             tblOrderList1.setModel(omodel);               
@@ -1686,6 +1699,12 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
         
     }//GEN-LAST:event_btnReset1ActionPerformed
+
+    private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
+    {//GEN-HEADEREND:event_localeLanguageActionPerformed
+         rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
+        updateGUILanguage();
+    }//GEN-LAST:event_localeLanguageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;

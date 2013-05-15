@@ -152,7 +152,7 @@ public class StockItemDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve, ProductionOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = CoilType.materialId AND Sleeve.thickness = CoilType.thickness AND Sleeve.materialId = Material.id AND Sleeve.Id = StockItem.sleeveId AND ProductionOrder.pOrder = ? ORDER BY CoilType.materialId, CoilType.thickness";        
+            String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve, ProductionOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND Material.id = CoilType.materialId AND CoilType.id = StockItem.coilTypeId AND Sleeve.thickness = CoilType.thickness AND ProductionOrder.pOrder = ? ORDER BY CoilType.materialId, CoilType.thickness";        
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, o.getOrderName());
 
