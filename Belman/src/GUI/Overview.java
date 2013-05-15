@@ -2274,7 +2274,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 try
 {slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
-            smodel = new StockListTableModel(smgr.getAll()); 
+ 
             tblStockList2.setModel(smodel);
             omodel2 = new OrderTablemodel(omgr.getAll());
             tblOrderList1.setModel(omodel);               
