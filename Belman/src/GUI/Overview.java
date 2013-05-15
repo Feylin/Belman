@@ -64,9 +64,6 @@ public class Overview extends javax.swing.JFrame implements Observer
     private int clickCount;
     private boolean doubleClick;
     private boolean leftClick;
-    
-    
-    
     Order o;
     private Timer timer;
 
@@ -81,17 +78,17 @@ public class Overview extends javax.swing.JFrame implements Observer
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
 //        loggedInAs();
         windowClose();
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
         productionSleeveListSelectioner();
         orderListSelectioner();
         localeLanguage.setLocale(locale);
         mouseListener();
 
-       
+
         updateGUILanguage();
-       
-            
-        
+
+
+
         tblProductionSleeve.getColumnModel().getColumn(0).setPreferredWidth(190);
         tblProductionSleeve.getColumnModel().getColumn(1).setPreferredWidth(120);
         tblProductionSleeve.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -100,7 +97,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         tblProductionSleeve.getColumnModel().getColumn(5).setPreferredWidth(100);
         tblProductionSleeve.getColumnModel().getColumn(6).setPreferredWidth(100);
         tblProductionSleeve.getColumnModel().getColumn(7).setPreferredWidth(100);
-        
+
     }
 
     public static Overview getInstance()
@@ -122,7 +119,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         menuSettings.setText(rb.getString("Overview.menuSettings.text"));
 
         lblKg.setText(rb.getString("Overview.jLabel6.text"));
-        
+
         jTabbedPane1.setTitleAt(0, rb.getString("Overview.pnlOrder.TabConstraints.tabTitle"));
         jTabbedPane1.setTitleAt(1, rb.getString("Overview.pnlInstock.TabConstraints.tabTitle"));
         jTabbedPane1.setTitleAt(2, rb.getString("Overview.pnlCutting1.TabConstraints.tabTitle"));
@@ -143,7 +140,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         border6.setTitle(rb.getString("Overview.pnlOrderStock.border.title"));
         TitledBorder border7 = (TitledBorder) pnlOrderStock.getBorder();
         border7.setTitle(rb.getString("Overview.pnlControlPanel1.border.title"));
-        
+
 
         rbtnUrgent.setText(rb.getString("Overview.rbtnUrgent.text"));
         rbtnPending.setText(rb.getString("Overview.rbtnPending.text"));
@@ -151,7 +148,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         rbtnContinue.setText(rb.getString("Overview.rbtnContinue.text"));
         rbtnInPauseAgain.setText(rb.getString("Overview.rbtnInPauseAgain.text"));
         rbtnFinish.setText(rb.getString("Overview.rbtnFinish.text"));
-               
+
         itemHelp.setText(rb.getString("Overview.itemHelp.text_1"));
         itemSettings.setText(rb.getString("Overview.itemSettings.text"));
         itemLogOut.setText(rb.getString("Overview.itemLogOut.text_1"));
@@ -176,7 +173,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblCode.setText(rb.getString("Overview.lblCode.text"));
         lblDensity.setText(rb.getString("Overview.lblDensity.text"));
         lblName.setText(rb.getString("Overview.lblName.text"));
-        lblMaterialID.setText(rb.getString("Overview.lblMaterialID.text"));  
+        lblMaterialID.setText(rb.getString("Overview.lblMaterialID.text"));
     }
 
     private void loggedInAs()
@@ -261,8 +258,8 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         }
     }
-    
-       private void orderListSelectioner()
+
+    private void orderListSelectioner()
     {
         try
         {
@@ -341,9 +338,9 @@ public class Overview extends javax.swing.JFrame implements Observer
 
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
-          
+
             tblStockList2.setModel(smodel2);
-            
+
 
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
@@ -364,9 +361,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                     {
                         return;
                     }
-                    
+
                     Sleeve s = slmodel.getEventsByRow(selectedRow);
-                    
+
                     try
                     {
                         if (!omgr.getOrdersBySleeve(s).isEmpty())
@@ -376,7 +373,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
                             if (!smgr.getItemBySleeve(s).isEmpty())
                             {
-                              
+
                                 tblStockList2.setModel(smodel2);
                             }
 
@@ -400,20 +397,18 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
     }
 
-
-    
     private void productionSleeveListSelectioner()
     {
         try
-        {          
-                      
+        {
+
             smgr = StockItemManager.getInstance();
-            smgr.addObserver(this);                      
-            smodel3 = new StockList2TableModel(smgr.getAll());  
-            tblStockList3.setModel(smodel3);                      
-            
+            smgr.addObserver(this);
+            smodel3 = new StockList2TableModel(smgr.getAll());
+            tblStockList3.setModel(smodel3);
+
             omgr = OrderManager.getInstance();
-            omgr.addObserver(this);   
+            omgr.addObserver(this);
             psmodel = new ProductionSleeveTableModel(omgr.getAll());
             tblProductionSleeve.setModel(psmodel);
 
@@ -423,7 +418,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 public void valueChanged(ListSelectionEvent es)
                 {
                     int selectedRow = tblProductionSleeve.getSelectedRow();
-                     if (selectedRow == -1)
+                    if (selectedRow == -1)
                     {
                         return;
                     }
@@ -447,10 +442,10 @@ public class Overview extends javax.swing.JFrame implements Observer
 //                    {
 ////                        omodel2.
 //                        tblOrderList1.setModel(omodel2);
-                    }
+                        }
                         else
                         {
-                            smodel2 = new StockListTableModel();            
+                            smodel2 = new StockListTableModel();
                             tblStockList3.setModel(smodel2);
                         }
 //                    Sleeve s = slmodel.getEventsByRow(selectedRow);
@@ -461,16 +456,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                 }
             });
             smgr = StockItemManager.getInstance();
-            smgr.addObserver(this);  
-            smodel3 = new StockList2TableModel(smgr.getAll());  
-            tblStockList3.setModel(smodel3); 
-             tblStockList3.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            smgr.addObserver(this);
+            smodel3 = new StockList2TableModel(smgr.getAll());
+            tblStockList3.setModel(smodel3);
+            tblStockList3.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
                 public void valueChanged(ListSelectionEvent es)
                 {
                     int selectedRow = tblStockList3.getSelectedRow();
-                     if (selectedRow == -1)
+                    if (selectedRow == -1)
                     {
                         return;
                     }
@@ -494,10 +489,10 @@ public class Overview extends javax.swing.JFrame implements Observer
 //                    {
 ////                        omodel2.
 //                        tblOrderList1.setModel(omodel2);
-                    }
+                        }
                         else
                         {
-                            smodel2 = new StockListTableModel();            
+                            smodel2 = new StockListTableModel();
                             tblStockList3.setModel(smodel2);
                         }
                     }
@@ -511,6 +506,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
         }
     }
+
     private void mouseListener()
     {
         tblProductionSleeve.addMouseListener(new MouseAdapter()
@@ -519,13 +515,24 @@ public class Overview extends javax.swing.JFrame implements Observer
             public void mouseClicked(MouseEvent me)
             {
                 if (me.getClickCount() == 2)
-                {                    
-                    OrderInfo.getInstance().setVisible(true);
+                {
+                    tblProductionSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+                    {
+                        @Override
+                        public void valueChanged(ListSelectionEvent e)
+                        {
+                            int selectedRow = tblProductionSleeve.getSelectedRow();
+                            Order o = psmodel.getEventsByRow(selectedRow);
+                            
+                        }
+                    });
+
                 }
+                new OrderInfo(o).setVisible(true);
             }
         });
     }
-    
+
     // SKAL MÅSKE BRUGES!!!!!!!!
 //    
 //      public void mouseClicked(MouseEvent evt) { 
@@ -559,7 +566,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 //                if(evt.getID()==MouseEvent.MOUSE_RELEASED) timer.stop();
 //    }           
 //    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -2218,83 +2224,82 @@ public class Overview extends javax.swing.JFrame implements Observer
     // RESET BUTTON DOES NOT WORK!!!!!!
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
-       
+
         try
-        {   
+        {
             slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
-            
+
             tblStockList2.setModel(smodel);
             omodel2 = new OrderTablemodel(omgr.getAll());
-            tblOrderList1.setModel(omodel);               
+            tblOrderList1.setModel(omodel);
 //            tblSleeveList.repaint(); 
-            
+
         }
         catch (Exception ex)
         {
-           ex.getMessage();
+            ex.getMessage();
         }
         finally
         {
             tblOrderList1.clearSelection();
             tblStockList2.clearSelection();
-            tblSleeveList.clearSelection();  
+            tblSleeveList.clearSelection();
         }
-        
+
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnReset1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnReset1ActionPerformed
     {//GEN-HEADEREND:event_btnReset1ActionPerformed
-         if(
-                 jTabbedPane1.getSelectedIndex() == 3)
-                 
-        try
-        {   
-                       
-            smodel3 = new StockList2TableModel(smgr.getAll()); 
-            tblStockList3.setModel(smodel3);
-            psmodel = new ProductionSleeveTableModel(omgr.getAll());
-            tblProductionSleeve.setModel(psmodel);               
+        if (jTabbedPane1.getSelectedIndex() == 3)
+        {
+            try
+            {
+
+                smodel3 = new StockList2TableModel(smgr.getAll());
+                tblStockList3.setModel(smodel3);
+                psmodel = new ProductionSleeveTableModel(omgr.getAll());
+                tblProductionSleeve.setModel(psmodel);
 //            tblSleeveList.repaint(); 
-            
+
+            }
+            catch (Exception ex)
+            {
+                ex.getMessage();
+            }
+            finally
+            {
+                tblProductionSleeve.clearSelection();
+                tblStockList3.clearSelection();
+            }
         }
-        catch (Exception ex)
+
+        if (jTabbedPane1.getSelectedIndex() == 2)
         {
-           ex.getMessage();
-        }
-        finally
-        {
-            tblProductionSleeve.clearSelection();
-            tblStockList3.clearSelection();              
-        }
-        
- if(
-         jTabbedPane1.getSelectedIndex() == 2)
- {
-try
-{slmodel = new SleeveTableModel(slmgr.getAll());
-            tblSleeveList.setModel(slmodel);
- 
-            tblStockList2.setModel(smodel);
-            omodel2 = new OrderTablemodel(omgr.getAll());
-            tblOrderList1.setModel(omodel);               
+            try
+            {
+                slmodel = new SleeveTableModel(slmgr.getAll());
+                tblSleeveList.setModel(slmodel);
+
+                tblStockList2.setModel(smodel);
+                omodel2 = new OrderTablemodel(omgr.getAll());
+                tblOrderList1.setModel(omodel);
 //            tblSleeveList.repaint(); 
-}
-        
-        catch (Exception ex)
-        {
-           ex.getMessage();
+            }
+            catch (Exception ex)
+            {
+                ex.getMessage();
+            }
+            finally
+            {
+                tblOrderList1.clearSelection();
+                tblStockList2.clearSelection();
+                tblSleeveList.clearSelection();
+            }
         }
-        finally
-        {
-            tblOrderList1.clearSelection();
-            tblStockList2.clearSelection();
-            tblSleeveList.clearSelection();  
-        }
- }
-        
- 
-        
+
+
+
     }//GEN-LAST:event_btnReset1ActionPerformed
 
     private void txtStockQuantity1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtStockQuantity1ActionPerformed
@@ -2309,10 +2314,9 @@ try
 
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
     {//GEN-HEADEREND:event_localeLanguageActionPerformed
-         rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
+        rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
         updateGUILanguage();
     }//GEN-LAST:event_localeLanguageActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanalStockInfo1;
