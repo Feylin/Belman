@@ -102,7 +102,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="btnClose" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnLogout" min="-2" pref="80" max="-2" attributes="0"/>
@@ -110,7 +110,7 @@
                       <Component id="btnReset1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="pnlLoggedIn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="localeLanguage" min="-2" max="-2" attributes="0"/>
@@ -125,14 +125,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
-                      <Component id="localeLanguage" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="pnlLoggedIn" pref="23" max="32767" attributes="0"/>
+                  <Component id="localeLanguage" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnlLoggedIn" min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" min="-2" pref="434" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -165,9 +162,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlOrderList" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnlOrderList" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlOrderInfo" max="32767" attributes="0"/>
+                      <Component id="pnlOrderInfo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -178,7 +175,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="pnlOrderInfo" max="32767" attributes="0"/>
-                          <Component id="pnlOrderList" pref="0" max="32767" attributes="0"/>
+                          <Component id="pnlOrderList" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -191,15 +188,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="scrOrderList" alignment="0" pref="257" max="32767" attributes="0"/>
+                      <Component id="scrOrderList" alignment="0" pref="675" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="scrOrderList" min="-2" pref="392" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="scrOrderList" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -430,7 +424,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="lblSalesOrderId" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="191" max="32767" attributes="0"/>
+                                      <EmptySpace pref="11" max="32767" attributes="0"/>
                                       <Component id="txtSalesOrderId" min="-2" pref="411" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -474,7 +468,7 @@
                                   <Component id="lblPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="151" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -549,10 +543,10 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="pnlInStockList" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnlInStockList" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="JPanalStockInfo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JPanalStockInfo" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -562,10 +556,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="JPanalStockInfo" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="pnlInStockList" min="-2" pref="393" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="pnlInStockList" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -578,9 +569,9 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
-                          <Component id="sclInStock" min="-2" pref="256" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="sclInStock" pref="669" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -588,8 +579,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="sclInStock" min="-2" pref="378" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                          <Component id="sclInStock" min="-2" pref="514" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -658,7 +649,7 @@
                                       <Component id="txtMaterialName1" alignment="1" max="32767" attributes="0"/>
                                       <Component id="txtMaterialDenisity" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="txtStockQuantity" pref="562" max="32767" attributes="0"/>
+                                          <Component id="txtStockQuantity" pref="384" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="lblKg" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -708,7 +699,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="pnlMeasurements2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="194" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -916,27 +907,33 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblSleeve" min="-2" max="-2" attributes="0"/>
-                          <Component id="scrSleeve" min="-2" pref="227" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lblSleeve" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="scrSleeve" pref="516" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="pnlOrderStock" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="183" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="lblSleeve" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="scrSleeve" min="-2" pref="370" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlOrderStock" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="lblSleeve" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="scrSleeve" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="pnlOrderStock" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -990,23 +987,17 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="scrOrderStock" min="-2" pref="190" max="-2" attributes="0"/>
+                          <Component id="scrOrderStock" pref="260" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="scrStockOrder" min="-2" pref="255" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="scrStockOrder" min="-2" pref="189" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="pnlControlPanel" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                  <Component id="btnReset" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="pnlControlPanel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnReset" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1015,20 +1006,17 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="scrStockOrder" pref="0" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="scrOrderStock" min="-2" pref="360" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="btnReset" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="pnlControlPanel" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="scrStockOrder" pref="494" max="32767" attributes="0"/>
+                              <Component id="scrOrderStock" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnReset" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="pnlControlPanel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1097,7 +1085,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="28" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnFinishOrder" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
@@ -1198,15 +1186,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="495" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="599" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" pref="492" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jScrollPane2" pref="626" max="32767" attributes="0"/>
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1215,15 +1200,15 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" min="-2" pref="371" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="371" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="507" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1303,12 +1288,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1017" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1255" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="406" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="549" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -1363,7 +1348,10 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="lblLoggedIn" min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Component id="lblLoggedIn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
