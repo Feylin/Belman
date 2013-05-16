@@ -85,7 +85,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
         return instance;
     }
-    
+
     private void setTableColumnSize()
     {
         tblProductionSleeve.getColumnModel().getColumn(0).setPreferredWidth(190);
@@ -97,7 +97,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         tblProductionSleeve.getColumnModel().getColumn(6).setPreferredWidth(100);
         tblProductionSleeve.getColumnModel().getColumn(7).setPreferredWidth(100);
     }
-    
+
     private void setTableSelectionMode()
     {
         tblOrderList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -396,7 +396,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
         }
     }
-    
+
     private void productionSleeveListSelectioner()
     {
         try
@@ -511,17 +511,16 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
         tblProductionSleeve.addMouseListener(new MouseAdapter()
         {
-             
             @Override
             public void mouseClicked(MouseEvent me)
             {
                 if (me.getClickCount() == 2)
-                {                   
+                {
                     int selectedRow = tblProductionSleeve.getSelectedRow();
                     Order o = psmodel.getEventsByRow(selectedRow);
                     new OrderInfo(o).setVisible(true);
                 }
-               
+
             }
         });
     }
@@ -718,6 +717,14 @@ public class Overview extends javax.swing.JFrame implements Observer
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
         setTitle(bundle.getString("Overview.title")); // NOI18N
         setResizable(false);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener()
+        {
+            public void stateChanged(javax.swing.event.ChangeEvent evt)
+            {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         tblProductionSleeve.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -2014,7 +2021,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlMeasurements2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlInstockLayout = new javax.swing.GroupLayout(pnlInstock);
@@ -2310,6 +2317,34 @@ public class Overview extends javax.swing.JFrame implements Observer
         rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
         updateGUILanguage();
     }//GEN-LAST:event_localeLanguageActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
+    {//GEN-HEADEREND:event_jTabbedPane1StateChanged
+        if (jTabbedPane1.getSelectedIndex() == 0)
+        {
+            btnReset1.setVisible(true);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 1)
+        {
+            btnReset1.setVisible(false);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 2)
+        {
+            btnReset1.setVisible(true);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 3)
+        {
+            btnReset1.setVisible(true);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 4)
+        {
+            btnReset1.setVisible(false);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 5)
+        {
+            btnReset1.setVisible(false);
+        }
+    }//GEN-LAST:event_jTabbedPane1StateChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanalStockInfo1;
