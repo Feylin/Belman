@@ -571,70 +571,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        pnlOrder = new javax.swing.JPanel();
-        pnlOrderList = new javax.swing.JPanel();
-        scrOrderList = new javax.swing.JScrollPane();
-        tblOrderList = new javax.swing.JTable();
-        pnlOrderInfo = new javax.swing.JPanel();
-        lblOrder = new javax.swing.JLabel();
-        txtOrderId = new javax.swing.JTextField();
-        lblQuantity = new javax.swing.JLabel();
-        txtQuantity = new javax.swing.JTextField();
-        lblDate = new javax.swing.JLabel();
-        txtDate = new javax.swing.JTextField();
-        pnlMeasurements = new javax.swing.JPanel();
-        txtThickness = new javax.swing.JTextField();
-        lblThickness = new javax.swing.JLabel();
-        lblWidth = new javax.swing.JLabel();
-        txtWidth = new javax.swing.JTextField();
-        pnlCustomerInfo = new javax.swing.JPanel();
-        lblSalesOrderId = new javax.swing.JLabel();
-        lblCustomerName = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
-        lblPhone = new javax.swing.JLabel();
-        txtSalesOrderId = new javax.swing.JTextField();
-        txtCustomerName = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
-        pnlInstock = new javax.swing.JPanel();
-        pnlInStockList = new javax.swing.JPanel();
-        sclInStock = new javax.swing.JScrollPane();
-        tblStockList = new javax.swing.JTable();
-        JPanalStockInfo = new javax.swing.JPanel();
-        lblName = new javax.swing.JLabel();
-        txtMaterialName1 = new javax.swing.JTextField();
-        lblMaterialID = new javax.swing.JLabel();
-        txtMaterialID1 = new javax.swing.JTextField();
-        lblCode = new javax.swing.JLabel();
-        txtCode = new javax.swing.JTextField();
-        lblDensity = new javax.swing.JLabel();
-        txtMaterialDenisity = new javax.swing.JTextField();
-        pnlMeasurements2 = new javax.swing.JPanel();
-        txtThickness1 = new javax.swing.JTextField();
-        lblThickness1 = new javax.swing.JLabel();
-        lblWidth1 = new javax.swing.JLabel();
-        txtWidth1 = new javax.swing.JTextField();
-        lblLength1 = new javax.swing.JLabel();
-        txtLength1 = new javax.swing.JTextField();
-        lblStockQuantity = new javax.swing.JLabel();
-        txtStockQuantity = new javax.swing.JTextField();
-        lblKg = new javax.swing.JLabel();
-        lblCharge = new javax.swing.JLabel();
-        txtCharge = new javax.swing.JTextField();
-        pnlCutting1 = new javax.swing.JPanel();
-        scrSleeve = new javax.swing.JScrollPane();
-        tblSleeveList = new javax.swing.JTable();
-        pnlOrderStock = new javax.swing.JPanel();
-        scrOrderStock = new javax.swing.JScrollPane();
-        tblOrderList1 = new javax.swing.JTable();
-        scrStockOrder = new javax.swing.JScrollPane();
-        tblStockList2 = new javax.swing.JTable();
-        pnlControlPanel = new javax.swing.JPanel();
-        btnFinishOrder = new javax.swing.JButton();
-        rbtnUrgent = new javax.swing.JRadioButton();
-        rbtnInProgress = new javax.swing.JRadioButton();
-        rbtnPending = new javax.swing.JRadioButton();
-        lblSleeve = new javax.swing.JLabel();
         pnlCutting2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductionSleeve = new javax.swing.JTable();
@@ -642,7 +578,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         tblStockList3 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        pnlCutting3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         scrOrderList1 = new javax.swing.JScrollPane();
@@ -699,6 +634,71 @@ public class Overview extends javax.swing.JFrame implements Observer
         txtCustomerName1 = new javax.swing.JTextField();
         txtEmail1 = new javax.swing.JTextField();
         txtPhone1 = new javax.swing.JTextField();
+        pnlCutting1 = new javax.swing.JPanel();
+        scrSleeve = new javax.swing.JScrollPane();
+        tblSleeveList = new javax.swing.JTable();
+        pnlOrderStock = new javax.swing.JPanel();
+        scrOrderStock = new javax.swing.JScrollPane();
+        tblOrderList1 = new javax.swing.JTable();
+        scrStockOrder = new javax.swing.JScrollPane();
+        tblStockList2 = new javax.swing.JTable();
+        pnlControlPanel = new javax.swing.JPanel();
+        btnFinishOrder = new javax.swing.JButton();
+        rbtnUrgent = new javax.swing.JRadioButton();
+        rbtnInProgress = new javax.swing.JRadioButton();
+        rbtnPending = new javax.swing.JRadioButton();
+        lblSleeve = new javax.swing.JLabel();
+        pnlCutting3 = new javax.swing.JPanel();
+        pnlOrder = new javax.swing.JPanel();
+        pnlOrderList = new javax.swing.JPanel();
+        scrOrderList = new javax.swing.JScrollPane();
+        tblOrderList = new javax.swing.JTable();
+        pnlOrderInfo = new javax.swing.JPanel();
+        lblOrder = new javax.swing.JLabel();
+        txtOrderId = new javax.swing.JTextField();
+        lblQuantity = new javax.swing.JLabel();
+        txtQuantity = new javax.swing.JTextField();
+        lblDate = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
+        pnlMeasurements = new javax.swing.JPanel();
+        txtThickness = new javax.swing.JTextField();
+        lblThickness = new javax.swing.JLabel();
+        lblWidth = new javax.swing.JLabel();
+        txtWidth = new javax.swing.JTextField();
+        pnlCustomerInfo = new javax.swing.JPanel();
+        lblSalesOrderId = new javax.swing.JLabel();
+        lblCustomerName = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblPhone = new javax.swing.JLabel();
+        txtSalesOrderId = new javax.swing.JTextField();
+        txtCustomerName = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
+        pnlInstock = new javax.swing.JPanel();
+        pnlInStockList = new javax.swing.JPanel();
+        sclInStock = new javax.swing.JScrollPane();
+        tblStockList = new javax.swing.JTable();
+        JPanalStockInfo = new javax.swing.JPanel();
+        lblName = new javax.swing.JLabel();
+        txtMaterialName1 = new javax.swing.JTextField();
+        lblMaterialID = new javax.swing.JLabel();
+        txtMaterialID1 = new javax.swing.JTextField();
+        lblCode = new javax.swing.JLabel();
+        txtCode = new javax.swing.JTextField();
+        lblDensity = new javax.swing.JLabel();
+        txtMaterialDenisity = new javax.swing.JTextField();
+        pnlMeasurements2 = new javax.swing.JPanel();
+        txtThickness1 = new javax.swing.JTextField();
+        lblThickness1 = new javax.swing.JLabel();
+        lblWidth1 = new javax.swing.JLabel();
+        txtWidth1 = new javax.swing.JTextField();
+        lblLength1 = new javax.swing.JLabel();
+        txtLength1 = new javax.swing.JTextField();
+        lblStockQuantity = new javax.swing.JLabel();
+        txtStockQuantity = new javax.swing.JTextField();
+        lblKg = new javax.swing.JLabel();
+        lblCharge = new javax.swing.JLabel();
+        txtCharge = new javax.swing.JTextField();
         btnClose = new javax.swing.JButton();
         pnlLoggedIn = new javax.swing.JPanel();
         lblLoggedIn = new javax.swing.JLabel();
@@ -718,731 +718,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
         setTitle(bundle.getString("Overview.title")); // NOI18N
         setResizable(false);
-
-        tblOrderList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String []
-            {
-                "Order List:"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-        });
-        scrOrderList.setViewportView(tblOrderList);
-
-        javax.swing.GroupLayout pnlOrderListLayout = new javax.swing.GroupLayout(pnlOrderList);
-        pnlOrderList.setLayout(pnlOrderListLayout);
-        pnlOrderListLayout.setHorizontalGroup(
-            pnlOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, 957, Short.MAX_VALUE)
-        );
-        pnlOrderListLayout.setVerticalGroup(
-            pnlOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrOrderList)
-        );
-
-        pnlOrderInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlOrderInfo.border.title"))); // NOI18N
-
-        lblOrder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblOrder.setText(bundle.getString("Overview.lblOrder.text")); // NOI18N
-
-        txtOrderId.setEditable(false);
-
-        lblQuantity.setText(bundle.getString("Overview.lblQuantity.text")); // NOI18N
-
-        txtQuantity.setEditable(false);
-
-        lblDate.setText(bundle.getString("Overview.lblDate.text")); // NOI18N
-
-        txtDate.setEditable(false);
-
-        pnlMeasurements.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlMeasurements.border.title"))); // NOI18N
-
-        txtThickness.setEditable(false);
-
-        lblThickness.setText(bundle.getString("Overview.lblThickness.text")); // NOI18N
-
-        lblWidth.setText(bundle.getString("Overview.lblWidth.text")); // NOI18N
-
-        txtWidth.setEditable(false);
-
-        javax.swing.GroupLayout pnlMeasurementsLayout = new javax.swing.GroupLayout(pnlMeasurements);
-        pnlMeasurements.setLayout(pnlMeasurementsLayout);
-        pnlMeasurementsLayout.setHorizontalGroup(
-            pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMeasurementsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblThickness)
-                    .addComponent(lblWidth))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtWidth, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
-                    .addComponent(txtThickness))
-                .addContainerGap())
-        );
-        pnlMeasurementsLayout.setVerticalGroup(
-            pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMeasurementsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtThickness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblThickness))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblWidth)
-                    .addComponent(txtWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        pnlCustomerInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlCustomerInfo.border.title"))); // NOI18N
-
-        lblSalesOrderId.setText(bundle.getString("Overview.lblSalesOrderId.text")); // NOI18N
-
-        lblCustomerName.setText(bundle.getString("Overview.lblCustomerName.text")); // NOI18N
-
-        lblEmail.setText(bundle.getString("Overview.lblEmail.text")); // NOI18N
-
-        lblPhone.setText(bundle.getString("Overview.lblPhone.text")); // NOI18N
-
-        txtSalesOrderId.setEditable(false);
-
-        txtCustomerName.setEditable(false);
-
-        txtEmail.setEditable(false);
-
-        txtPhone.setEditable(false);
-
-        javax.swing.GroupLayout pnlCustomerInfoLayout = new javax.swing.GroupLayout(pnlCustomerInfo);
-        pnlCustomerInfo.setLayout(pnlCustomerInfoLayout);
-        pnlCustomerInfoLayout.setHorizontalGroup(
-            pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
-                        .addComponent(lblSalesOrderId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(txtSalesOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
-                        .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEmail)
-                            .addComponent(lblCustomerName)
-                            .addComponent(lblPhone))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
-                            .addComponent(txtPhone)
-                            .addComponent(txtCustomerName, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
-        );
-        pnlCustomerInfoLayout.setVerticalGroup(
-            pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSalesOrderId)
-                    .addComponent(txtSalesOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCustomerName)
-                    .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPhone)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(197, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnlOrderInfoLayout = new javax.swing.GroupLayout(pnlOrderInfo);
-        pnlOrderInfo.setLayout(pnlOrderInfoLayout);
-        pnlOrderInfoLayout.setHorizontalGroup(
-            pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlCustomerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderInfoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDate)
-                            .addComponent(lblOrder)
-                            .addComponent(lblQuantity))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtOrderId, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
-                            .addComponent(txtQuantity)
-                            .addComponent(txtDate))))
-                .addContainerGap())
-        );
-        pnlOrderInfoLayout.setVerticalGroup(
-            pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblOrder)
-                    .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDate)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblQuantity)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlMeasurements, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlCustomerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnlOrderLayout = new javax.swing.GroupLayout(pnlOrder);
-        pnlOrder.setLayout(pnlOrderLayout);
-        pnlOrderLayout.setHorizontalGroup(
-            pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlOrderInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
-        );
-        pnlOrderLayout.setVerticalGroup(
-            pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab(bundle.getString("Overview.pnlOrder.TabConstraints.tabTitle"), pnlOrder); // NOI18N
-
-        tblStockList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String []
-            {
-                "In Stock list:"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-        });
-        sclInStock.setViewportView(tblStockList);
-
-        javax.swing.GroupLayout pnlInStockListLayout = new javax.swing.GroupLayout(pnlInStockList);
-        pnlInStockList.setLayout(pnlInStockListLayout);
-        pnlInStockListLayout.setHorizontalGroup(
-            pnlInStockListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInStockListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sclInStock, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE))
-        );
-        pnlInStockListLayout.setVerticalGroup(
-            pnlInStockListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInStockListLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sclInStock, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77))
-        );
-
-        JPanalStockInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.JPanalStockInfo.border.title"))); // NOI18N
-        JPanalStockInfo.setEnabled(false);
-
-        lblName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblName.setText(bundle.getString("Overview.lblName.text")); // NOI18N
-
-        txtMaterialName1.setEditable(false);
-
-        lblMaterialID.setText(bundle.getString("Overview.lblMaterialID.text")); // NOI18N
-
-        txtMaterialID1.setEditable(false);
-
-        lblCode.setText(bundle.getString("Overview.lblCode.text")); // NOI18N
-
-        txtCode.setEditable(false);
-
-        lblDensity.setText(bundle.getString("Overview.lblDensity.text")); // NOI18N
-
-        txtMaterialDenisity.setEditable(false);
-
-        pnlMeasurements2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlMeasurements2.border.title"))); // NOI18N
-
-        txtThickness1.setEditable(false);
-
-        lblThickness1.setText(bundle.getString("Overview.lblThickness1.text")); // NOI18N
-
-        lblWidth1.setText(bundle.getString("Overview.lblWidth1.text")); // NOI18N
-
-        txtWidth1.setEditable(false);
-
-        lblLength1.setText(bundle.getString("Overview.lblLength1.text")); // NOI18N
-
-        txtLength1.setEditable(false);
-
-        javax.swing.GroupLayout pnlMeasurements2Layout = new javax.swing.GroupLayout(pnlMeasurements2);
-        pnlMeasurements2.setLayout(pnlMeasurements2Layout);
-        pnlMeasurements2Layout.setHorizontalGroup(
-            pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMeasurements2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblThickness1)
-                    .addComponent(lblWidth1)
-                    .addComponent(lblLength1))
-                .addGap(27, 27, 27)
-                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtWidth1)
-                    .addComponent(txtThickness1)
-                    .addComponent(txtLength1))
-                .addContainerGap())
-        );
-        pnlMeasurements2Layout.setVerticalGroup(
-            pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMeasurements2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtThickness1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblThickness1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblWidth1)
-                    .addComponent(txtWidth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLength1)
-                    .addComponent(txtLength1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
-        lblStockQuantity.setText(bundle.getString("Overview.lblStockQuantity.text")); // NOI18N
-
-        txtStockQuantity.setEditable(false);
-        txtStockQuantity.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtStockQuantityActionPerformed(evt);
-            }
-        });
-
-        lblKg.setText(bundle.getString("Overview.lblKg.text")); // NOI18N
-
-        lblCharge.setText(bundle.getString("Overview.lblCharge.text")); // NOI18N
-
-        txtCharge.setEditable(false);
-
-        javax.swing.GroupLayout JPanalStockInfoLayout = new javax.swing.GroupLayout(JPanalStockInfo);
-        JPanalStockInfo.setLayout(JPanalStockInfoLayout);
-        JPanalStockInfoLayout.setHorizontalGroup(
-            JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlMeasurements2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(JPanalStockInfoLayout.createSequentialGroup()
-                        .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblName)
-                                    .addComponent(lblMaterialID)
-                                    .addComponent(lblCode)))
-                            .addComponent(lblDensity)
-                            .addComponent(lblStockQuantity)
-                            .addComponent(lblCharge))
-                        .addGap(18, 18, 18)
-                        .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMaterialID1)
-                            .addComponent(txtCode)
-                            .addComponent(txtMaterialName1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtMaterialDenisity)
-                            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
-                                .addComponent(txtStockQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblKg))
-                            .addComponent(txtCharge))))
-                .addContainerGap())
-        );
-        JPanalStockInfoLayout.setVerticalGroup(
-            JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(txtMaterialName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMaterialID)
-                    .addComponent(txtMaterialID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCode)
-                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDensity)
-                    .addComponent(txtMaterialDenisity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStockQuantity)
-                    .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtStockQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblKg)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCharge)
-                    .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(pnlMeasurements2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnlInstockLayout = new javax.swing.GroupLayout(pnlInstock);
-        pnlInstock.setLayout(pnlInstockLayout);
-        pnlInstockLayout.setHorizontalGroup(
-            pnlInstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInstockLayout.createSequentialGroup()
-                .addComponent(pnlInStockList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JPanalStockInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pnlInstockLayout.setVerticalGroup(
-            pnlInstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInstockLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlInstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JPanalStockInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlInStockList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab(bundle.getString("Overview.pnlInstock.TabConstraints.tabTitle"), pnlInstock); // NOI18N
-
-        tblSleeveList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String []
-            {
-                "Sleeve"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-        });
-        scrSleeve.setViewportView(tblSleeveList);
-
-        pnlOrderStock.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlOrderStock.border.title"))); // NOI18N
-
-        tblOrderList1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String []
-            {
-                "Order List:"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-        });
-        scrOrderStock.setViewportView(tblOrderList1);
-
-        tblStockList2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String []
-            {
-                "Stock Item"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-        });
-        scrStockOrder.setViewportView(tblStockList2);
-
-        pnlControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlControlPanel.border.title"))); // NOI18N
-
-        btnFinishOrder.setText(bundle.getString("Overview.btnFinishOrder.text")); // NOI18N
-
-        buttonGroup1.add(rbtnUrgent);
-        rbtnUrgent.setText(bundle.getString("Overview.rbtnUrgent.text")); // NOI18N
-
-        buttonGroup1.add(rbtnInProgress);
-        rbtnInProgress.setText(bundle.getString("Overview.rbtnInProgress.text")); // NOI18N
-
-        buttonGroup1.add(rbtnPending);
-        rbtnPending.setText(bundle.getString("Overview.rbtnPending.text")); // NOI18N
-
-        javax.swing.GroupLayout pnlControlPanelLayout = new javax.swing.GroupLayout(pnlControlPanel);
-        pnlControlPanel.setLayout(pnlControlPanelLayout);
-        pnlControlPanelLayout.setHorizontalGroup(
-            pnlControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlControlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbtnUrgent)
-                    .addComponent(rbtnInProgress)
-                    .addComponent(rbtnPending))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlControlPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFinishOrder)
-                .addGap(25, 25, 25))
-        );
-        pnlControlPanelLayout.setVerticalGroup(
-            pnlControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlControlPanelLayout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(rbtnPending)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbtnInProgress)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rbtnUrgent)
-                .addGap(18, 18, 18)
-                .addComponent(btnFinishOrder)
-                .addGap(15, 15, 15))
-        );
-
-        javax.swing.GroupLayout pnlOrderStockLayout = new javax.swing.GroupLayout(pnlOrderStock);
-        pnlOrderStock.setLayout(pnlOrderStockLayout);
-        pnlOrderStockLayout.setHorizontalGroup(
-            pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderStockLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrOrderStock, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(scrStockOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pnlOrderStockLayout.setVerticalGroup(
-            pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOrderStockLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrStockOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-                    .addComponent(scrOrderStock))
-                .addGap(1, 1, 1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderStockLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        lblSleeve.setText(bundle.getString("Overview.lblSleeve.text")); // NOI18N
-
-        javax.swing.GroupLayout pnlCutting1Layout = new javax.swing.GroupLayout(pnlCutting1);
-        pnlCutting1.setLayout(pnlCutting1Layout);
-        pnlCutting1Layout.setHorizontalGroup(
-            pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCutting1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCutting1Layout.createSequentialGroup()
-                        .addComponent(lblSleeve)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(scrSleeve, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlOrderStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pnlCutting1Layout.setVerticalGroup(
-            pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCutting1Layout.createSequentialGroup()
-                .addGroup(pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCutting1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lblSleeve)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrSleeve))
-                    .addGroup(pnlCutting1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlOrderStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab(bundle.getString("Overview.pnlCutting1.TabConstraints.tabTitle"), pnlCutting1); // NOI18N
 
         tblProductionSleeve.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -1510,19 +785,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         );
 
         jTabbedPane1.addTab(bundle.getString("Overview.pnlCutting2.TabConstraints.tabTitle"), pnlCutting2); // NOI18N
-
-        javax.swing.GroupLayout pnlCutting3Layout = new javax.swing.GroupLayout(pnlCutting3);
-        pnlCutting3.setLayout(pnlCutting3Layout);
-        pnlCutting3Layout.setHorizontalGroup(
-            pnlCutting3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1537, Short.MAX_VALUE)
-        );
-        pnlCutting3Layout.setVerticalGroup(
-            pnlCutting3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 595, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab(bundle.getString("Overview.pnlCutting3.TabConstraints.tabTitle"), pnlCutting3); // NOI18N
 
         tblOrderList2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -2038,6 +1300,744 @@ public class Overview extends javax.swing.JFrame implements Observer
         );
 
         jTabbedPane1.addTab(bundle.getString("Overview.jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
+
+        tblSleeveList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String []
+            {
+                "Sleeve"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+        });
+        scrSleeve.setViewportView(tblSleeveList);
+
+        pnlOrderStock.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlOrderStock.border.title"))); // NOI18N
+
+        tblOrderList1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String []
+            {
+                "Order List:"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+        });
+        scrOrderStock.setViewportView(tblOrderList1);
+
+        tblStockList2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String []
+            {
+                "Stock Item"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+        });
+        scrStockOrder.setViewportView(tblStockList2);
+
+        pnlControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlControlPanel.border.title"))); // NOI18N
+
+        btnFinishOrder.setText(bundle.getString("Overview.btnFinishOrder.text")); // NOI18N
+
+        buttonGroup1.add(rbtnUrgent);
+        rbtnUrgent.setText(bundle.getString("Overview.rbtnUrgent.text")); // NOI18N
+
+        buttonGroup1.add(rbtnInProgress);
+        rbtnInProgress.setText(bundle.getString("Overview.rbtnInProgress.text")); // NOI18N
+
+        buttonGroup1.add(rbtnPending);
+        rbtnPending.setText(bundle.getString("Overview.rbtnPending.text")); // NOI18N
+
+        javax.swing.GroupLayout pnlControlPanelLayout = new javax.swing.GroupLayout(pnlControlPanel);
+        pnlControlPanel.setLayout(pnlControlPanelLayout);
+        pnlControlPanelLayout.setHorizontalGroup(
+            pnlControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlControlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtnUrgent)
+                    .addComponent(rbtnInProgress)
+                    .addComponent(rbtnPending))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlControlPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFinishOrder)
+                .addGap(25, 25, 25))
+        );
+        pnlControlPanelLayout.setVerticalGroup(
+            pnlControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlControlPanelLayout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(rbtnPending)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbtnInProgress)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbtnUrgent)
+                .addGap(18, 18, 18)
+                .addComponent(btnFinishOrder)
+                .addGap(15, 15, 15))
+        );
+
+        javax.swing.GroupLayout pnlOrderStockLayout = new javax.swing.GroupLayout(pnlOrderStock);
+        pnlOrderStock.setLayout(pnlOrderStockLayout);
+        pnlOrderStockLayout.setHorizontalGroup(
+            pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrderStockLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrOrderStock, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(scrStockOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlOrderStockLayout.setVerticalGroup(
+            pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrderStockLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlOrderStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrStockOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                    .addComponent(scrOrderStock))
+                .addGap(1, 1, 1))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderStockLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        lblSleeve.setText(bundle.getString("Overview.lblSleeve.text")); // NOI18N
+
+        javax.swing.GroupLayout pnlCutting1Layout = new javax.swing.GroupLayout(pnlCutting1);
+        pnlCutting1.setLayout(pnlCutting1Layout);
+        pnlCutting1Layout.setHorizontalGroup(
+            pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCutting1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCutting1Layout.createSequentialGroup()
+                        .addComponent(lblSleeve)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(scrSleeve, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlOrderStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlCutting1Layout.setVerticalGroup(
+            pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCutting1Layout.createSequentialGroup()
+                .addGroup(pnlCutting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCutting1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblSleeve)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrSleeve))
+                    .addGroup(pnlCutting1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnlOrderStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab(bundle.getString("Overview.pnlCutting1.TabConstraints.tabTitle"), pnlCutting1); // NOI18N
+
+        javax.swing.GroupLayout pnlCutting3Layout = new javax.swing.GroupLayout(pnlCutting3);
+        pnlCutting3.setLayout(pnlCutting3Layout);
+        pnlCutting3Layout.setHorizontalGroup(
+            pnlCutting3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1537, Short.MAX_VALUE)
+        );
+        pnlCutting3Layout.setVerticalGroup(
+            pnlCutting3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 595, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab(bundle.getString("Overview.pnlCutting3.TabConstraints.tabTitle"), pnlCutting3); // NOI18N
+
+        tblOrderList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String []
+            {
+                "Order List:"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+        });
+        scrOrderList.setViewportView(tblOrderList);
+
+        javax.swing.GroupLayout pnlOrderListLayout = new javax.swing.GroupLayout(pnlOrderList);
+        pnlOrderList.setLayout(pnlOrderListLayout);
+        pnlOrderListLayout.setHorizontalGroup(
+            pnlOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, 957, Short.MAX_VALUE)
+        );
+        pnlOrderListLayout.setVerticalGroup(
+            pnlOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrOrderList)
+        );
+
+        pnlOrderInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlOrderInfo.border.title"))); // NOI18N
+
+        lblOrder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblOrder.setText(bundle.getString("Overview.lblOrder.text")); // NOI18N
+
+        txtOrderId.setEditable(false);
+
+        lblQuantity.setText(bundle.getString("Overview.lblQuantity.text")); // NOI18N
+
+        txtQuantity.setEditable(false);
+
+        lblDate.setText(bundle.getString("Overview.lblDate.text")); // NOI18N
+
+        txtDate.setEditable(false);
+
+        pnlMeasurements.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlMeasurements.border.title"))); // NOI18N
+
+        txtThickness.setEditable(false);
+
+        lblThickness.setText(bundle.getString("Overview.lblThickness.text")); // NOI18N
+
+        lblWidth.setText(bundle.getString("Overview.lblWidth.text")); // NOI18N
+
+        txtWidth.setEditable(false);
+
+        javax.swing.GroupLayout pnlMeasurementsLayout = new javax.swing.GroupLayout(pnlMeasurements);
+        pnlMeasurements.setLayout(pnlMeasurementsLayout);
+        pnlMeasurementsLayout.setHorizontalGroup(
+            pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMeasurementsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblThickness)
+                    .addComponent(lblWidth))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtWidth, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                    .addComponent(txtThickness))
+                .addContainerGap())
+        );
+        pnlMeasurementsLayout.setVerticalGroup(
+            pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMeasurementsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtThickness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblThickness))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWidth)
+                    .addComponent(txtWidth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        pnlCustomerInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlCustomerInfo.border.title"))); // NOI18N
+
+        lblSalesOrderId.setText(bundle.getString("Overview.lblSalesOrderId.text")); // NOI18N
+
+        lblCustomerName.setText(bundle.getString("Overview.lblCustomerName.text")); // NOI18N
+
+        lblEmail.setText(bundle.getString("Overview.lblEmail.text")); // NOI18N
+
+        lblPhone.setText(bundle.getString("Overview.lblPhone.text")); // NOI18N
+
+        txtSalesOrderId.setEditable(false);
+
+        txtCustomerName.setEditable(false);
+
+        txtEmail.setEditable(false);
+
+        txtPhone.setEditable(false);
+
+        javax.swing.GroupLayout pnlCustomerInfoLayout = new javax.swing.GroupLayout(pnlCustomerInfo);
+        pnlCustomerInfo.setLayout(pnlCustomerInfoLayout);
+        pnlCustomerInfoLayout.setHorizontalGroup(
+            pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
+                        .addComponent(lblSalesOrderId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(txtSalesOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
+                        .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEmail)
+                            .addComponent(lblCustomerName)
+                            .addComponent(lblPhone))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                            .addComponent(txtPhone)
+                            .addComponent(txtCustomerName, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
+        );
+        pnlCustomerInfoLayout.setVerticalGroup(
+            pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCustomerInfoLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSalesOrderId)
+                    .addComponent(txtSalesOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustomerName)
+                    .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCustomerInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPhone)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(197, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlOrderInfoLayout = new javax.swing.GroupLayout(pnlOrderInfo);
+        pnlOrderInfo.setLayout(pnlOrderInfoLayout);
+        pnlOrderInfoLayout.setHorizontalGroup(
+            pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrderInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlCustomerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderInfoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDate)
+                            .addComponent(lblOrder)
+                            .addComponent(lblQuantity))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtOrderId, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                            .addComponent(txtQuantity)
+                            .addComponent(txtDate))))
+                .addContainerGap())
+        );
+        pnlOrderInfoLayout.setVerticalGroup(
+            pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrderInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblOrder)
+                    .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDate)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlOrderInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQuantity)
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlMeasurements, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlCustomerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlOrderLayout = new javax.swing.GroupLayout(pnlOrder);
+        pnlOrder.setLayout(pnlOrderLayout);
+        pnlOrderLayout.setHorizontalGroup(
+            pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlOrderInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6))
+        );
+        pnlOrderLayout.setVerticalGroup(
+            pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOrderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlOrderInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab(bundle.getString("Overview.pnlOrder.TabConstraints.tabTitle"), pnlOrder); // NOI18N
+
+        tblStockList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String []
+            {
+                "In Stock list:"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+        });
+        sclInStock.setViewportView(tblStockList);
+
+        javax.swing.GroupLayout pnlInStockListLayout = new javax.swing.GroupLayout(pnlInStockList);
+        pnlInStockList.setLayout(pnlInStockListLayout);
+        pnlInStockListLayout.setHorizontalGroup(
+            pnlInStockListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInStockListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sclInStock, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE))
+        );
+        pnlInStockListLayout.setVerticalGroup(
+            pnlInStockListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInStockListLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sclInStock, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
+        );
+
+        JPanalStockInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.JPanalStockInfo.border.title"))); // NOI18N
+        JPanalStockInfo.setEnabled(false);
+
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblName.setText(bundle.getString("Overview.lblName.text")); // NOI18N
+
+        txtMaterialName1.setEditable(false);
+
+        lblMaterialID.setText(bundle.getString("Overview.lblMaterialID.text")); // NOI18N
+
+        txtMaterialID1.setEditable(false);
+
+        lblCode.setText(bundle.getString("Overview.lblCode.text")); // NOI18N
+
+        txtCode.setEditable(false);
+
+        lblDensity.setText(bundle.getString("Overview.lblDensity.text")); // NOI18N
+
+        txtMaterialDenisity.setEditable(false);
+
+        pnlMeasurements2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("Overview.pnlMeasurements2.border.title"))); // NOI18N
+
+        txtThickness1.setEditable(false);
+
+        lblThickness1.setText(bundle.getString("Overview.lblThickness1.text")); // NOI18N
+
+        lblWidth1.setText(bundle.getString("Overview.lblWidth1.text")); // NOI18N
+
+        txtWidth1.setEditable(false);
+
+        lblLength1.setText(bundle.getString("Overview.lblLength1.text")); // NOI18N
+
+        txtLength1.setEditable(false);
+
+        javax.swing.GroupLayout pnlMeasurements2Layout = new javax.swing.GroupLayout(pnlMeasurements2);
+        pnlMeasurements2.setLayout(pnlMeasurements2Layout);
+        pnlMeasurements2Layout.setHorizontalGroup(
+            pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMeasurements2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblThickness1)
+                    .addComponent(lblWidth1)
+                    .addComponent(lblLength1))
+                .addGap(27, 27, 27)
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtWidth1)
+                    .addComponent(txtThickness1)
+                    .addComponent(txtLength1))
+                .addContainerGap())
+        );
+        pnlMeasurements2Layout.setVerticalGroup(
+            pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMeasurements2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtThickness1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblThickness1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWidth1)
+                    .addComponent(txtWidth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlMeasurements2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLength1)
+                    .addComponent(txtLength1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        lblStockQuantity.setText(bundle.getString("Overview.lblStockQuantity.text")); // NOI18N
+
+        txtStockQuantity.setEditable(false);
+        txtStockQuantity.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtStockQuantityActionPerformed(evt);
+            }
+        });
+
+        lblKg.setText(bundle.getString("Overview.lblKg.text")); // NOI18N
+
+        lblCharge.setText(bundle.getString("Overview.lblCharge.text")); // NOI18N
+
+        txtCharge.setEditable(false);
+
+        javax.swing.GroupLayout JPanalStockInfoLayout = new javax.swing.GroupLayout(JPanalStockInfo);
+        JPanalStockInfo.setLayout(JPanalStockInfoLayout);
+        JPanalStockInfoLayout.setHorizontalGroup(
+            JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlMeasurements2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                        .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblName)
+                                    .addComponent(lblMaterialID)
+                                    .addComponent(lblCode)))
+                            .addComponent(lblDensity)
+                            .addComponent(lblStockQuantity)
+                            .addComponent(lblCharge))
+                        .addGap(18, 18, 18)
+                        .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMaterialID1)
+                            .addComponent(txtCode)
+                            .addComponent(txtMaterialName1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMaterialDenisity)
+                            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                                .addComponent(txtStockQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblKg))
+                            .addComponent(txtCharge))))
+                .addContainerGap())
+        );
+        JPanalStockInfoLayout.setVerticalGroup(
+            JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanalStockInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName)
+                    .addComponent(txtMaterialName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMaterialID)
+                    .addComponent(txtMaterialID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCode)
+                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDensity)
+                    .addComponent(txtMaterialDenisity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblStockQuantity)
+                    .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtStockQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblKg)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JPanalStockInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCharge)
+                    .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(pnlMeasurements2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlInstockLayout = new javax.swing.GroupLayout(pnlInstock);
+        pnlInstock.setLayout(pnlInstockLayout);
+        pnlInstockLayout.setHorizontalGroup(
+            pnlInstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInstockLayout.createSequentialGroup()
+                .addComponent(pnlInStockList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JPanalStockInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlInstockLayout.setVerticalGroup(
+            pnlInstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInstockLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlInstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JPanalStockInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlInStockList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab(bundle.getString("Overview.pnlInstock.TabConstraints.tabTitle"), pnlInstock); // NOI18N
 
         btnClose.setText(bundle.getString("Overview.btnClose.text")); // NOI18N
         btnClose.addActionListener(new java.awt.event.ActionListener()
