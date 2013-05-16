@@ -38,7 +38,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class Overview extends javax.swing.JFrame implements Observer
 {
-
+    
     static OrderManager omgr = null;
     static StockItemManager smgr = null;
     static MaterialManager mmgr = null;
@@ -76,7 +76,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         setTableSelectionMode();
         updateGUILanguage();
     }
-
+    
     public static Overview getInstance()
     {
         if (instance == null)
@@ -85,7 +85,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
         return instance;
     }
-
+    
     private void setTableColumnSize()
     {
         tblProductionSleeve.getColumnModel().getColumn(0).setPreferredWidth(190);
@@ -97,7 +97,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         tblProductionSleeve.getColumnModel().getColumn(6).setPreferredWidth(100);
         tblProductionSleeve.getColumnModel().getColumn(7).setPreferredWidth(100);
     }
-
+    
     private void setTableSelectionMode()
     {
         tblOrderList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -109,24 +109,26 @@ public class Overview extends javax.swing.JFrame implements Observer
         tblStockList2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblStockList3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-
+    
     private void updateGUILanguage()
     {
         btnClose.setText(rb.getString("Overview.btnClose.text"));
         btnLogout.setText(rb.getString("Overview.btnLogout.text"));
         btnFinishOrder.setText(rb.getString("Overview.btnFinishOrder.text"));
-
+        btnReset1.setText(rb.getString("Overview.btnReset1.text"));
+        
         menuFile.setText(rb.getString("Overview.menuFile.text"));
         menuSettings.setText(rb.getString("Overview.menuSettings.text"));
-
+        
         lblKg.setText(rb.getString("Overview.jLabel6.text"));
-
-        jTabbedPane1.setTitleAt(0, rb.getString("Overview.pnlOrder.TabConstraints.tabTitle"));
-        jTabbedPane1.setTitleAt(1, rb.getString("Overview.pnlInstock.TabConstraints.tabTitle"));
-        jTabbedPane1.setTitleAt(2, rb.getString("Overview.pnlCutting1.TabConstraints.tabTitle"));
-        jTabbedPane1.setTitleAt(3, rb.getString("Overview.pnlCutting2.TabConstraints.tabTitle"));
-        jTabbedPane1.setTitleAt(4, rb.getString("Overview.pnlCutting3.TabConstraints.tabTitle"));
-
+        
+        jTabbedPane1.setTitleAt(0, rb.getString("Overview.pnlCutting2.TabConstraints.tabTitle"));
+        jTabbedPane1.setTitleAt(1, rb.getString("Overview.jPanel1.TabConstraints.tabTitle"));    
+        jTabbedPane1.setTitleAt(2, rb.getString("Overview.pnlCutting1.TabConstraints.tabTitle"));       
+        jTabbedPane1.setTitleAt(3, rb.getString("Overview.pnlCutting3.TabConstraints.tabTitle"));
+        jTabbedPane1.setTitleAt(4, rb.getString("Overview.pnlOrder.TabConstraints.tabTitle"));
+        jTabbedPane1.setTitleAt(5, rb.getString("Overview.pnlInstock.TabConstraints.tabTitle"));
+        
         TitledBorder border = (TitledBorder) pnlControlPanel.getBorder();
         border.setTitle(rb.getString("Overview.pnlControlPanel.border.title"));
         TitledBorder border2 = (TitledBorder) pnlMeasurements2.getBorder();
@@ -141,19 +143,19 @@ public class Overview extends javax.swing.JFrame implements Observer
         border6.setTitle(rb.getString("Overview.pnlOrderStock.border.title"));
         TitledBorder border7 = (TitledBorder) pnlOrderStock.getBorder();
         border7.setTitle(rb.getString("Overview.pnlControlPanel1.border.title"));
-
+        
         rbtnUrgent.setText(rb.getString("Overview.rbtnUrgent.text"));
         rbtnPending.setText(rb.getString("Overview.rbtnPending.text"));
         rbtnInProgress.setText(rb.getString("Overview.rbtnInProgress.text"));
         rbtnContinue.setText(rb.getString("Overview.rbtnContinue.text"));
         rbtnInPauseAgain.setText(rb.getString("Overview.rbtnInPauseAgain.text"));
         rbtnFinish.setText(rb.getString("Overview.rbtnFinish.text"));
-
+        
         itemHelp.setText(rb.getString("Overview.itemHelp.text_1"));
         itemSettings.setText(rb.getString("Overview.itemSettings.text"));
         itemLogOut.setText(rb.getString("Overview.itemLogOut.text_1"));
         itemExit.setText(rb.getString("Overview.itemExit.text"));
-
+        
         lblCharge.setText(rb.getString("Overview.lblCharge.text"));
         lblQuantity.setText(rb.getString("Overview.lblQuantity.text"));
         lblLength1.setText(rb.getString("Overview.lblLength1.text"));
@@ -175,13 +177,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblName.setText(rb.getString("Overview.lblName.text"));
         lblMaterialID.setText(rb.getString("Overview.lblMaterialID.text"));
     }
-
+    
     private void loggedInAs()
     {
         String operator = Login.getInstance().getOperator();
         lblLoggedIn.setText("Logged in as " + operator);
     }
-
+    
     private void closePressed()
     {
         String message = "Are you sure you want to exit?";
@@ -191,7 +193,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             System.exit(0);
         }
     }
-
+    
     private void logoutPressed()
     {
         String message = "Are you sure you want to log out?";
@@ -202,7 +204,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             Login.getInstance().setVisible(true);
         }
     }
-
+    
     private void windowClose()
     {
         addWindowListener(new WindowAdapter()
@@ -258,14 +260,14 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         }
     }
-
+    
     private void orderListSelectioner()
     {
         try
         {
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
-
+            
             omodel = new OrderTablemodel(omgr.getAll());
             tblOrderList.setModel(omodel);
             tblOrderList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
@@ -286,9 +288,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtEmail.setText("");
                         txtPhone.setText("");
                     }
-
+                    
                     Order o = omodel.getEventsByRow(selectedRow);
-
+                    
                     try
                     {
                         txtOrderId.setText(String.valueOf(o.getOrderId()));
@@ -326,7 +328,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
         }
     }
-
+    
     private void sleeveListSelectioner()
     {
         try
@@ -335,13 +337,13 @@ public class Overview extends javax.swing.JFrame implements Observer
             slmgr.addObserver(this);
 //            slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
-
+            
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
             smodel2 = new StockListTableModel();
             tblStockList2.setModel(smodel2);
-
-
+            
+            
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
             omodel2 = new OrderTablemodel(omgr.getAll());
@@ -361,16 +363,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                     {
                         return;
                     }
-
+                    
                     Sleeve s = slmodel.getEventsByRow(selectedRow);
-
+                    
                     try
                     {
                         if (!omgr.getOrdersBySleeve(s).isEmpty())
                         {
                             omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
                             tblOrderList1.setModel(omodel2);
-
+                            
                             if (!smgr.getItemBySleeve(s).isEmpty())
                             {
                                 smodel2 = new StockListTableModel();
@@ -396,22 +398,22 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
         }
     }
-
+    
     private void productionSleeveListSelectioner()
     {
         try
         {
-
+            
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
             smodel3 = new StockList2TableModel(smgr.getAll());
             tblStockList3.setModel(smodel3);
-
+            
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
             psmodel = new ProductionSleeveTableModel(omgr.getAll());
             tblProductionSleeve.setModel(psmodel);
-
+            
             tblProductionSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
@@ -506,7 +508,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
         }
     }
-
+    
     private void mouseListener()
     {
         tblProductionSleeve.addMouseListener(new MouseAdapter()
@@ -520,7 +522,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     Order o = psmodel.getEventsByRow(selectedRow);
                     new OrderInfo(o).setVisible(true);
                 }
-
+                
             }
         });
     }
@@ -2195,27 +2197,27 @@ public class Overview extends javax.swing.JFrame implements Observer
     {//GEN-HEADEREND:event_itemExitActionPerformed
         closePressed();
     }//GEN-LAST:event_itemExitActionPerformed
-
+    
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCloseActionPerformed
     {//GEN-HEADEREND:event_btnCloseActionPerformed
         closePressed();
     }//GEN-LAST:event_btnCloseActionPerformed
-
+    
     private void txtStockQuantityActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtStockQuantityActionPerformed
     {//GEN-HEADEREND:event_txtStockQuantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockQuantityActionPerformed
-
+    
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLogoutActionPerformed
     {//GEN-HEADEREND:event_btnLogoutActionPerformed
         logoutPressed();
     }//GEN-LAST:event_btnLogoutActionPerformed
-
+    
     private void itemLogOutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemLogOutActionPerformed
     {//GEN-HEADEREND:event_itemLogOutActionPerformed
         logoutPressed();
     }//GEN-LAST:event_itemLogOutActionPerformed
-
+    
     private void itemSettingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSettingsActionPerformed
     {//GEN-HEADEREND:event_itemSettingsActionPerformed
         OperatorSettings.getInstance().setVisible(true);
@@ -2224,12 +2226,12 @@ public class Overview extends javax.swing.JFrame implements Observer
     // RESET BUTTON DOES NOT WORK!!!!!!
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
-
+        
         try
         {
 //            slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
-
+            
             tblStockList2.setModel(smodel);
             omodel2 = new OrderTablemodel(omgr.getAll());
             tblOrderList1.setModel(omodel);
@@ -2246,16 +2248,16 @@ public class Overview extends javax.swing.JFrame implements Observer
             tblStockList2.clearSelection();
             tblSleeveList.clearSelection();
         }
-
+        
     }//GEN-LAST:event_btnResetActionPerformed
-
+    
     private void btnReset1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnReset1ActionPerformed
     {//GEN-HEADEREND:event_btnReset1ActionPerformed
-        if (jTabbedPane1.getSelectedIndex() == 3)
+        if (jTabbedPane1.getSelectedIndex() == 0)
         {
             try
             {
-
+                
                 smodel3 = new StockList2TableModel(smgr.getAll());
                 tblStockList3.setModel(smodel3);
                 psmodel = new ProductionSleeveTableModel(omgr.getAll());
@@ -2273,14 +2275,14 @@ public class Overview extends javax.swing.JFrame implements Observer
                 tblStockList3.clearSelection();
             }
         }
-
+        
         if (jTabbedPane1.getSelectedIndex() == 2)
         {
             try
             {
 //                slmodel = new SleeveTableModel(slmgr.getAll());
                 tblSleeveList.setModel(slmodel);
-
+                
                 tblStockList2.setModel(smodel);
                 omodel2 = new OrderTablemodel(omgr.getAll());
                 tblOrderList1.setModel(omodel);
@@ -2297,27 +2299,48 @@ public class Overview extends javax.swing.JFrame implements Observer
                 tblSleeveList.clearSelection();
             }
         }
+        
+        if (jTabbedPane1.getSelectedIndex() == 3)
+        {
+            try
+            {
+                
+                smodel3 = new StockList2TableModel(smgr.getAll());
+                tblStockList3.setModel(smodel3);
+                psmodel = new ProductionSleeveTableModel(omgr.getAll());
+                tblProductionSleeve.setModel(psmodel);
+//            tblSleeveList.repaint(); 
 
-
-
+            }
+            catch (Exception ex)
+            {
+                ex.getMessage();
+            }
+            finally
+            {
+                tblProductionSleeve.clearSelection();
+                tblStockList3.clearSelection();
+            }
+        }
+        
     }//GEN-LAST:event_btnReset1ActionPerformed
-
+    
     private void txtStockQuantity1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtStockQuantity1ActionPerformed
     {//GEN-HEADEREND:event_txtStockQuantity1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockQuantity1ActionPerformed
-
+    
     private void rbtnFinishActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rbtnFinishActionPerformed
     {//GEN-HEADEREND:event_rbtnFinishActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnFinishActionPerformed
-
+    
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
     {//GEN-HEADEREND:event_localeLanguageActionPerformed
         rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
         updateGUILanguage();
     }//GEN-LAST:event_localeLanguageActionPerformed
-
+    
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
     {//GEN-HEADEREND:event_jTabbedPane1StateChanged
         if (jTabbedPane1.getSelectedIndex() == 0)
