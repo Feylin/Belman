@@ -511,24 +511,17 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
         tblProductionSleeve.addMouseListener(new MouseAdapter()
         {
+             
             @Override
             public void mouseClicked(MouseEvent me)
             {
                 if (me.getClickCount() == 2)
-                {
-                    tblProductionSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-                    {
-                        @Override
-                        public void valueChanged(ListSelectionEvent e)
-                        {
-                            int selectedRow = tblProductionSleeve.getSelectedRow();
-                            Order o = psmodel.getEventsByRow(selectedRow);
-                            
-                        }
-                    });
-
+                {                   
+                    int selectedRow = tblProductionSleeve.getSelectedRow();
+                    Order o = psmodel.getEventsByRow(selectedRow);
+                    new OrderInfo(o).setVisible(true);
                 }
-                new OrderInfo(o).setVisible(true);
+               
             }
         });
     }
@@ -951,9 +944,9 @@ public class Overview extends javax.swing.JFrame implements Observer
             .addGroup(pnlOrderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlOrderInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
         pnlOrderLayout.setVerticalGroup(
             pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2163,7 +2156,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReset1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlLoggedIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(localeLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -2178,8 +2171,8 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(localeLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 3, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
