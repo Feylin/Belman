@@ -4,6 +4,7 @@
  */
 package BLL;
 
+import BE.Order;
 import BE.Sleeve;
 import DAL.SleeveDBManager;
 import java.io.IOException;
@@ -31,8 +32,8 @@ public class SleeveManager extends Observable
         return instance;
     }
     
-     public ArrayList<Sleeve> getAll() throws IOException, SQLException
+     public ArrayList<Sleeve> getSleevesByOrder(Order o) throws IOException, SQLException
     {
-       return accessor.getAllSleeves();       
+       return accessor.getSleevesByOrder(o);       
     }
 }

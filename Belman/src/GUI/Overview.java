@@ -333,7 +333,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
-            slmodel = new SleeveTableModel(slmgr.getAll());
+//            slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
 
             smgr = StockItemManager.getInstance();
@@ -2220,7 +2220,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         try
         {
-            slmodel = new SleeveTableModel(slmgr.getAll());
+//            slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
 
             tblStockList2.setModel(smodel);
@@ -2271,7 +2271,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
             try
             {
-                slmodel = new SleeveTableModel(slmgr.getAll());
+//                slmodel = new SleeveTableModel(slmgr.getAll());
                 tblSleeveList.setModel(slmodel);
 
                 tblStockList2.setModel(smodel);
