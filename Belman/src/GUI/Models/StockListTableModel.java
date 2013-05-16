@@ -62,5 +62,4 @@ public class StockListTableModel extends AbstractTableModel
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-  
 }

@@ -338,7 +338,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
-
+            smodel2 = new StockListTableModel();
             tblStockList2.setModel(smodel2);
 
 
@@ -373,7 +373,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
                             if (!smgr.getItemBySleeve(s).isEmpty())
                             {
-
+                                smodel2 = new StockListTableModel();
                                 tblStockList2.setModel(smodel2);
                             }
 
@@ -396,7 +396,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
         }
     }
-
+    
     private void productionSleeveListSelectioner()
     {
         try
@@ -2217,28 +2217,28 @@ public class Overview extends javax.swing.JFrame implements Observer
     // RESET BUTTON DOES NOT WORK!!!!!!
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
-
-        try
-        {
-            slmodel = new SleeveTableModel(slmgr.getAll());
-            tblSleeveList.setModel(slmodel);
-
-            tblStockList2.setModel(smodel);
-            omodel2 = new OrderTablemodel(omgr.getAll());
-            tblOrderList1.setModel(omodel);
-//            tblSleeveList.repaint(); 
-
-        }
-        catch (Exception ex)
-        {
-            ex.getMessage();
-        }
-        finally
-        {
-            tblOrderList1.clearSelection();
-            tblStockList2.clearSelection();
-            tblSleeveList.clearSelection();
-        }
+//
+//        try
+//        {
+//            slmodel = new SleeveTableModel(slmgr.getAll());
+//            tblSleeveList.setModel(slmodel);
+//
+//            tblStockList2.setModel(smodel);
+//            omodel2 = new OrderTablemodel(omgr.getAll());
+//            tblOrderList1.setModel(omodel);
+////            tblSleeveList.repaint(); 
+//
+//        }
+//        catch (Exception ex)
+//        {
+//            ex.getMessage();
+//        }
+//        finally
+//        {
+//            tblOrderList1.clearSelection();
+//            tblStockList2.clearSelection();
+//            tblSleeveList.clearSelection();
+//        }
 
     }//GEN-LAST:event_btnResetActionPerformed
 
