@@ -111,7 +111,7 @@ public class Login extends javax.swing.JFrame
         {
             String username = txtOperator.getText();
             char[] pass = jpfPassword.getPassword();
-            String password = new String(pass);
+            String password = new String(pass);            
 
             try
             {
