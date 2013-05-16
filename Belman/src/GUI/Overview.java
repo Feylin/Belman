@@ -17,24 +17,16 @@ import GUI.Models.ProductionSleeveTableModel;
 import GUI.Models.SleeveTableModel;
 import GUI.Models.StockList2TableModel;
 import GUI.Models.StockListTableModel;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.ListSelectionModel;
 import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -61,11 +53,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private StockListTableModel smodel2 = null;
     private ProductionSleeveTableModel psmodel = null;
     private StockList2TableModel smodel3 = null;
-    private int clickCount;
-    private boolean doubleClick;
-    private boolean leftClick;
     Order o;
-    private Timer timer;
 
     /**
      * Creates new form Overview
@@ -74,6 +62,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
         Locale locale = Locale.getDefault();
         rb = ResourceBundle.getBundle("GUI.Bundle");
+//        setExtendedState(MAXIMIZED_BOTH); MAXIMIZED WINDOW
         initComponents();
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
 //        loggedInAs();
@@ -83,21 +72,9 @@ public class Overview extends javax.swing.JFrame implements Observer
         orderListSelectioner();
         localeLanguage.setLocale(locale);
         mouseListener();
-
-
+        setTableColumnSize();
+        setTableSelectionMode();
         updateGUILanguage();
-
-
-
-        tblProductionSleeve.getColumnModel().getColumn(0).setPreferredWidth(190);
-        tblProductionSleeve.getColumnModel().getColumn(1).setPreferredWidth(120);
-        tblProductionSleeve.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tblProductionSleeve.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tblProductionSleeve.getColumnModel().getColumn(4).setPreferredWidth(100);
-        tblProductionSleeve.getColumnModel().getColumn(5).setPreferredWidth(100);
-        tblProductionSleeve.getColumnModel().getColumn(6).setPreferredWidth(100);
-        tblProductionSleeve.getColumnModel().getColumn(7).setPreferredWidth(100);
-
     }
 
     public static Overview getInstance()
@@ -107,6 +84,30 @@ public class Overview extends javax.swing.JFrame implements Observer
             instance = new Overview();
         }
         return instance;
+    }
+    
+    private void setTableColumnSize()
+    {
+        tblProductionSleeve.getColumnModel().getColumn(0).setPreferredWidth(190);
+        tblProductionSleeve.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tblProductionSleeve.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tblProductionSleeve.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tblProductionSleeve.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tblProductionSleeve.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tblProductionSleeve.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tblProductionSleeve.getColumnModel().getColumn(7).setPreferredWidth(100);
+    }
+    
+    private void setTableSelectionMode()
+    {
+        tblOrderList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblOrderList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblOrderList2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblProductionSleeve.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblSleeveList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblStockList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblStockList2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblStockList3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     private void updateGUILanguage()
@@ -140,7 +141,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         border6.setTitle(rb.getString("Overview.pnlOrderStock.border.title"));
         TitledBorder border7 = (TitledBorder) pnlOrderStock.getBorder();
         border7.setTitle(rb.getString("Overview.pnlControlPanel1.border.title"));
-
 
         rbtnUrgent.setText(rb.getString("Overview.rbtnUrgent.text"));
         rbtnPending.setText(rb.getString("Overview.rbtnPending.text"));
@@ -333,7 +333,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
-            slmodel = new SleeveTableModel(slmgr.getAll());
+//            slmodel = new SleeveTableModel(slmgr.getAll());
             tblSleeveList.setModel(slmodel);
 
             smgr = StockItemManager.getInstance();
@@ -2217,28 +2217,28 @@ public class Overview extends javax.swing.JFrame implements Observer
     // RESET BUTTON DOES NOT WORK!!!!!!
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
-//
-//        try
-//        {
+
+        try
+        {
 //            slmodel = new SleeveTableModel(slmgr.getAll());
-//            tblSleeveList.setModel(slmodel);
-//
-//            tblStockList2.setModel(smodel);
-//            omodel2 = new OrderTablemodel(omgr.getAll());
-//            tblOrderList1.setModel(omodel);
-////            tblSleeveList.repaint(); 
-//
-//        }
-//        catch (Exception ex)
-//        {
-//            ex.getMessage();
-//        }
-//        finally
-//        {
-//            tblOrderList1.clearSelection();
-//            tblStockList2.clearSelection();
-//            tblSleeveList.clearSelection();
-//        }
+            tblSleeveList.setModel(slmodel);
+
+            tblStockList2.setModel(smodel);
+            omodel2 = new OrderTablemodel(omgr.getAll());
+            tblOrderList1.setModel(omodel);
+//            tblSleeveList.repaint(); 
+
+        }
+        catch (Exception ex)
+        {
+            ex.getMessage();
+        }
+        finally
+        {
+            tblOrderList1.clearSelection();
+            tblStockList2.clearSelection();
+            tblSleeveList.clearSelection();
+        }
 
     }//GEN-LAST:event_btnResetActionPerformed
 
@@ -2271,7 +2271,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
             try
             {
-                slmodel = new SleeveTableModel(slmgr.getAll());
+//                slmodel = new SleeveTableModel(slmgr.getAll());
                 tblSleeveList.setModel(slmodel);
 
                 tblStockList2.setModel(smodel);

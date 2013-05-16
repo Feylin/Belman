@@ -6,6 +6,7 @@
 package DAL;
 
 import BE.Material;
+import BE.Order;
 import BE.Sleeve;
 import java.io.IOException;
 import java.sql.Connection;
@@ -49,12 +50,13 @@ public class SleeveDBManager
         return instance;
     }
     
-    public ArrayList<Sleeve> getAllSleeves() throws SQLException
+    public ArrayList<Sleeve> getSleevesByOrder(Order o) throws SQLException
     {
          try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT Sleeve.*, Material.name FROM Sleeve, Material WHERE Sleeve.materialId = Material.id";
+            String sql = "SELECT * FROM Sleeve, Material, ProductionOrder WHERE Sleeve.materialId = Material.id AND Sleeve.pOrderId = ProductionOrder.pOrderId AND ProductionOrder.pOrder = ?";
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, o.getOrderName());
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Sleeve> sleeves = new ArrayList<>();
