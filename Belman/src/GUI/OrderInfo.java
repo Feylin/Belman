@@ -5,17 +5,23 @@
 package GUI;
 
 import BE.Order;
-import BE.Sleeve;
 import BLL.OrderManager;
 import BLL.SleeveManager;
 import BLL.StockItemManager;
-import GUI.Models.OrderTablemodel;
 import GUI.Models.SleeveTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.Timer;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
@@ -23,12 +29,25 @@ import javax.swing.event.ListSelectionListener;
  */
 public class OrderInfo extends javax.swing.JFrame implements Observer
 {
-     private Order order;
-     private SleeveTableModel slmodel = null;
-     static SleeveManager slmgr = null;
-     static StockItemManager smgr = null;
-     static OrderManager omgr = null;
-     
+
+    private Order order;
+    private SleeveTableModel slmodel = null;
+    static SleeveManager slmgr = null;
+    static StockItemManager smgr = null;
+    static OrderManager omgr = null;
+    private GregorianCalendar date = new GregorianCalendar();
+    final DateFormat startTimeFormat = new SimpleDateFormat("HH:mm:ss");
+    final DateFormat endTimeFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+//    long starTime = System.currentTimeMillis();
+//    long endTime = System.currentTimeMillis();
+    int day, month, year;
+    int hour, minute, second;
+    DateTime jodaTime = new DateTime();
+    DateTimeFormatter jodaTimeFormat = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm:ss");
+    private int elapsedTimeMin;
+    private int elapsedTimeSec;
+    private int elapsedTimeHour;
+    Timer timer;
 
     /**
      * Creates new form OrderInfo
@@ -37,15 +56,16 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     {
         order = o;
         initComponents();
-       
+        buttonState();
+
         txtOrderName.setText(o.getOrderName());
         txtOrderId.setText(String.valueOf(o.getOrderId()));
-       
+
         lblSleeves.setText(String.valueOf("Sleeves to be made " + " 0 " + " / " + o.getQuantity()));
-        
-         try
+
+        try
         {
-            
+
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getSleevesByOrder(o));
@@ -53,7 +73,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             omgr = OrderManager.getInstance();
             omgr.addObserver(this);
             smgr = StockItemManager.getInstance();
-            smgr.addObserver(this);                    
+            smgr.addObserver(this);
 
 
 //            tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
@@ -100,12 +120,20 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         catch (Exception e)
         {
         }
-        
+
 //        txtDueDate.setText(o.printDate(o.getDueDate()));
 //        txtQuantity.setText("" + o.getQuantity());
     }
-    
-    
+
+    private void buttonState()
+    {
+        if (jTextField5.getText().isEmpty())
+        {
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -445,46 +473,105 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
+        Date date = new Date();
+//        String time = startTimeFormat.format(date);
+//        jTextField5.setText(time);
 
-        String option = "Pending";
-        String option2 = "Paused";
-        if(order.getStatus().equals(option) || order.getStatus().equals(option2))
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+
+//        day = date.get(Calendar.DAY_OF_MONTH);
+//        month = date.get(Calendar.MONTH) + 1;
+//        year = date.get(Calendar.YEAR);
+//        hour = date.get(Calendar.HOUR_OF_DAY);
+//        minute = date.get(Calendar.MINUTE);
+//        second = date.get(Calendar.SECOND);
+//        String dates = day +"/" +month +"/" +year;
+//        String time = hour +":" +minute +":" +second;
+//        
+//        jTextField5.setText(dates +" " +time);
+
+        jTextField5.setText(jodaTimeFormat.print(jodaTime));
+
+//        jTextField5.setText(DateFormat.(System.currentTimeMillis(), "MM/dd/yy HH:mm"));
+
+        if (jTextField7.getText().isEmpty())
         {
-        order.setStatus("In Progress");
-        omgr.updateStatus(order);
-        String message = "Production Order " + order.getOrderId() + " status has been updated.";
-        JOptionPane.showMessageDialog(this, message, "Update succesfull", JOptionPane.INFORMATION_MESSAGE);
+            elapsedTimeHour = 0;
+            elapsedTimeMin = 0;
+            elapsedTimeSec = 0;
+            timer = new Timer(1000, new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    if (elapsedTimeSec < 59)
+                    {
+                        elapsedTimeSec++;
+                    }
+                    else
+                    {
+                        elapsedTimeSec = 0;
+                        elapsedTimeMin++;
+                    }
+                    if (elapsedTimeMin == 60)
+                    {
+                        elapsedTimeHour++;
+                        elapsedTimeMin = 0;
+                    }
+                    jTextField7.setText(elapsedTimeHour + ":" + elapsedTimeMin + ":" + elapsedTimeSec);
+                }
+            });
+            timer.setInitialDelay(0);
+            timer.start();
         }
         else
         {
-        String message = "Production Order " + order.getOrderId() + " status is already: In progress.";
-        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+            timer.start();
+        }
+
+        String option = "Pending";
+        String option2 = "Paused";
+        if (order.getStatus().equals(option) || order.getStatus().equals(option2))
+        {
+            order.setStatus("In Progress");
+            omgr.updateStatus(order);
+            String message = "Production Order " + order.getOrderId() + " status has been updated.";
+            JOptionPane.showMessageDialog(this, message, "Update succesfull", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+            String message = "Production Order " + order.getOrderId() + " status is already: In progress.";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-        String option = "In Progress";        
-        if(order.getStatus().equals(option))
+        Date dater = new Date();
+        String time = endTimeFormat.format(dater);
+        jTextField6.setText(time);
+        timer.stop();
+
+        String option = "In Progress";
+        if (order.getStatus().equals(option))
         {
-       
-        order.setStatus("Paused");
-        omgr.updateStatus(order);
-        String message = "Production Order " + order.getOrderId() + " status has been paused.";
-        JOptionPane.showMessageDialog(this, message, "Pause succesfull", JOptionPane.INFORMATION_MESSAGE);
-         new SleeveInfo().setVisible(true);
+            order.setStatus("Paused");
+            omgr.updateStatus(order);
+            String message = "Production Order " + order.getOrderId() + " status has been paused.";
+            JOptionPane.showMessageDialog(this, message, "Pause succesfull", JOptionPane.INFORMATION_MESSAGE);
+            new SleeveInfo().setVisible(true);
         }
         else
         {
-        String message = "Production Order " + order.getOrderId() + " status is not in progress or already paused.";
-        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+            String message = "Production Order " + order.getOrderId() + " status is not in progress or already paused.";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         dispose();
     }//GEN-LAST:event_btnOkActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
     private javax.swing.JButton jButton1;
@@ -523,6 +610,5 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     @Override
     public void update(Observable o, Object arg)
     {
-        
     }
 }
