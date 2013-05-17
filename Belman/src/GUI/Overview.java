@@ -8,6 +8,7 @@ import BE.Order;
 import BE.Sleeve;
 import BE.StockItem;
 import BLL.MaterialManager;
+import BLL.OperatorManager;
 import BLL.OrderManager;
 import BLL.SleeveManager;
 import BLL.StockItemManager;
@@ -21,10 +22,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.Timer;
@@ -43,6 +49,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     static StockItemManager smgr = null;
     static MaterialManager mmgr = null;
     static SleeveManager slmgr = null;
+    static OperatorManager opmgr = null;
     private OrderTablemodel omodel = null;
     private static Overview instance = null;
     private StockListTableModel smodel = null;
@@ -75,6 +82,9 @@ public class Overview extends javax.swing.JFrame implements Observer
         setTableColumnSize();
         setTableSelectionMode();
         updateGUILanguage();
+        initiateCbx();
+        
+        
     }
     
     public static Overview getInstance()
@@ -167,7 +177,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblThickness.setText(rb.getString("Overview.lblThickness.text"));
         lblWidth.setText(rb.getString("Overview.lblWidth.text"));
         lblOrder.setText(rb.getString("Overview.lblOrder.text"));
-        lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") + Login.getInstance().getOperator());
+//        lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") + Login.getInstance().getOperator());
         lblPhone.setText(rb.getString("Overview.lblPhone.text"));
         lblEmail.setText(rb.getString("Overview.lblEmail.text"));
         lblSleeve.setText(rb.getString("Overview.lblSleeve.text"));
@@ -178,11 +188,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblMaterialID.setText(rb.getString("Overview.lblMaterialID.text"));
     }
     
-    private void loggedInAs()
-    {
-        String operator = Login.getInstance().getOperator();
-        lblLoggedIn.setText("Logged in as " + operator);
-    }
+//    private void loggedInAs()
+//    {
+//        String operator = Login.getInstance().getOperator();
+//        lblLoggedIn.setText("Logged in as " + operator);
+//    }
     
     private void closePressed()
     {
@@ -526,40 +536,27 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
     }
+    
+    private void initiateCbx()
+    {
+         try
+        {
+            opmgr = OperatorManager.getInstance();
+        }        
+        catch (IOException ex)
+        {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try
+        {            
+            cbxOperator.setModel(new javax.swing.DefaultComboBoxModel(opmgr.getAllOperators().toArray()));
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Overview.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
-    // SKAL MÅSKE BRUGES!!!!!!!!
-//    
-//      public void mouseClicked(MouseEvent evt) { 
-//    if (evt.getButton()==MouseEvent.BUTTON1){
-//        leftClick = true; clickCount = 0;
-//        if(evt.getClickCount() == 2) doubleClick=true;
-//        Integer timerinterval = (Integer)Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval");
-//
-//                   timer = new Timer(timerinterval, new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {  
-//                        if(doubleClick){
-//                           
-//                            clickCount++;
-//                            if(clickCount == 2){
-//                                rfbProto.capture();
-//                                clickCount=0;
-//                                doubleClick = false;
-//                            }
-//
-//                        } else {
-//
-//                            sb = new StringBuffer();
-//                            sb.append("Left Mouse");
-//                            System.out.println("single click.");
-//                            rfbProto.capture();
-//                        }
-//                    }               
-//                });
-//                timer.setRepeats(false);
-//                timer.start();
-//                if(evt.getID()==MouseEvent.MOUSE_RELEASED) timer.stop();
-//    }           
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -706,6 +703,8 @@ public class Overview extends javax.swing.JFrame implements Observer
         btnLogout = new javax.swing.JButton();
         btnReset1 = new javax.swing.JButton();
         localeLanguage = new com.toedter.components.JLocaleChooser();
+        cbxOperator = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         itemExit = new javax.swing.JMenuItem();
@@ -2023,7 +2022,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addComponent(txtCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlMeasurements2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlInstockLayout = new javax.swing.GroupLayout(pnlInstock);
@@ -2104,6 +2103,17 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
+        cbxOperator.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxOperator.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cbxOperatorActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText(bundle.getString("Overview.jLabel4.text")); // NOI18N
+
         menuFile.setText(bundle.getString("Overview.menuFile.text")); // NOI18N
 
         itemExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_MASK));
@@ -2167,6 +2177,10 @@ public class Overview extends javax.swing.JFrame implements Observer
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlLoggedIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxOperator, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(localeLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -2178,7 +2192,10 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlLoggedIn, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(localeLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(localeLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxOperator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addGap(0, 3, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2368,6 +2385,13 @@ public class Overview extends javax.swing.JFrame implements Observer
             btnReset1.setVisible(false);
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void cbxOperatorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cbxOperatorActionPerformed
+    {//GEN-HEADEREND:event_cbxOperatorActionPerformed
+      
+        lblLoggedIn.setText("Logged in as " + cbxOperator.getItemAt(0).toString());        
+    }//GEN-LAST:event_cbxOperatorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanalStockInfo;
     private javax.swing.JPanel JPanalStockInfo1;
@@ -2377,6 +2401,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JButton btnOk;
     private javax.swing.JButton btnReset1;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox cbxOperator;
     private javax.swing.JMenuItem itemExit;
     private javax.swing.JMenuItem itemHelp;
     private javax.swing.JMenuItem itemLogOut;
@@ -2384,6 +2409,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
