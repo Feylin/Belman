@@ -458,10 +458,12 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         String option = "In Progress";        
         if(order.getStatus().equals(option))
         {
+       
         order.setStatus("Paused");
         omgr.updateStatus(order);
         String message = "Production Order " + order.getOrderId() + " status has been paused.";
         JOptionPane.showMessageDialog(this, message, "Pause succesfull", JOptionPane.INFORMATION_MESSAGE);
+         new SleeveInfo().setVisible(true);
         }
         else
         {
