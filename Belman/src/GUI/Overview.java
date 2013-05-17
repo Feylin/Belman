@@ -46,13 +46,13 @@ public class Overview extends javax.swing.JFrame implements Observer
     private OrderTablemodel omodel = null;
     private static Overview instance = null;
     private StockListTableModel smodel = null;
-    private MaterialTableModel mmodel = null;
+    private StockListTableModel smodel4 = null;
     private OrderTablemodel omodel2 = null;
     private SleeveTableModel slmodel = null;
     private ResourceBundle rb = null;
     private StockListTableModel smodel2 = null;
     private ProductionSleeveTableModel psmodel = null;
-    private StockList2TableModel smodel3 = null;
+    private StockList2TableModel smodel3 = null;   
     Order o;
 
     /**
@@ -494,8 +494,8 @@ public class Overview extends javax.swing.JFrame implements Observer
                         }
                         else
                         {
-                            smodel2 = new StockListTableModel();
-                            tblStockList3.setModel(smodel2);
+                            smodel4 = new StockListTableModel();
+                            tblProductionSleeve.setModel(smodel4);
                         }
                     }
                     catch (Exception e)

@@ -64,13 +64,25 @@ public class OrderManager extends Observable
             notifyObservers();
         }
         catch (SQLException e)
-        {
+        {            
         }
     }
 
     public ArrayList<Order> getAll() throws IOException, SQLException
     {
         return accessor.getAll();
+    }
+    
+    public void updateStatus(Order o)
+    {
+        try{
+            accessor.updateStatus(o);
+            setChanged();
+            notifyObservers();
+        }
+        catch( SQLException e ){
+            e.getMessage();
+        }
     }
 
     public ArrayList<Order> getOrderByMaterial(StockItem s) throws SQLException, IOException

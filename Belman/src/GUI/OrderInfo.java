@@ -13,6 +13,7 @@ import GUI.Models.OrderTablemodel;
 import GUI.Models.SleeveTableModel;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -22,16 +23,21 @@ import javax.swing.event.ListSelectionListener;
  */
 public class OrderInfo extends javax.swing.JFrame implements Observer
 {
+     private Order order;
      private SleeveTableModel slmodel = null;
      static SleeveManager slmgr = null;
      static StockItemManager smgr = null;
+     static OrderManager omgr = null;
+     
 
     /**
      * Creates new form OrderInfo
      */
     public OrderInfo(Order o)
     {
+        order = o;
         initComponents();
+       
         txtOrderName.setText(o.getOrderName());
         txtOrderId.setText(String.valueOf(o.getOrderId()));
        
@@ -39,11 +45,13 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         
          try
         {
+            
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getSleevesByOrder(o));
             tblSleeve.setModel(slmodel);
-
+            omgr = OrderManager.getInstance();
+            omgr.addObserver(this);
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);                    
 
@@ -213,8 +221,22 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         lblSleeves.setText("Sleeves to be made:");
 
         jButton1.setText("Start");
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Pause");
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Finish");
 
@@ -339,7 +361,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -406,26 +427,51 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
+    {//GEN-HEADEREND:event_jButton1ActionPerformed
+
+        String option = "Pending";
+        String option2 = "Paused";
+        if(order.getStatus().equals(option) || order.getStatus().equals(option2))
+        {
+        order.setStatus("In Progress");
+        omgr.updateStatus(order);
+        String message = "Production Order " + order.getOrderId() + " status has been updated.";
+        JOptionPane.showMessageDialog(this, message, "Update succesfull", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+        String message = "Production Order " + order.getOrderId() + " status is already: In progress.";
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
+    {//GEN-HEADEREND:event_jButton2ActionPerformed
+        String option = "In Progress";        
+        if(order.getStatus().equals(option))
+        {
+        order.setStatus("Paused");
+        omgr.updateStatus(order);
+        String message = "Production Order " + order.getOrderId() + " status has been paused.";
+        JOptionPane.showMessageDialog(this, message, "Pause succesfull", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else
+        {
+        String message = "Production Order " + order.getOrderId() + " status is not in progress or already paused.";
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -434,7 +480,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea2;
@@ -446,7 +491,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblSleeves;
-    private javax.swing.JLabel lblSleeves2;
     private javax.swing.JTable tblSleeve;
     private javax.swing.JTextField txtOrderId;
     private javax.swing.JTextField txtOrderName;
@@ -455,6 +499,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     @Override
     public void update(Observable o, Object arg)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 }

@@ -9,6 +9,7 @@ import BE.Order;
 import BE.SalesOrder;
 import BE.Sleeve;
 import BE.StockItem;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -125,7 +126,7 @@ public class ProductionOrderDBManager
             }
             return orders;
         }
-    }
+    }      
     
     
 
@@ -145,7 +146,24 @@ public class ProductionOrderDBManager
         }
     }
     
-    
+    public void updateStatus(Order o) throws SQLException
+    {
+        try(Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE ProductionOrder SET ProductionOrder.status = ? WHERE ProductionOrder.pOrderId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, o.getStatus());
+            ps.setInt(2, o.getOrderId());  
+            
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0)
+            {
+                 throw new SQLException( "Unable to update Status" );
+            }
+        }
+    }
 
     public void update(Order o) throws SQLException
     {
