@@ -18,7 +18,6 @@ public class Order
     private String orderName;
     private GregorianCalendar dueDate;
     private int quantity;
-    private double thickness;
     private double width;
     private String status;
     private SalesOrder salesOrder;
@@ -36,14 +35,13 @@ public class Order
      * @param width
      * @param status
      */
-    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, String status, SalesOrder salesOrder, Sleeve sleeve)
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double width, String status, SalesOrder salesOrder, Sleeve sleeve)
     {
         this.sOrderId = sOrderId;
         this.orderId = orderId;
         this.orderName = orderName;
         this.dueDate = dueDate;
         this.quantity = quantity;
-        this.thickness = thickness;
         this.width = width;
         this.status = status;
         this.salesOrder = salesOrder;
@@ -57,7 +55,6 @@ public class Order
                 o.getOrderName(),
                 o.getDueDate(),
                 o.getQuantity(),
-                o.getThickness(),
                 o.getWidth(),
                 o.getStatus(),
                 o.getSalesOrder(),
@@ -136,21 +133,7 @@ public class Order
         this.quantity = quantity;
     }
 
-    /**
-     * @return the thickness
-     */
-    public double getThickness()
-    {
-        return thickness;
-    }
 
-    /**
-     * @param thickness the thickness to set
-     */
-    public void setThickness(double thickness)
-    {
-        this.thickness = thickness;
-    }
 
     /**
      * @return the width
