@@ -4,7 +4,6 @@
  */
 package GUI.Models;
 
-import BE.Order;
 import BE.Sleeve;
 import java.util.ArrayList;
 import java.util.Collection;
