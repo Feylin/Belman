@@ -64,6 +64,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtOrderName.setText(o.getOrderName());
         txtOrderId.setText(String.valueOf(o.getOrderId()));
 
+        
         lblSleeves.setText(String.valueOf("Sleeves to be made " + " 0 " + " / " + o.getQuantity()));
 
         try
@@ -77,6 +78,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             omgr.addObserver(this);
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
+            
+           
 
 
 //            tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()

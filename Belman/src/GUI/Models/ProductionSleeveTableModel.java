@@ -54,7 +54,7 @@ public class ProductionSleeveTableModel extends AbstractTableModel
            case 0 : return o.getOrderName();
            case 1 : return o.printDate(o.getDueDate());
            case 2 : return o.getSleeve().getMaterialName();
-           case 3 : return o.getThickness();
+           case 3 : return o.getSleeve().getThickness();
            case 4 : return o.getSleeve().getCircumference();
            case 5 : return o.getWidth();
            case 6 : return o.getQuantity();
@@ -90,8 +90,8 @@ public class ProductionSleeveTableModel extends AbstractTableModel
             case 0 : or.getOrderName(); break;
             case 1 : or.getDueDate(); break;
             case 2 : or.getSleeve().getMaterialName(); break;
-            case 3 : or.getThickness(); break;
-            case 4 : or.getSleeve().getThickness(); break;
+            case 3 : or.getSleeve().getThickness(); break;
+            case 4 : or.getSleeve().getCircumference(); break;
             case 5 : or.getWidth(); break;
             case 6 : or.getQuantity(); break;
             case 7 : or.getStatus(); break;

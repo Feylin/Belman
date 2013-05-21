@@ -36,4 +36,9 @@ public class SleeveManager extends Observable
     {
        return accessor.getSleevesByOrder(o);       
     }
+     
+     public ArrayList<Sleeve> getAllSleeves() throws IOException, SQLException             
+    {
+       return accessor.getAllSleeves();      
+    }
 }

@@ -46,6 +46,11 @@ public class OrderManager extends Observable
         notifyObservers();
         return o;
     }
+    
+     public ArrayList<Order> getPaused() throws IOException, SQLException
+    {
+        return accessor.getPaused();
+    }
 
     /**
      * Opdaterer en ordre i databasen

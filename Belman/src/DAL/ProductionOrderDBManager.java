@@ -50,15 +50,14 @@ public class ProductionOrderDBManager
         try (Connection con = connector.getConnection())
         {
             String sql = "INSERT INTO ProductionOrder(sOrderId, pOrder, dueDate, quantity, "
-                    + " thickness, width, status) VALUES (?,?,?,?,?,?,?)";
+                    + " thickness, width, status) VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, order.getsOrderId());
             ps.setString(2, order.getOrderName());
             ps.setString(3, convertDateToSQL(order.getDueDate()));
             ps.setInt(4, order.getQuantity());
-            ps.setDouble(5, order.getThickness());
-            ps.setDouble(6, order.getWidth());
-            ps.setString(7, order.getStatus());
+            ps.setDouble(5, order.getWidth());
+            ps.setString(6, order.getStatus());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -77,7 +76,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id ORDER BY ProductionOrder.dueDate, Sleeve.materialId, ProductionOrder.thickness";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId ORDER BY ProductionOrder.dueDate";
             PreparedStatement ps = con.prepareStatement( sql );
             ResultSet rs = ps.executeQuery();
 
@@ -94,7 +93,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material, StockItem, CoilType WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND Material.id = CoilType.materialId AND CoilType.id = StockItem.coilTypeId AND Sleeve.thickness = CoilType.thickness AND StockItem.chargeNo = ? ORDER BY ProductionOrder.dueDate, Sleeve.materialId, ProductionOrder.thickness";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material, StockItem, CoilType WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND Material.id = CoilType.materialId AND CoilType.id = StockItem.coilTypeId AND Sleeve.thickness = CoilType.thickness AND StockItem.chargeNo = ? ORDER BY ProductionOrder.dueDate, Sleeve.materialId, Sleeve.thickness";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, s.getChargeNo());
 
@@ -113,7 +112,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, StockItem, CoilType, Material, Sleeve, SalesOrder WHERE ProductionOrder.thickness = Sleeve.thickness AND Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId AND Sleeve.id = ?";        
+            String sql = "SELECT * FROM ProductionOrder, StockItem, CoilType, Material, Sleeve, SalesOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId AND Sleeve.id = ?";        
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, s.getId());
 
@@ -169,17 +168,16 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "UPDATE ProductionOrder SET sOrderId = ?, pOrder = ?, dueDate = ?, quantity = ?, thickness = ?, widch = ?, status = ? WHERE pOrderId = ?";
+            String sql = "UPDATE ProductionOrder SET sOrderId = ?, pOrder = ?, dueDate = ?, quantity = ?, width = ?, status = ? WHERE pOrderId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setInt(1, o.getsOrderId());
             ps.setString(2, o.getOrderName());
             ps.setString(3, convertDateToSQL(o.getDueDate()));
             ps.setInt(4, o.getQuantity());
-            ps.setDouble(5, o.getThickness());
-            ps.setDouble(7, o.getWidth());
-            ps.setString(8, o.getStatus());
-            ps.setInt (9, o.getOrderId());            
+            ps.setDouble(5, o.getWidth());
+            ps.setString(6, o.getStatus());
+            ps.setInt (7, o.getOrderId());            
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -189,6 +187,26 @@ public class ProductionOrderDBManager
 //            ps.setString(9, o.getType().toString());
         }
 
+    }
+    
+      public ArrayList<Order> getPaused() throws SQLException, IOException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND ProductionOrder.status = 'PAUSED' ORDER BY ProductionOrder.dueDate, Sleeve.materialId, ProductionOrder.thickness";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            ArrayList<Order> orders1 = new ArrayList<>();
+            while (rs.next())
+            {
+                 orders1.add(getOneOrder(rs));
+                 
+            }
+            return orders1;
+        }
+        
     }
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
@@ -202,7 +220,6 @@ public class ProductionOrderDBManager
         int quantity = rs.getInt("quantity");
 //      int materialId = rs.getInt("materialId");
 //      String name = rs.getString("name");
-        double thickness = rs.getDouble("thickness");
         double width = rs.getDouble("width");
         String status = rs.getString("status");
         
@@ -211,12 +228,12 @@ public class ProductionOrderDBManager
         String email = rs.getString("email");
         int phone = rs.getInt("phone");
         
-       
+        double thickness = rs.getDouble("thickness");
         double circumference = rs.getDouble("circumference");
         String materialName = rs.getString("name");                     
         
 
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, thickness, width, status, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, -1, circumference, -1, -1, new Material(materialName)));
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, width, status, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)));
     }
 
     protected String convertDateToSQL(GregorianCalendar date)
