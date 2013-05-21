@@ -4,6 +4,7 @@
  */
 package GUI;
 
+// <editor-fold defaultstate="collapsed" desc="Imports">                          
 import BE.Operator;
 import BE.Order;
 import BE.StockItem;
@@ -32,6 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+// </editor-fold> 
 
 /**
  *
