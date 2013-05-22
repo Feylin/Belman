@@ -76,7 +76,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId ORDER BY ProductionOrder.dueDate";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId ORDER BY UrgentFlag DESC, ProductionOrder.dueDate";
             PreparedStatement ps = con.prepareStatement( sql );
             ResultSet rs = ps.executeQuery();
 
@@ -222,6 +222,7 @@ public class ProductionOrderDBManager
 //      String name = rs.getString("name");
         double width = rs.getDouble("width");
         String status = rs.getString("status");
+        boolean urgent = rs.getBoolean("urgentFlag");
         
         int sOrderId = rs.getInt("sOrderId");
         String custName = rs.getString("sOrder");
@@ -233,7 +234,7 @@ public class ProductionOrderDBManager
         String materialName = rs.getString("name");                     
         
 
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, width, status, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)));
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)));
     }
 
     protected String convertDateToSQL(GregorianCalendar date)
