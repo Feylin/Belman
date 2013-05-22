@@ -18,27 +18,37 @@ import java.util.Observable;
  */
 public class SleeveManager extends Observable
 {
-    
+
     private SleeveDBManager accessor;
     private static SleeveManager instance;
-    
+
     private SleeveManager() throws IOException
     {
         accessor = SleeveDBManager.getInstance();
     }
-    
-    public static SleeveManager getInstance() throws IOException{
-        if( instance == null ) instance = new SleeveManager();
+
+    public static SleeveManager getInstance() throws IOException
+    {
+        if (instance == null)
+        {
+            instance = new SleeveManager();
+        }
         return instance;
     }
-    
-     public ArrayList<Sleeve> getSleevesByOrder(Order o) throws IOException, SQLException
+
+    public ArrayList<Sleeve> getSleevesByOrder(Order order) throws IOException, SQLException
     {
-       return accessor.getSleevesByOrder(o);       
+        return accessor.getSleevesByOrder(order);
     }
-     
-     public ArrayList<Sleeve> getAllSleeves() throws IOException, SQLException             
+
+    public Sleeve get(int id) throws SQLException
     {
-       return accessor.getAllSleeves();      
+        return accessor.get(id);
+    }
+
+    public void update(Sleeve sleeve) throws SQLException
+    {
+        accessor.updateSleeve(sleeve);
     }
 }
+

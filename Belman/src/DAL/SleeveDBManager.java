@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,27 +52,11 @@ public class SleeveDBManager
         return instance;
     }
     
-      public ArrayList<Sleeve> getAllSleeves() throws SQLException
+      public ArrayList<Sleeve> getSleevesByOrder(Order o) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Sleeve, Material, ProductionOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            ArrayList<Sleeve> sleeves = new ArrayList<>();
-            while (rs.next())
-            {
-                sleeves.add(getOneSleeve(rs));
-            }
-            return sleeves;
-        }
-    }
-      public ArrayList<Sleeve> getSleevesByOrder(Order o) throws SQLException
-    {
-         try (Connection con = connector.getConnection())
-        {
-            String sql = "SELECT * FROM Sleeve, Material, ProductionOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.Id AND ProductionOrder.pOrder = ?";
+            String sql = "SELECT Sleeve.*, Material.Name FROM Sleeve, Material, ProductionOrder WHERE Sleeve.materialId = Material.id AND Sleeve.pOrderId = ProductionOrder.pOrderId AND ProductionOrder.pOrder = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, o.getOrderName());
             ResultSet rs = ps.executeQuery();
@@ -84,25 +69,17 @@ public class SleeveDBManager
             return sleeves;
         }
     }
+
+ 
     
     public Sleeve getOneSleeve(ResultSet rs) throws SQLException
     {
         int id = rs.getInt(ID);
-        GregorianCalendar gc = null;
-        Date date = rs.getTimestamp("startTime");
-        if(date != null)
-        {
-            gc = new GregorianCalendar();
-            gc.setTime(date);
-        }
-        GregorianCalendar gc2 = null;
-        date = rs.getTimestamp("endTime");
-        if(date != null)
-        {
-            gc2 = new GregorianCalendar();
-            gc2.setTime(date);
-        }       
-        double thickness = rs.getDouble("thickness");
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(rs.getTimestamp(START_TIME));
+        GregorianCalendar gc2 = new GregorianCalendar();
+        gc2.setTime(rs.getTimestamp(END_TIME));
+        double thickness = rs.getDouble(THICKNESS);
         double circumference = rs.getDouble(CIRCUMFERENCE);
         int materialId = rs.getInt(MATERIAL_ID);
         int pOrderId = rs.getInt(P_ORDER_ID);
@@ -110,6 +87,68 @@ public class SleeveDBManager
         
         return new Sleeve(id, gc, gc2, thickness, circumference, materialId, pOrderId, new Material(materialName));
     }
+
+        public Sleeve get(int id) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM Sleeve where id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                return getSleeve(rs);
+            }
+            return null;
+        }
+    }
+    
+    
+     public Sleeve getSleeve(ResultSet rs) throws SQLException
+    {
+        int id = rs.getInt(ID);
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(rs.getTimestamp(START_TIME));
+        GregorianCalendar gc2 = new GregorianCalendar();
+        gc2.setTime(rs.getTimestamp(END_TIME));
+        double thickness = rs.getDouble(THICKNESS);
+        double circumference = rs.getDouble(CIRCUMFERENCE);
+        int materialId = rs.getInt(MATERIAL_ID);
+        int pOrderId = rs.getInt(P_ORDER_ID);
+        
+        return new Sleeve(id, gc, gc2, thickness, circumference, materialId, pOrderId);
+    }
+
+    
+    public void updateSleeve(Sleeve s) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE Sleeve SET startTime = ?, endTime = ?, thickness = ?, circumference = ?, materialid = ?, porderid = ? WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            Date startDate = new Date();
+            Timestamp startTime = new Timestamp(startDate.getTime());
+            Date endDate = new Date();
+            Timestamp endTime = new Timestamp(endDate.getTime());  
+            ps.setTimestamp(1, startTime, s.getStartTime());            
+            ps.setTimestamp(2, endTime, s.getEndTime());            
+            ps.setDouble(3, s.getThickness());
+            ps.setDouble(4, s.getCircumference());
+            ps.setInt(5, s.getMaterialId());
+            ps.setInt(6, s.getpOrderId());
+            ps.setInt(7, s.getId());
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0)
+            {
+                throw new SQLException("Unable to update sleeve");
+            }
+        }
+    }
+    
+
     
     protected String convertDateToSQL(GregorianCalendar date)
     {

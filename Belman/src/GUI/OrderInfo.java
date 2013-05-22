@@ -132,6 +132,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
 
 //        txtDueDate.setText(o.printDate(o.getDueDate()));
