@@ -49,15 +49,16 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO ProductionOrder(sOrderId, pOrder, dueDate, quantity, "
-                    + " thickness, width, status) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO ProductionOrder(sOrderId, pOrder, dueDate, quantity, conductedQuantity "
+                    + " thickness, width, status) VALUES (?,?,?,?,?,?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, order.getsOrderId());
             ps.setString(2, order.getOrderName());
             ps.setString(3, convertDateToSQL(order.getDueDate()));
             ps.setInt(4, order.getQuantity());
-            ps.setDouble(5, order.getWidth());
-            ps.setString(6, order.getStatus());
+            ps.setInt(5, order.getConductedQuantity());
+            ps.setDouble(6, order.getWidth());
+            ps.setString(7, order.getStatus());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -168,16 +169,17 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "UPDATE ProductionOrder SET sOrderId = ?, pOrder = ?, dueDate = ?, quantity = ?, width = ?, status = ? WHERE pOrderId = ?";
+            String sql = "UPDATE ProductionOrder SET sOrderId = ?, pOrder = ?, dueDate = ?, quantity = ?, conductedQuantity = ?, width = ?, status = ? WHERE pOrderId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setInt(1, o.getsOrderId());
             ps.setString(2, o.getOrderName());
             ps.setString(3, convertDateToSQL(o.getDueDate()));
             ps.setInt(4, o.getQuantity());
-            ps.setDouble(5, o.getWidth());
-            ps.setString(6, o.getStatus());
-            ps.setInt (7, o.getOrderId());            
+            ps.setInt(5, o.getConductedQuantity());
+            ps.setDouble(6, o.getWidth());
+            ps.setString(7, o.getStatus());
+            ps.setInt (8, o.getOrderId());            
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
