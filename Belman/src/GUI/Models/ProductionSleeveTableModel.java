@@ -16,8 +16,8 @@ public class ProductionSleeveTableModel extends AbstractTableModel
 {
 
     
-    private final String[] header = {"Order", "DueDate", "MaterialName", "Thickness", "Circumference", "Width", "Quantity", "Status", "Urgent"};
-    private final Class[] columnTypes = {Integer.class, String.class,String.class, double.class, double.class, double.class, Integer.class, String.class, Boolean.class};
+    private final String[] header = {"Order", "DueDate", "MaterialName", "Thickness", "Circumference", "Width", "Quantity", "conductedQuantity", "Status", "Urgent"};
+    private final Class[] columnTypes = {Integer.class, String.class,String.class, double.class, double.class, double.class, Integer.class, Integer.class, String.class, Boolean.class};
 
 
     private ArrayList<Order> info;
@@ -58,8 +58,9 @@ public class ProductionSleeveTableModel extends AbstractTableModel
            case 4 : return o.getSleeve().getCircumference();
            case 5 : return o.getWidth();
            case 6 : return o.getQuantity();
-           case 7 : return o.getStatus();
-           case 8 : return o.isUrgent();
+           case 7 : return o.getConductedQuantity(); 
+           case 8 : return o.getStatus();
+           case 9 : return o.isUrgent();
        }
        return null;
     }
@@ -95,8 +96,9 @@ public class ProductionSleeveTableModel extends AbstractTableModel
             case 4 : or.getSleeve().getCircumference(); break;
             case 5 : or.getWidth(); break;
             case 6 : or.getQuantity(); break;
-            case 7 : or.getStatus(); break;
-            case 8 : or.isUrgent(); break;
+            case 7 : or.getConductedQuantity(); break;
+            case 8 : or.getStatus(); break;
+            case 9 : or.isUrgent(); break;
         }
     }
 

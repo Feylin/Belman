@@ -20,8 +20,9 @@ public class OrderTablemodel extends AbstractTableModel
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-    private final String[] header = {"Order", "Status"};
-    private final Class[] columnTypes = {String.class, String.class};
+private final String[] header = {"Order", "DueDate", "MaterialName", "Circumference", "Width", "Quantity", "conductedQuantity", "Status"};
+    private final Class[] columnTypes = {Integer.class, String.class, String.class, double.class, double.class, Integer.class, Integer.class, String.class};
+    
 
 
     private ArrayList<Order> info;
@@ -56,7 +57,15 @@ public class OrderTablemodel extends AbstractTableModel
        switch (col)
        {
            case 0 : return o.getOrderName();
-           case 1 : return o.getStatus();
+           case 1 : return o.printDate(o.getDueDate());
+           case 2 : return o.getSleeve().getMaterialName();
+           case 3 : return o.getSleeve().getCircumference();
+           case 4 : return o.getWidth();
+           case 5 : return o.getQuantity();
+           case 6 : return o.getConductedQuantity();
+           case 7 : return o.getStatus();        
+               
+               
        }
        return null;
     }
@@ -85,8 +94,14 @@ public class OrderTablemodel extends AbstractTableModel
         Order or = info.get(row);
         switch (col)
         {
-            case 0 : or.getOrderName(); break;
-            case 1 : or.getStatus(); break;
+           case 0 : or.getOrderName(); break;
+           case 1 :  or.getDueDate(); break;
+           case 2 :  or.getSleeve().getMaterialName(); break;
+           case 3 :  or.getSleeve().getCircumference(); break;
+           case 4 :  or.getWidth(); break;
+           case 5 :  or.getQuantity(); break;
+           case 6 :  or.getConductedQuantity(); break;
+           case 7 :  or.getStatus(); break;
         }
     }
 

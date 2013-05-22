@@ -65,7 +65,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtOrderId.setText(String.valueOf(o.getOrderId()));
 
         
-        lblSleeves.setText(String.valueOf("Sleeves to be made " + " 0 " + " / " + o.getQuantity()));
+        lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
         try
         {
@@ -589,13 +589,14 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
+
         Date dater = new Date();
         String time = endTimeFormat.format(dater);
         jTextField6.setText(time);
         timer.stop();
 
         String option = "In Progress";
-        if (order.getStatus().equals(option))
+        if (order.getStatus().equalsIgnoreCase(option))
         {
             order.setStatus("Paused");
             omgr.updateStatus(order);
