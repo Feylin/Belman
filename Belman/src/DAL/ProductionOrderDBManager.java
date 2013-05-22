@@ -220,8 +220,8 @@ public class ProductionOrderDBManager
         gc.setTime(rs.getTimestamp("dueDate"));
         int quantity = rs.getInt("quantity");
         int conductedQuantity = rs.getInt("conductedQuantity");
-//      int materialId = rs.getInt("materialId");
-//      String name = rs.getString("name");
+       
+        
         double width = rs.getDouble("width");
         String status = rs.getString("status");
         boolean urgent = rs.getBoolean("urgentFlag");

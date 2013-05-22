@@ -32,7 +32,8 @@ public class Sleeve {
      * @param materialId
      * @param pOrderId
      */
-    public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material) {
+    public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
+    {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -66,8 +67,9 @@ public class Sleeve {
                 s.getMaterial());
     }
 
-    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material) {
-        this(-1, null, null, thickness, circumference, -1, -1, material);
+    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
+    {
+        this(-1, null, null, -1, circumference, -1, -1,material);
     }
 
 //    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)

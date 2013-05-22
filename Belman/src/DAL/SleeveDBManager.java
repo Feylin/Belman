@@ -71,11 +71,21 @@ public class SleeveDBManager
     public Sleeve getOneSleeve(ResultSet rs) throws SQLException
     {
         int id = rs.getInt(ID);
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(rs.getTimestamp(START_TIME));
-        GregorianCalendar gc2 = new GregorianCalendar();
-        gc2.setTime(rs.getTimestamp(END_TIME));
-        double thickness = rs.getDouble(THICKNESS);
+        GregorianCalendar gc = null;
+        Date date = rs.getTimestamp("startTime");
+        if(date != null)
+        {
+            gc = new GregorianCalendar();
+            gc.setTime(date);
+        }
+        GregorianCalendar gc2 = null;
+        date = rs.getTimestamp("endTime");
+        if(date != null)
+        {
+            gc2 = new GregorianCalendar();
+            gc2.setTime(date);
+        }       
+        double thickness = rs.getDouble("thickness");
         double circumference = rs.getDouble(CIRCUMFERENCE);
         int materialId = rs.getInt(MATERIAL_ID);
         int pOrderId = rs.getInt(P_ORDER_ID);
