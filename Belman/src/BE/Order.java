@@ -23,6 +23,7 @@ public class Order
 
     private double width;
     private String status;
+    private boolean Urgent;
     private String paused;
     private SalesOrder salesOrder;
     private Sleeve sleeve;
@@ -41,7 +42,8 @@ public class Order
      * @param status
 
      */
-    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, int conductedQuantity, double width, String status, SalesOrder salesOrder, Sleeve sleeve)
+
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, int conductedQuantity, double width, String status, boolean Urgent, SalesOrder salesOrder, Sleeve sleeve)
     {
         this.sOrderId = sOrderId;
         this.orderId = orderId;
@@ -52,6 +54,7 @@ public class Order
 //        this.thickness = thickness;
         this.width = width;
         this.status = status;
+        this.Urgent = Urgent;
         this.salesOrder = salesOrder;
         this.sleeve = sleeve;
     }
@@ -66,6 +69,7 @@ public class Order
                 o.getConductedQuantity(),
                 o.getWidth(),
                 o.getStatus(),
+                o.isUrgent(),
                 o.getSalesOrder(),
                 o.getSleeve());
     }
@@ -212,6 +216,22 @@ public class Order
     public void setSleeve(Sleeve sleeve)
     {
         this.sleeve = sleeve;
+    }    
+
+    /**
+     * @return the Urgent
+     */
+    public boolean isUrgent()
+    {
+        return Urgent;
+    }
+
+    /**
+     * @param Urgent the Urgent to set
+     */
+    public void setUrgent(boolean Urgent)
+    {
+        this.Urgent = Urgent;
     }
     
     /**
@@ -221,6 +241,4 @@ public class Order
     {
         return paused;
     }
-
-    
 }
