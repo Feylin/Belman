@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DAL;
 
 import BE.Material;
@@ -19,13 +18,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
 /**
  *
  * @author Mak
  */
-public class SleeveDBManager 
-{    
+public class SleeveDBManager
+{
+
     private static final String ID = "id";
     private static final String START_TIME = "startTime";
     private static final String END_TIME = "endTime";
@@ -34,7 +33,6 @@ public class SleeveDBManager
     private static final String MATERIAL_ID = "materialId";
     private static final String P_ORDER_ID = "pOrderId";
     private static final String NAME = "name";
-    
     private Connector connector;
     private static SleeveDBManager instance;
 
@@ -51,8 +49,8 @@ public class SleeveDBManager
         }
         return instance;
     }
-    
-      public ArrayList<Sleeve> getSleevesByOrder(Order o) throws SQLException
+
+    public ArrayList<Sleeve> getSleevesByOrder(Order o) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
@@ -70,8 +68,6 @@ public class SleeveDBManager
         }
     }
 
- 
-    
     public Sleeve getOneSleeve(ResultSet rs) throws SQLException
     {
         int id = rs.getInt(ID);
@@ -84,11 +80,11 @@ public class SleeveDBManager
         int materialId = rs.getInt(MATERIAL_ID);
         int pOrderId = rs.getInt(P_ORDER_ID);
         String materialName = rs.getString(NAME);
-        
+
         return new Sleeve(id, gc, gc2, thickness, circumference, materialId, pOrderId, new Material(materialName));
     }
 
-        public Sleeve get(int id) throws SQLException
+    public Sleeve get(int id) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
@@ -103,9 +99,8 @@ public class SleeveDBManager
             return null;
         }
     }
-    
-    
-     public Sleeve getSleeve(ResultSet rs) throws SQLException
+
+    public Sleeve getSleeve(ResultSet rs) throws SQLException
     {
         int id = rs.getInt(ID);
         GregorianCalendar gc = new GregorianCalendar();
@@ -116,30 +111,29 @@ public class SleeveDBManager
         double circumference = rs.getDouble(CIRCUMFERENCE);
         int materialId = rs.getInt(MATERIAL_ID);
         int pOrderId = rs.getInt(P_ORDER_ID);
-        
+
         return new Sleeve(id, gc, gc2, thickness, circumference, materialId, pOrderId);
     }
 
-    
     public void updateSleeve(Sleeve s) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
             String sql = "UPDATE Sleeve SET startTime = ?, endTime = ?, thickness = ?, circumference = ?, materialid = ?, porderid = ? WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             Date startDate = new Date();
             Timestamp startTime = new Timestamp(startDate.getTime());
             Date endDate = new Date();
-            Timestamp endTime = new Timestamp(endDate.getTime());  
-            ps.setTimestamp(1, startTime, s.getStartTime());            
-            ps.setTimestamp(2, endTime, s.getEndTime());            
+            Timestamp endTime = new Timestamp(endDate.getTime());
+            ps.setTimestamp(1, startTime, s.getStartTime());
+            ps.setTimestamp(2, endTime, s.getEndTime());
             ps.setDouble(3, s.getThickness());
             ps.setDouble(4, s.getCircumference());
             ps.setInt(5, s.getMaterialId());
             ps.setInt(6, s.getpOrderId());
             ps.setInt(7, s.getId());
-            
+
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
             {
@@ -147,9 +141,7 @@ public class SleeveDBManager
             }
         }
     }
-    
 
-    
     protected String convertDateToSQL(GregorianCalendar date)
     {
         String str = String.format("%04d%02d%02d %02d:%02d:%02d",
