@@ -5,6 +5,7 @@
 package DAL;
 
 import BE.ErrorsOccured;
+import BE.Order;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +20,7 @@ public class ErrorsOccuredDBManager {
     
 private Connector connector;
     private static ErrorsOccuredDBManager instance;
+    private String message;
 
     public ErrorsOccuredDBManager() throws IOException
     {
@@ -34,14 +36,14 @@ private Connector connector;
         return instance;
     }
 
-    public ErrorsOccured add(ErrorsOccured errorsOccured) throws SQLException
+    public ErrorsOccured add(Order o, String message) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO ErrorsOccured(ProductionOrder, info) VALUES (?,?)";
+            String sql = "INSERT INTO ErrorsOccured(pOrder, info) VALUES (?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, errorsOccured.getProductionOrder());
-            ps.setString(2, errorsOccured.getInfo());
+            ps.setInt(1, o.getOrderId());
+            ps.setString(2, message);
             
             
 

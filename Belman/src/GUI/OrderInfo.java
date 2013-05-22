@@ -5,6 +5,7 @@
 package GUI;
 
 import BE.Order;
+import BLL.ErrorsOccuredManager;
 import BLL.OrderManager;
 import BLL.SleeveManager;
 import BLL.StockItemManager;
@@ -13,12 +14,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import org.joda.time.DateTime;
@@ -37,6 +41,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     static SleeveManager slmgr = null;
     static StockItemManager smgr = null;
     static OrderManager omgr = null;
+    static ErrorsOccuredManager emgr = null;
     private GregorianCalendar date = new GregorianCalendar();
     final DateFormat startTimeFormat = new SimpleDateFormat("HH:mm:ss");
     final DateFormat endTimeFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
@@ -78,6 +83,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             omgr.addObserver(this);
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
+            emgr = ErrorsOccuredManager.getInstance();
+            emgr.addObserver(this);
             
            
 
@@ -168,8 +175,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -202,6 +208,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        btnSave = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -217,10 +224,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jLabel2.setText("Order ID: ");
 
         txtOrderName.setEditable(false);
-        txtOrderName.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtOrderName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtOrderNameActionPerformed(evt);
             }
         });
@@ -228,15 +233,13 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtOrderId.setEditable(false);
 
         tblSleeve.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -282,19 +285,15 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         lblSleeves.setText("Sleeves to be made:");
 
         jButton1.setText("Start");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
         jButton2.setText("Pause");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -334,10 +333,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jTextField4.setEditable(false);
 
         jTextField5.setEditable(false);
-        jTextField5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
@@ -348,6 +345,13 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Start time on cut: ");
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -408,7 +412,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                         .addGap(14, 14, 14))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                        .addComponent(jScrollPane3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSave)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -455,15 +462,14 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 .addGap(29, 29, 29)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSave))
         );
 
         btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });
@@ -495,7 +501,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnOk)
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -614,8 +620,19 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         closePressed();
     }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        String message = jTextArea2.getText();
+        try {
+            emgr.add(order, message);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
