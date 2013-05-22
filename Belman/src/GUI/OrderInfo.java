@@ -34,7 +34,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
- * @author Mak
+ * @author Mak, Klaus, Rashid og Daniel
  */
 public class OrderInfo extends javax.swing.JFrame implements Observer
 {
@@ -72,7 +72,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtOrderName.setText(o.getOrderName());
         txtOrderId.setText(String.valueOf(o.getOrderId()));
 
-        
+
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
         try
@@ -88,8 +88,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             smgr.addObserver(this);
             emgr = ErrorsOccuredManager.getInstance();
             emgr.addObserver(this);
-            
-           tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+
+            tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
                 public void valueChanged(ListSelectionEvent es)
@@ -102,7 +102,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                     sleeve = slmodel.getEventsByRow(selectedRow);
                 }
             });
-           
+
 //                    try
 //                    {
 //                        if (!omgr.getOrdersBySleeve(s).isEmpty())
@@ -148,7 +148,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             jButton3.setEnabled(false);
         }
     }
-     private void windowClose()
+
+    private void windowClose()
     {
         addWindowListener(new WindowAdapter()
         {
@@ -159,8 +160,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
         });
     }
-     
-     private void closePressed()
+
+    private void closePressed()
     {
         String message = "Are you sure you want to close the window?";
         int reply = JOptionPane.showConfirmDialog(null, message, getTitle(), JOptionPane.YES_NO_OPTION);
@@ -522,81 +523,89 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        jButton2.setEnabled(true);
-        jButton3.setEnabled(true);
+        if (tblSleeve.getSelectedRow() == -1)
+        {
+            String message = "Please select a Sleeve to the left";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(true);
 
 //        endTime = new DateTime();
-        jTextField5.setText(jodaTimeFormat.print(startTime));
+            jTextField5.setText(jodaTimeFormat.print(startTime));
 
-        startTime = jodaTimeFormat.parseDateTime(jTextField5.getText());
-        GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
+            startTime = jodaTimeFormat.parseDateTime(jTextField5.getText());
+            GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
 
-        sleeve.setStartTime(startTimeCalendar);
-        try
-        {
-            slmgr.update(sleeve);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+            sleeve.setStartTime(startTimeCalendar);
+            try
+            {
+                slmgr.update(sleeve);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
 
 //        jTextField5.setText(DateFormat.(System.currentTimeMillis(), "MM/dd/yy HH:mm"));
 
-        if (jTextField7.getText().isEmpty())
-        {
-            elapsedHour = 0;
-            elapsedMin = 0;
-            elapsedSec = 0;
-            elapsedMillisec = 0;
-            timer = new Timer(1000, new ActionListener()
+            if (jTextField7.getText().isEmpty())
             {
-                @Override
-                public void actionPerformed(ActionEvent e)
+                elapsedHour = 0;
+                elapsedMin = 0;
+                elapsedSec = 0;
+                elapsedMillisec = 0;
+                timer = new Timer(1000, new ActionListener()
                 {
-                    elapsedSec++;
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        elapsedSec++;
 //                    if (elapsedMillisec > 999)
 //                    {
 //                        elapsedMillisec = 0;
 //                        elapsedSec++;
 //                    }
-                    if (elapsedSec > 59)
-                    {
-                        elapsedSec = 0;
-                        elapsedMin++;
-                    }
-                    if (elapsedMin > 59)
-                    {
-                        elapsedMin = 0;
-                        elapsedHour++;
-                    }
-                    String displayTimer = String.format("%02d:%02d:%02d:%03d", elapsedHour, elapsedMin, elapsedSec, elapsedMillisec);
-                    jTextField7.setText(displayTimer);
+                        if (elapsedSec > 59)
+                        {
+                            elapsedSec = 0;
+                            elapsedMin++;
+                        }
+                        if (elapsedMin > 59)
+                        {
+                            elapsedMin = 0;
+                            elapsedHour++;
+                        }
+                        String displayTimer = String.format("%02d:%02d:%02d:%03d", elapsedHour, elapsedMin, elapsedSec, elapsedMillisec);
+                        jTextField7.setText(displayTimer);
 
-                }
-            });
-            timer.setInitialDelay(0);
-            timer.start();
-        }
-        else
-        {
-            timer.start();
-        }
+                    }
+                });
+                timer.setInitialDelay(0);
+                timer.start();
+            }
+            else
+            {
+                timer.start();
+            }
 
-        String option = "Pending";
-        String option2 = "Paused";
-        if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
-        {
-            String status = "in Progress";
-            order.setStatus(status.toUpperCase());
-            omgr.updateStatus(order);
-            String message = "Production Order " + order.getOrderId() + "'s status has been updated.";
-            JOptionPane.showMessageDialog(this, message, "Update succesful", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else
-        {
-            String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            String option = "Pending";
+            String option2 = "Paused";
+            if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
+            {
+                String status = "in Progress";
+                order.setStatus(status.toUpperCase());
+                omgr.updateStatus(order);
+                String message = "Production Order " + order.getOrderId() + "'s status has been updated.";
+                JOptionPane.showMessageDialog(this, message, "Update succesful", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -651,13 +660,15 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String message = jTextArea2.getText();
-        try {
+        try
+        {
             emgr.add(order, message);
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex)
+        {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
     private javax.swing.JButton btnSave;
