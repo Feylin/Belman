@@ -211,13 +211,13 @@ public class ProductionOrderDBManager
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
     {
-
         int sOrderID = rs.getInt("sOrderId");
         int prodOrderId = rs.getInt("pOrderId");
         String pOrder = rs.getString("pOrder");
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTime(rs.getTimestamp("dueDate"));
         int quantity = rs.getInt("quantity");
+        int conductedQuantity = rs.getInt("conductedQuantity");
 //      int materialId = rs.getInt("materialId");
 //      String name = rs.getString("name");
         double width = rs.getDouble("width");
@@ -233,8 +233,7 @@ public class ProductionOrderDBManager
         double circumference = rs.getDouble("circumference");
         String materialName = rs.getString("name");                     
         
-
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)));
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)));
     }
 
     protected String convertDateToSQL(GregorianCalendar date)

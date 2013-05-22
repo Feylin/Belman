@@ -18,9 +18,13 @@ public class Order
     private String orderName;
     private GregorianCalendar dueDate;
     private int quantity;
+    private int conductedQuantity;
+//    private double thickness;
+
     private double width;
     private String status;
     private boolean Urgent;
+    private String paused;
     private SalesOrder salesOrder;
     private Sleeve sleeve;
 
@@ -32,17 +36,22 @@ public class Order
      * @param orderName
      * @param dueDate
      * @param quantity
+     * @param conductedQuantity
      * @param thickness
      * @param width
      * @param status
+
      */
-    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double width, String status, boolean Urgent, SalesOrder salesOrder, Sleeve sleeve)
+
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, int conductedQuantity, double width, String status, boolean Urgent, SalesOrder salesOrder, Sleeve sleeve)
     {
         this.sOrderId = sOrderId;
         this.orderId = orderId;
         this.orderName = orderName;
         this.dueDate = dueDate;
         this.quantity = quantity;
+        this.conductedQuantity = conductedQuantity;
+//        this.thickness = thickness;
         this.width = width;
         this.status = status;
         this.Urgent = Urgent;
@@ -57,6 +66,7 @@ public class Order
                 o.getOrderName(),
                 o.getDueDate(),
                 o.getQuantity(),
+                o.getConductedQuantity(),
                 o.getWidth(),
                 o.getStatus(),
                 o.isUrgent(),
@@ -136,6 +146,23 @@ public class Order
         this.quantity = quantity;
     }
 
+    
+     /**
+     * @return the quantity
+     */
+    public int getConductedQuantity()
+    {
+        return conductedQuantity;
+    }
+    
+    
+    /**
+     * @param conductedQuantity the quantity to set
+     */
+    public void setConductedQuantity(String text)
+    {
+        this.conductedQuantity = conductedQuantity;
+    }
 
 
     /**
@@ -205,5 +232,13 @@ public class Order
     public void setUrgent(boolean Urgent)
     {
         this.Urgent = Urgent;
+    }
+    
+    /**
+     * @return the paused
+     */
+    public String getPaused() 
+    {
+        return paused;
     }
 }
