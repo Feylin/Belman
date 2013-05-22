@@ -53,7 +53,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 //    long endTime = System.currentTimeMillis();
     int day, month, year;
     int hour, minute, second;
-    DateTime startTime, endTime = new DateTime();
+    DateTime startTime, endTime;
     DateTimeFormatter jodaTimeFormat = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm:ss");
     private int elapsedMillisec, elapsedSec, elapsedMin, elapsedHour;
     Timer timer;
