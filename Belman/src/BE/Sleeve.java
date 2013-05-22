@@ -40,7 +40,7 @@ public class Sleeve {
         this.circumference = circumference;
         this.materialId = materialId;
         this.pOrderId = pOrderId;
-
+        this.material = material;
     }
 
     public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId)
