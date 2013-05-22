@@ -218,6 +218,7 @@ public class ProductionOrderDBManager
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTime(rs.getTimestamp("dueDate"));
         int quantity = rs.getInt("quantity");
+        int conductedQuantity = rs.getInt("conductedQuantity");
 //      int materialId = rs.getInt("materialId");
 //      String name = rs.getString("name");
         double width = rs.getDouble("width");
@@ -233,7 +234,7 @@ public class ProductionOrderDBManager
         String materialName = rs.getString("name");                     
         
 
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, width, status, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)));
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)));
     }
 
     protected String convertDateToSQL(GregorianCalendar date)

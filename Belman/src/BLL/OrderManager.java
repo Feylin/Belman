@@ -90,6 +90,7 @@ public class OrderManager extends Observable
         }
     }
 
+
     public ArrayList<Order> getOrderByMaterial(StockItem s) throws SQLException, IOException
     {
         return accessor.getOrderByStock(s);
