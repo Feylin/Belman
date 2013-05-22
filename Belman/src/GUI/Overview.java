@@ -518,7 +518,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
         setTitle(bundle.getString("Overview.title")); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1300, 650));
+        setPreferredSize(new java.awt.Dimension(1500, 650));
         setResizable(false);
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -566,8 +566,8 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addGroup(pnlCutting2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCutting2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 611, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE))
+                        .addGap(0, 740, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlCutting2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -636,7 +636,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         pnlOrderList.setLayout(pnlOrderListLayout);
         pnlOrderListLayout.setHorizontalGroup(
             pnlOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
+            .addComponent(scrOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
         );
         pnlOrderListLayout.setVerticalGroup(
             pnlOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
