@@ -25,10 +25,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -57,6 +60,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private StockList2TableModel smodel3 = null;
     Order o;
     Sleeve s;
+    Operator op;
     private String operator = null;
 
     /**
@@ -432,7 +436,15 @@ public class Overview extends javax.swing.JFrame implements Observer
                 {
                     int selectedRow = tblProductionSleeve.getSelectedRow();
                     Order o = psmodel.getEventsByRow(selectedRow);
-                    new OrderInfo(o, s).setVisible(true);
+                    try
+                    {
+                        op = opmgr.get(operator);
+                    }
+                    catch (SQLException ex)
+                    {
+                       ex.printStackTrace();
+                    }
+                    new OrderInfo(o, s, op).setVisible(true);
                 }
                 
             }
@@ -449,8 +461,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                 if (me.getClickCount() == 2)
                 {
                     int selectedRow = tblOrderList.getSelectedRow();
-                    Order o = psmodel.getEventsByRow(selectedRow);
-                    new OrderInfo(o, s).setVisible(true);
+                    Order o = psmodel.getEventsByRow(selectedRow);                    
+                    try
+                    {
+                        op = opmgr.get(operator);
+                    }
+                    catch (SQLException ex)
+                    {
+                       ex.printStackTrace();
+                    }
+                    new OrderInfo(o, s, op).setVisible(true);
                 }
             }
         });
