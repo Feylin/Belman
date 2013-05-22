@@ -77,6 +77,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtId.setText(String.valueOf(op.getId()));
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
+        txtHasCut.setText(String.valueOf(op.getQuantityCut()));
 
 
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
@@ -208,7 +209,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtError = new javax.swing.JTextArea();
         jLabel12 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
@@ -335,9 +336,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Time spent: ");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        txtError.setColumns(20);
+        txtError.setRows(5);
+        jScrollPane3.setViewportView(txtError);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Errors occured: ");
@@ -680,15 +681,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String message = jTextArea2.getText();
-        try
-        {
-            emgr.add(order, message);
-        }
-        catch (SQLException ex)
-        {
-            ex.printStackTrace();
-        }
+        String message = txtError.getText();              
+        omgr.updateErrorMessage(order, message);
+       
+      
     }//GEN-LAST:event_btnSaveActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
@@ -712,12 +708,12 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblSleeves;
     private javax.swing.JTable tblSleeve;
+    private javax.swing.JTextArea txtError;
     private javax.swing.JTextField txtHasCut;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtLastName;

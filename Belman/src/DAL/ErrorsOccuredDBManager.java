@@ -36,28 +36,29 @@ private Connector connector;
         return instance;
     }
 
-    public ErrorsOccured add(Order o, String message) throws SQLException
-    {
-        try (Connection con = connector.getConnection())
-        {
-            String sql = "INSERT INTO ErrorsOccured(pOrder, info) VALUES (?,?)";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, o.getOrderId());
-            ps.setString(2, message);
-            
-            
-
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0)
-            {
-                throw new SQLException(" ");
-            }
-            ResultSet keys = ps.getGeneratedKeys();
-            keys.next();
-            int id = keys.getInt(1);
-
-        }
-        return null;
-    }
+//    public ErrorsOccured add(String info) throws SQLException
+//    {
+//        try (Connection con = connector.getConnection())
+//        {
+//            String sql = "INSERT INTO ErrorsOccured(info) VALUES (?)";
+//            PreparedStatement ps = con.prepareStatement(sql);            
+//            ps.setString(1, m);
+//                      
+//            int affectedRows = ps.executeUpdate();
+//            if (affectedRows == 0)
+//            {
+//                throw new SQLException("Unable to add a message");
+//            }
+//            
+//            ResultSet keys = ps.getGeneratedKeys();
+//            keys.next();
+//            int id = keys.getInt(1);
+//
+//            
+//            return new ErrorsOccured(info);
+//            
+//
+//        }               
+//    }
     
 }

@@ -27,6 +27,7 @@ public class Order
     private String paused;
     private SalesOrder salesOrder;
     private Sleeve sleeve;
+    private String errorOccured;
 
     /**
      * Overodnede konstruktør for Order.
@@ -43,7 +44,7 @@ public class Order
 
      */
 
-    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, int conductedQuantity, double width, String status, boolean Urgent, SalesOrder salesOrder, Sleeve sleeve)
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, int conductedQuantity, double width, String status, boolean Urgent, SalesOrder salesOrder, Sleeve sleeve, String errorOccured)
     {
         this.sOrderId = sOrderId;
         this.orderId = orderId;
@@ -57,6 +58,7 @@ public class Order
         this.Urgent = Urgent;
         this.salesOrder = salesOrder;
         this.sleeve = sleeve;
+        this.errorOccured = errorOccured;
     }
 
     public Order(int orderId, Order o)
@@ -71,7 +73,9 @@ public class Order
                 o.getStatus(),
                 o.isUrgent(),
                 o.getSalesOrder(),
-                o.getSleeve());
+                o.getSleeve(),
+                o.getErrorOccured());
+                
     }
 
     public String printDate(GregorianCalendar gc)
@@ -240,5 +244,21 @@ public class Order
     public String getPaused() 
     {
         return paused;
+    }
+
+    /**
+     * @return the errorOccured
+     */
+    public String getErrorOccured()
+    {
+        return errorOccured;
+    }
+
+    /**
+     * @param errorOccured the errorOccured to set
+     */
+    public void setErrorOccured(String errorOccured)
+    {
+        this.errorOccured = errorOccured;
     }
 }

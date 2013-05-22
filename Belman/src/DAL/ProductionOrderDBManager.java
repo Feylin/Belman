@@ -164,6 +164,25 @@ public class ProductionOrderDBManager
             }
         }
     }
+    
+    public void updateErrorMessage(Order o, String message) throws SQLException
+    {
+        try(Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE ProductionOrder SET ProductionOrder.errorOccured = ? WHERE ProductionOrder.pOrderId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, o.getErrorOccured());
+            ps.setInt(2, o.getOrderId());  
+            
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0)
+            {
+                 throw new SQLException( "Unable to update Error message" );
+            }
+        }
+    }
 
     public void update(Order o) throws SQLException
     {
@@ -188,7 +207,6 @@ public class ProductionOrderDBManager
             }
 //            ps.setString(9, o.getType().toString());
         }
-
     }
     
       public ArrayList<Order> getPaused() throws SQLException, IOException
@@ -220,6 +238,7 @@ public class ProductionOrderDBManager
         gc.setTime(rs.getTimestamp("dueDate"));
         int quantity = rs.getInt("quantity");
         int conductedQuantity = rs.getInt("conductedQuantity");
+        String errorOccured = rs.getString("errorOccured");
        
         
         double width = rs.getDouble("width");
@@ -235,7 +254,7 @@ public class ProductionOrderDBManager
         double circumference = rs.getDouble("circumference");
         String materialName = rs.getString("name");                     
         
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)));
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)), errorOccured);
     }
 
     protected String convertDateToSQL(GregorianCalendar date)
