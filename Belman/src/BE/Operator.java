@@ -14,18 +14,22 @@ public class Operator
     private String username;
     private String firstName;
     private String lastName;
+    private Sleeve sleeve;
+    private int quantityCut;
 
-    public Operator(int id, String username, String firstName, String lastName)
+    public Operator(int id, String username, String firstName, String lastName, Sleeve sleeve, int quantityCut)
     {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.sleeve = sleeve;
+        this.quantityCut = quantityCut;
     }
 
-    public Operator(String username, String firstName, String lastName)
+    public Operator(String username, String firstName, String lastName, Sleeve sleeve, int quantityCut)
     {
-        this(-1, username, firstName, lastName);
+        this(-1, username, firstName, lastName, sleeve, quantityCut);
     }
 
     /**
@@ -88,5 +92,37 @@ public class Operator
     public String toString()
     {
         return username;
+    }
+
+    /**
+     * @return the sleeve
+     */
+    public Sleeve getSleeve()
+    {
+        return sleeve;
+    }
+
+    /**
+     * @param sleeve the sleeve to set
+     */
+    public void setSleeve(Sleeve sleeve)
+    {
+        this.sleeve = sleeve;
+    }
+
+    /**
+     * @return the quantityCut
+     */
+    public int getQuantityCut()
+    {
+        return quantityCut;
+    }
+
+    /**
+     * @param quantityCut the quantityCut to set
+     */
+    public void setQuantityCut(int quantityCut)
+    {
+        this.quantityCut = quantityCut;
     }
 }

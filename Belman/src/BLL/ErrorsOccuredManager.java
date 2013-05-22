@@ -29,9 +29,9 @@ public class ErrorsOccuredManager extends Observable {
         return instance;
     }
     
-    public void add (Order o, String message) throws SQLException
-    {
-        accessor.add(o, message);
-    }
+//    public void add (String message) throws SQLException
+//    {
+//        accessor.add(message);
+//    }
 }
 

@@ -6,6 +6,7 @@ package DAL;
 
 import BE.Material;
 import BE.Operator;
+import BE.Sleeve;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -20,10 +21,12 @@ import java.util.ArrayList;
  */
 public class OperatorDBManager
 {
-    private static final String ID = "id";
+    private static final String OPERATORID = "OperatorId";
     private static final String USERNAME = "username";
     private static final String FIRST_NAME = "firstName";
     private static final String LAST_NAME = "lastName";
+    private static final String SLEEVEID = "id";
+    private static final String QUANTITYCUT = "quantityCut";
     
     private Connector connector;
     private static OperatorDBManager instance;
@@ -46,7 +49,7 @@ public class OperatorDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Operator";
+            String sql = "SELECT * FROM Operator, Sleeve";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -63,7 +66,7 @@ public class OperatorDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Operator WHERE username = ?";
+            String sql = "SELECT * FROM Operator, Sleeve WHERE username = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, username);
 
@@ -78,11 +81,13 @@ public class OperatorDBManager
     
     private Operator getOneOperator(ResultSet rs) throws SQLException
     {
-        int id = rs.getInt(ID);
+        int id = rs.getInt(OPERATORID);
         String username = rs.getString(USERNAME);
         String firstName = rs.getString(FIRST_NAME);
         String lastName = rs.getString(LAST_NAME);
+        int sleeveId = rs.getInt(SLEEVEID);
+        int quantityCut = rs.getInt(QUANTITYCUT);
         
-        return new Operator(id, username, firstName, lastName);
+        return new Operator(id, username, firstName, lastName, new Sleeve(sleeveId, null, null, -1, -1, -1, -1, null), quantityCut);
     }
 }

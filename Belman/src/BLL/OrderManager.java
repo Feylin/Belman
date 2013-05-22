@@ -89,6 +89,18 @@ public class OrderManager extends Observable
             e.getMessage();
         }
     }
+    
+    public void updateErrorMessage(Order o, String message)
+    {
+        try{
+            accessor.updateErrorMessage(o, message);
+            setChanged();
+            notifyObservers();
+        }
+        catch( SQLException e ){
+            e.getMessage();
+        }
+    }
 
     public ArrayList<Order> getOrderByMaterial(StockItem s) throws SQLException, IOException
     {
