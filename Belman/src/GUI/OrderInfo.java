@@ -5,6 +5,7 @@
 package GUI;
 
 import BE.Order;
+import BE.Sleeve;
 import BLL.ErrorsOccuredManager;
 import BLL.OrderManager;
 import BLL.SleeveManager;
@@ -25,6 +26,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -37,6 +40,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 {
 
     private Order order;
+    private Sleeve sleeve;
     private SleeveTableModel slmodel = null;
     static SleeveManager slmgr = null;
     static StockItemManager smgr = null;
@@ -49,19 +53,18 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 //    long endTime = System.currentTimeMillis();
     int day, month, year;
     int hour, minute, second;
-    DateTime jodaTime = new DateTime();
+    DateTime startTime, endTime = new DateTime();
     DateTimeFormatter jodaTimeFormat = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm:ss");
-    private int elapsedTimeMin;
-    private int elapsedTimeSec;
-    private int elapsedTimeHour;
+    private int elapsedMillisec, elapsedSec, elapsedMin, elapsedHour;
     Timer timer;
 
     /**
      * Creates new form OrderInfo
      */
-    public OrderInfo(Order o)
+    public OrderInfo(Order o, Sleeve s)
     {
         order = o;
+        sleeve = s;
         initComponents();
         buttonState();
         windowClose();
@@ -86,22 +89,20 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             emgr = ErrorsOccuredManager.getInstance();
             emgr.addObserver(this);
             
+           tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent es)
+                {
+                    int selectedRow = tblSleeve.getSelectedRow();
+                    if (selectedRow == -1)
+                    {
+                        return;
+                    }
+                    sleeve = slmodel.getEventsByRow(selectedRow);
+                }
+            });
            
-
-
-//            tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-//            {
-//                @Override
-//                public void valueChanged(ListSelectionEvent es)
-//                {
-//                    int selectedRow = tblSleeveList.getSelectedRow();
-//                    if (selectedRow == -1)
-//                    {
-//                        return;
-//                    }
-//
-//                    Sleeve s = slmodel.getEventsByRow(selectedRow);
-//
 //                    try
 //                    {
 //                        if (!omgr.getOrdersBySleeve(s).isEmpty())
@@ -521,53 +522,57 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        Date date = new Date();
-//        String time = startTimeFormat.format(date);
-//        jTextField5.setText(time);
-
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
 
-//        day = date.get(Calendar.DAY_OF_MONTH);
-//        month = date.get(Calendar.MONTH) + 1;
-//        year = date.get(Calendar.YEAR);
-//        hour = date.get(Calendar.HOUR_OF_DAY);
-//        minute = date.get(Calendar.MINUTE);
-//        second = date.get(Calendar.SECOND);
-//        String dates = day +"/" +month +"/" +year;
-//        String time = hour +":" +minute +":" +second;
-//        
-//        jTextField5.setText(dates +" " +time);
+//        endTime = new DateTime();
+        jTextField5.setText(jodaTimeFormat.print(startTime));
 
-        jTextField5.setText(jodaTimeFormat.print(jodaTime));
+        startTime = jodaTimeFormat.parseDateTime(jTextField5.getText());
+        GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
+
+        sleeve.setStartTime(startTimeCalendar);
+        try
+        {
+            slmgr.update(sleeve);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
 //        jTextField5.setText(DateFormat.(System.currentTimeMillis(), "MM/dd/yy HH:mm"));
 
         if (jTextField7.getText().isEmpty())
         {
-            elapsedTimeHour = 0;
-            elapsedTimeMin = 0;
-            elapsedTimeSec = 0;
+            elapsedHour = 0;
+            elapsedMin = 0;
+            elapsedSec = 0;
+            elapsedMillisec = 0;
             timer = new Timer(1000, new ActionListener()
             {
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    if (elapsedTimeSec < 59)
+                    elapsedSec++;
+//                    if (elapsedMillisec > 999)
+//                    {
+//                        elapsedMillisec = 0;
+//                        elapsedSec++;
+//                    }
+                    if (elapsedSec > 59)
                     {
-                        elapsedTimeSec++;
+                        elapsedSec = 0;
+                        elapsedMin++;
                     }
-                    else
+                    if (elapsedMin > 59)
                     {
-                        elapsedTimeSec = 0;
-                        elapsedTimeMin++;
+                        elapsedMin = 0;
+                        elapsedHour++;
                     }
-                    if (elapsedTimeMin == 60)
-                    {
-                        elapsedTimeHour++;
-                        elapsedTimeMin = 0;
-                    }
-                    jTextField7.setText(elapsedTimeHour + ":" + elapsedTimeMin + ":" + elapsedTimeSec);
+                    String displayTimer = String.format("%02d:%02d:%02d:%03d", elapsedHour, elapsedMin, elapsedSec, elapsedMillisec);
+                    jTextField7.setText(displayTimer);
+
                 }
             });
             timer.setInitialDelay(0);
@@ -580,41 +585,63 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
         String option = "Pending";
         String option2 = "Paused";
-        if (order.getStatus().equals(option) || order.getStatus().equals(option2))
+        if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
         {
-            order.setStatus("In Progress");
+            String status = "in Progress";
+            order.setStatus(status.toUpperCase());
             omgr.updateStatus(order);
-            String message = "Production Order " + order.getOrderId() + " status has been updated.";
-            JOptionPane.showMessageDialog(this, message, "Update succesfull", JOptionPane.INFORMATION_MESSAGE);
+            String message = "Production Order " + order.getOrderId() + "'s status has been updated.";
+            JOptionPane.showMessageDialog(this, message, "Update succesful", JOptionPane.INFORMATION_MESSAGE);
         }
         else
         {
-            String message = "Production Order " + order.getOrderId() + " status is already: In progress.";
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+            String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-
-        Date dater = new Date();
-        String time = endTimeFormat.format(dater);
-        jTextField6.setText(time);
-        timer.stop();
-
-        String option = "In Progress";
-        if (order.getStatus().equalsIgnoreCase(option))
+//        endTime = new DateTime();
+        if (tblSleeve.getSelectedRow() == -1)
         {
-            order.setStatus("Paused");
-            omgr.updateStatus(order);
-            String message = "Production Order " + order.getOrderId() + " status has been paused.";
-            JOptionPane.showMessageDialog(this, message, "Pause succesfull", JOptionPane.INFORMATION_MESSAGE);
-            new SleeveInfo().setVisible(true);
+            String message = "Please select a Sleeve to the left";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
-            String message = "Production Order " + order.getOrderId() + " status is not in progress or already paused.";
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+            jTextField6.setText(jodaTimeFormat.print(endTime));
+
+            timer.stop();
+
+            endTime = jodaTimeFormat.parseDateTime(jTextField6.getText());
+            GregorianCalendar endTimeCalendar = endTime.toGregorianCalendar();
+
+            try
+            {
+                sleeve.setEndTime(endTimeCalendar);
+                slmgr.update(sleeve);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            String option = "In Progress";
+            if (order.getStatus().equalsIgnoreCase(option))
+            {
+                String status = "Paused";
+                order.setStatus(status.toUpperCase());
+                omgr.updateStatus(order);
+                String message = "Production Order " + order.getOrderId() + "'s status has been paused.";
+                JOptionPane.showMessageDialog(this, message, "Pause succesful", JOptionPane.INFORMATION_MESSAGE);
+                new SleeveInfo().setVisible(true);
+            }
+            else
+            {
+                String message = "Production Order " + order.getOrderId() + "'s status is not in progress or already paused.";
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
