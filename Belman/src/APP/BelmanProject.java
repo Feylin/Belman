@@ -29,7 +29,7 @@ public class BelmanProject
                 try
                 {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//                    Overview.getInstance().setVisible(true);
+//                    Login.getInstance().setVisible(true);
                     Overview.getInstance().setVisible(true);
                 }
                 catch (Exception e)
