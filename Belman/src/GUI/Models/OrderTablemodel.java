@@ -20,8 +20,8 @@ public class OrderTablemodel extends AbstractTableModel
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-private final String[] header = {"Order", "DueDate", "MaterialName", "Circumference", "Width", "Quantity", "conductedQuantity", "Status"};
-    private final Class[] columnTypes = {Integer.class, String.class, String.class, double.class, double.class, Integer.class, Integer.class, String.class};
+private final String[] header = {"Order", "DueDate", "MaterialName", "Circumference", "Width", "Quantity", "conductedQuantity", "Status", "Urgent"};
+    private final Class[] columnTypes = {Integer.class, String.class, String.class, double.class, double.class, Integer.class, Integer.class, String.class, Boolean.class};
     
 
 
@@ -63,7 +63,8 @@ private final String[] header = {"Order", "DueDate", "MaterialName", "Circumfere
            case 4 : return o.getWidth();
            case 5 : return o.getQuantity();
            case 6 : return o.getConductedQuantity();
-           case 7 : return o.getStatus();        
+           case 7 : return o.getStatus();  
+           case 8 : return o.isUrgent();
                
                
        }
@@ -95,13 +96,14 @@ private final String[] header = {"Order", "DueDate", "MaterialName", "Circumfere
         switch (col)
         {
            case 0 : or.getOrderName(); break;
-           case 1 :  or.getDueDate(); break;
-           case 2 :  or.getSleeve().getMaterialName(); break;
-           case 3 :  or.getSleeve().getCircumference(); break;
-           case 4 :  or.getWidth(); break;
-           case 5 :  or.getQuantity(); break;
-           case 6 :  or.getConductedQuantity(); break;
-           case 7 :  or.getStatus(); break;
+           case 1 : or.getDueDate(); break;
+           case 2 : or.getSleeve().getMaterialName(); break;
+           case 3 : or.getSleeve().getCircumference(); break;
+           case 4 : or.getWidth(); break;
+           case 5 : or.getQuantity(); break;
+           case 6 : or.getConductedQuantity(); break;
+           case 7 : or.getStatus(); break;
+           case 8 : or.isUrgent(); break;
         }
     }
 

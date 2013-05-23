@@ -1048,10 +1048,10 @@ public class Overview extends javax.swing.JFrame implements Observer
         OperatorSettings.getInstance().setVisible(true);
     }//GEN-LAST:event_itemSettingsActionPerformed
 
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
+    private void btnReset1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
     }//GEN-LAST:event_btnResetActionPerformed
-    private void btnReset1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnReset1ActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnReset1ActionPerformed
     {//GEN-HEADEREND:event_btnReset1ActionPerformed
 
         try
