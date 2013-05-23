@@ -255,9 +255,10 @@ public class ProductionOrderDBManager
         
         double thickness = rs.getDouble("thickness");
         double circumference = rs.getDouble("circumference");
-        String materialName = rs.getString("name");                     
+        String materialName = rs.getString("name"); 
+        int sleeveid = rs.getInt("id");
         
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)), errorOccured);
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(sleeveid, null, null, thickness, circumference, -1, -1, new Material(materialName)), errorOccured);
     }
 
     protected String convertDateToSQL(GregorianCalendar date)

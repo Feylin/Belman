@@ -68,6 +68,25 @@ public class OperatorDBManager
             return operators;
         }
     }   
+    
+    public void updateHasCut(Operator op, int hasCut) throws SQLException
+    {
+        try(Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE Operator SET Operator.quantityCut = ? WHERE Operator.operatorId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, hasCut);
+            ps.setInt(2, op.getId());  
+            
+            
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0)
+            {
+                 throw new SQLException( "Unable to update Operator" );
+            }
+        }
+    }
 
     public Operator get(String username) throws SQLServerException, SQLException
     {

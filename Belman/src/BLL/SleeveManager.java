@@ -50,5 +50,15 @@ public class SleeveManager extends Observable
     {
         accessor.updateSleeve(sleeve);
     }
+    
+    public void updateSleeveStartTime(Sleeve sleeve) throws SQLException
+    {
+        accessor.updateSleeveStartTim(sleeve);
+    }
+    
+    public void updateSleeveEndTime(Sleeve sleeve) throws SQLException
+    {
+        accessor.updateSleeveEndTime(sleeve);
+    }
 }
 

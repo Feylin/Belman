@@ -9,6 +9,7 @@ import BE.Order;
 import BE.Sleeve;
 import BLL.ErrorsOccuredManager;
 import BLL.OrderManager;
+import BLL.SleeveLogManager;
 import BLL.SleeveManager;
 import BLL.StockItemManager;
 import GUI.Models.SleeveTableModel;
@@ -19,17 +20,15 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.joda.time.DateTime;
@@ -49,11 +48,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private SleeveTableModel slmodel = null;
     private static SleeveManager slmgr = null;
     private static StockItemManager smgr = null;
+    private static SleeveLogManager sllmgr = null;
     private static OrderManager omgr = null;
     private static ErrorsOccuredManager emgr = null;
-    Locale locale = Locale.getDefault();
-    private ResourceBundle rb = null;
-//    localeLanguage.setLocale(locale); 
 //    private GregorianCalendar date = new GregorianCalendar();
 //    final DateFormat startTimeFormat = new SimpleDateFormat("HH:mm:ss");
 //    final DateFormat endTimeFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
@@ -74,37 +71,36 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         try
         {
             omgr = OrderManager.getInstance();
+            sllmgr = SleeveLogManager.getInstance();
         }
         catch (Exception ex)
         {
             ex.printStackTrace();
         }
-        
+
         order = o;
         sleeve = s;
         operator = op;
-        rb = ResourceBundle.getBundle("GUI.Bundle");
         initComponents();
         buttonState();
         windowClose();
-        updateGUILanguage();
-        
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
         txtOrderName.setText(o.getOrderName());
         txtOrderId.setText(String.valueOf(o.getOrderId()));
         txtId.setText(String.valueOf(op.getId()));
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
-        txtHasCut.setText(String.valueOf(op.getQuantityCut()));
-       
+        
+
         txtError.setText(o.getErrorOccured());
 //        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
-            
-        
+
+
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
         try
         {
+            txtHasCut.setText(String.valueOf(sllmgr.getQuantity(order.getSleeve(), operator.getId())));
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getSleevesByOrder(o));
@@ -127,6 +123,24 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                         return;
                     }
                     sleeve = slmodel.getEventsByRow(selectedRow);
+                    if (sleeve.getStartTime() != null)
+                    {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+                        txtStartTime.setText(sdf.format(sleeve.getStartTime().getTime()));
+
+                        btnPause.setEnabled(true);
+                        btnFinish.setEnabled(true);
+                        btnStart.setEnabled(true);
+                    }
+                    else
+                    {
+                        btnStart.setEnabled(true);
+                    }
+                    if (sleeve.getStartTime() != null)
+                    {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+                        txtEndTime.setText(sdf.format(sleeve.getEndTime().getTime()));
+                    }
                 }
             });
 
@@ -169,25 +183,19 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void buttonState()
     {
-        if (order.getStatus() == "IN PROGRESS")
+        if (txtStartTime.getText().isEmpty())
         {
-            btnPause.setEnabled(true);
-            btnFinish.setEnabled(true);
-        }
-        else
-        {
-            btnStart.setEnabled(true);
+            btnStart.setEnabled(false);
             btnPause.setEnabled(false);
             btnFinish.setEnabled(false);
         }
+//        else
+//        {
+//            jButton1.setEnabled(false);
+//            jButton2.setEnabled(true);
+//            jButton3.setEnabled(true);
+//        }
     }
-    
-//    private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt) 
-//    {
-//        rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
-//        updateGUILanguage();
-//        
-//    }
 
     private void windowClose()
     {
@@ -200,10 +208,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
         });
     }
-    
+
     private void updateMessage()
     {
-        
     }
 
     private void closePressed()
@@ -214,7 +221,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         {
             dispose();
         }
-        
+
     }
 
     /**
@@ -224,8 +231,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -259,28 +268,32 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         btnSave = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Start time on cut: ");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
-        setTitle(bundle.getString("OrderInfo.title")); // NOI18N
+        setTitle("Belman Manager");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("OrderInfo.jPanel2.border.title"))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Production Order and Sleeve Information"));
 
-        jLabel1.setText(bundle.getString("OrderInfo.jLabel1.text")); // NOI18N
+        jLabel1.setText("Order Name: ");
 
-        jLabel2.setText(bundle.getString("OrderInfo.jLabel2.text")); // NOI18N
+        jLabel2.setText("Order ID: ");
 
         txtOrderName.setEditable(false);
 
         txtOrderId.setEditable(false);
 
         tblSleeve.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -320,50 +333,61 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("OrderInfo.jPanel3.border.border.title")))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Cutting Console")));
 
         lblSleeves.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblSleeves.setText(bundle.getString("OrderInfo.lblSleeves.text")); // NOI18N
+        lblSleeves.setText("Sleeves to be made:");
 
-        btnStart.setText(bundle.getString("OrderInfo.btnStart.text")); // NOI18N
-        btnStart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnStart.setText("Start");
+        btnStart.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnStartActionPerformed(evt);
             }
         });
 
-        btnPause.setText(bundle.getString("OrderInfo.btnPause.text")); // NOI18N
-        btnPause.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPause.setText("Pause");
+        btnPause.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPauseActionPerformed(evt);
             }
         });
 
-        btnFinish.setText(bundle.getString("OrderInfo.btnFinish.text")); // NOI18N
+        btnFinish.setText("Finish");
+        btnFinish.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnFinishActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText(bundle.getString("OrderInfo.jLabel4.text")); // NOI18N
+        jLabel4.setText("Employee cutting:");
 
-        jLabel5.setText(bundle.getString("OrderInfo.jLabel5.text")); // NOI18N
+        jLabel5.setText("First name:");
 
-        jLabel6.setText(bundle.getString("OrderInfo.jLabel6.text")); // NOI18N
+        jLabel6.setText("Last name:");
 
-        jLabel7.setText(bundle.getString("OrderInfo.jLabel7.text")); // NOI18N
+        jLabel7.setText("ID: ");
 
-        jLabel9.setText(bundle.getString("OrderInfo.jLabel9.text")); // NOI18N
+        jLabel9.setText("Has cut:");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText(bundle.getString("OrderInfo.jLabel10.text")); // NOI18N
+        jLabel10.setText("End time on cut:");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText(bundle.getString("OrderInfo.jLabel11.text")); // NOI18N
+        jLabel11.setText("Time spent: ");
 
         txtError.setColumns(20);
         txtError.setRows(5);
         jScrollPane3.setViewportView(txtError);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setText(bundle.getString("OrderInfo.jLabel12.text")); // NOI18N
+        jLabel12.setText("Errors occured: ");
 
         txtId.setEditable(false);
 
@@ -374,22 +398,19 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtHasCut.setEditable(false);
 
         txtStartTime.setEditable(false);
-        txtStartTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStartTimeActionPerformed(evt);
-            }
-        });
 
         txtEndTime.setEditable(false);
 
         txtTimeSpent.setEditable(false);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText(bundle.getString("OrderInfo.jLabel13.text")); // NOI18N
+        jLabel13.setText("Start time on cut: ");
 
-        btnSave.setText(bundle.getString("OrderInfo.btnSave.text")); // NOI18N
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSaveActionPerformed(evt);
             }
         });
@@ -508,9 +529,11 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 .addComponent(btnSave))
         );
 
-        btnOk.setText(bundle.getString("OrderInfo.btnOk.text")); // NOI18N
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOk.setText("Ok");
+        btnOk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOkActionPerformed(evt);
             }
         });
@@ -551,215 +574,195 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
     {//GEN-HEADEREND:event_btnStartActionPerformed
-        if (tblSleeve.getSelectedRow() == -1)
-        {
-            String message = "Please select a Sleeve to the left";
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else
-        {
-            btnPause.setEnabled(true);
-            btnFinish.setEnabled(true);
+//        if (tblSleeve.getSelectedRow() == -1)
+//        {
+//            String message = "Please select a Sleeve to the left";
+//            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//        else
+//        {
+        btnPause.setEnabled(true);
+        btnFinish.setEnabled(true);
 
 //        endTime = new DateTime();
+
+        try
+        {
             txtStartTime.setText(jodaTimeFormat.print(startTime));
             startTime = jodaTimeFormat.parseDateTime(txtStartTime.getText());
 
             GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
 
-            try
-            {
-                sleeve.setStartTime(startTimeCalendar);
-                slmgr.update(sleeve);
-            }
-            catch (Exception e)
-            {
-                String message = "Unable to update sleeve with id " + sleeve.getId();
-                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            finally
-            {
-                tblSleeve.clearSelection();
-            }
+            sleeve.setStartTime(startTimeCalendar);
+            slmgr.updateSleeveStartTime(sleeve);
+        }
+        catch (Exception e)
+        {
+            String message = "Unable to update sleeve with id " + sleeve.getId();
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
 //        jTextField5.setText(DateFormat.(System.currentTimeMillis(), "MM/dd/yy HH:mm"));
 
-            if (txtTimeSpent.getText().isEmpty())
+        if (txtTimeSpent.getText().isEmpty())
+        {
+            elapsedHour = 0;
+            elapsedMin = 0;
+            elapsedSec = 0;
+            elapsedMillisec = 0;
+            timer = new Timer(1000, new ActionListener()
             {
-                elapsedHour = 0;
-                elapsedMin = 0;
-                elapsedSec = 0;
-                elapsedMillisec = 0;
-                timer = new Timer(1000, new ActionListener()
+                @Override
+                public void actionPerformed(ActionEvent e)
                 {
-                    @Override
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        elapsedSec++;
+                    elapsedSec++;
 //                    if (elapsedMillisec > 999)
 //                    {
 //                        elapsedMillisec = 0;
 //                        elapsedSec++;
 //                    }
-                        if (elapsedSec > 59)
-                        {
-                            elapsedSec = 0;
-                            elapsedMin++;
-                        }
-                        if (elapsedMin > 59)
-                        {
-                            elapsedMin = 0;
-                            elapsedHour++;
-                        }
-                        String displayTimer = String.format("%02d:%02d:%02d:%03d", elapsedHour, elapsedMin, elapsedSec, elapsedMillisec);
-                        txtTimeSpent.setText(displayTimer);
-
+                    if (elapsedSec > 59)
+                    {
+                        elapsedSec = 0;
+                        elapsedMin++;
                     }
-                });
-                timer.setInitialDelay(0);
-                timer.start();
-            }
-            else
-            {
-                timer.start();
-            }
+                    if (elapsedMin > 59)
+                    {
+                        elapsedMin = 0;
+                        elapsedHour++;
+                    }
+                    String displayTimer = String.format("%02d:%02d:%02d:%03d", elapsedHour, elapsedMin, elapsedSec, elapsedMillisec);
+                    txtTimeSpent.setText(displayTimer);
 
-            String option = "Pending";
-            String option2 = "Paused";
-            if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
+                }
+            });
+            timer.setInitialDelay(0);
+            timer.start();
+        }
+        else
+        {
+            timer.start();
+        }
+
+        String option = "Pending";
+        String option2 = "Paused";
+        if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
+        {
+            String status = "in Progress";
+            order.setStatus(status.toUpperCase());
+            try
             {
-                String status = "in Progress";
-                order.setStatus(status.toUpperCase());
-                try
-                {
-                    omgr.updateStatus(order);
-                }
-                catch (SQLException ex)
-                {
-                    ex.printStackTrace();
-                }
-                String message = "Production Order " + order.getOrderId() + "'s status has been updated.";
-                JOptionPane.showMessageDialog(this, message, "Update succesful", JOptionPane.INFORMATION_MESSAGE);
+                omgr.updateStatus(order);
             }
-            else
+            catch (Exception e)
             {
-                String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
+                String message = "Unable to update order";
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
+            String message = "Production Order " + order.getOrderId() + "'s status has been updated.";
+            JOptionPane.showMessageDialog(this, message, "Update succesful", JOptionPane.INFORMATION_MESSAGE);
         }
+        else
+        {
+            String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+//        }
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPauseActionPerformed
     {//GEN-HEADEREND:event_btnPauseActionPerformed
 //        endTime = new DateTime();
-        if (tblSleeve.getSelectedRow() == -1)
-        {
-            String message = "Please select a Sleeve to the left";
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else
-        {
-            btnStart.setEnabled(true);
+//        if (tblSleeve.getSelectedRow() == -1)
+//        {
+//            String message = "Please select a Sleeve to the left";
+//            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//        else
+//        {
+//            jButton1.setEnabled(true);
 
-            timer.stop();
+        timer.stop();
 
+        try
+        {
             txtEndTime.setText(jodaTimeFormat.print(endTime));
             endTime = jodaTimeFormat.parseDateTime(txtEndTime.getText());
 
             GregorianCalendar endTimeCalendar = endTime.toGregorianCalendar();
 
+            sleeve.setEndTime(endTimeCalendar);
+            slmgr.updateSleeveEndTime(sleeve);
+        }
+        catch (Exception e)
+        {
+            String message = "Unable to update sleeve with id " + sleeve.getId();
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        String option = "In Progress";
+        if (order.getStatus().equalsIgnoreCase(option))
+        {
+            String status = "Paused";
+            order.setStatus(status.toUpperCase());
             try
             {
-                sleeve.setEndTime(endTimeCalendar);
-                slmgr.update(sleeve);
+                omgr.updateStatus(order);
             }
             catch (Exception e)
             {
-                String message = "Unable to update sleeve with id " + sleeve.getId();
+                String message = "Unable to update order";
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-            String option = "In Progress";
-            if (order.getStatus().equalsIgnoreCase(option))
-            {
-                String status = "Paused";
-                order.setStatus(status.toUpperCase());
-                try
-                {
-                    omgr.updateStatus(order);
-                }
-                catch (SQLException ex)
-                {
-                   ex.printStackTrace();
-                }
-                String message = "Production Order " + order.getOrderId() + "'s status has been paused.";
-                JOptionPane.showMessageDialog(this, message, "Pause succesful", JOptionPane.INFORMATION_MESSAGE);
-                new SleeveInfo().setVisible(true);
-            }
-            else
-            {
-                String message = "Production Order " + order.getOrderId() + "'s status is not in progress or already paused.";
-                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            String message = "Production Order " + order.getOrderId() + "'s status has been paused.";
+            JOptionPane.showMessageDialog(this, message, "Pause succesful", JOptionPane.INFORMATION_MESSAGE);
+            new SleeveInfo(order, operator).setVisible(true);
         }
+        else
+        {
+            String message = "Production Order " + order.getOrderId() + "'s status is not in progress or already paused.";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        dispose();
+//        }
     }//GEN-LAST:event_btnPauseActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         closePressed();
     }//GEN-LAST:event_btnOkActionPerformed
- private void updateGUILanguage()
- {
-     btnStart.setText(rb.getString("OrderInfo.btnStart.text"));
-     btnPause.setText(rb.getString("OrderInfo.btnPause.text"));
-     btnFinish.setText(rb.getString("OrderInfo.btnFinish.text"));
-     btnSave.setText(rb.getString("OrderInfo.btnSave.text"));
-     btnOk.setText(rb.getString("OrderInfo.btnOk.text"));
-     
-     jLabel1.setText(rb.getString("OrderInfo.jLabel1.text"));
-     jLabel10.setText(rb.getString("OrderInfo.jLabel10.text"));
-     jLabel11.setText(rb.getString("OrderInfo.jLabel11.text"));
-     jLabel12.setText(rb.getString("OrderInfo.jLabel12.text"));
-     jLabel13.setText(rb.getString("OrderInfo.jLabel13.text"));
-     jLabel2.setText(rb.getString("OrderInfo.jLabel2.text"));
-     jLabel4.setText(rb.getString("OrderInfo.jLabel4.text"));
-     jLabel5.setText(rb.getString("OrderInfo.jLabel5.text"));
-     jLabel6.setText(rb.getString("OrderInfo.jLabel6.text"));
-     jLabel7.setText(rb.getString("OrderInfo.jLabel7.text"));
-     jLabel9.setText(rb.getString("OrderInfo.jLabel9.text"));
-     
-     TitledBorder border = (TitledBorder) jPanel2.getBorder();
-     border.setTitle(rb.getString("OrderInfo.jPanel2.border.title"));
-     
-     TitledBorder border2 = (TitledBorder) jPanel3.getBorder();
-     border.setTitle(rb.getString("OrderInfo.jPanel3.border.border.title"));
 
-    lblSleeves.setText(rb.getString("OrderInfo.lblSleeves.text"));
-     
-     
- }
-    
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String message = txtError.getText();              
+        String message = txtError.getText();
         try
         {
             omgr.updateErrorMessage(order, message);
             order.setErrorOccured(message);
         }
-        catch (SQLException ex)
+        catch (Exception e)
         {
-           ex.printStackTrace();
+            String error = "Unable to update error message";
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        String popup = "The error message has been saved.";
-        JOptionPane.showMessageDialog(this, popup, "Save Successful ", JOptionPane.INFORMATION_MESSAGE);
 
-      
+        String popup = "The error message has been saved";
+        JOptionPane.showMessageDialog(this, popup, "Save successful", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void txtStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStartTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStartTimeActionPerformed
+    private void btnFinishActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnFinishActionPerformed
+    {//GEN-HEADEREND:event_btnFinishActionPerformed
 
+        String status = "Finished";
+        order.setStatus(status.toUpperCase());
+        try
+        {
+            omgr.updateStatus(order);
+            dispose();
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnFinishActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinish;
     private javax.swing.JButton btnOk;
@@ -776,6 +779,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
