@@ -80,7 +80,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         productionSleeveListSelectioner();
         pausedOrderTable();
 
-        localeLanguage.setLocale(locale);       
+        localeLanguage.setLocale(locale);
         mouseListener1();
         mouseListener2();
         setTableColumnSize();
@@ -161,7 +161,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 //        String operator = Login.getInstance().getOperator();
 //        lblLoggedIn.setText("Logged in as " + operator);
 //    }
-    
     private void updateOperator()
     {
         lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") + operator);
@@ -442,16 +441,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                     }
                     catch (SQLException ex)
                     {
-                       ex.printStackTrace();
+                        ex.printStackTrace();
                     }
                     new OrderInfo(o, s, op).setVisible(true);
                 }
-                
+
             }
         });
     }
-    
-        private void mouseListener2()
+
+    private void mouseListener2()
     {
         tblOrderList.addMouseListener(new MouseAdapter()
         {
@@ -461,21 +460,20 @@ public class Overview extends javax.swing.JFrame implements Observer
                 if (me.getClickCount() == 2)
                 {
                     int selectedRow = tblOrderList.getSelectedRow();
-                    Order o = psmodel.getEventsByRow(selectedRow);                    
+                    Order o = psmodel.getEventsByRow(selectedRow);
                     try
                     {
                         op = opmgr.get(operator);
                     }
                     catch (SQLException ex)
                     {
-                       ex.printStackTrace();
+                        ex.printStackTrace();
                     }
                     new OrderInfo(o, s, op).setVisible(true);
                 }
             }
         });
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1050,10 +1048,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     private void btnReset1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
-    }//GEN-LAST:event_btnResetActionPerformed
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnReset1ActionPerformed
-    {//GEN-HEADEREND:event_btnReset1ActionPerformed
-
         try
         {
 
@@ -1072,9 +1066,9 @@ public class Overview extends javax.swing.JFrame implements Observer
             tblStockList3.clearSelection();
         }
 
-
-
-
+    }//GEN-LAST:event_btnResetActionPerformed
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnReset1ActionPerformed
+    {//GEN-HEADEREND:event_btnReset1ActionPerformed
     }//GEN-LAST:event_btnReset1ActionPerformed
 
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed

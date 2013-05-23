@@ -124,21 +124,19 @@ public class SleeveInfo extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        int hasCut = Integer.parseInt(txtHasCut.getText());
-        int total = 0;
-        
-        if (hasCut <= order.getQuantity())
+        int cut = Integer.parseInt(txtHasCut.getText()) + order.getConductedQuantity();
+
+        if (cut <= order.getQuantity())
         {
+            order.setConductedQuantity(cut);
             try
             {
-                total = order.getConductedQuantity() + hasCut;
-                order.setConductedQuantity(total);
                 omgr.update(order);
-                opmgr.updateHasCut(operator, total);
+                dispose();
             }
-            catch (Exception ex)
+            catch (SQLException ex)
             {
-                ex.printStackTrace();
+               ex.printStackTrace();
             }
         }
         else
@@ -149,8 +147,8 @@ public class SleeveInfo extends javax.swing.JFrame
             {
                 dispose();
             }
-        }
 
+        }
     }//GEN-LAST:event_btnOkActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
