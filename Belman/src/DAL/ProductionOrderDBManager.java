@@ -172,7 +172,7 @@ public class ProductionOrderDBManager
             String sql = "UPDATE ProductionOrder SET ProductionOrder.errorOccured = ? WHERE ProductionOrder.pOrderId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setString(1, o.getErrorOccured());
+            ps.setString(1, message);
             ps.setInt(2, o.getOrderId());  
             
             
@@ -183,6 +183,7 @@ public class ProductionOrderDBManager
             }
         }
     }
+        
 
     public void update(Order o) throws SQLException
     {
@@ -228,6 +229,8 @@ public class ProductionOrderDBManager
         }
         
     }
+      
+     
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
     {
