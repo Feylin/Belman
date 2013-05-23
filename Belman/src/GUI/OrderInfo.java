@@ -16,11 +16,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
@@ -61,6 +66,15 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      */
     public OrderInfo(Order o, Sleeve s, Operator op)
     {
+        try
+        {
+            omgr = OrderManager.getInstance();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        
         order = o;
         sleeve = s;
         operator = op;
@@ -74,7 +88,11 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
         txtHasCut.setText(String.valueOf(op.getQuantityCut()));
-
+       
+        txtError.setText(o.getErrorOccured());
+//        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
+            
+        
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
         try
@@ -186,6 +204,11 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
         });
     }
+    
+    private void updateMessage()
+    {
+        
+    }
 
     private void closePressed()
     {
@@ -195,6 +218,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         {
             dispose();
         }
+        
     }
 
     /**
@@ -204,8 +228,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -258,15 +281,13 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtOrderId.setEditable(false);
 
         tblSleeve.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -373,10 +394,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jLabel13.setText("Start time on cut: ");
 
         btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
@@ -407,7 +426,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6)
                                             .addComponent(jLabel9))
-                                        .addGap(60, 60, 60)
+                                        .addGap(69, 69, 69)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtLastName)
                                             .addComponent(txtHasCut)))
@@ -496,10 +515,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         );
 
         btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });

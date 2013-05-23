@@ -172,7 +172,7 @@ public class ProductionOrderDBManager
             String sql = "UPDATE ProductionOrder SET ProductionOrder.errorOccured = ? WHERE ProductionOrder.pOrderId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setString(1, o.getErrorOccured());
+            ps.setString(1, message);
             ps.setInt(2, o.getOrderId());  
             
             
@@ -183,6 +183,7 @@ public class ProductionOrderDBManager
             }
         }
     }
+        
 
     public void update(Order o) throws SQLException
     {
@@ -213,7 +214,7 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND ProductionOrder.status = 'PAUSED' ORDER BY ProductionOrder.dueDate, Sleeve.materialId, sleeve.thickness";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND ProductionOrder.status = 'PAUSED' ORDER BY ProductionOrder.urgentFlag DESC, ProductionOrder.dueDate, Sleeve.materialId, sleeve.thickness";
             PreparedStatement ps = con.prepareStatement(sql);
             
             ResultSet rs = ps.executeQuery();
@@ -228,6 +229,8 @@ public class ProductionOrderDBManager
         }
         
     }
+      
+     
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
     {
