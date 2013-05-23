@@ -16,10 +16,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
@@ -73,7 +77,14 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
         txtHasCut.setText(String.valueOf(op.getQuantityCut()));
-        txtError.setText(o.getErrorOccured());
+        try
+        {
+            txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
 
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
