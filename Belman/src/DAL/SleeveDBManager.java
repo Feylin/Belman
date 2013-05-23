@@ -5,6 +5,7 @@
 package DAL;
 
 import BE.Material;
+import BE.Operator;
 import BE.Order;
 import BE.Sleeve;
 import java.io.IOException;
@@ -202,5 +203,44 @@ public class SleeveDBManager
                 date.get(Calendar.MINUTE),
                 0);
         return str;
+    }
+
+    public void addLog(int id, Operator op, int hasCut, int timeSpent) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "INSERT INTO SleeveLog (sleeveId, quantity, operatorId, timeSpent) VALUES(?,?,?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, id);
+            ps.setInt(2, hasCut);
+            ps.setInt(3, op.getId());
+            ps.setInt(4, timeSpent);
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows <= 0)
+            {
+                throw new SQLException();
+            }
+        }
+    }
+    
+    public int getQuantity(Sleeve s, int opid) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM SleeveLog WHERE sleeveid = ? AND operatorId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, s.getId());
+            ps.setInt(2, opid);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                int quantity = rs.getInt("quantity");
+                return quantity;
+            }
+            return 0;
+        }
     }
 }

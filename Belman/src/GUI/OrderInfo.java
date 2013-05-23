@@ -9,6 +9,7 @@ import BE.Order;
 import BE.Sleeve;
 import BLL.ErrorsOccuredManager;
 import BLL.OrderManager;
+import BLL.SleeveLogManager;
 import BLL.SleeveManager;
 import BLL.StockItemManager;
 import GUI.Models.SleeveTableModel;
@@ -47,6 +48,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private SleeveTableModel slmodel = null;
     private static SleeveManager slmgr = null;
     private static StockItemManager smgr = null;
+    private static SleeveLogManager sllmgr = null;
     private static OrderManager omgr = null;
     private static ErrorsOccuredManager emgr = null;
 //    private GregorianCalendar date = new GregorianCalendar();
@@ -69,6 +71,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         try
         {
             omgr = OrderManager.getInstance();
+            sllmgr = SleeveLogManager.getInstance();
         }
         catch (Exception ex)
         {
@@ -87,7 +90,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtId.setText(String.valueOf(op.getId()));
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
-        txtHasCut.setText(String.valueOf(o.getConductedQuantity()));
+        
 
         txtError.setText(o.getErrorOccured());
 //        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
@@ -97,6 +100,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
         try
         {
+            txtHasCut.setText(String.valueOf(sllmgr.getQuantity(order.getSleeve(), operator.getId())));
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getSleevesByOrder(o));

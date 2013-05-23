@@ -8,6 +8,7 @@ import BE.Operator;
 import BE.Order;
 import BLL.OperatorManager;
 import BLL.OrderManager;
+import BLL.SleeveLogManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ public class SleeveInfo extends javax.swing.JFrame
     private OrderManager omgr = null;
     private Operator operator;
     private OperatorManager opmgr = null;
+    private SleeveLogManager slmgr = null;
 
     /**
      * Creates new form SleeveInfo
@@ -35,6 +37,7 @@ public class SleeveInfo extends javax.swing.JFrame
         {
             omgr = OrderManager.getInstance();
             opmgr = OperatorManager.getInstance();
+            slmgr = SleeveLogManager.getInstance();
         }
         catch (Exception ex)
         {
@@ -132,6 +135,7 @@ public class SleeveInfo extends javax.swing.JFrame
             try
             {
                 omgr.update(order);
+                slmgr.addLog(order.getSleeve().getId(), operator, cut, 0);
                 dispose();
             }
             catch (SQLException ex)
