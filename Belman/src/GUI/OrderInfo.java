@@ -74,7 +74,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         {
             ex.printStackTrace();
         }
-        
+
         order = o;
         sleeve = s;
         operator = op;
@@ -88,11 +88,11 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
         txtHasCut.setText(String.valueOf(op.getQuantityCut()));
-       
+
         txtError.setText(o.getErrorOccured());
 //        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
-            
-        
+
+
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
         try
@@ -204,10 +204,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
         });
     }
-    
+
     private void updateMessage()
     {
-        
     }
 
     private void closePressed()
@@ -218,7 +217,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         {
             dispose();
         }
-        
+
     }
 
     /**
@@ -633,7 +632,15 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         {
             String status = "in Progress";
             order.setStatus(status.toUpperCase());
-            omgr.updateStatus(order);
+            try
+            {
+                omgr.updateStatus(order);
+            }
+            catch (Exception e)
+            {
+                String message = "Unable to update order";
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            }
             String message = "Production Order " + order.getOrderId() + "'s status has been updated.";
             JOptionPane.showMessageDialog(this, message, "Update succesful", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -680,7 +687,15 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         {
             String status = "Paused";
             order.setStatus(status.toUpperCase());
-            omgr.updateStatus(order);
+            try
+            {
+                omgr.updateStatus(order);
+            }
+            catch (Exception e)
+            {
+                String message = "Unable to update order";
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            }
             String message = "Production Order " + order.getOrderId() + "'s status has been paused.";
             JOptionPane.showMessageDialog(this, message, "Pause succesful", JOptionPane.INFORMATION_MESSAGE);
             new SleeveInfo().setVisible(true);
@@ -699,9 +714,19 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String message = txtError.getText();
-        omgr.updateErrorMessage(order, message);
+        try
+        {
+            omgr.updateErrorMessage(order, message);
+            order.setErrorOccured(message);
+        }
+        catch (Exception e)
+        {
+            String error = "Unable to update error message";
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-
+        String popup = "The error message has been saved";
+        JOptionPane.showMessageDialog(this, popup, "Save successful", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnSaveActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinish;
