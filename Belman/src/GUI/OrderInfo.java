@@ -87,7 +87,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtId.setText(String.valueOf(op.getId()));
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
-        txtHasCut.setText(String.valueOf(op.getQuantityCut()));
+        txtHasCut.setText(String.valueOf(o.getConductedQuantity()));
 
         txtError.setText(o.getErrorOccured());
 //        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
@@ -698,13 +698,14 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
             String message = "Production Order " + order.getOrderId() + "'s status has been paused.";
             JOptionPane.showMessageDialog(this, message, "Pause succesful", JOptionPane.INFORMATION_MESSAGE);
-            new SleeveInfo().setVisible(true);
+            new SleeveInfo(order, operator).setVisible(true);
         }
         else
         {
             String message = "Production Order " + order.getOrderId() + "'s status is not in progress or already paused.";
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
+        dispose();
 //        }
     }//GEN-LAST:event_btnPauseActionPerformed
 
