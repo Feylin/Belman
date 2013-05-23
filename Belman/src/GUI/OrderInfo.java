@@ -142,10 +142,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void buttonState()
     {
-        if (jTextField5.getText().isEmpty())
+        if (txtStartTime.getText().isEmpty())
         {
-            jButton2.setEnabled(false);
-            jButton3.setEnabled(false);
+            btnPause.setEnabled(false);
+            btnFinish.setEnabled(false);
         }
 //        else
 //        {
@@ -184,8 +184,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -197,9 +196,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         tblSleeve = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         lblSleeves = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnStart = new javax.swing.JButton();
+        btnPause = new javax.swing.JButton();
+        btnFinish = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -214,9 +213,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtName = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
         txtHasCut = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txtStartTime = new javax.swing.JTextField();
+        txtEndTime = new javax.swing.JTextField();
+        txtTimeSpent = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
@@ -238,15 +237,13 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtOrderId.setEditable(false);
 
         tblSleeve.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -291,25 +288,21 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         lblSleeves.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblSleeves.setText("Sleeves to be made:");
 
-        jButton1.setText("Start");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton1ActionPerformed(evt);
+        btnStart.setText("Start");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Pause");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton2ActionPerformed(evt);
+        btnPause.setText("Pause");
+        btnPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPauseActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Finish");
+        btnFinish.setText("Finish");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Employee cutting:");
@@ -343,20 +336,18 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
         txtHasCut.setEditable(false);
 
-        jTextField5.setEditable(false);
+        txtStartTime.setEditable(false);
 
-        jTextField6.setEditable(false);
+        txtEndTime.setEditable(false);
 
-        jTextField7.setEditable(false);
+        txtTimeSpent.setEditable(false);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Start time on cut: ");
 
         btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
@@ -387,18 +378,18 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6)
                                             .addComponent(jLabel9))
-                                        .addGap(60, 60, 60)
+                                        .addGap(69, 69, 69)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtLastName)
                                             .addComponent(txtHasCut)))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jButton1)
+                                                .addComponent(btnStart)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton2)
+                                                .addComponent(btnPause)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton3))
+                                                .addComponent(btnFinish))
                                             .addComponent(lblSleeves)
                                             .addComponent(jLabel4))
                                         .addGap(0, 51, Short.MAX_VALUE))))
@@ -414,9 +405,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField7)
-                                    .addComponent(jTextField6))))
+                                    .addComponent(txtStartTime, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtTimeSpent)
+                                    .addComponent(txtEndTime))))
                         .addGap(14, 14, 14))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
@@ -435,20 +426,20 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                         .addComponent(lblSleeves)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
+                            .addComponent(btnStart)
+                            .addComponent(btnPause)
+                            .addComponent(btnFinish))
                         .addGap(19, 19, 19)
                         .addComponent(jLabel13))
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTimeSpent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -476,10 +467,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         );
 
         btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOkActionPerformed(evt);
             }
         });
@@ -518,8 +507,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
+    {//GEN-HEADEREND:event_btnStartActionPerformed
         if (tblSleeve.getSelectedRow() == -1)
         {
             String message = "Please select a Sleeve to the left";
@@ -527,12 +516,12 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         }
         else
         {
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
+            btnPause.setEnabled(true);
+            btnFinish.setEnabled(true);
 
 //        endTime = new DateTime();
-            jTextField5.setText(jodaTimeFormat.print(startTime));
-            startTime = jodaTimeFormat.parseDateTime(jTextField5.getText());
+            txtStartTime.setText(jodaTimeFormat.print(startTime));
+            startTime = jodaTimeFormat.parseDateTime(txtStartTime.getText());
 
             GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
 
@@ -553,7 +542,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
 //        jTextField5.setText(DateFormat.(System.currentTimeMillis(), "MM/dd/yy HH:mm"));
 
-            if (jTextField7.getText().isEmpty())
+            if (txtTimeSpent.getText().isEmpty())
             {
                 elapsedHour = 0;
                 elapsedMin = 0;
@@ -581,7 +570,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                             elapsedHour++;
                         }
                         String displayTimer = String.format("%02d:%02d:%02d:%03d", elapsedHour, elapsedMin, elapsedSec, elapsedMillisec);
-                        jTextField7.setText(displayTimer);
+                        txtTimeSpent.setText(displayTimer);
 
                     }
                 });
@@ -609,10 +598,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnStartActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void btnPauseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPauseActionPerformed
+    {//GEN-HEADEREND:event_btnPauseActionPerformed
 //        endTime = new DateTime();
         if (tblSleeve.getSelectedRow() == -1)
         {
@@ -621,12 +610,12 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         }
         else
         {
-            jButton1.setEnabled(true);
+            btnStart.setEnabled(true);
 
             timer.stop();
 
-            jTextField6.setText(jodaTimeFormat.print(endTime));
-            endTime = jodaTimeFormat.parseDateTime(jTextField6.getText());
+            txtEndTime.setText(jodaTimeFormat.print(endTime));
+            endTime = jodaTimeFormat.parseDateTime(txtEndTime.getText());
 
             GregorianCalendar endTimeCalendar = endTime.toGregorianCalendar();
 
@@ -657,7 +646,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnPauseActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         closePressed();
@@ -670,11 +659,11 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
       
     }//GEN-LAST:event_btnSaveActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinish;
     private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnPause;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnStart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -691,11 +680,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblSleeves;
     private javax.swing.JTable tblSleeve;
+    private javax.swing.JTextField txtEndTime;
     private javax.swing.JTextArea txtError;
     private javax.swing.JTextField txtHasCut;
     private javax.swing.JTextField txtId;
@@ -703,6 +690,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtOrderId;
     private javax.swing.JTextField txtOrderName;
+    private javax.swing.JTextField txtStartTime;
+    private javax.swing.JTextField txtTimeSpent;
     // End of variables declaration//GEN-END:variables
 
     @Override
