@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
@@ -64,6 +65,15 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      */
     public OrderInfo(Order o, Sleeve s, Operator op)
     {
+        try
+        {
+            omgr = OrderManager.getInstance();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        
         order = o;
         sleeve = s;
         operator = op;
@@ -77,15 +87,11 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
         txtHasCut.setText(String.valueOf(op.getQuantityCut()));
-        try
-        {
-            txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-
+       
+        txtError.setText(o.getErrorOccured());
+//        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
+            
+        
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
         try
@@ -700,6 +706,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         try
         {
             omgr.updateErrorMessage(order, message);
+            order.setErrorOccured(message);
         }
         catch (SQLException ex)
         {
