@@ -17,14 +17,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
@@ -44,21 +39,21 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private Sleeve sleeve;
     private Operator operator;
     private SleeveTableModel slmodel = null;
-    static SleeveManager slmgr = null;
-    static StockItemManager smgr = null;
-    static OrderManager omgr = null;
-    static ErrorsOccuredManager emgr = null;
-    private GregorianCalendar date = new GregorianCalendar();
-    final DateFormat startTimeFormat = new SimpleDateFormat("HH:mm:ss");
-    final DateFormat endTimeFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+    private static SleeveManager slmgr = null;
+    private static StockItemManager smgr = null;
+    private static OrderManager omgr = null;
+    private static ErrorsOccuredManager emgr = null;
+//    private GregorianCalendar date = new GregorianCalendar();
+//    final DateFormat startTimeFormat = new SimpleDateFormat("HH:mm:ss");
+//    final DateFormat endTimeFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
 //    long starTime = System.currentTimeMillis();
 //    long endTime = System.currentTimeMillis();
-    int day, month, year;
-    int hour, minute, second;
-    DateTime startTime, endTime;
-    DateTimeFormatter jodaTimeFormat = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm:ss");
+//    int day, month, year;
+//    int hour, minute, second;
+    private DateTime startTime, endTime;
+    private DateTimeFormatter jodaTimeFormat = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm:ss");
     private int elapsedMillisec, elapsedSec, elapsedMin, elapsedHour;
-    Timer timer;
+    private Timer timer;
 
     /**
      * Creates new form OrderInfo
@@ -80,12 +75,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtHasCut.setText(String.valueOf(op.getQuantityCut()));
         txtError.setText(o.getErrorOccured());
 
-
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
         try
         {
-
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getSleevesByOrder(o));
@@ -155,12 +148,12 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             jButton2.setEnabled(false);
             jButton3.setEnabled(false);
         }
-        else
-        {
-            jButton1.setEnabled(false);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
-        }
+//        else
+//        {
+//            jButton1.setEnabled(false);
+//            jButton2.setEnabled(true);
+//            jButton3.setEnabled(true);
+//        }
     }
 
     private void windowClose()
@@ -198,7 +191,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -247,22 +241,19 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jLabel2.setText("Order ID: ");
 
         txtOrderName.setEditable(false);
-        txtOrderName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtOrderNameActionPerformed(evt);
-            }
-        });
 
         txtOrderId.setEditable(false);
 
         tblSleeve.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -308,15 +299,19 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         lblSleeves.setText("Sleeves to be made:");
 
         jButton1.setText("Start");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton1ActionPerformed(evt);
             }
         });
 
         jButton2.setText("Pause");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -356,11 +351,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtHasCut.setEditable(false);
 
         jTextField5.setEditable(false);
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
 
         jTextField6.setEditable(false);
 
@@ -370,8 +360,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jLabel13.setText("Start time on cut: ");
 
         btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSaveActionPerformed(evt);
             }
         });
@@ -491,8 +483,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         );
 
         btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOkActionPerformed(evt);
             }
         });
@@ -531,16 +525,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtOrderNameActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtOrderNameActionPerformed
-    {//GEN-HEADEREND:event_txtOrderNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtOrderNameActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField5ActionPerformed
-    {//GEN-HEADEREND:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
         if (tblSleeve.getSelectedRow() == -1)
@@ -555,18 +539,23 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
 //        endTime = new DateTime();
             jTextField5.setText(jodaTimeFormat.print(startTime));
-
             startTime = jodaTimeFormat.parseDateTime(jTextField5.getText());
+
             GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
 
-            sleeve.setStartTime(startTimeCalendar);
             try
             {
+                sleeve.setStartTime(startTimeCalendar);
                 slmgr.update(sleeve);
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+                String message = "Unable to update sleeve with id " + sleeve.getId();
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            finally
+            {
+                tblSleeve.clearSelection();
             }
 
 //        jTextField5.setText(DateFormat.(System.currentTimeMillis(), "MM/dd/yy HH:mm"));
@@ -639,18 +628,20 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
 //        endTime = new DateTime();
-        if (tblSleeve.getSelectedRow() == 0)
+        if (tblSleeve.getSelectedRow() == -1)
         {
             String message = "Please select a Sleeve to the left";
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
         else
-        {   jButton1.setEnabled(true);
-            jTextField6.setText(jodaTimeFormat.print(endTime));
+        {
+            jButton1.setEnabled(true);
 
             timer.stop();
 
+            jTextField6.setText(jodaTimeFormat.print(endTime));
             endTime = jodaTimeFormat.parseDateTime(jTextField6.getText());
+
             GregorianCalendar endTimeCalendar = endTime.toGregorianCalendar();
 
             try
@@ -660,7 +651,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+                String message = "Unable to update sleeve with id " + sleeve.getId();
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
 
             String option = "In Progress";
