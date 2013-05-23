@@ -12,9 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class CoilTypeDBManager
 {
@@ -119,7 +120,6 @@ public class CoilTypeDBManager
 
     protected CoilType getOneItem(ResultSet rs) throws SQLException, IOException
     {
-
         int id = rs.getInt(ID);
         String code = rs.getString(CODE);
         double width = rs.getInt(WIDTH);

@@ -6,7 +6,7 @@ package BE;
 
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class ErrorsOccured 
 {
@@ -18,7 +18,6 @@ public class ErrorsOccured
       this.ProductionOrder = ProductionOrder;
       this.info = info;
   }
-
 
     /**
      * @param ProductionOrder the ProductionOrder to set
@@ -34,7 +33,6 @@ public class ErrorsOccured
         this.info = info;
     }
     
-
     /**
      * @return the ProductionOrder
      */

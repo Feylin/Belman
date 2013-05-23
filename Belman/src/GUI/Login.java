@@ -21,8 +21,9 @@ import javax.swing.event.ListSelectionListener;
 
 /**
  *
- * @author Feylin
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class Login extends javax.swing.JFrame
 {
 

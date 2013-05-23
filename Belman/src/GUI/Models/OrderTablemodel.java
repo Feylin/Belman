@@ -10,21 +10,19 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-
 /**
  *
- * @author bhp
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class OrderTablemodel extends AbstractTableModel
 {
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-private final String[] header = {"Order", "DueDate", "MaterialName", "Circumference", "Width", "Quantity", "conductedQuantity", "Status", "Urgent"};
+    private final String[] header = {"Order", "DueDate", "MaterialName", "Circumference", "Width", "Quantity", "conductedQuantity", "Status", "Urgent"};
     private final Class[] columnTypes = {Integer.class, String.class, String.class, double.class, double.class, Integer.class, Integer.class, String.class, Boolean.class};
     
-
-
     private ArrayList<Order> info;
 
     public OrderTablemodel(ArrayList<Order> allInfo)
@@ -64,9 +62,7 @@ private final String[] header = {"Order", "DueDate", "MaterialName", "Circumfere
            case 5 : return o.getQuantity();
            case 6 : return o.getConductedQuantity();
            case 7 : return o.getStatus();  
-           case 8 : return o.isUrgent();
-               
-               
+           case 8 : return o.isUrgent();               
        }
        return null;
     }

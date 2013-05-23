@@ -17,8 +17,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Administrator
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class OperatorDBManager
 {
     private static final String OPERATORID = "OperatorId";

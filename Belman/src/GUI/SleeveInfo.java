@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class SleeveInfo extends javax.swing.JFrame
 {
-
     private Order order;
     private OrderManager omgr = null;
     private Operator operator;

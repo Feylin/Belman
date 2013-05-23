@@ -23,11 +23,11 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class ProductionOrderDBManager
 {
-
     private Connector connector;
     private static ProductionOrderDBManager instance;
 
@@ -155,8 +155,7 @@ public class ProductionOrderDBManager
             
             ps.setString(1, o.getStatus());
             ps.setInt(2, o.getOrderId());  
-            
-            
+                        
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
             {
@@ -174,8 +173,7 @@ public class ProductionOrderDBManager
             
             ps.setString(1, message);
             ps.setInt(2, o.getOrderId());  
-            
-            
+                       
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
             {
@@ -184,7 +182,6 @@ public class ProductionOrderDBManager
         }
     }
         
-
     public void update(Order o) throws SQLException
     {
         try (Connection con = connector.getConnection())
@@ -222,15 +219,13 @@ public class ProductionOrderDBManager
             ArrayList<Order> orders1 = new ArrayList<>();
             while (rs.next())
             {
-                 orders1.add(getOneOrder(rs));
-                 
+                 orders1.add(getOneOrder(rs));                
             }
             return orders1;
         }
         
     }
-      
-     
+          
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
     {
@@ -242,8 +237,7 @@ public class ProductionOrderDBManager
         int quantity = rs.getInt("quantity");
         int conductedQuantity = rs.getInt("conductedQuantity");
         String errorOccured = rs.getString("errorOccured");
-       
-        
+              
         double width = rs.getDouble("width");
         String status = rs.getString("status");
         boolean urgent = rs.getBoolean("urgentFlag");

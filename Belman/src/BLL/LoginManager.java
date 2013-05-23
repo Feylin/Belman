@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class LoginManager
 {

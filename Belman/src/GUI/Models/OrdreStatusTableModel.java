@@ -6,8 +6,9 @@ package GUI.Models;
 
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class OrdreStatusTableModel
 {
     

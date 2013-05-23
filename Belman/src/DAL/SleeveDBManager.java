@@ -21,11 +21,11 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class SleeveDBManager
 {
-
     private static final String ID = "id";
     private static final String START_TIME = "startTime";
     private static final String END_TIME = "endTime";

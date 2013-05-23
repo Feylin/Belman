@@ -14,7 +14,7 @@ import java.util.Observable;
 
 /**
  *
- * @author Administrator
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class OperatorManager extends Observable
 {
@@ -48,7 +48,7 @@ public class OperatorManager extends Observable
     public void updateHasCut(Operator op, int hasCut) throws SQLException
     {
          accessor.updateHasCut(op, hasCut);
-            setChanged();
-            notifyObservers();
+         setChanged();
+         notifyObservers();
     }
 }

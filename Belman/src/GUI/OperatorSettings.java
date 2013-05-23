@@ -22,11 +22,11 @@ import javax.swing.KeyStroke;
 
 /**
  *
- * @author Administrator
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class OperatorSettings extends javax.swing.JDialog
 {
-
     private static OperatorSettings instance = null;
     private static OperatorManager mgr;
     private static LoginManager lmgr;

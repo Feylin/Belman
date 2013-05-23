@@ -37,11 +37,11 @@ import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
- * @author Mak, Klaus, Rashid og Daniel
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class OrderInfo extends javax.swing.JFrame implements Observer
 {
-
     private Order order;
     private Sleeve sleeve;
     private Operator operator;

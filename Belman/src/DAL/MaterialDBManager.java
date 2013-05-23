@@ -15,8 +15,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class MaterialDBManager 
 {
     private static final String ID = "id";
@@ -64,6 +65,5 @@ public class MaterialDBManager
         double density = rs.getDouble(DENSITY);
         
         return new Material(id, density, name);
-    }
-    
+    }    
 }

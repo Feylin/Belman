@@ -44,9 +44,9 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Rashid, Daniel Mak og Klaus
  */
+
 public class Overview extends javax.swing.JFrame implements Observer
 {
-
     static OrderManager omgr = null;
     static StockItemManager smgr = null;
     static MaterialManager mmgr = null;
@@ -1081,8 +1081,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
     {//GEN-HEADEREND:event_localeLanguageActionPerformed
         rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
-        updateGUILanguage();
-        
+        updateGUILanguage();       
     }//GEN-LAST:event_localeLanguageActionPerformed
 
     private void cbxOperatorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cbxOperatorActionPerformed

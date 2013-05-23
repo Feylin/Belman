@@ -21,6 +21,7 @@ import java.util.ArrayList;
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class StockItemDBManager
 {
     private static final String ID = "id";

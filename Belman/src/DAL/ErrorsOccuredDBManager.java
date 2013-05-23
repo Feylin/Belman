@@ -14,11 +14,12 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class ErrorsOccuredDBManager {
     
-private Connector connector;
+    private Connector connector;
     private static ErrorsOccuredDBManager instance;
     private String message;
 
@@ -57,7 +58,6 @@ private Connector connector;
 //            
 //            return new ErrorsOccured(info);
 //            
-//
 //        }               
 //    }
     

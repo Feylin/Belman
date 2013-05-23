@@ -149,7 +149,6 @@ public class Order
     {
         this.quantity = quantity;
     }
-
     
      /**
      * @return the quantity
@@ -158,8 +157,7 @@ public class Order
     {
         return conductedQuantity;
     }
-    
-    
+       
     /**
      * @param conductedQuantity the quantity to set
      */

@@ -14,7 +14,7 @@ import java.util.Observable;
 
 /**
  *
- * @author Daniel
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class SleeveLogManager extends Observable
 {

@@ -1,5 +1,10 @@
 package BE;
 
+/**
+ *
+ * @author Daniel, Klaus, Mak, Rashid
+ */
+
 public enum OrderType
 
 {

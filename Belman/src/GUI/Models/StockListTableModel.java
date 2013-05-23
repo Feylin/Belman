@@ -10,11 +10,11 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-
 /**
  *
- * @author bhp
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class StockListTableModel extends AbstractTableModel
 {
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
@@ -28,11 +28,7 @@ public class StockListTableModel extends AbstractTableModel
     public StockListTableModel()
     {
         
-    }
-
-    
-
-   
+    } 
 
     @Override
     public void setValueAt(Object o, int row, int col)
