@@ -151,6 +151,46 @@ public class SleeveDBManager
             }
         }
     }
+    
+    public void updateSleeveStartTim(Sleeve s) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE Sleeve SET startTime = ? WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            Date startDate = new Date();
+            Timestamp startTime = new Timestamp(startDate.getTime());
+            ps.setTimestamp(1, startTime);
+            ps.setInt(2, s.getId());
+            
+            int affectedrows = ps.executeUpdate();
+            if (affectedrows == 0)
+            {
+                throw new SQLException("Unable to update sleeve start time");
+            }
+        }
+    }
+    
+    public void updateSleeveEndTime(Sleeve s) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE Sleeve SET endTime = ? WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            Date endDate = new Date();
+            Timestamp endTime = new Timestamp(endDate.getTime());
+            ps.setTimestamp(1, endTime);
+            ps.setInt(2, s.getId());
+            
+            int affectedrows = ps.executeUpdate();
+            if (affectedrows == 0)
+            {
+                throw new SQLException("Unable to update sleeve end time");
+            }
+        }
+    }
 
     protected String convertDateToSQL(GregorianCalendar date)
     {
