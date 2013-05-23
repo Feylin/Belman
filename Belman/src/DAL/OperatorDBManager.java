@@ -49,15 +49,22 @@ public class OperatorDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM Operator, Sleeve";
+            String sql = "SELECT * FROM Operator";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Operator> operators = new ArrayList<>();
             while (rs.next())
             {
-                operators.add(getOneOperator(rs));
-            }
+                int operatorId = rs.getInt("operatorId");
+                String username = rs.getString("username");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                int quantityCut = rs.getInt("quantityCut");
+                
+                Operator op = new Operator(operatorId, username, firstName, lastName, null, quantityCut);
+                operators.add(op);               
+            }            
             return operators;
         }
     }   

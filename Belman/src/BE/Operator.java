@@ -26,11 +26,21 @@ public class Operator
         this.sleeve = sleeve;
         this.quantityCut = quantityCut;
     }
-
+    
+    public Operator(int id, String username, String firstName, String lastName, int quantityCut)
+    {
+        this(id, username, firstName, lastName,null, quantityCut);
+    }
+//
     public Operator(String username, String firstName, String lastName, Sleeve sleeve, int quantityCut)
     {
         this(-1, username, firstName, lastName, sleeve, quantityCut);
     }
+//    
+//    public Operator(int id, String username, String firstName, String lastName, int quantityCut)
+//    {
+//        this(id, username, firstName, lastName, quantityCut);
+//    }
 
     /**
      * @return the username
