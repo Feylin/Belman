@@ -128,7 +128,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                         btnStart.setEnabled(true);
 
                         String status = "Finished";
-                        if (order.getConductedQuantity() == order.getQuantity() || order.getStatus().equalsIgnoreCase(status))
+                        if (order.getConductedQuantity() == order.getQuantity() && order.getStatus().equalsIgnoreCase(status))
                         {
                             btnPause.setEnabled(false);
                             btnFinish.setEnabled(false);

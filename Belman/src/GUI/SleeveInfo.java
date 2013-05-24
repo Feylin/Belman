@@ -49,6 +49,7 @@ public class SleeveInfo extends JDialog
         initComponents();
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
         numbersOnlyKeyListener();
+        setLocationByPlatform(true);
 
         txtTotal.setText(String.valueOf(o.getQuantity()));
     }
