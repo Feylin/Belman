@@ -134,7 +134,7 @@ public class SleeveInfo extends JDialog
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         int cut = Integer.parseInt(txtHasCut.getText()) + order.getConductedQuantity();
 
-        if (cut <= order.getQuantity())
+        if (cut < order.getQuantity())
         {
             order.setConductedQuantity(cut);
             try
@@ -148,22 +148,22 @@ public class SleeveInfo extends JDialog
                ex.printStackTrace();
             } 
         }
-//        if (cut == order.getQuantity())
-//        {
-//            order.setConductedQuantity(cut);
-//            String status = "Finished";
-//            order.setStatus(status.toUpperCase());
-//            try
-//            {
-//                omgr.update(order);
-//                slmgr.addLog(order.getSleeve().getId(), operator, cut, 0);
-//                dispose();
-//            }
-//            catch (SQLException ex)
-//            {
-//               ex.printStackTrace();
-//            }
-//        }
+        else if (cut == order.getQuantity())
+        {
+            order.setConductedQuantity(cut);
+            String status = "Finished";
+            order.setStatus(status.toUpperCase());
+            try
+            {
+                omgr.update(order);
+                slmgr.addLog(order.getSleeve().getId(), operator, cut, 0);
+                dispose();
+            }
+            catch (SQLException ex)
+            {
+               ex.printStackTrace();
+            }
+        }
         else
         {
             String message = "Error : You cant cut more than the total quantity ";

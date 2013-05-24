@@ -134,6 +134,13 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                             btnFinish.setEnabled(false);
                             btnStart.setEnabled(false);
                         }
+                        
+                        else if (order.getConductedQuantity() == order.getQuantity())
+                        {
+                            btnPause.setEnabled(false);
+                            btnFinish.setEnabled(true);
+                            btnStart.setEnabled(false);
+                        }
                     }
                     else
                     {

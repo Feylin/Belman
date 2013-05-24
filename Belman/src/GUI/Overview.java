@@ -933,6 +933,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
 
         btnReset1.setText(bundle.getString("Overview.btnReset1.text")); // NOI18N
+        btnReset1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnReset1ActionPerformed(evt);
+            }
+        });
 
         localeLanguage.addActionListener(new java.awt.event.ActionListener()
         {
