@@ -7,7 +7,6 @@ package GUI;
 import BE.Operator;
 import BE.Order;
 import BE.Sleeve;
-import BLL.ErrorsOccuredManager;
 import BLL.OrderManager;
 import BLL.SleeveLogManager;
 import BLL.SleeveManager;
@@ -44,7 +43,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private static StockItemManager smgr = null;
     private static SleeveLogManager sllmgr = null;
     private static OrderManager omgr = null;
-    private static ErrorsOccuredManager emgr = null;
 //    private GregorianCalendar date = new GregorianCalendar();
 //    final DateFormat startTimeFormat = new SimpleDateFormat("HH:mm:ss");
 //    final DateFormat endTimeFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
@@ -103,9 +101,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             omgr.addObserver(this);
             smgr = StockItemManager.getInstance();
             smgr.addObserver(this);
-            emgr = ErrorsOccuredManager.getInstance();
-            emgr.addObserver(this);
-
+            
             tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override

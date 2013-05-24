@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package BE;
 
 /**
- *
+ * Buisness Entity SalesOrder klassen
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class SalesOrder 
@@ -16,6 +11,13 @@ public class SalesOrder
     private String email;
     private int phone;
     
+    /**
+     * Den overordnede konstruktør til salesOrder klassen
+     * @param sOrderId
+     * @param custName
+     * @param email
+     * @param phone
+     */
     public SalesOrder(int sOrderId, String custName, String email, int phone)
     {
         this.sOrderId = sOrderId;
@@ -25,61 +27,33 @@ public class SalesOrder
     }
 
     /**
-     * @return the sOrderId
+     * Metode som returnere sOrderId.
      */
     public int getsOrderId()
     {
         return sOrderId;
-    }
+    }      
 
     /**
-     * @return the sOrder
-     */
-    public String getsOrder()
-    {
-        return getCustName();
-    }
-
-    /**
-     * @param sOrder the sOrder to set
-     */
-    public void setsOrder(String sOrder)
-    {
-        this.setCustName(sOrder);
-    }
-
-    /**
-     * @return the email
+     * Metode som returnere email.
      */
     public String getEmail()
     {
         return email;
-    }
+    } 
 
     /**
-     * @param email the email to set
-     */
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    /**
-     * @return the phone
+     * Metode som returnere telefonnummeret.
      */
     public int getPhone()
     {
         return phone;
     }
-
+   
     /**
-     * @param phone the phone to set
+     * Metode som returnere objektet i en Streng.
+     * @return 
      */
-    public void setPhone(int phone)
-    {
-        this.phone = phone;
-    }
-    
     @Override
     public String toString()
     {
@@ -87,18 +61,11 @@ public class SalesOrder
     }
 
     /**
-     * @return the custName
+     * Metode som returnere kunde navnet.
      */
     public String getCustName()
     {
         return custName;
     }
-
-    /**
-     * @param custName the custName to set
-     */
-    public void setCustName(String custName)
-    {
-        this.custName = custName;
-    }
+    
 }

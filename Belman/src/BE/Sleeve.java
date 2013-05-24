@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 import java.util.GregorianCalendar;
 
 /**
- *
+ * Buisness Entity Sleeve klassen.
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class Sleeve {
@@ -46,6 +42,16 @@ public class Sleeve {
 
     }
 
+    /**
+     * Anden konstruktør til sleeve klassen.
+     * @param id
+     * @param startTime
+     * @param endTime
+     * @param thickness
+     * @param circumference
+     * @param materialId
+     * @param pOrderId
+     */
     public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId)
     {
         this.id = id;
@@ -56,46 +62,11 @@ public class Sleeve {
         this.materialId = materialId;
         this.pOrderId = pOrderId; 
    
-    }
-    
-    public Sleeve(int id, Sleeve s) {
-        this(id,
-                s.getStartTime(),
-                s.getEndTime(),
-                s.getThickness(),
-                s.getCircumference(),
-                s.getMaterialId(),
-                s.getpOrderId(),
-                s.getMaterial());
-    }
+    }  
 
-    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
-    {
-        this(-1, null, null, -1, circumference, -1, -1,material);
-    }
-       
-
-//    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
-//    {
-//        this(-1, -1, -1, -1, circumference, -1, -1, material);
-//    }
-//    public Sleeve(GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
-//    {        
-//        this(-1, null, null, -1, circumference, -1, -1, material);
-//    }
-//    public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
-//    {
-//        this(id,
-//                startTime,
-//                endTime,
-//                thickness,
-//                circumference,
-//                materialId,
-//                pOrderId,
-//                material);        
-//    }
+   
     /**
-     * @return the id
+     * Metode som returnere sleevens id.
      */
     public int getId() 
     {
@@ -103,7 +74,7 @@ public class Sleeve {
     }
 
     /**
-     * @return the startTime
+     * Metode som returnere start tiden på sleevet.
      */
     public GregorianCalendar getStartTime() 
     {
@@ -111,7 +82,7 @@ public class Sleeve {
     }
 
     /**
-     * @param startTime the startTime to set
+     * Metode som sætter start tiden på sleevet til værdien i parameteren.
      */
     public void setStartTime(GregorianCalendar startTime) 
     {
@@ -119,7 +90,7 @@ public class Sleeve {
     }
 
     /**
-     * @return the endTime
+     * Metode som returnere slut tiden.
      */
     public GregorianCalendar getEndTime() 
     {
@@ -127,7 +98,7 @@ public class Sleeve {
     }
 
     /**
-     * @param endTime the endTime to set
+     * Metode som sætter slut tiden på sleevet til værdien i parameteren.
      */
     public void setEndTime(GregorianCalendar endTime) 
     {
@@ -135,87 +106,44 @@ public class Sleeve {
     }
 
     /**
-     * @return the thickness
+     * Metode som returnere sleevets tykkelse.
      */
     public double getThickness() 
     {
         return thickness;
     }
-
+   
     /**
-     * @param thickness the thickness to set
-     */
-    public void setThickness(double thickness) 
-    {
-        this.thickness = thickness;
-    }
-
-    /**
-     * @return the circumference
+     * Metode som returnere sleevets omkreds.
      */
     public double getCircumference() 
     {
         return circumference;
     }
-
+  
     /**
-     * @param circumference the circumference to set
-     */
-    public void setCircumference(double circumference) 
-    {
-        this.circumference = circumference;
-    }
-
-    /**
-     * @return the materialId
+     * Metode som returnere materiale id på sleevet.
      */
     public int getMaterialId() 
     {
         return materialId;
     }
+   
 
     /**
-     * @param materialId the materialId to set
-     */
-    public void setMaterialId(int materialId) 
-    {
-        this.materialId = materialId;
-    }
-
-    /**
-     * @return the pOrderId
+     * Metode som returnere productionorder id på sleevet.
      */
     public int getpOrderId() 
     {
         return pOrderId;
-    }
+    }    
 
     /**
-     * @param pOrderId the pOrderId to set
-     */
-    public void setpOrderId(int pOrderId) 
-    {
-        this.pOrderId = pOrderId;
-    }
-
-    public Material getMaterialName() 
-    {
-        return getMaterial();
-    }
-
-    /**
-     * @return the material
+     * Metode som returnere et objekt af klassen Material. 
      */
     public Material getMaterial() 
     {
         return material;
     }
 
-    /**
-     * @param material the material to set
-     */
-    public void setMaterial(Material material) 
-    {
-        this.material = material;
-    }
 }

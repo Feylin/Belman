@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- *
+ * Buisness Entity Order klassen
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class Order
@@ -19,7 +15,6 @@ public class Order
     private GregorianCalendar dueDate;
     private int quantity;
     private int conductedQuantity;
-//    private double thickness;
 
     private double width;
     private String status;
@@ -41,9 +36,7 @@ public class Order
      * @param thickness
      * @param width
      * @param status
-
      */
-
     public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, int conductedQuantity, double width, String status, boolean Urgent, SalesOrder salesOrder, Sleeve sleeve, String errorOccured)
     {
         this.sOrderId = sOrderId;
@@ -52,7 +45,6 @@ public class Order
         this.dueDate = dueDate;
         this.quantity = quantity;
         this.conductedQuantity = conductedQuantity;
-//        this.thickness = thickness;
         this.width = width;
         this.status = status;
         this.Urgent = Urgent;
@@ -61,6 +53,11 @@ public class Order
         this.errorOccured = errorOccured;
     }
 
+    /**
+     * Anden konstruktør for Order
+     * @param orderId
+     * @param o
+     */
     public Order(int orderId, Order o)
     {
         this(orderId,
@@ -78,6 +75,11 @@ public class Order
                 
     }
 
+    /**
+     * Printer datoen ud i en læselig format
+     * @param gc
+     * @return
+     */
     public String printDate(GregorianCalendar gc)
     {
         return String.format("%02d-%02d-%04d",
@@ -87,7 +89,7 @@ public class Order
     }
 
     /**
-     * @return the sOrderId
+     * Metode som returnere sOrderId for ordren.
      */
     public int getsOrderId()
     {
@@ -95,7 +97,7 @@ public class Order
     }
 
     /**
-     * @return the orderId
+     * Metode som returnere orderId for ordren
      */
     public int getOrderId()
     {
@@ -103,55 +105,33 @@ public class Order
     }
 
     /**
-     * @return the orderName
+     * Metode som returnere orde navnet.
      */
     public String getOrderName()
     {
         return orderName;
     }
 
-    /**
-     * @param orderName the orderName to set
-     */
-    public void setOrderName(String orderName)
-    {
-        this.orderName = orderName;
-    }
 
     /**
-     * @return the dueDate
+     * Metode som returnere dueDate for ordren.
      */
     public GregorianCalendar getDueDate()
     {
         return dueDate;
     }
 
-    /**
-     * @param dueDate the dueDate to set
-     */
-    public void setDueDate(GregorianCalendar dueDate)
-    {
-        this.dueDate = dueDate;
-    }
 
     /**
-     * @return the quantity
+     * Metode som returnere quantity for ordren.
      */
     public int getQuantity()
     {
         return quantity;
     }
-
-    /**
-     * @param quantity the quantity to set
-     */
-    public void setQuantity(int quantity)
-    {
-        this.quantity = quantity;
-    }
-    
+   
      /**
-     * @return the quantity
+     * Metode som returnere conductedQuantity for ordren.
      */
     public int getConductedQuantity()
     {
@@ -159,7 +139,7 @@ public class Order
     }
        
     /**
-     * @param conductedQuantity the quantity to set
+     * Metode som sætter conductedQuantity til værdien som parameteren hasCut har.
      */
     public void setConductedQuantity(int hasCut)
     {
@@ -168,7 +148,7 @@ public class Order
 
 
     /**
-     * @return the width
+     * Metode som returnere bredden for ordren.
      */
     public double getWidth()
     {
@@ -176,27 +156,23 @@ public class Order
     }
 
     /**
-     * @param width the width to set
-     */
-    public void setWidth(double width)
-    {
-        this.width = width;
-    }
-
-    /**
-     * @return the status
+     * Metode som returnere status for ordren.
      */
     public String getStatus()
     {
         return status;
     }
     
+    /**
+     * Metode som returnere et salesOrder objekt.
+     */
     public SalesOrder getSalesOrder()
     {
         return salesOrder;
     }
 
     /**
+     * Metode som sætter status til parameterens værdi.
      * @param status the status to set
      */
     public void setStatus(String status)
@@ -205,47 +181,24 @@ public class Order
     } 
 
     /**
-     * @return the sleeve
+     * Metode som returnere et sleeve objekt.
      */
     public Sleeve getSleeve()
     {
         return sleeve;
     }
+   
 
     /**
-     * @param sleeve the sleeve to set
-     */
-    public void setSleeve(Sleeve sleeve)
-    {
-        this.sleeve = sleeve;
-    }    
-
-    /**
-     * @return the Urgent
+     * Metode som returnere om ordren er en hasteOrdre
      */
     public boolean isUrgent()
     {
         return Urgent;
-    }
+    }    
 
     /**
-     * @param Urgent the Urgent to set
-     */
-    public void setUrgent(boolean Urgent)
-    {
-        this.Urgent = Urgent;
-    }
-    
-    /**
-     * @return the paused
-     */
-    public String getPaused() 
-    {
-        return paused;
-    }
-
-    /**
-     * @return the errorOccured
+     * Metode som returnere ordrens fejl.
      */
     public String getErrorOccured()
     {
@@ -253,7 +206,7 @@ public class Order
     }
 
     /**
-     * @param errorOccured the errorOccured to set
+     * Metode som sætter errorOccured til parameterens værdi.
      */
     public void setErrorOccured(String errorOccured)
     {

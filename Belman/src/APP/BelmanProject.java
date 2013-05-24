@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package APP;
 
 import GUI.Login;
@@ -11,13 +7,14 @@ import javax.swing.UIManager;
 import com.microsoft.sqlserver.jdbc.ISQLServerCallableStatement;
 
 /**
- *
+ * Belman Project 2012
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class BelmanProject
 {
 
     /**
+     * Belman Project main metode
      * @param args the command line arguments
      */
     public static void main(String[] args)

@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 /**
- *
+ * Buisness entity Material klassen
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class Material
@@ -28,18 +24,27 @@ public class Material
         this.name = name;
     }
 
+    /**
+     * Anden konstruktør til Material som laver et material objekt med id -1
+     * @param density
+     * @param name
+     */
     public Material(double density, String name)
     {
         this(-1, density, name);
     }
 
+    /**
+     * Tredje Material konstruktør
+     * @param name
+     */
     public Material(String name)
     {
         this.name = name;
     }
 
     /**
-     * @return the name
+     * Metode som returnere navnet på materialet.
      */
     public String getName()
     {
@@ -47,37 +52,17 @@ public class Material
     }
 
     /**
-     * @param name the name to set
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    /**
-     * @return the density
-     */
-    public double getDensity()
-    {
-        return density;
-    }
-
-    /**
-     * @param density the density to set
-     */
-    public void setDensity(double density)
-    {
-        this.density = density;
-    }
-
-    /**
-     * @returnerne materialets id.
+     * Metode som returnere id på materialet.
      */
     public int getId()
     {
         return id;
     }
     
+    /**
+     * Metode som formatere navnet til en læselig streng.
+     * @return 
+     */
     @Override
     public String toString()
     {

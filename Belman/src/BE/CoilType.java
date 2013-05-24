@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 /**
+ * Buisness entity CoilType klassen
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
@@ -35,6 +32,12 @@ public class CoilType
         this.materialId = materialId;
     }
 
+    /**
+     * Anden konstruktør som opretter et CoilType object
+     *
+     * @param id
+     * @param c
+     */
     public CoilType(int id, CoilType c)
     {
         this(id,
@@ -44,37 +47,31 @@ public class CoilType
                 c.getMaterialId());
     }
 
+    
+    /**
+     * Tredje konstruktør, som opretter et CoilType objekt med id -1
+     *
+     * @param code
+     * @param width
+     * @param thickness
+     * @param materialId
+     */
     public CoilType(String code, double width, double thickness, int materialId)
     {
         this(-1, code, width, thickness, materialId);
     }
 
+    
     /**
-     * @return the id
-     */
-    public int getId()
-    {
-        return id;
-    }
-
-    /**
-     * @return the code
+     * Metode som returnere koden for coiltypen.
      */
     public String getCode()
     {
         return code;
     }
-
+    
     /**
-     * @param code the code to set
-     */
-    public void setCode(String code)
-    {
-        this.code = code;
-    }
-
-    /**
-     * @return the width
+     * Metode som returnere bredden for coiltypen.
      */
     public double getWidth()
     {
@@ -82,15 +79,7 @@ public class CoilType
     }
 
     /**
-     * @param width the width to set
-     */
-    public void setWidth(double width)
-    {
-        this.width = width;
-    }
-
-    /**
-     * @return the thickness
+     * Metode som returnere tykkelsen for coiltypen.
      */
     public double getThickness()
     {
@@ -98,26 +87,10 @@ public class CoilType
     }
 
     /**
-     * @param thickness the thickness to set
-     */
-    public void setThickness(double thickness)
-    {
-        this.thickness = thickness;
-    }
-
-    /**
-     * @return the materialId
+     * Metode som returnere materiale id'et for coiltypen.
      */
     public int getMaterialId()
     {
         return materialId;
-    }
-
-    /**
-     * @param materialId the materialId to set
-     */
-    public void setMaterialId(int materialId)
-    {
-        this.materialId = materialId;
     }
 }

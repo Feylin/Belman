@@ -56,7 +56,7 @@ public class OrderTablemodel extends AbstractTableModel
        {
            case 0 : return o.getOrderName();
            case 1 : return o.printDate(o.getDueDate());
-           case 2 : return o.getSleeve().getMaterialName();
+           case 2 : return o.getSleeve().getMaterial().getName();
            case 3 : return o.getSleeve().getCircumference();
            case 4 : return o.getWidth();
            case 5 : return o.getQuantity();
@@ -93,7 +93,7 @@ public class OrderTablemodel extends AbstractTableModel
         {
            case 0 : or.getOrderName(); break;
            case 1 : or.getDueDate(); break;
-           case 2 : or.getSleeve().getMaterialName(); break;
+           case 2 : or.getSleeve().getMaterial().getName(); break;
            case 3 : or.getSleeve().getCircumference(); break;
            case 4 : or.getWidth(); break;
            case 5 : or.getQuantity(); break;

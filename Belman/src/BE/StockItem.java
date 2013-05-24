@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 /**
- *
+ * Buisness Entity StockItem klassen.
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class StockItem
@@ -19,6 +15,17 @@ public class StockItem
     private CoilType coilType;
     private Material material;
 
+    /**
+     * Den overordnede konstruktør for StockItem.
+     * @param id
+     * @param chargeNo
+     * @param length
+     * @param stockQuantity
+     * @param coilTypeId
+     * @param sleeveId
+     * @param coilType
+     * @param material
+     */
     public StockItem(int id, String chargeNo, double length, double stockQuantity, int coilTypeId, int sleeveId, CoilType coilType, Material material)
     {
         this.id = id;
@@ -31,6 +38,11 @@ public class StockItem
         this.material = material;
     }
 
+    /**
+     * Anden konstruktør til StockItem.
+     * @param id
+     * @param item
+     */
     public StockItem(int id, StockItem item)
     {
         this(id,
@@ -44,7 +56,7 @@ public class StockItem
     }
 
     /**
-     * @return the id
+     * Metode som returnere lagervarens id. 
      */
     public int getId()
     {
@@ -52,7 +64,7 @@ public class StockItem
     }
 
     /**
-     * @return the chargeNo
+     * Metode som returnere lagervarens chargeNo.
      */
     public String getChargeNo()
     {
@@ -60,31 +72,16 @@ public class StockItem
     }
 
     /**
-     * @param chargeNo the chargeNo to set
-     */
-    public void setChargeNo(String chargeNo)
-    {
-        this.chargeNo = chargeNo;
-    }
-
-    /**
-     * @return the length
+     * Metode som returnere lagervarens længde.
      */
     public double getLength()
     {
         return length;
     }
 
-    /**
-     * @param length the length to set
-     */
-    public void setLength(double length)
-    {
-        this.length = length;
-    }
 
     /**
-     * @return the stockQuantity
+     * Metode som returnere mængden af lagervareren.
      */
     public double getStockQuantity()
     {
@@ -92,15 +89,7 @@ public class StockItem
     }
 
     /**
-     * @param stockQuantity the stockQuantity to set
-     */
-    public void setStockQuantity(double stockQuantity)
-    {
-        this.stockQuantity = stockQuantity;
-    }
-
-    /**
-     * @return the coilTypeId
+     * Metode som returnere lagervarens coilTypeId.
      */
     public int getCoilTypeId()
     {
@@ -108,58 +97,29 @@ public class StockItem
     }
 
     /**
-     * @param coilTypeId the coilTypeId to set
-     */
-    public void setCoilTypeId(int coilTypeId)
-    {
-        this.coilTypeId = coilTypeId;
-    }
-
-    /**
-     * @return the sleeveId
+     * Metode som returnere lagervarens sleeveId.
      */
     public int getSleeveId()
     {
         return sleeveId;
     }
 
-    /**
-     * @param sleeveId the sleeveId to set
-     */
-    public void setSleeveId(int sleeveId)
-    {
-        this.sleeveId = sleeveId;
-    }
 
     /**
-     * @return the coilType
+     * Metode som returnere et objekt af klassen CoilType.
      */
     public CoilType getCoilType()
     {
         return coilType;
     }
 
-    /**
-     * @param coilType the coilType to set
-     */
-    public void setCoilType(CoilType coilType)
-    {
-        this.coilType = coilType;
-    }
 
     /**
-     * @return the material
+     * Metode som returnere et objekt af klassen Material.
      */
     public Material getMaterial()
     {
         return material;
     }
 
-    /**
-     * @param material the material to set
-     */
-    public void setMaterial(Material material)
-    {
-        this.material = material;
-    }
 }

@@ -44,9 +44,9 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Rashid, Daniel Mak og Klaus
  */
-
 public class Overview extends javax.swing.JFrame implements Observer
 {
+
     static OrderManager omgr = null;
     static StockItemManager smgr = null;
     static MaterialManager mmgr = null;
@@ -146,24 +146,24 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
         btnClose.setText(rb.getString("Overview.btnClose.text"));
         btnLogout.setText(rb.getString("Overview.btnLogout.text"));
-        btnReset1.setText(rb.getString("Overview.btnReset1.text"));
-        
+        btnReset.setText(rb.getString("Overview.btnReset.text"));
+
         menuFile.setText(rb.getString("Overview.menuFile.text"));
         menuSettings.setText(rb.getString("Overview.menuSettings.text"));
-        
+
         itemExit.setText(rb.getString("Overview.itemExit.text"));
         itemHelp.setText(rb.getString("Overview.itemHelp.text_1"));
-        
+
         jTabbedPane1.setTitleAt(0, rb.getString("Overview.pnlCutting2.TabConstraints.tabTitle"));
         lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") + operator);
-        
+
         itemSettings.setText(rb.getString("Overview.itemSettings.text"));
         itemLogOut.setText(rb.getString("Overview.itemLogOut.text_1"));
-        
+
         jLabel1.setText(rb.getString("Overview.jLabel1.text"));
         jLabel2.setText(rb.getString("Overview.jLabel2.text"));
         jLabel4.setText(rb.getString("Overview.jLabel4.text"));
-        
+
         lblCustomerName.setText(rb.getString("Overview.lblCustomerName.text"));
         lblDate.setText(rb.getString("Overview.lblDate.text"));
         lblEmail.setText(rb.getString("Overview.lblEmail.text"));
@@ -173,16 +173,16 @@ public class Overview extends javax.swing.JFrame implements Observer
         lblSalesOrderId.setText(rb.getString("Overview.lblSalesOrderId.text"));
         lblThickness.setText(rb.getString("Overview.lblThickness.text"));
         lblWidth.setText(rb.getString("Overview.lblWidth.text"));
-        
-        
+
+
 //     TitledBorder border = (TitledBorder) pnlCustomerInfo.getBorder();
-     
+
 //          TitledBorder border2 = (TitledBorder) pnlMeasurements.getBorder();
-          
+
 //     TitledBorder border3 = (TitledBorder) pnlCutting2.getBorder();
-          
+
 //     TitledBorder border4 = (TitledBorder) pnlOrder.getBorder();
-     
+
 //     TitledBorder border5 = (TitledBorder) pnlOrderInfo.getBorder();
     }// </editor-fold> 
 
@@ -558,7 +558,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         pnlLoggedIn = new javax.swing.JPanel();
         lblLoggedIn = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
-        btnReset1 = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         localeLanguage = new com.toedter.components.JLocaleChooser();
         cbxOperator = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
@@ -932,12 +932,12 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
 
-        btnReset1.setText(bundle.getString("Overview.btnReset1.text")); // NOI18N
-        btnReset1.addActionListener(new java.awt.event.ActionListener()
+        btnReset.setText(bundle.getString("Overview.btnReset.text")); // NOI18N
+        btnReset.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnReset1ActionPerformed(evt);
+                btnResetActionPerformed(evt);
             }
         });
 
@@ -1018,7 +1018,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnReset1))
+                        .addComponent(btnReset))
                     .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlLoggedIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1046,7 +1046,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReset1)
+                    .addComponent(btnReset)
                     .addComponent(btnLogout)
                     .addComponent(btnClose)))
         );
@@ -1079,11 +1079,48 @@ public class Overview extends javax.swing.JFrame implements Observer
         OperatorSettings.getInstance().setVisible(true);
     }//GEN-LAST:event_itemSettingsActionPerformed
 
-    private void btnReset1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
+    private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
+    {//GEN-HEADEREND:event_localeLanguageActionPerformed
+        rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
+        updateGUILanguage();
+    }//GEN-LAST:event_localeLanguageActionPerformed
+
+    private void cbxOperatorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cbxOperatorActionPerformed
+    {//GEN-HEADEREND:event_cbxOperatorActionPerformed
+    }//GEN-LAST:event_cbxOperatorActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
+    {//GEN-HEADEREND:event_jTabbedPane1StateChanged
+        if (jTabbedPane1.getSelectedIndex() == 0)
+        {
+            btnReset.setVisible(true);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 1)
+        {
+            btnReset.setVisible(false);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 2)
+        {
+            btnReset.setVisible(true);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 3)
+        {
+            btnReset.setVisible(true);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 4)
+        {
+            btnReset.setVisible(false);
+        }
+        if (jTabbedPane1.getSelectedIndex() == 5)
+        {
+            btnReset.setVisible(false);
+        }
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
         try
         {
-
             smodel3 = new StockList2TableModel(smgr.getAll());
             tblStockList3.setModel(smodel3);
             psmodel = new ProductionSleeveTableModel(omgr.getAll());
@@ -1098,49 +1135,11 @@ public class Overview extends javax.swing.JFrame implements Observer
             tblProductionSleeve.clearSelection();
             tblStockList3.clearSelection();
         }
-
     }//GEN-LAST:event_btnResetActionPerformed
-    private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
-    {//GEN-HEADEREND:event_localeLanguageActionPerformed
-        rb = ResourceBundle.getBundle("GUI.Bundle", localeLanguage.getLocale());
-        updateGUILanguage();       
-    }//GEN-LAST:event_localeLanguageActionPerformed
-
-    private void cbxOperatorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cbxOperatorActionPerformed
-    {//GEN-HEADEREND:event_cbxOperatorActionPerformed
-    }//GEN-LAST:event_cbxOperatorActionPerformed
-
-    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
-    {//GEN-HEADEREND:event_jTabbedPane1StateChanged
-        if (jTabbedPane1.getSelectedIndex() == 0)
-        {
-            btnReset1.setVisible(true);
-        }
-        if (jTabbedPane1.getSelectedIndex() == 1)
-        {
-            btnReset1.setVisible(false);
-        }
-        if (jTabbedPane1.getSelectedIndex() == 2)
-        {
-            btnReset1.setVisible(true);
-        }
-        if (jTabbedPane1.getSelectedIndex() == 3)
-        {
-            btnReset1.setVisible(true);
-        }
-        if (jTabbedPane1.getSelectedIndex() == 4)
-        {
-            btnReset1.setVisible(false);
-        }
-        if (jTabbedPane1.getSelectedIndex() == 5)
-        {
-            btnReset1.setVisible(false);
-        }
-    }//GEN-LAST:event_jTabbedPane1StateChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnReset1;
+    private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cbxOperator;
     private javax.swing.JMenuItem itemExit;

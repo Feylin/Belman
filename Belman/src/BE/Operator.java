@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 /**
- *
+ * Buisness entity Operator klassen
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class Operator
@@ -17,6 +13,15 @@ public class Operator
     private Sleeve sleeve;
     private int quantityCut;
 
+    /**
+     * Den overordnede konstruktør for Operator klassen
+     * @param id
+     * @param username
+     * @param firstName
+     * @param lastName
+     * @param sleeve
+     * @param quantityCut
+     */
     public Operator(int id, String username, String firstName, String lastName, Sleeve sleeve, int quantityCut)
     {
         this.id = id;
@@ -26,56 +31,18 @@ public class Operator
         this.sleeve = sleeve;
         this.quantityCut = quantityCut;
     }
-    
-    public Operator(int id, String username, String firstName, String lastName, int quantityCut)
-    {
-        this(id, username, firstName, lastName,null, quantityCut);
-    }
-
-    public Operator(String username, String firstName, String lastName, Sleeve sleeve, int quantityCut)
-    {
-        this(-1, username, firstName, lastName, sleeve, quantityCut);
-    }
-//    
-//    public Operator(int id, String username, String firstName, String lastName, int quantityCut)
-//    {
-//        this(id, username, firstName, lastName, quantityCut);
-//    }
+  
 
     /**
-     * @return the username
-     */
-    public String getUsername()
-    {
-        return username;
-    }
-
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
-
-    /**
-     * @return the firstName
+     * Metode som returnere operatorens fornavn
      */
     public String getFirstName()
     {
         return firstName;
-    }
+    } 
 
     /**
-     * @param firstName the firstName to set
-     */
-    public void setFirstName(String firstName)
-    {
-        this.firstName = firstName;
-    }
-
-    /**
-     * @return the lastName
+     * Metode som returnere operatorens efternavn
      */
     public String getLastName()
     {
@@ -83,56 +50,20 @@ public class Operator
     }
 
     /**
-     * @param lastName the lastName to set
-     */
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
-    }
-
-    /**
-     * @return the id
+     * Metode som returnere operatorens ID
      */
     public int getId()
     {
         return id;
     }
-
+    /**
+     * Metode som returnere brugernavnet som en streng.
+     * @return 
+     */
     @Override
     public String toString()
     {
         return username;
     }
 
-    /**
-     * @return the sleeve
-     */
-    public Sleeve getSleeve()
-    {
-        return sleeve;
-    }
-
-    /**
-     * @param sleeve the sleeve to set
-     */
-    public void setSleeve(Sleeve sleeve)
-    {
-        this.sleeve = sleeve;
-    }
-
-    /**
-     * @return the quantityCut
-     */
-    public int getQuantityCut()
-    {
-        return quantityCut;
-    }
-
-    /**
-     * @param quantityCut the quantityCut to set
-     */
-    public void setQuantityCut(int quantityCut)
-    {
-        this.quantityCut = quantityCut;
-    }
 }
