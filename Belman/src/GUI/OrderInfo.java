@@ -33,9 +33,9 @@ import org.joda.time.format.DateTimeFormatter;
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
-
 public class OrderInfo extends javax.swing.JFrame implements Observer
 {
+
     private Order order;
     private Sleeve sleeve;
     private Operator operator;
@@ -84,7 +84,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtId.setText(String.valueOf(op.getId()));
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
-        
+
 
         txtError.setText(o.getErrorOccured());
 //        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
@@ -121,20 +121,25 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                     {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
                         txtStartTime.setText(sdf.format(sleeve.getStartTime().getTime()));
+                        txtEndTime.setText(sdf.format(sleeve.getEndTime().getTime()));
 
                         btnPause.setEnabled(true);
                         btnFinish.setEnabled(true);
                         btnStart.setEnabled(true);
+
+//                        String status = "Finished";
+                        if (order.getConductedQuantity() == order.getQuantity())
+                        {
+                            btnPause.setEnabled(false);
+                            btnFinish.setEnabled(false);
+                            btnStart.setEnabled(false);
+                        }
                     }
                     else
                     {
                         btnStart.setEnabled(true);
                     }
-                    if (sleeve.getStartTime() != null)
-                    {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-                        txtEndTime.setText(sdf.format(sleeve.getEndTime().getTime()));
-                    }
+
                 }
             });
 
@@ -213,7 +218,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         if (order.getStatus().equalsIgnoreCase(option))
         {
             String error = "Order is still in progress";
-            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);            
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
