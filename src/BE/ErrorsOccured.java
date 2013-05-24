@@ -1,52 +1,56 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 /**
- *
- * @author Rashid
+ * BE.ErrorsOccured klasse 
+ * @author Rashid, Klaus, Mak, Daniel
  */
-public class ErrorsOccured 
+public class ErrorsOccured
 {
-    private int ProductionOrder;
-  private String info;
-  
-  public ErrorsOccured(int ProductionOrder, String info)
-  {
-      this.ProductionOrder = ProductionOrder;
-      this.info = info;
-  }
 
+    private int ProductionOrder;
+    private String info;
+
+    
+    /**
+     * Den overordnede konstruktør til ErrorsOccured klassen
+     * @param ProductionOrder
+     * @param info
+     */
+    public ErrorsOccured(int ProductionOrder, String info)
+    {
+        this.ProductionOrder = ProductionOrder;
+        this.info = info;
+    }
 
     /**
-     * @param ProductionOrder the ProductionOrder to set
+     * @param ProductionOrder sætter en ny productionOrder
      */
-    public void setProductionOrder(int ProductionOrder) {
+    public void setProductionOrder(int ProductionOrder)
+    {
         this.ProductionOrder = ProductionOrder;
     }
 
     /**
-     * @param info the info to set
+     * @param info sætter ny info
      */
-    public void setInfo(String info) {
+    public void setInfo(String info)
+    {
         this.info = info;
     }
-    
 
     /**
-     * @return the ProductionOrder
+     * @returnere productionOrder
      */
-    public int getProductionOrder() {
+    public int getProductionOrder()
+    {
         return ProductionOrder;
     }
 
     /**
-     * @return the info
+     * @returnere info
      */
-    public String getInfo() {
+    public String getInfo()
+    {
         return info;
     }
-      
 }
