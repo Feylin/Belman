@@ -47,6 +47,7 @@ public class SleeveInfo extends JDialog
         }
         order = o;
         initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
         numbersOnlyKeyListener();
 
         txtTotal.setText(String.valueOf(o.getQuantity()));
@@ -74,6 +75,7 @@ public class SleeveInfo extends JDialog
         txtTotal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Belman Manager");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnOk.setText("Ok");
@@ -131,7 +133,7 @@ public class SleeveInfo extends JDialog
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         int cut = Integer.parseInt(txtHasCut.getText()) + order.getConductedQuantity();
 
-        if (cut < order.getQuantity())
+        if (cut <= order.getQuantity())
         {
             order.setConductedQuantity(cut);
             try
@@ -143,24 +145,24 @@ public class SleeveInfo extends JDialog
             catch (SQLException ex)
             {
                ex.printStackTrace();
-            }
+            } 
         }
-        if (cut == order.getQuantity())
-        {
-            order.setConductedQuantity(cut);
-            String status = "Finished";
-            order.setStatus(status.toUpperCase());
-            try
-            {
-                omgr.update(order);
-                slmgr.addLog(order.getSleeve().getId(), operator, cut, 0);
-                dispose();
-            }
-            catch (SQLException ex)
-            {
-               ex.printStackTrace();
-            }
-        }
+//        if (cut == order.getQuantity())
+//        {
+//            order.setConductedQuantity(cut);
+//            String status = "Finished";
+//            order.setStatus(status.toUpperCase());
+//            try
+//            {
+//                omgr.update(order);
+//                slmgr.addLog(order.getSleeve().getId(), operator, cut, 0);
+//                dispose();
+//            }
+//            catch (SQLException ex)
+//            {
+//               ex.printStackTrace();
+//            }
+//        }
         else
         {
             String message = "Error : You cant cut more than the total quantity ";

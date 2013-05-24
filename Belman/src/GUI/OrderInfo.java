@@ -127,8 +127,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                         btnFinish.setEnabled(true);
                         btnStart.setEnabled(true);
 
-//                        String status = "Finished";
-                        if (order.getConductedQuantity() == order.getQuantity())
+                        String status = "Finished";
+                        if (order.getConductedQuantity() == order.getQuantity() || order.getStatus().equalsIgnoreCase(status))
                         {
                             btnPause.setEnabled(false);
                             btnFinish.setEnabled(false);
@@ -242,7 +242,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private void initComponents()
     {
 
-        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -276,17 +275,16 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         btnSave = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Start time on cut: ");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Belman Manager");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
+        setTitle(bundle.getString("OrderInfo.title")); // NOI18N
+        setLocationByPlatform(true);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Production Order and Sleeve Information"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("OrderInfo.jPanel2.border.title"))); // NOI18N
 
-        jLabel1.setText("Order Name: ");
+        jLabel1.setText(bundle.getString("OrderInfo.jLabel1.text")); // NOI18N
 
-        jLabel2.setText("Order ID: ");
+        jLabel2.setText(bundle.getString("OrderInfo.jLabel2.text")); // NOI18N
 
         txtOrderName.setEditable(false);
 
@@ -341,12 +339,12 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Cutting Console")));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), bundle.getString("OrderInfo.jPanel3.border.border.title")))); // NOI18N
 
         lblSleeves.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblSleeves.setText("Sleeves to be made:");
+        lblSleeves.setText(bundle.getString("OrderInfo.lblSleeves.text")); // NOI18N
 
-        btnStart.setText("Start");
+        btnStart.setText(bundle.getString("OrderInfo.btnStart.text")); // NOI18N
         btnStart.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -355,7 +353,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
         });
 
-        btnPause.setText("Pause");
+        btnPause.setText(bundle.getString("OrderInfo.btnPause.text")); // NOI18N
         btnPause.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -364,7 +362,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
         });
 
-        btnFinish.setText("Finish");
+        btnFinish.setText(bundle.getString("OrderInfo.btnFinish.text")); // NOI18N
         btnFinish.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -374,28 +372,28 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Employee cutting:");
+        jLabel4.setText(bundle.getString("OrderInfo.jLabel4.text")); // NOI18N
 
-        jLabel5.setText("First name:");
+        jLabel5.setText(bundle.getString("OrderInfo.jLabel5.text")); // NOI18N
 
-        jLabel6.setText("Last name:");
+        jLabel6.setText(bundle.getString("OrderInfo.jLabel6.text")); // NOI18N
 
-        jLabel7.setText("ID: ");
+        jLabel7.setText(bundle.getString("OrderInfo.jLabel7.text")); // NOI18N
 
-        jLabel9.setText("Has cut:");
+        jLabel9.setText(bundle.getString("OrderInfo.jLabel9.text")); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("End time on cut:");
+        jLabel10.setText(bundle.getString("OrderInfo.jLabel10.text")); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Time spent: ");
+        jLabel11.setText(bundle.getString("OrderInfo.jLabel11.text")); // NOI18N
 
         txtError.setColumns(20);
         txtError.setRows(5);
         jScrollPane3.setViewportView(txtError);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setText("Errors occured: ");
+        jLabel12.setText(bundle.getString("OrderInfo.jLabel12.text")); // NOI18N
 
         txtId.setEditable(false);
 
@@ -412,9 +410,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtTimeSpent.setEditable(false);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Start time on cut: ");
+        jLabel13.setText(bundle.getString("OrderInfo.jLabel13.text")); // NOI18N
 
-        btnSave.setText("Save");
+        btnSave.setText(bundle.getString("OrderInfo.btnSave.text")); // NOI18N
         btnSave.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -465,15 +463,11 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                                             .addComponent(jLabel4))
                                         .addGap(0, 51, Short.MAX_VALUE))))
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jLabel13))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtStartTime, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -537,7 +531,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 .addComponent(btnSave))
         );
 
-        btnOk.setText("Ok");
+        btnOk.setText(bundle.getString("OrderInfo.btnOk.text")); // NOI18N
         btnOk.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -757,9 +751,12 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
         String status = "Finished";
         order.setStatus(status.toUpperCase());
+        int quantity = order.getQuantity();
+        order.setConductedQuantity(quantity);
         try
         {
-            omgr.updateStatus(order);
+            omgr.update(order);
+//            omgr.updateStatus(order);
             dispose();
         }
         catch (Exception e)
@@ -783,7 +780,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
