@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package APP;
 
 import GUI.Login;
@@ -10,13 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.UIManager;
 
 /**
- *
+ * Belman Projekt 2012
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class BelmanProject
 {
 
     /**
+     * Belman Project main metode.
      * @param args the command line arguments
      */
     public static void main(String[] args)
@@ -29,7 +26,6 @@ public class BelmanProject
                 try
                 {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//                    Overview.getInstance().setVisible(true);
                     Overview.getInstance().setVisible(true);
                 }
                 catch (Exception e)

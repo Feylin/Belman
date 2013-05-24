@@ -1,15 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 /**
  *
- * @author Administrator
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class Operator
 {
+
     private int id;
     private String username;
     private String firstName;
@@ -17,6 +14,16 @@ public class Operator
     private Sleeve sleeve;
     private int quantityCut;
 
+    /**
+     * Den overordnede konstruktør til Operator
+     *
+     * @param id
+     * @param username
+     * @param firstName
+     * @param lastName
+     * @param sleeve
+     * @param quantityCut
+     */
     public Operator(int id, String username, String firstName, String lastName, Sleeve sleeve, int quantityCut)
     {
         this.id = id;
@@ -26,24 +33,9 @@ public class Operator
         this.sleeve = sleeve;
         this.quantityCut = quantityCut;
     }
-    
-    public Operator(int id, String username, String firstName, String lastName, int quantityCut)
-    {
-        this(id, username, firstName, lastName,null, quantityCut);
-    }
-//
-    public Operator(String username, String firstName, String lastName, Sleeve sleeve, int quantityCut)
-    {
-        this(-1, username, firstName, lastName, sleeve, quantityCut);
-    }
-//    
-//    public Operator(int id, String username, String firstName, String lastName, int quantityCut)
-//    {
-//        this(id, username, firstName, lastName, quantityCut);
-//    }
 
     /**
-     * @return the username
+     * @returnere username
      */
     public String getUsername()
     {
@@ -51,7 +43,7 @@ public class Operator
     }
 
     /**
-     * @param username the username to set
+     * @param username sætter username
      */
     public void setUsername(String username)
     {
@@ -59,7 +51,7 @@ public class Operator
     }
 
     /**
-     * @return the firstName
+     * @returnere firstName
      */
     public String getFirstName()
     {
@@ -67,7 +59,7 @@ public class Operator
     }
 
     /**
-     * @param firstName the firstName to set
+     * @param firstName sætter firstName
      */
     public void setFirstName(String firstName)
     {
@@ -75,7 +67,7 @@ public class Operator
     }
 
     /**
-     * @return the lastName
+     * @returnere lastName
      */
     public String getLastName()
     {
@@ -83,7 +75,7 @@ public class Operator
     }
 
     /**
-     * @param lastName the lastName to set
+     * @param lastName sætter lastName
      */
     public void setLastName(String lastName)
     {
@@ -91,7 +83,7 @@ public class Operator
     }
 
     /**
-     * @return the id
+     * @returnere id
      */
     public int getId()
     {
@@ -105,21 +97,13 @@ public class Operator
     }
 
     /**
-     * @return the sleeve
+     * @returnere et Sleeve objekt
      */
     public Sleeve getSleeve()
     {
         return sleeve;
     }
-
-    /**
-     * @param sleeve the sleeve to set
-     */
-    public void setSleeve(Sleeve sleeve)
-    {
-        this.sleeve = sleeve;
-    }
-
+ 
     /**
      * @return the quantityCut
      */

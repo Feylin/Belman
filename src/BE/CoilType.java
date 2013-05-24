@@ -1,16 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 /**
- *
+ * BE.CoilType klasse
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class CoilType
 {
-
     private final int id;
     private String code;
     private double width;
@@ -26,7 +21,8 @@ public class CoilType
      * @param thickness
      * @param materialId
      */
-    public CoilType(int id, String code, double width, double thickness, int materialId)
+    public CoilType(int id, String code, double width, double thickness
+            , int materialId)
     {
         this.id = id;
         this.code = code;
@@ -35,6 +31,11 @@ public class CoilType
         this.materialId = materialId;
     }
 
+    /**
+     * Anden konstruktør til coilType som opretter et CoilType objekt med en id
+     * @param id
+     * @param c
+     */
     public CoilType(int id, CoilType c)
     {
         this(id,
@@ -44,13 +45,21 @@ public class CoilType
                 c.getMaterialId());
     }
 
+    /**
+     * Tredje konstruktør til CoilType som opretter et CoilType objekt
+     * med en id på -1
+     * @param code
+     * @param width
+     * @param thickness
+     * @param materialId
+     */
     public CoilType(String code, double width, double thickness, int materialId)
     {
         this(-1, code, width, thickness, materialId);
     }
 
     /**
-     * @return the id
+     * @returnere id for en CoilType
      */
     public int getId()
     {
@@ -58,7 +67,7 @@ public class CoilType
     }
 
     /**
-     * @return the code
+     * @returnere code for en CoilType
      */
     public String getCode()
     {
@@ -66,7 +75,7 @@ public class CoilType
     }
 
     /**
-     * @param code the code to set
+     * @param code sætter en ny code
      */
     public void setCode(String code)
     {
@@ -74,7 +83,7 @@ public class CoilType
     }
 
     /**
-     * @return the width
+     * @returnere width for en CoilType
      */
     public double getWidth()
     {
@@ -82,7 +91,7 @@ public class CoilType
     }
 
     /**
-     * @param width the width to set
+     * @param width sætter en ny width
      */
     public void setWidth(double width)
     {
@@ -90,7 +99,7 @@ public class CoilType
     }
 
     /**
-     * @return the thickness
+     * @returnere tykkelsen for en CoilType
      */
     public double getThickness()
     {
@@ -98,7 +107,7 @@ public class CoilType
     }
 
     /**
-     * @param thickness the thickness to set
+     * @param thickness sætter en ny thickness
      */
     public void setThickness(double thickness)
     {
@@ -106,7 +115,7 @@ public class CoilType
     }
 
     /**
-     * @return the materialId
+     * @returnere materialId for en CoilType
      */
     public int getMaterialId()
     {
@@ -114,7 +123,7 @@ public class CoilType
     }
 
     /**
-     * @param materialId the materialId to set
+     * @param materialId sætter en ny materialId
      */
     public void setMaterialId(int materialId)
     {

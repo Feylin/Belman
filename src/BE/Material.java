@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BE;
 
 /**
- *
+ * BE.Material klassen
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class Material
@@ -28,18 +24,27 @@ public class Material
         this.name = name;
     }
 
+    /**
+     * Anden konstruktør til Material som opretter et material objekt med -1 id.
+     * @param density
+     * @param name
+     */
     public Material(double density, String name)
     {
         this(-1, density, name);
     }
 
+    /**
+     * Tredje konstruktør til Material som opretter et material, kun med et name
+     * @param name
+     */
     public Material(String name)
     {
         this.name = name;
     }
 
     /**
-     * @return the name
+     * @returnere name
      */
     public String getName()
     {
@@ -47,7 +52,7 @@ public class Material
     }
 
     /**
-     * @param name the name to set
+     * @param name sætter name
      */
     public void setName(String name)
     {
@@ -55,7 +60,7 @@ public class Material
     }
 
     /**
-     * @return the density
+     * @returnere density
      */
     public double getDensity()
     {
@@ -63,7 +68,7 @@ public class Material
     }
 
     /**
-     * @param density the density to set
+     * @param density sætter density
      */
     public void setDensity(double density)
     {
