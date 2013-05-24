@@ -18,7 +18,7 @@ import java.util.Observable;
 
 /**
  *
- * @author Daniel
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class OrderManager extends Observable
 {
@@ -86,12 +86,10 @@ public class OrderManager extends Observable
     }
     
     public void updateErrorMessage(Order o, String message) throws SQLException
-    {
-       
+    {   
             accessor.updateErrorMessage(o, message);
             setChanged();
-            notifyObservers();
-        
+            notifyObservers();       
     }
 
     public ArrayList<Order> getOrderByMaterial(StockItem s) throws SQLException, IOException

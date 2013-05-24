@@ -21,6 +21,7 @@ import java.util.ArrayList;
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class StockItemDBManager
 {
     private static final String ID = "id";
@@ -82,7 +83,7 @@ public class StockItemDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem, CoilType, Material WHERE Coiltype.MaterialId = Material.Id AND CoilType.Id = StockItem.coilTypeId ORDER BY CoilType.materialId, CoilType.thickness";
+            String sql = "SELECT * FROM StockItem, CoilType, Material WHERE Coiltype.MaterialId = Material.Id AND CoilType.Id = StockItem.coilTypeId ORDER BY CoilType.thickness";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 

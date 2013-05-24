@@ -14,8 +14,9 @@ import java.util.Properties;
 
 /**
  *
- * @author Feylin
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class Connector
 {
     private static final String ServerName = "SERVER";

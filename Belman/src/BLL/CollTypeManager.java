@@ -15,10 +15,10 @@
 //import java.util.ArrayList;
 //import java.util.Collection;
 //import java.util.Observable;
-///**
-// *
-// * @author Rashid
-// */
+/**
+ *
+ * @author Daniel, Klaus, Mak, Rashid
+ */
 //public class CoilTypeManager
 //{
 //    

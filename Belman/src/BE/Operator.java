@@ -6,7 +6,7 @@ package BE;
 
 /**
  *
- * @author Administrator
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class Operator
 {
@@ -31,7 +31,7 @@ public class Operator
     {
         this(id, username, firstName, lastName,null, quantityCut);
     }
-//
+
     public Operator(String username, String firstName, String lastName, Sleeve sleeve, int quantityCut)
     {
         this(-1, username, firstName, lastName, sleeve, quantityCut);

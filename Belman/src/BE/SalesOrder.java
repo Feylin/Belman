@@ -7,7 +7,7 @@ package BE;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class SalesOrder 
 {

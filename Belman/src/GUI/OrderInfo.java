@@ -9,6 +9,7 @@ import BE.Order;
 import BE.Sleeve;
 import BLL.ErrorsOccuredManager;
 import BLL.OrderManager;
+import BLL.SleeveLogManager;
 import BLL.SleeveManager;
 import BLL.StockItemManager;
 import GUI.Models.SleeveTableModel;
@@ -30,17 +31,18 @@ import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
- * @author Mak, Klaus, Rashid og Daniel
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class OrderInfo extends javax.swing.JFrame implements Observer
 {
-
     private Order order;
     private Sleeve sleeve;
     private Operator operator;
     private SleeveTableModel slmodel = null;
     private static SleeveManager slmgr = null;
     private static StockItemManager smgr = null;
+    private static SleeveLogManager sllmgr = null;
     private static OrderManager omgr = null;
     private static ErrorsOccuredManager emgr = null;
 //    private GregorianCalendar date = new GregorianCalendar();
@@ -63,6 +65,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         try
         {
             omgr = OrderManager.getInstance();
+            sllmgr = SleeveLogManager.getInstance();
         }
         catch (Exception ex)
         {
@@ -81,7 +84,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtId.setText(String.valueOf(op.getId()));
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
-        txtHasCut.setText(String.valueOf(op.getQuantityCut()));
+        
 
         txtError.setText(o.getErrorOccured());
 //        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
@@ -91,6 +94,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
         try
         {
+            txtHasCut.setText(String.valueOf(sllmgr.getQuantity(order.getSleeve(), operator.getId())));
             slmgr = SleeveManager.getInstance();
             slmgr.addObserver(this);
             slmodel = new SleeveTableModel(slmgr.getSleevesByOrder(o));
@@ -230,7 +234,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -283,13 +288,15 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtOrderId.setEditable(false);
 
         tblSleeve.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -353,6 +360,13 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         });
 
         btnFinish.setText("Finish");
+        btnFinish.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnFinishActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Employee cutting:");
@@ -396,8 +410,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         jLabel13.setText("Start time on cut: ");
 
         btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSaveActionPerformed(evt);
             }
         });
@@ -517,8 +533,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         );
 
         btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOkActionPerformed(evt);
             }
         });
@@ -704,6 +722,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             String message = "Production Order " + order.getOrderId() + "'s status is not in progress or already paused.";
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
+        dispose();
 //        }
     }//GEN-LAST:event_btnPauseActionPerformed
 
@@ -727,6 +746,22 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         String popup = "The error message has been saved";
         JOptionPane.showMessageDialog(this, popup, "Save successful", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnFinishActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnFinishActionPerformed
+    {//GEN-HEADEREND:event_btnFinishActionPerformed
+
+        String status = "Finished";
+        order.setStatus(status.toUpperCase());
+        try
+        {
+            omgr.updateStatus(order);
+            dispose();
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnFinishActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinish;
     private javax.swing.JButton btnOk;

@@ -10,8 +10,9 @@ import javax.swing.AbstractListModel;
 
 /**
  *
- * @author bhp
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class OperatorListModel extends AbstractListModel
 {
     private ArrayList<Operator> operators = new ArrayList<>();

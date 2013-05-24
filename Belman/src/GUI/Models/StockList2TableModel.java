@@ -6,14 +6,13 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-
 /**
  *
- * @author bhp
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class StockList2TableModel extends AbstractTableModel
-{
-    
+{    
     private final String[] header = {"ChargeNo", "MaterialName", "Thickness", "Length", "Width", "StockQuantity"};
     private final Class[] columnTypes = {String.class, String.class, double.class, double.class, double.class, double.class};
 

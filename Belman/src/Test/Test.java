@@ -9,11 +9,11 @@ import BLL.OrderManager;
 
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class Test
 {
-
     /**
      * @param args the command line arguments
      */

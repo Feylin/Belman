@@ -149,7 +149,6 @@ public class Order
     {
         this.quantity = quantity;
     }
-
     
      /**
      * @return the quantity
@@ -158,14 +157,13 @@ public class Order
     {
         return conductedQuantity;
     }
-    
-    
+       
     /**
      * @param conductedQuantity the quantity to set
      */
-    public void setConductedQuantity(String text)
+    public void setConductedQuantity(int hasCut)
     {
-        this.conductedQuantity = conductedQuantity;
+        this.conductedQuantity = hasCut;
     }
 
 

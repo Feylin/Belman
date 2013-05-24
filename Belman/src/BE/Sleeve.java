@@ -32,6 +32,7 @@ public class Sleeve {
      * @param materialId
      * @param pOrderId
      */
+    
     public Sleeve(int id, GregorianCalendar startTime, GregorianCalendar endTime, double thickness, double circumference, int materialId, int pOrderId, Material material)
     {
         this.id = id;
@@ -96,109 +97,125 @@ public class Sleeve {
     /**
      * @return the id
      */
-    public int getId() {
+    public int getId() 
+    {
         return id;
     }
 
     /**
      * @return the startTime
      */
-    public GregorianCalendar getStartTime() {
+    public GregorianCalendar getStartTime() 
+    {
         return startTime;
     }
 
     /**
      * @param startTime the startTime to set
      */
-    public void setStartTime(GregorianCalendar startTime) {
+    public void setStartTime(GregorianCalendar startTime) 
+    {
         this.startTime = startTime;
     }
 
     /**
      * @return the endTime
      */
-    public GregorianCalendar getEndTime() {
+    public GregorianCalendar getEndTime() 
+    {
         return endTime;
     }
 
     /**
      * @param endTime the endTime to set
      */
-    public void setEndTime(GregorianCalendar endTime) {
+    public void setEndTime(GregorianCalendar endTime) 
+    {
         this.endTime = endTime;
     }
 
     /**
      * @return the thickness
      */
-    public double getThickness() {
+    public double getThickness() 
+    {
         return thickness;
     }
 
     /**
      * @param thickness the thickness to set
      */
-    public void setThickness(double thickness) {
+    public void setThickness(double thickness) 
+    {
         this.thickness = thickness;
     }
 
     /**
      * @return the circumference
      */
-    public double getCircumference() {
+    public double getCircumference() 
+    {
         return circumference;
     }
 
     /**
      * @param circumference the circumference to set
      */
-    public void setCircumference(double circumference) {
+    public void setCircumference(double circumference) 
+    {
         this.circumference = circumference;
     }
 
     /**
      * @return the materialId
      */
-    public int getMaterialId() {
+    public int getMaterialId() 
+    {
         return materialId;
     }
 
     /**
      * @param materialId the materialId to set
      */
-    public void setMaterialId(int materialId) {
+    public void setMaterialId(int materialId) 
+    {
         this.materialId = materialId;
     }
 
     /**
      * @return the pOrderId
      */
-    public int getpOrderId() {
+    public int getpOrderId() 
+    {
         return pOrderId;
     }
 
     /**
      * @param pOrderId the pOrderId to set
      */
-    public void setpOrderId(int pOrderId) {
+    public void setpOrderId(int pOrderId) 
+    {
         this.pOrderId = pOrderId;
     }
 
-    public Material getMaterialName() {
+    public Material getMaterialName() 
+    {
         return getMaterial();
     }
 
     /**
      * @return the material
      */
-    public Material getMaterial() {
+    public Material getMaterial() 
+    {
         return material;
     }
 
     /**
      * @param material the material to set
      */
-    public void setMaterial(Material material) {
+    public void setMaterial(Material material) 
+    {
         this.material = material;
     }
 }

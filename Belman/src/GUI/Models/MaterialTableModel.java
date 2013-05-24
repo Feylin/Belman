@@ -13,8 +13,9 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author bhp
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class MaterialTableModel extends AbstractTableModel
 {
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};

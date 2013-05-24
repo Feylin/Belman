@@ -9,9 +9,13 @@ import java.sql.SQLException;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+/**
+ *
+ * @author Daniel, Klaus, Mak, Rashid
+ */
+
 public class LoginAccessDBManager
 {
-
     private Connector connector;
     private static LoginAccessDBManager instance;
 

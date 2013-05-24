@@ -10,12 +10,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  *
- * @author Administrator
+ * @author Daniel, Klaus, Mak, Rashid
  */
-public class OperatorManager
+public class OperatorManager extends Observable
 {
     private OperatorDBManager accessor;
     private static OperatorManager instance;
@@ -42,5 +43,12 @@ public class OperatorManager
     public Operator get(String username) throws SQLException
     {
         return accessor.get(username);
+    }
+    
+    public void updateHasCut(Operator op, int hasCut) throws SQLException
+    {
+         accessor.updateHasCut(op, hasCut);
+         setChanged();
+         notifyObservers();
     }
 }

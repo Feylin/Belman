@@ -23,11 +23,11 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class ProductionOrderDBManager
 {
-
     private Connector connector;
     private static ProductionOrderDBManager instance;
 
@@ -155,8 +155,7 @@ public class ProductionOrderDBManager
             
             ps.setString(1, o.getStatus());
             ps.setInt(2, o.getOrderId());  
-            
-            
+                        
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
             {
@@ -174,8 +173,7 @@ public class ProductionOrderDBManager
             
             ps.setString(1, message);
             ps.setInt(2, o.getOrderId());  
-            
-            
+                       
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
             {
@@ -184,7 +182,6 @@ public class ProductionOrderDBManager
         }
     }
         
-
     public void update(Order o) throws SQLException
     {
         try (Connection con = connector.getConnection())
@@ -222,15 +219,13 @@ public class ProductionOrderDBManager
             ArrayList<Order> orders1 = new ArrayList<>();
             while (rs.next())
             {
-                 orders1.add(getOneOrder(rs));
-                 
+                 orders1.add(getOneOrder(rs));                
             }
             return orders1;
         }
         
     }
-      
-     
+          
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
     {
@@ -242,8 +237,7 @@ public class ProductionOrderDBManager
         int quantity = rs.getInt("quantity");
         int conductedQuantity = rs.getInt("conductedQuantity");
         String errorOccured = rs.getString("errorOccured");
-       
-        
+              
         double width = rs.getDouble("width");
         String status = rs.getString("status");
         boolean urgent = rs.getBoolean("urgentFlag");
@@ -255,9 +249,10 @@ public class ProductionOrderDBManager
         
         double thickness = rs.getDouble("thickness");
         double circumference = rs.getDouble("circumference");
-        String materialName = rs.getString("name");                     
+        String materialName = rs.getString("name"); 
+        int sleeveid = rs.getInt("id");
         
-        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(-1, null, null, thickness, circumference, -1, -1, new Material(materialName)), errorOccured);
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(sleeveid, null, null, thickness, circumference, -1, -1, new Material(materialName)), errorOccured);
     }
 
     protected String convertDateToSQL(GregorianCalendar date)

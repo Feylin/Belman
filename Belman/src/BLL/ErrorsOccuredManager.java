@@ -12,7 +12,7 @@ import java.util.Observable;
 
 /**
  *
- * @author Rashid
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class ErrorsOccuredManager extends Observable {
         

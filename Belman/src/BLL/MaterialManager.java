@@ -15,7 +15,7 @@ import java.util.Observable;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class MaterialManager extends Observable{
     

@@ -10,16 +10,15 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-
 /**
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class SleeveTableModel extends AbstractTableModel
 {   
     private final String[] header = {"Sleeve Id", "Material", "Thickness"};
     private final Class[] columnTypes = {Integer.class, String.class, double.class};
-
 
     private ArrayList<Sleeve> s;
 
