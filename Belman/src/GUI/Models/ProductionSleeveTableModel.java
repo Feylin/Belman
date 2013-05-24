@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class ProductionSleeveTableModel extends AbstractTableModel
 {
     
-    private final String[] header = {"Order", "DueDate", "MaterialName", "Thickness", "Circumference", "Width", "Quantity", "conductedQuantity", "Status", "Urgent"};
+    private final String[] header = {"Order", "DueDate", "MaterialName", "Thickness", "Circumference", "Width", "Quantity", "Cut", "Status", "Urgent"};
     private final Class[] columnTypes = {Integer.class, String.class, String.class, double.class, double.class, double.class, Integer.class, Integer.class, String.class, Boolean.class};
 
     private ArrayList<Order> info;

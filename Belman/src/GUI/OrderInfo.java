@@ -715,7 +715,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 String message = "Unable to update order";
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
-            new SleeveInfo().setVisible(true);
+            new SleeveInfo(order, operator).setVisible(true);
         }
         else
         {
@@ -757,9 +757,9 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             omgr.updateStatus(order);
             dispose();
         }
-        catch (SQLException ex)
+        catch (Exception e)
         {
-            ex.printStackTrace();
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnFinishActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables

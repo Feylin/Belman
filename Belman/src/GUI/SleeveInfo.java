@@ -12,6 +12,7 @@ import BLL.SleeveLogManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author Daniel, Klaus, Mak, Rashid
  */
 
-public class SleeveInfo extends javax.swing.JFrame
+public class SleeveInfo extends JDialog
 {
     private Order order;
     private OrderManager omgr = null;
@@ -32,6 +33,7 @@ public class SleeveInfo extends javax.swing.JFrame
      */
     public SleeveInfo(Order o, Operator op)
     {
+        setModal(true);
         operator = op;
         try
         {
@@ -129,9 +131,25 @@ public class SleeveInfo extends javax.swing.JFrame
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         int cut = Integer.parseInt(txtHasCut.getText()) + order.getConductedQuantity();
 
-        if (cut <= order.getQuantity())
+        if (cut < order.getQuantity())
         {
             order.setConductedQuantity(cut);
+            try
+            {
+                omgr.update(order);
+                slmgr.addLog(order.getSleeve().getId(), operator, cut, 0);
+                dispose();
+            }
+            catch (SQLException ex)
+            {
+               ex.printStackTrace();
+            }
+        }
+        if (cut == order.getQuantity())
+        {
+            order.setConductedQuantity(cut);
+            String status = "Finished";
+            order.setStatus(status.toUpperCase());
             try
             {
                 omgr.update(order);
