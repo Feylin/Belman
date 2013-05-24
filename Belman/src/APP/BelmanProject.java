@@ -1,13 +1,11 @@
 package APP;
 
-import GUI.Login;
 import GUI.Overview;
 import java.awt.EventQueue;
 import javax.swing.UIManager;
-import com.microsoft.sqlserver.jdbc.ISQLServerCallableStatement;
 
 /**
- * Belman Project 2012
+ * Belman Project 2013
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class BelmanProject

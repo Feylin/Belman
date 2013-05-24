@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BLL;
 
 import BE.Operator;
@@ -13,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 /**
- *
+ * Buisness Logic Layer OperatorManager klassen.
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class OperatorManager extends Observable

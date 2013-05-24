@@ -9,14 +9,12 @@ import BE.Operator;
 import BE.Order;
 import BE.Sleeve;
 import BE.StockItem;
-import BLL.MaterialManager;
 import BLL.OperatorManager;
 import BLL.OrderManager;
 import BLL.SleeveManager;
 import BLL.StockItemManager;
 import GUI.Models.OrderTablemodel;
 import GUI.Models.ProductionSleeveTableModel;
-import GUI.Models.SleeveTableModel;
 import GUI.Models.StockList2TableModel;
 import GUI.Models.StockListTableModel;
 import java.awt.event.ItemEvent;
@@ -30,12 +28,9 @@ import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 // </editor-fold> 
@@ -49,7 +44,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     static OrderManager omgr = null;
     static StockItemManager smgr = null;
-    static MaterialManager mmgr = null;
     static SleeveManager slmgr = null;
     static OperatorManager opmgr = null;
     private OrderTablemodel omodel = null;
@@ -144,8 +138,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private void updateGUILanguage()
     // <editor-fold defaultstate="collapsed" desc="Updates fields and labels when the language is changed">                          
     {
-        btnClose.setText(rb.getString("Overview.btnClose.text"));
-        btnLogout.setText(rb.getString("Overview.btnLogout.text"));
+        btnClose.setText(rb.getString("Overview.btnClose.text")); 
         btnReset.setText(rb.getString("Overview.btnReset.text"));
 
         menuFile.setText(rb.getString("Overview.menuFile.text"));
@@ -246,17 +239,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             System.exit(0);
         }
     }
-
-    private void logoutPressed()
-    {
-        String message = "Are you sure you want to log out?";
-        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION)
-        {
-            dispose();
-            Login.getInstance().setVisible(true);
-        }
-    }
+   
 
     private void windowClose()
     {
@@ -557,7 +540,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         btnClose = new javax.swing.JButton();
         pnlLoggedIn = new javax.swing.JPanel();
         lblLoggedIn = new javax.swing.JLabel();
-        btnLogout = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
         localeLanguage = new com.toedter.components.JLocaleChooser();
         cbxOperator = new javax.swing.JComboBox();
@@ -923,15 +905,6 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        btnLogout.setText(bundle.getString("Overview.btnLogout.text")); // NOI18N
-        btnLogout.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnLogoutActionPerformed(evt);
-            }
-        });
-
         btnReset.setText(bundle.getString("Overview.btnReset.text")); // NOI18N
         btnReset.addActionListener(new java.awt.event.ActionListener()
         {
@@ -1016,9 +989,8 @@ public class Overview extends javax.swing.JFrame implements Observer
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnReset))
+                        .addComponent(btnReset)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlLoggedIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1047,7 +1019,6 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
-                    .addComponent(btnLogout)
                     .addComponent(btnClose)))
         );
 
@@ -1064,19 +1035,14 @@ public class Overview extends javax.swing.JFrame implements Observer
         closePressed();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLogoutActionPerformed
-    {//GEN-HEADEREND:event_btnLogoutActionPerformed
-        logoutPressed();
-    }//GEN-LAST:event_btnLogoutActionPerformed
-
     private void itemLogOutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemLogOutActionPerformed
     {//GEN-HEADEREND:event_itemLogOutActionPerformed
-        logoutPressed();
+      
     }//GEN-LAST:event_itemLogOutActionPerformed
 
     private void itemSettingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemSettingsActionPerformed
     {//GEN-HEADEREND:event_itemSettingsActionPerformed
-        OperatorSettings.getInstance().setVisible(true);
+        
     }//GEN-LAST:event_itemSettingsActionPerformed
 
     private void localeLanguageActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_localeLanguageActionPerformed
@@ -1136,9 +1102,9 @@ public class Overview extends javax.swing.JFrame implements Observer
             tblStockList3.clearSelection();
         }
     }//GEN-LAST:event_btnResetActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cbxOperator;
