@@ -4,16 +4,21 @@
  */
 package GUI;
 
+import javax.swing.JDialog;
+
 /**
  *
  * @author Rashid
  */
-public class SleeveInfo extends javax.swing.JFrame {
+public class SleeveInfo extends JDialog
+{
 
     /**
      * Creates new form SleeveInfo
      */
-    public SleeveInfo() {
+    public SleeveInfo()
+    {
+        setModal(true);
         initComponents();
         numbersOnlyKeyListener();
     }

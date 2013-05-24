@@ -16,16 +16,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
@@ -211,11 +205,20 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void closePressed()
     {
-        String message = "Are you sure you want to close the window?";
-        int reply = JOptionPane.showConfirmDialog(null, message, getTitle(), JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION)
+        String option = "In progress";
+        if (order.getStatus().equalsIgnoreCase(option))
         {
-            dispose();
+            String error = "Order is still in progress";
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);            
+        }
+        else
+        {
+            String message = "Are you sure you want to close the window?";
+            int reply = JOptionPane.showConfirmDialog(null, message, getTitle(), JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION)
+            {
+                dispose();
+            }
         }
 
     }
@@ -613,7 +616,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                         elapsedMin = 0;
                         elapsedHour++;
                     }
-                    String displayTimer = String.format("%02d:%02d:%02d:%03d", elapsedHour, elapsedMin, elapsedSec, elapsedMillisec);
+                    String displayTimer = String.format("%02d:%02d:%02d", elapsedHour, elapsedMin, elapsedSec);
                     txtTimeSpent.setText(displayTimer);
 
                 }
@@ -641,8 +644,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 String message = "Unable to update order";
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
-            String message = "Production Order " + order.getOrderId() + "'s status has been updated.";
-            JOptionPane.showMessageDialog(this, message, "Update succesful", JOptionPane.INFORMATION_MESSAGE);
         }
         else
         {
@@ -696,8 +697,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 String message = "Unable to update order";
                 JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
             }
-            String message = "Production Order " + order.getOrderId() + "'s status has been paused.";
-            JOptionPane.showMessageDialog(this, message, "Pause succesful", JOptionPane.INFORMATION_MESSAGE);
             new SleeveInfo().setVisible(true);
         }
         else
