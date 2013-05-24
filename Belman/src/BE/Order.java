@@ -13,15 +13,21 @@ import java.util.GregorianCalendar;
  */
 public class Order
 {
-
     private final int sOrderId;
     private final int orderId;
     private String orderName;
     private GregorianCalendar dueDate;
     private int quantity;
-    private double thickness;
+    private int conductedQuantity;
+//    private double thickness;
+
     private double width;
     private String status;
+    private boolean Urgent;
+    private String paused;
+    private SalesOrder salesOrder;
+    private Sleeve sleeve;
+    private String errorOccured;
 
     /**
      * Overodnede konstruktør for Order.
@@ -31,21 +37,28 @@ public class Order
      * @param orderName
      * @param dueDate
      * @param quantity
+     * @param conductedQuantity
      * @param thickness
      * @param width
      * @param status
+
      */
-    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, double thickness, double width, String status)
+
+    public Order(int sOrderId, int orderId, String orderName, GregorianCalendar dueDate, int quantity, int conductedQuantity, double width, String status, boolean Urgent, SalesOrder salesOrder, Sleeve sleeve, String errorOccured)
     {
         this.sOrderId = sOrderId;
         this.orderId = orderId;
         this.orderName = orderName;
         this.dueDate = dueDate;
         this.quantity = quantity;
-        this.thickness = thickness;
+        this.conductedQuantity = conductedQuantity;
+//        this.thickness = thickness;
         this.width = width;
         this.status = status;
-
+        this.Urgent = Urgent;
+        this.salesOrder = salesOrder;
+        this.sleeve = sleeve;
+        this.errorOccured = errorOccured;
     }
 
     public Order(int orderId, Order o)
@@ -55,9 +68,14 @@ public class Order
                 o.getOrderName(),
                 o.getDueDate(),
                 o.getQuantity(),
-                o.getThickness(),
+                o.getConductedQuantity(),
                 o.getWidth(),
-                o.getStatus());
+                o.getStatus(),
+                o.isUrgent(),
+                o.getSalesOrder(),
+                o.getSleeve(),
+                o.getErrorOccured());
+                
     }
 
     public String printDate(GregorianCalendar gc)
@@ -131,22 +149,23 @@ public class Order
     {
         this.quantity = quantity;
     }
-
-    /**
-     * @return the thickness
+    
+     /**
+     * @return the quantity
      */
-    public double getThickness()
+    public int getConductedQuantity()
     {
-        return thickness;
+        return conductedQuantity;
+    }
+       
+    /**
+     * @param conductedQuantity the quantity to set
+     */
+    public void setConductedQuantity(int hasCut)
+    {
+        this.conductedQuantity = hasCut;
     }
 
-    /**
-     * @param thickness the thickness to set
-     */
-    public void setThickness(double thickness)
-    {
-        this.thickness = thickness;
-    }
 
     /**
      * @return the width
@@ -171,6 +190,11 @@ public class Order
     {
         return status;
     }
+    
+    public SalesOrder getSalesOrder()
+    {
+        return salesOrder;
+    }
 
     /**
      * @param status the status to set
@@ -178,5 +202,61 @@ public class Order
     public void setStatus(String status)
     {
         this.status = status;
+    } 
+
+    /**
+     * @return the sleeve
+     */
+    public Sleeve getSleeve()
+    {
+        return sleeve;
+    }
+
+    /**
+     * @param sleeve the sleeve to set
+     */
+    public void setSleeve(Sleeve sleeve)
+    {
+        this.sleeve = sleeve;
+    }    
+
+    /**
+     * @return the Urgent
+     */
+    public boolean isUrgent()
+    {
+        return Urgent;
+    }
+
+    /**
+     * @param Urgent the Urgent to set
+     */
+    public void setUrgent(boolean Urgent)
+    {
+        this.Urgent = Urgent;
+    }
+    
+    /**
+     * @return the paused
+     */
+    public String getPaused() 
+    {
+        return paused;
+    }
+
+    /**
+     * @return the errorOccured
+     */
+    public String getErrorOccured()
+    {
+        return errorOccured;
+    }
+
+    /**
+     * @param errorOccured the errorOccured to set
+     */
+    public void setErrorOccured(String errorOccured)
+    {
+        this.errorOccured = errorOccured;
     }
 }

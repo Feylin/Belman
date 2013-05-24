@@ -15,7 +15,7 @@ import java.util.Observable;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
 public class MaterialManager extends Observable{
     
@@ -28,13 +28,15 @@ public class MaterialManager extends Observable{
     }
     
      public static MaterialManager getInstance() throws FileNotFoundException, IOException{
-        if( instance == null ) instance = new MaterialManager();
+        if( instance == null )
+         {
+             instance = new MaterialManager();
+         }
         return instance;
     }
      
      public ArrayList<Material> getAllMaterials() throws IOException, SQLException             
     {
        return accessor.getAllMaterials();      
-    }
-     
+    }    
 }

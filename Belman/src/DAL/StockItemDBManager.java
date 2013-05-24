@@ -4,7 +4,10 @@
  */
 package DAL;
 
+import BE.CoilType;
 import BE.Material;
+import BE.Order;
+import BE.Sleeve;
 import BE.StockItem;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -16,11 +19,24 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class StockItemDBManager
 {
-
+    private static final String ID = "id";
+    private static final String CHARGE_NO = "chargeNo";
+    private static final String LENGTH = "length";
+    private static final String STOCK_QUANTITY = "stockQuantity";
+    private static final String COIL_TYPE_ID = "coilTypeId";
+    private static final String SLEEVE_ID = "sleeveId";
+    private static final String CODE = "code";
+    private static final String WIDTH = "width";
+    private static final String THICKNESS = "thickness";
+    private static final String DENSITY = "density";
+    private static final String NAME = "name";
+    private static final String MATERIAL_ID = "materialId";    
+    
     private Connector connector;
     private static StockItemDBManager instance;
 
@@ -42,18 +58,13 @@ public class StockItemDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO StockItem(code, materialId, materialName, materialDensity, chargeNo,"
-                    + " length, width, thickness, stockQuantity) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO StockItem(chargeNo, length, stockQuantity, coilTypeId, sleeveId) VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, item.getCode());
-            ps.setInt(2, item.getMaterialId());
-            ps.setString(3, item.getMaterialName());
-            ps.setDouble(4, item.getMaterialDensity());
-            ps.setString(5, item.getChargeNr());
-            ps.setDouble(6, item.getLength());
-            ps.setDouble(7, item.getWidth());
-            ps.setDouble(8, item.getThickness());
-            ps.setDouble(9, item.getStockQuantity());
+            ps.setString(1, item.getChargeNo());
+            ps.setDouble(2, item.getLength());
+            ps.setDouble(3, item.getStockQuantity());
+            ps.setDouble(4, item.getCoilTypeId());
+            ps.setInt(5, item.getSleeveId());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -72,7 +83,7 @@ public class StockItemDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM StockItem, Material WHERE StockItem.MaterialId = Material.id";
+            String sql = "SELECT * FROM StockItem, CoilType, Material WHERE Coiltype.MaterialId = Material.Id AND CoilType.Id = StockItem.coilTypeId ORDER BY CoilType.thickness";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -83,7 +94,6 @@ public class StockItemDBManager
             }
             return items;
         }
-
     }
 
     public void remove(int id) throws SQLException
@@ -119,21 +129,60 @@ public class StockItemDBManager
             return items;
         }
     }
+    
+    public ArrayList<StockItem> getItemBySleeve(Sleeve s) throws SQLServerException, SQLException, IOException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve WHERE Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND Sleeve.id = ?";        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, s.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<StockItem> items = new ArrayList<>();
+            while (rs.next())
+            {
+                items.add(getOneItem(rs));
+            }
+            return items;
+        }
+    }
+    
+    public ArrayList<StockItem> getItemByOrder(Order o) throws SQLServerException, SQLException, IOException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM StockItem, CoilType, Material, Sleeve, ProductionOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND Material.id = CoilType.materialId AND CoilType.id = StockItem.coilTypeId AND Sleeve.thickness = CoilType.thickness AND ProductionOrder.pOrder = ? ORDER BY CoilType.materialId, CoilType.thickness";        
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, o.getOrderName());
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<StockItem> items = new ArrayList<>();
+            while (rs.next())
+            {
+                items.add(getOneItem(rs));
+            }
+            return items;
+        }
+    }
 
     protected StockItem getOneItem(ResultSet rs) throws SQLException, IOException
     {
+        int id = rs.getInt(ID);
+        String chargeNo = rs.getString(CHARGE_NO);
+        double length = rs.getDouble(LENGTH);
+        int stockQuantity = rs.getInt(STOCK_QUANTITY);
+        int coilTypeId = rs.getInt(COIL_TYPE_ID);
+        int sleeveId = rs.getInt(SLEEVE_ID);
+        String code = rs.getString(CODE);
+        double width = rs.getDouble(WIDTH);
+        double thickness = rs.getDouble(THICKNESS);
+        double density = rs.getDouble(DENSITY);
+        String name = rs.getString(NAME);
+        int materialId = rs.getInt(MATERIAL_ID);
 
-        int id = rs.getInt("id");
-        String code = rs.getString("code");
-        int materialId = rs.getInt("id");
-        String materialName = rs.getString("name");
-        double materialDensity = rs.getDouble("density");
-        String chargeNo = rs.getString("chargeNo");
-        double length = rs.getDouble("length");
-        double width = rs.getDouble("width");
-        double thickness = rs.getDouble("thickness");
-        double stockQuantity = rs.getDouble("stockQuantity");
-
-        return new StockItem(id, code, new Material(materialId, materialDensity, materialName), chargeNo, length, width, thickness, stockQuantity);
+        return new StockItem(id, chargeNo, length, stockQuantity, coilTypeId, sleeveId, new CoilType(code, width, thickness, materialId), new Material(density, name));
     }
 }

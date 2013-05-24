@@ -4,25 +4,65 @@
  */
 package GUI;
 
+import BE.Operator;
+import BLL.LoginManager;
+import BLL.OperatorManager;
+import GUI.Models.OperatorListModel;
+import java.awt.Cursor;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
- * @author Feylin
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class Login extends javax.swing.JFrame
 {
+
+    private String operator;
     private static Login instance = null;
+    private static OperatorManager mgr = null;
+    private static LoginManager lmgr = null;
+    private OperatorListModel model = null;
+
     /**
      * Creates new form Login
      */
     private Login()
     {
+        loadManagers();
         setUndecorated(true);
         initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
+        addEnterKeyListener();
+        lstOperators.grabFocus();
         setLocationRelativeTo(null);
+        windowClose();
+        listSelection();
+        capslockActve();
     }
-    
+
+    private void loadManagers()
+    {
+        try
+        {
+            lmgr = LoginManager.getInstance();
+            mgr = OperatorManager.getInstance();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public static Login getInstance()
     {
         if (instance == null)
@@ -31,14 +71,153 @@ public class Login extends javax.swing.JFrame
         }
         return instance;
     }
+
+    public String getOperator()
+    {
+        return operator;
+    }
+
+    private void addEnterKeyListener()
+    {
+        KeyListener enterKey = new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent ke)
+            {
+                if (ke.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    loginPressed();
+                }
+            }
+        };
+        jpfPassword.addKeyListener(enterKey);
+        lstOperators.addKeyListener(enterKey);
+    }
+
+    private void defaultCursor()
+    {
+//        Welcome.getFrames()[0].setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void loadingCursor()
+    {
+//        Welcome.getFrames()[0].setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+    }
+
+    private void loginPressed()
+    {
+        if (txtOperator.getText().length() != 0)
+        {
+            String username = txtOperator.getText();
+            char[] pass = jpfPassword.getPassword();
+            String password = new String(pass);            
+
+            try
+            {
+                if (lmgr.checkLogin(username, password) == true)
+                {
+                    operator = username;
+
+//                    String message = "Welcome back " + operator + "\nBe productive =)";
+//                    JOptionPane.showMessageDialog(this, message, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+
+                    loadingCursor();
+                    Overview.getInstance().setVisible(true);
+                    clearFields();
+                    dispose();
+                }
+                else
+                {
+                    jpfPassword.setText("");
+                    String message = "Wrong Password";
+                    JOptionPane.showMessageDialog(this, message, getTitle(), JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                defaultCursor();
+            }
+        }
+        else
+        {
+            String message = "Please pick an operator";
+            JOptionPane.showMessageDialog(this, message, getTitle(), JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
+    private void capslockActve()
+    {
+        boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
+
+        lblCaps.setText("CapsLock button is " + (isOn ? "on!" : "off"));
+    }
+
     private void closePressed()
     {
         String message = "Are you sure you want to exit?";
-        int reply = JOptionPane.showConfirmDialog(this, message, getTitle(), JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, message, getTitle(), JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION)
         {
             System.exit(0);
+        }
+    }
+
+    private void windowClose()
+    {
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                closePressed();
+            }
+        });
+    }
+
+    private void clearFields()
+    {
+        jpfPassword.setText("");
+        txtOperator.setText("");
+        lstOperators.clearSelection();
+    }
+
+    private void selectedOperator()
+    {
+        Operator selectedOperator = (Operator) lstOperators.getSelectedValue();
+        if (selectedOperator != null)
+        {
+            txtOperator.setText(selectedOperator.toString());
+        }
+    }
+
+    private void listSelection()
+    {
+        try
+        {
+            model = new OperatorListModel(mgr.getAllOperators());
+            lstOperators.setModel(model);
+
+            lstOperators.addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent lse)
+                {
+                    if (!(lse.getValueIsAdjusting() || lstOperators.isSelectionEmpty()))
+                    {
+                        selectedOperator();
+                    }
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -52,65 +231,65 @@ public class Login extends javax.swing.JFrame
     private void initComponents()
     {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jLabel5 = new javax.swing.JLabel();
+        lblBelman = new javax.swing.JLabel();
+        lblLogin = new javax.swing.JLabel();
+        lblOperator = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        jpfPassword = new javax.swing.JPasswordField();
+        txtOperator = new javax.swing.JTextField();
+        btnSignup = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
+        scrOperators = new javax.swing.JScrollPane();
+        lstOperators = new javax.swing.JList();
+        lblOperators = new javax.swing.JLabel();
+        lblCaps = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Belman");
+        setTitle("Belman Manager");
         setResizable(false);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Belman logo_02.2010.png"))); // NOI18N
+        lblBelman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Belman logo_02.2010.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Login");
+        lblLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblLogin.setText("Login");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Employee");
+        lblOperator.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblOperator.setText("Operator");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("Password");
+        lblPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblPassword.setText("Password");
 
-        jButton1.setText("Sign up");
+        txtOperator.setEnabled(false);
 
-        jButton2.setText("Login");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
+        btnSignup.setText("Sign up");
+
+        btnLogin.setText("Log in");
+        btnLogin.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton2ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/rsz_offbutton.png"))); // NOI18N
-        jButton3.setContentAreaFilled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener()
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/rsz_offbutton.png"))); // NOI18N
+        btnClose.setContentAreaFilled(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton3ActionPerformed(evt);
+                btnCloseActionPerformed(evt);
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        scrOperators.setViewportView(lstOperators);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Employee");
+        lblOperators.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblOperators.setText("Operators");
+
+        lblCaps.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblCaps.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,91 +300,94 @@ public class Login extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblOperators, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(scrOperators, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(87, 87, 87)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jPasswordField1)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lblCaps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblOperator))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jpfPassword)
+                                        .addComponent(txtOperator, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(70, 70, 70))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(lblBelman)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addComponent(lblBelman)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
+                            .addComponent(lblOperators)
+                            .addComponent(lblLogin))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(scrOperators, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 36, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(txtOperator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblOperator))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jpfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPassword))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCaps)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(btnSignup)
+                            .addComponent(btnLogin))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
-    {//GEN-HEADEREND:event_jButton3ActionPerformed
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCloseActionPerformed
+    {//GEN-HEADEREND:event_btnCloseActionPerformed
         closePressed();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
-        dispose();
-        Overview.getInstance().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLoginActionPerformed
+    {//GEN-HEADEREND:event_btnLoginActionPerformed
+        loginPressed();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JList jList1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnSignup;
+    private javax.swing.JPasswordField jpfPassword;
+    private javax.swing.JLabel lblBelman;
+    private javax.swing.JLabel lblCaps;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblOperator;
+    private javax.swing.JLabel lblOperators;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JList lstOperators;
+    private javax.swing.JScrollPane scrOperators;
+    private javax.swing.JTextField txtOperator;
     // End of variables declaration//GEN-END:variables
 }

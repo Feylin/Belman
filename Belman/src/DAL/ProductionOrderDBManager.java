@@ -6,23 +6,28 @@ package DAL;
 
 import BE.Material;
 import BE.Order;
+import BE.SalesOrder;
+import BE.Sleeve;
+import BE.StockItem;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class ProductionOrderDBManager
 {
-
     private Connector connector;
     private static ProductionOrderDBManager instance;
 
@@ -44,17 +49,16 @@ public class ProductionOrderDBManager
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "INSERT INTO Order(sOrderId, sOrder, pOrder, dueDate, quantity, materialId,"
-                    + " thickness, width, circumference) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO ProductionOrder(sOrderId, pOrder, dueDate, quantity, conductedQuantity "
+                    + " thickness, width, status) VALUES (?,?,?,?,?,?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDouble(1, order.getOrder());
-            ps.setDouble(2, order.getProdOrder());
+            ps.setInt(1, order.getsOrderId());
+            ps.setString(2, order.getOrderName());
             ps.setString(3, convertDateToSQL(order.getDueDate()));
             ps.setInt(4, order.getQuantity());
-            ps.setInt(5, order.getMaterialID());
-            ps.setDouble(6, order.getThickness());
-            ps.setDouble(7, order.getWidth());
-            ps.setDouble(8, order.getCircumference());
+            ps.setInt(5, order.getConductedQuantity());
+            ps.setDouble(6, order.getWidth());
+            ps.setString(7, order.getStatus());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0)
@@ -63,18 +67,37 @@ public class ProductionOrderDBManager
             }
             ResultSet keys = ps.getGeneratedKeys();
             keys.next();
-            int id = keys.getInt( 1 );
+            int id = keys.getInt(1);
 
-            return new Order( id, order);
-        }      
+            return new Order(id, order);
+        }
     }
 
     public ArrayList<Order> getAll() throws SQLException, IOException
     {
         try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, Material WHERE Material.ID = ProductionOrder.materialID";
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId ORDER BY UrgentFlag DESC, ProductionOrder.dueDate";
+            PreparedStatement ps = con.prepareStatement( sql );
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Order> orders = new ArrayList<>();
+            while (rs.next())
+            {
+                orders.add(getOneOrder(rs));
+            }
+            return orders;
+        }
+    }
+
+    public ArrayList<Order> getOrderByStock(StockItem s) throws SQLException, IOException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material, StockItem, CoilType WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND Material.id = CoilType.materialId AND CoilType.id = StockItem.coilTypeId AND Sleeve.thickness = CoilType.thickness AND StockItem.chargeNo = ? ORDER BY ProductionOrder.dueDate, Sleeve.materialId, Sleeve.thickness";
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, s.getChargeNo());
+
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Order> orders = new ArrayList<>();
@@ -86,14 +109,14 @@ public class ProductionOrderDBManager
         }
     }
     
-    public ArrayList<Order> getOrderByMaterial(Material m) throws SQLException, IOException
+    public ArrayList<Order> getOrderBySleeve (Sleeve s) throws SQLException, IOException
     {
-        try(Connection con = connector.getConnection())
+        try (Connection con = connector.getConnection())
         {
-            String sql = "SELECT * FROM ProductionOrder, Material WHERE ProductionOrder.MaterialId = ? AND ProductionOrder.MaterialId = Material.id";
+            String sql = "SELECT * FROM ProductionOrder, StockItem, CoilType, Material, Sleeve, SalesOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId AND Sleeve.id = ?";        
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, m.getId());
-            
+            ps.setInt(1, s.getId());
+
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Order> orders = new ArrayList<>();
@@ -103,44 +126,133 @@ public class ProductionOrderDBManager
             }
             return orders;
         }
-    }
+    }      
     
     
-    
-    public void remove(int prodOrderId) throws SQLException            
+
+    public void remove(int prodOrderId) throws SQLException
     {
-        try(Connection con = connector.getConnection())
+        try (Connection con = connector.getConnection())
         {
-            String sql = "DELETE * FROM ProductionOrder WHERE pOrderId = ?";    
+            String sql = "DELETE * FROM ProductionOrder WHERE pOrderId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, prodOrderId);  
-            
+            ps.setInt(1, prodOrderId);
+
             int affectedRows = ps.executeUpdate();
-            if( affectedRows == 0 ){
-                throw new SQLException( "Unable to remove Order!" );
+            if (affectedRows == 0)
+            {
+                throw new SQLException("Unable to remove Order!");
             }
         }
     }
     
+    public void updateStatus(Order o) throws SQLException
+    {
+        try(Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE ProductionOrder SET ProductionOrder.status = ? WHERE ProductionOrder.pOrderId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, o.getStatus());
+            ps.setInt(2, o.getOrderId());  
+                        
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0)
+            {
+                 throw new SQLException( "Unable to update Status" );
+            }
+        }
+    }
     
+    public void updateErrorMessage(Order o, String message) throws SQLException
+    {
+        try(Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE ProductionOrder SET ProductionOrder.errorOccured = ? WHERE ProductionOrder.pOrderId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, message);
+            ps.setInt(2, o.getOrderId());  
+                       
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0)
+            {
+                 throw new SQLException( "Unable to update Error message" );
+            }
+        }
+    }
+        
+    public void update(Order o) throws SQLException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "UPDATE ProductionOrder SET sOrderId = ?, pOrder = ?, dueDate = ?, quantity = ?, conductedQuantity = ?, width = ?, status = ? WHERE pOrderId = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, o.getsOrderId());
+            ps.setString(2, o.getOrderName());
+            ps.setString(3, convertDateToSQL(o.getDueDate()));
+            ps.setInt(4, o.getQuantity());
+            ps.setInt(5, o.getConductedQuantity());
+            ps.setDouble(6, o.getWidth());
+            ps.setString(7, o.getStatus());
+            ps.setInt (8, o.getOrderId());            
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0)
+            {
+                throw new SQLException("Unable to update order");
+            }
+//            ps.setString(9, o.getType().toString());
+        }
+    }
+    
+      public ArrayList<Order> getPaused() throws SQLException, IOException
+    {
+        try (Connection con = connector.getConnection())
+        {
+            String sql = "SELECT * FROM ProductionOrder, SalesOrder, Sleeve, Material WHERE ProductionOrder.sOrderId = SalesOrder.sOrderId AND ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.materialId = Material.id AND ProductionOrder.status = 'PAUSED' ORDER BY ProductionOrder.urgentFlag DESC, ProductionOrder.dueDate, Sleeve.materialId, sleeve.thickness";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            ArrayList<Order> orders1 = new ArrayList<>();
+            while (rs.next())
+            {
+                 orders1.add(getOneOrder(rs));                
+            }
+            return orders1;
+        }
+        
+    }
+          
 
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
     {
-
         int sOrderID = rs.getInt("sOrderId");
-        double sOrder = rs.getDouble("sOrder");
         int prodOrderId = rs.getInt("pOrderId");
-        double prodOrder = rs.getDouble("pOrder");
+        String pOrder = rs.getString("pOrder");
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTime(rs.getTimestamp("dueDate"));
         int quantity = rs.getInt("quantity");
-        int materialId = rs.getInt("materialId");
-        String name = rs.getString("name");
-        double thickness = rs.getDouble("thickness");
+        int conductedQuantity = rs.getInt("conductedQuantity");
+        String errorOccured = rs.getString("errorOccured");
+              
         double width = rs.getDouble("width");
+        String status = rs.getString("status");
+        boolean urgent = rs.getBoolean("urgentFlag");
+        
+        int sOrderId = rs.getInt("sOrderId");
+        String custName = rs.getString("sOrder");
+        String email = rs.getString("email");
+        int phone = rs.getInt("phone");
+        
+        double thickness = rs.getDouble("thickness");
         double circumference = rs.getDouble("circumference");
-
-        return new Order(sOrderID, sOrder, prodOrderId,prodOrder, gc, quantity, materialId,new Material(name), thickness, width, circumference);  
+        String materialName = rs.getString("name"); 
+        int sleeveid = rs.getInt("id");
+        
+        return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(sleeveid, null, null, thickness, circumference, -1, -1, new Material(materialName)), errorOccured);
     }
 
     protected String convertDateToSQL(GregorianCalendar date)

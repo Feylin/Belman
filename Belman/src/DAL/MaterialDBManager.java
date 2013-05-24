@@ -15,10 +15,15 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Mak
+ * @author Daniel, Klaus, Mak, Rashid
  */
+
 public class MaterialDBManager 
 {
+    private static final String ID = "id";
+    private static final String NAME = "name";
+    private static final String DENSITY = "density";
+    
     private Connector connector;
     private static MaterialDBManager instance;
     
@@ -55,11 +60,10 @@ public class MaterialDBManager
     
     protected Material getOneMaterial(ResultSet rs) throws SQLException
     {
-        int id = rs.getInt("id");
-        String name = rs.getString("name");
-        double density = rs.getDouble("density");
+        int id = rs.getInt(ID);
+        String name = rs.getString(NAME);
+        double density = rs.getDouble(DENSITY);
         
         return new Material(id, density, name);
-    }
-    
+    }    
 }

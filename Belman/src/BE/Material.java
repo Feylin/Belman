@@ -9,14 +9,14 @@ package BE;
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class Material
-{ 
+{
     private int id;
     private double density;
-    private String name; 
-   
-    
+    private String name;
+
     /**
      * Den overordnede konstruktør til Material
+     *
      * @param id
      * @param density
      * @param name
@@ -25,11 +25,14 @@ public class Material
     {
         this.id = id;
         this.density = density;
-        this.name = name;        
-    } 
-    
- 
-    
+        this.name = name;
+    }
+
+    public Material(double density, String name)
+    {
+        this(-1, density, name);
+    }
+
     public Material(String name)
     {
         this.name = name;
@@ -50,8 +53,6 @@ public class Material
     {
         this.name = name;
     }
-
-
 
     /**
      * @return the density
@@ -76,6 +77,10 @@ public class Material
     {
         return id;
     }
-
-
+    
+    @Override
+    public String toString()
+    {
+        return String.format(" %-5s", name);
+    }
 }

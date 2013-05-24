@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.Tablemodels;
+package GUI.Models;
 
-import BE.Order;
+import BE.Material;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,27 +13,28 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author bhp
+ * @author Daniel, Klaus, Mak, Rashid
  */
-public class OrderTablemodel extends AbstractTableModel
+
+public class MaterialTableModel extends AbstractTableModel
 {
 //    private final String[] header = {"ID","Event Name","Messege", "Date"};
 //    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
     
-    private final String[] header = {"Order"};
-    private final Class[] columnTypes = {String.class};
+    private final String[] header = {"Material Id"," Material Name"};
+    private final Class[] columnTypes = {Integer.class, String.class};
 
 
-    private ArrayList<Order> info;
+    private ArrayList<Material> info;
 
-    public OrderTablemodel(ArrayList<Order> allInfo)
+    public MaterialTableModel(ArrayList<Material> allInfo)
     {
         info = allInfo;
     }
 
-    public OrderTablemodel(List<Order> all)
+    public MaterialTableModel(List<Material> all)
     {
-        info = (ArrayList<Order>) all;
+        info = (ArrayList<Material>) all;
     }
 
     @Override
@@ -41,7 +42,8 @@ public class OrderTablemodel extends AbstractTableModel
     {
         return info.size();
     }
-
+    
+    
     @Override
     public int getColumnCount()
     {
@@ -51,11 +53,11 @@ public class OrderTablemodel extends AbstractTableModel
     @Override
     public Object getValueAt(int row, int col)
     {
-       
-       Order o = info.get(row);
+       Material m = info.get(row);
        switch (col)
        {
-           case 0 : return o.getProdOrderID();
+           case 0 : return m.getId();
+           case 1 : return m.getName();
        }
        return null;
     }
@@ -81,21 +83,27 @@ public class OrderTablemodel extends AbstractTableModel
     @Override
     public void setValueAt(Object o, int row, int col)
     {
-        Order or = info.get(row);
+        Material m = info.get(row);
         switch (col)
         {
-            case 0 : or.getProdOrderID(); break;
+            case 0 : m.getId();
+            case 1 : m.getName();
         }
     }
 
-    public Order getEventsByRow(int row)
+    public Material getEventsByRow(int row)
     {
         return info.get(row);
     }
 
-    public void setCollection(Collection<Order> order)
+    public void setCollection(Collection<Material> material)
     {
-        info = new ArrayList<>(order);
+        info = new ArrayList<>(material);
         fireTableDataChanged();
+    }
+     public Material getMaterialByRow(int row)
+    {
+        if( row < 0 ) return null;
+        return info.get(row);
     }
 }
