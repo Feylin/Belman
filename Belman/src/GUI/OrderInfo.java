@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import BE.Operator;
@@ -29,7 +25,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 /**
- *
+ * Graphical User Interface OrderInfo klassen.
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class OrderInfo extends javax.swing.JFrame implements Observer
@@ -43,20 +39,17 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     private static StockItemManager smgr = null;
     private static SleeveLogManager sllmgr = null;
     private static OrderManager omgr = null;
-//    private GregorianCalendar date = new GregorianCalendar();
-//    final DateFormat startTimeFormat = new SimpleDateFormat("HH:mm:ss");
-//    final DateFormat endTimeFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-//    long starTime = System.currentTimeMillis();
-//    long endTime = System.currentTimeMillis();
-//    int day, month, year;
-//    int hour, minute, second;
     private DateTime startTime, endTime;
     private DateTimeFormatter jodaTimeFormat = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm:ss");
     private int elapsedMillisec, elapsedSec, elapsedMin, elapsedHour;
     private Timer timer;
 
+
     /**
-     * Creates new form OrderInfo
+     * Opretter en ny form af OrderInfo
+     * @param o
+     * @param s
+     * @param op
      */
     public OrderInfo(Order o, Sleeve s, Operator op)
     {
@@ -85,8 +78,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
 
         txtError.setText(o.getErrorOccured());
-//        txtError.setText(omgr.getOrdersBySleeve(o.getSleeve()).get(0).getErrorOccured());
-
 
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
@@ -209,10 +200,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 closePressed();
             }
         });
-    }
-
-    private void updateMessage()
-    {
     }
 
     private void closePressed()

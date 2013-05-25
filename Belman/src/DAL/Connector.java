@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAL;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
@@ -13,7 +9,7 @@ import java.sql.Connection;
 import java.util.Properties;
 
 /**
- *
+ * Data Access Layer Connector klasse.
  * @author Daniel, Klaus, Mak, Rashid
  */
 
@@ -43,6 +39,11 @@ public class Connector
         datasource.setInstanceName(config.getProperty(InstanceName));
     }
     
+    /**
+     * Metode som returnerer det eneste instans af klassen.
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     protected static Connector getInstance() throws FileNotFoundException, IOException
     {
         if (instance == null)
@@ -52,6 +53,10 @@ public class Connector
         return instance;
     }
     
+    /**
+     * Metode som opretter forbindelse til databasen.
+     * @throws SQLServerException
+     */
     protected Connection getConnection() throws SQLServerException
     {
         return datasource.getConnection();

@@ -1,12 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package BLL;
 
 import BE.Order;
-import BE.Sleeve;
 import BE.StockItem;
 import DAL.StockItemDBManager;
 import java.io.FileNotFoundException;
@@ -16,56 +10,56 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 /**
+ * Buisness Logic Layer StockItemManager klassen.
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
 public class StockItemManager extends Observable
 {
+
     private static StockItemDBManager accessor;
     private static StockItemManager instance;
-    
+
     public StockItemManager() throws IOException
     {
         accessor = StockItemDBManager.getInstance();
     }
-    
-    public static StockItemManager getInstance() throws FileNotFoundException, IOException{
-        if( instance == null ) instance = new StockItemManager();
+
+    /**
+     * Metode som returnerer den eneste instans af klassen.
+     *
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public static StockItemManager getInstance() throws FileNotFoundException, IOException
+    {
+        if (instance == null)
+        {
+            instance = new StockItemManager();
+        }
         return instance;
     }
-    
-    public StockItem add(StockItem item) throws SQLException
-    {
-        StockItem i = accessor.add(item); 
-        setChanged();
-        notifyObservers();
-        return i;
-    }
-    
+
+    /**
+     * Metode som returnerer alle lagervarer.
+     *
+     * @throws IOException
+     * @throws SQLException
+     */
     public ArrayList<StockItem> getAll() throws IOException, SQLException
     {
-       return accessor.getAllItems();        
+        return accessor.getAllItems();
     }
-    
-    public ArrayList<StockItem> getItemBySleeve(Sleeve s) throws IOException, SQLException
-    {
-        return accessor.getItemBySleeve(s);
-    }
-    
+
+    /**
+     * Metode som returnerer lagervarer i forhold til den valgte ordre.
+     *
+     * @param o
+     * @throws IOException
+     * @throws SQLException
+     */
     public ArrayList<StockItem> getItemByOrder(Order o) throws IOException, SQLException
     {
         return accessor.getItemByOrder(o);
     }
-    
-    public void remove(int id) throws SQLException
-    {
-        accessor.remove(id);
-        setChanged();
-        notifyObservers();
-    }
-    
-    public ArrayList<StockItem> getItemByMaterial(double materialName) throws IOException, SQLException
-    {
-        return accessor.getItemByMaterial(materialName);
-    }  
 }

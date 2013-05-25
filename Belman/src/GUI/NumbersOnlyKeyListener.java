@@ -4,7 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
- *
+ * Graphical user interface NumbersOnlyKeyListener klassen.
  * @author Daniel, Klaus, Mak, Rashid
  */
 

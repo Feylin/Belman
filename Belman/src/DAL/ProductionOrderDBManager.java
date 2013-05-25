@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAL;
 
 import BE.Material;
@@ -9,20 +5,18 @@ import BE.Order;
 import BE.SalesOrder;
 import BE.Sleeve;
 import BE.StockItem;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- *
+ * Data Access Layer ProductionOrderDBManager klassen.
  * @author Daniel, Klaus, Mak, Rashid
  */
 
@@ -36,6 +30,10 @@ public class ProductionOrderDBManager
         connector = Connector.getInstance();
     }
 
+    /**
+     * Metode som returnerer det eneste objekt af klassen.
+     * @throws IOException
+     */
     public static ProductionOrderDBManager getInstance() throws IOException
     {
         if (instance == null)
@@ -43,36 +41,14 @@ public class ProductionOrderDBManager
             instance = new ProductionOrderDBManager();
         }
         return instance;
-    }
+    }   
 
-    public Order add(Order order) throws SQLException
-    {
-        try (Connection con = connector.getConnection())
-        {
-            String sql = "INSERT INTO ProductionOrder(sOrderId, pOrder, dueDate, quantity, conductedQuantity "
-                    + " thickness, width, status) VALUES (?,?,?,?,?,?, ?)";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, order.getsOrderId());
-            ps.setString(2, order.getOrderName());
-            ps.setString(3, convertDateToSQL(order.getDueDate()));
-            ps.setInt(4, order.getQuantity());
-            ps.setInt(5, order.getConductedQuantity());
-            ps.setDouble(6, order.getWidth());
-            ps.setString(7, order.getStatus());
-
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0)
-            {
-                throw new SQLException("Unable to add an Order");
-            }
-            ResultSet keys = ps.getGeneratedKeys();
-            keys.next();
-            int id = keys.getInt(1);
-
-            return new Order(id, order);
-        }
-    }
-
+    /**
+     * Metode som forbinder til databasen, henter alle ordre og gemmer dem i en 
+     * arrayliste.
+     * @throws SQLException
+     * @throws IOException
+     */
     public ArrayList<Order> getAll() throws SQLException, IOException
     {
         try (Connection con = connector.getConnection())
@@ -90,6 +66,13 @@ public class ProductionOrderDBManager
         }
     }
 
+    /**
+     * Metode som forbinder til databasen, henter alle ordre i forhold til den
+     * givne lagervare og gemmer dem i en arrayliste.
+     * @param s
+     * @throws SQLException
+     * @throws IOException
+     */
     public ArrayList<Order> getOrderByStock(StockItem s) throws SQLException, IOException
     {
         try (Connection con = connector.getConnection())
@@ -107,45 +90,14 @@ public class ProductionOrderDBManager
             }
             return orders;
         }
-    }
+    }    
     
-    public ArrayList<Order> getOrderBySleeve (Sleeve s) throws SQLException, IOException
-    {
-        try (Connection con = connector.getConnection())
-        {
-            String sql = "SELECT * FROM ProductionOrder, StockItem, CoilType, Material, Sleeve, SalesOrder WHERE ProductionOrder.pOrderId = Sleeve.pOrderId AND Sleeve.Id = StockItem.sleeveId AND StockItem.coilTypeId = CoilType.id AND CoilType.materialId = Material.id AND ProductionOrder.sOrderId = SalesOrder.sOrderId AND Sleeve.id = ?";        
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, s.getId());
-
-            ResultSet rs = ps.executeQuery();
-
-            ArrayList<Order> orders = new ArrayList<>();
-            while (rs.next())
-            {
-                orders.add(getOneOrder(rs));
-            }
-            return orders;
-        }
-    }      
-    
-    
-
-    public void remove(int prodOrderId) throws SQLException
-    {
-        try (Connection con = connector.getConnection())
-        {
-            String sql = "DELETE * FROM ProductionOrder WHERE pOrderId = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, prodOrderId);
-
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0)
-            {
-                throw new SQLException("Unable to remove Order!");
-            }
-        }
-    }
-    
+    /**
+     * Metode som forbinder til databasen og opdaterer status på
+     * det valgte ordre.
+     * @param o
+     * @throws SQLException
+     */
     public void updateStatus(Order o) throws SQLException
     {
         try(Connection con = connector.getConnection())
@@ -164,6 +116,13 @@ public class ProductionOrderDBManager
         }
     }
     
+    /**
+     * Metode som forbinder til databasen og opdaterer fejlbeskeden på det 
+     * valgte ordre.
+     * @param o
+     * @param message
+     * @throws SQLException
+     */
     public void updateErrorMessage(Order o, String message) throws SQLException
     {
         try(Connection con = connector.getConnection())
@@ -182,6 +141,12 @@ public class ProductionOrderDBManager
         }
     }
         
+    /**
+     * Metode som forbinder til databasen og opdaterer informationerne for det
+     * valgte ordre.
+     * @param o
+     * @throws SQLException
+     */
     public void update(Order o) throws SQLException
     {
         try (Connection con = connector.getConnection())
@@ -203,11 +168,16 @@ public class ProductionOrderDBManager
             {
                 throw new SQLException("Unable to update order");
             }
-//            ps.setString(9, o.getType().toString());
         }
     }
     
-      public ArrayList<Order> getPaused() throws SQLException, IOException
+      /**
+     * Metode som forbinder til databasen, henter alle ordre som er på pause og
+     * gemmer dem i en arrayliste.
+     * @throws SQLException
+     * @throws IOException
+     */
+    public ArrayList<Order> getPaused() throws SQLException, IOException
     {
         try (Connection con = connector.getConnection())
         {
@@ -227,6 +197,13 @@ public class ProductionOrderDBManager
     }
           
 
+    /**
+     * Metode som returnerer et Order objekt fra et resultset.
+     * @param rs
+     * @throws SQLException
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     protected Order getOneOrder(ResultSet rs) throws SQLException, FileNotFoundException, IOException
     {
         int sOrderID = rs.getInt("sOrderId");
@@ -255,6 +232,11 @@ public class ProductionOrderDBManager
         return new Order(sOrderID, prodOrderId, pOrder, gc, quantity, conductedQuantity, width, status, urgent, new SalesOrder(sOrderId, custName, email, phone), new Sleeve(sleeveid, null, null, thickness, circumference, -1, -1, new Material(materialName)), errorOccured);
     }
 
+    /**
+     * Metode som formater en dato til en string og gør den mere læselig.
+     * @param date
+     * @return
+     */
     protected String convertDateToSQL(GregorianCalendar date)
     {
         String str = String.format("%04d%02d%02d %02d:%02d:%02d",
