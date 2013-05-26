@@ -22,9 +22,9 @@ import javax.swing.JOptionPane;
 
 public class SleeveInfo extends JDialog
 {
-    private Order order;
-    private OrderManager omgr = null;
+    private Order order;    
     private Operator operator;
+    private OrderManager omgr = null;
     private OperatorManager opmgr = null;
     private SleeveLogManager slmgr = null;
 
@@ -35,6 +35,18 @@ public class SleeveInfo extends JDialog
     {
         setModal(true);
         operator = op;
+        order = o;
+        loadManagers();
+        initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
+        numbersOnlyKeyListener();
+        setLocationByPlatform(true);
+
+        txtOf.setText(String.valueOf(o.getQuantity()));
+    }
+    
+    private void loadManagers()
+    {
         try
         {
             omgr = OrderManager.getInstance();
@@ -45,18 +57,11 @@ public class SleeveInfo extends JDialog
         {
             ex.printStackTrace();
         }
-        order = o;
-        initComponents();
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
-        numbersOnlyKeyListener();
-        setLocationByPlatform(true);
-
-        txtTotal.setText(String.valueOf(o.getQuantity()));
     }
 
     private void numbersOnlyKeyListener()
     {
-        txtHasCut.addKeyListener(new gui.NumbersOnlyKeyListener());
+        txtSleevesMade.addKeyListener(new gui.NumbersOnlyKeyListener());
     }
 
     /**
@@ -70,10 +75,10 @@ public class SleeveInfo extends JDialog
     {
 
         btnOk = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtHasCut = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtTotal = new javax.swing.JTextField();
+        lblSleevesMade = new javax.swing.JLabel();
+        txtSleevesMade = new javax.swing.JTextField();
+        lblOf = new javax.swing.JLabel();
+        txtOf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Belman Manager");
@@ -88,11 +93,11 @@ public class SleeveInfo extends JDialog
             }
         });
 
-        jLabel1.setText("Sleeves Made:");
+        lblSleevesMade.setText("Sleeves Made:");
 
-        jLabel2.setText("Of");
+        lblOf.setText("Of");
 
-        txtTotal.setEditable(false);
+        txtOf.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,13 +107,13 @@ public class SleeveInfo extends JDialog
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblSleevesMade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtHasCut, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSleevesMade, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
+                        .addComponent(lblOf)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtOf, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(93, 93, 93)))
@@ -119,10 +124,10 @@ public class SleeveInfo extends JDialog
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtHasCut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSleevesMade)
+                    .addComponent(txtSleevesMade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOf)
+                    .addComponent(txtOf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOk)
                 .addContainerGap())
@@ -132,7 +137,7 @@ public class SleeveInfo extends JDialog
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        int cut = Integer.parseInt(txtHasCut.getText()) + order.getConductedQuantity();
+        int cut = Integer.parseInt(txtSleevesMade.getText()) + order.getConductedQuantity();
 
         if (cut < order.getQuantity())
         {
@@ -166,20 +171,20 @@ public class SleeveInfo extends JDialog
         }
         else
         {
-            String message = "Error : You cant cut more than the total quantity ";
-            int reply = JOptionPane.showConfirmDialog(null, message, getTitle(), JOptionPane.OK_CANCEL_OPTION);
-            if (reply == JOptionPane.CANCEL_OPTION)
-            {
-                dispose();
-            }
+            String message = "You cant cut more than the total quantity";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+//            if (reply == JOptionPane.CANCEL_OPTION)
+//            {
+//                dispose();
+//            }
 
         }
     }//GEN-LAST:event_btnOkActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtHasCut;
-    private javax.swing.JTextField txtTotal;
+    private javax.swing.JLabel lblOf;
+    private javax.swing.JLabel lblSleevesMade;
+    private javax.swing.JTextField txtOf;
+    private javax.swing.JTextField txtSleevesMade;
     // End of variables declaration//GEN-END:variables
 }

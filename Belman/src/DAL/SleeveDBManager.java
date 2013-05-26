@@ -87,20 +87,20 @@ public class SleeveDBManager
     {
         int id = rs.getInt(ID);
         GregorianCalendar gc = null;
-        Date date = rs.getTimestamp("startTime");
+        Date date = rs.getTimestamp(START_TIME);
         if (date != null)
         {
             gc = new GregorianCalendar();
             gc.setTime(date);
         }
         GregorianCalendar gc2 = null;
-        date = rs.getTimestamp("endTime");
+        date = rs.getTimestamp(END_TIME);
         if (date != null)
         {
             gc2 = new GregorianCalendar();
             gc2.setTime(date);
         }
-        double thickness = rs.getDouble("thickness");
+        double thickness = rs.getDouble(THICKNESS);
         double circumference = rs.getDouble(CIRCUMFERENCE);
         int materialId = rs.getInt(MATERIAL_ID);
         int pOrderId = rs.getInt(P_ORDER_ID);

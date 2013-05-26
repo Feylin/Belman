@@ -30,13 +30,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSleevesMade" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtHasCut" min="-2" pref="76" max="-2" attributes="0"/>
+                      <Component id="txtSleevesMade" min="-2" pref="76" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblOf" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtTotal" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="txtOf" min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnOk" min="-2" pref="76" max="-2" attributes="0"/>
@@ -52,10 +52,10 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtHasCut" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSleevesMade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSleevesMade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblOf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtOf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btnOk" min="-2" max="-2" attributes="0"/>
@@ -73,19 +73,19 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOkActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblSleevesMade">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sleeves Made:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtHasCut">
+    <Component class="javax.swing.JTextField" name="txtSleevesMade">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblOf">
       <Properties>
         <Property name="text" type="java.lang.String" value="Of"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtTotal">
+    <Component class="javax.swing.JTextField" name="txtOf">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
