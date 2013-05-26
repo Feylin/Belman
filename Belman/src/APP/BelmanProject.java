@@ -7,10 +7,10 @@ import javax.swing.UIManager;
 /**
  * Belman Project 2013
  * @author Daniel, Klaus, Mak, Rashid
+ * @version 1.01a
  */
 public class BelmanProject
 {
-
     /**
      * Belman Project main metode
      * @param args the command line arguments

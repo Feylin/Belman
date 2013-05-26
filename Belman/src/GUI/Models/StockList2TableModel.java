@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package GUI.Models;
 
 import BE.StockItem;
@@ -10,7 +14,6 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
-
 public class StockList2TableModel extends AbstractTableModel
 {    
     private final String[] header = {"ChargeNo", "MaterialName", "Thickness", "Length", "Width", "StockQuantity"};
@@ -67,12 +70,12 @@ public class StockList2TableModel extends AbstractTableModel
     {
         return columnTypes[col];
     }
-//
-//    @Override
-//    public boolean isCellEditable(int row, int col)
-//    {
-//        return (col > 0);
-//    }
+
+    @Override
+    public boolean isCellEditable(int row, int col)
+    {
+        return false;
+    }
 
     @Override
     public void setValueAt(Object o, int row, int col)

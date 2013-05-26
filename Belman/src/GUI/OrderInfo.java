@@ -1,5 +1,6 @@
 package GUI;
 
+//<editor-fold defaultstate="collapsed" desc="Imports">
 import BE.Operator;
 import BE.Order;
 import BE.Sleeve;
@@ -23,6 +24,7 @@ import javax.swing.event.ListSelectionListener;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+//</editor-fold>
 
 /**
  * Graphical User Interface OrderInfo klassen.
@@ -31,26 +33,28 @@ import org.joda.time.format.DateTimeFormatter;
  */
 public class OrderInfo extends javax.swing.JFrame implements Observer
 {
+    //<editor-fold defaultstate="collapsed" desc="Class variables">
 
     private Order order;
     private Sleeve sleeve;
     private Operator operator;
     private SleeveTableModel slmodel = null;
-    private static SleeveManager slmgr = null;
-    private static StockItemManager smgr = null;
-    private static SleeveLogManager sllmgr = null;
-    private static OrderManager omgr = null;
+    private static SleeveManager managerSleeve = null;
+    private static StockItemManager managerStockItem = null;
+    private static SleeveLogManager managerSleeveLog = null;
+    private static OrderManager managerOrder = null;
     private DateTime startTime, endTime;
     private DateTimeFormatter jodaTimeFormat = DateTimeFormat.forPattern("dd/MM/YYYY HH:mm:ss");
     private int elapsedSec, elapsedMin, elapsedHour;
     private Timer timer;
+    //</editor-fold>
 
     /**
      * Opretter en ny form af OrderInfo
      *
-     * @param o
-     * @param s
-     * @param op
+     * @param order o
+     * @param sleeve s
+     * @param operator op
      */
     public OrderInfo(Order o, Sleeve s, Operator op)
     {
@@ -67,20 +71,17 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         txtId.setText(String.valueOf(op.getId()));
         txtName.setText(String.valueOf(op.getFirstName()));
         txtLastName.setText(String.valueOf(op.getLastName()));
-
-
         txtfErrors.setText(o.getErrorOccured());
-
         lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
 
         try
         {
-            txtHasCut.setText(String.valueOf(sllmgr.getQuantity(order.getSleeve(), operator.getId())));
-            slmgr.addObserver(this);
-            slmodel = new SleeveTableModel(slmgr.getSleevesByOrder(o));
+            txtHasCut.setText(String.valueOf(managerSleeveLog.getQuantity(order.getSleeve(), operator.getId())));
+            managerSleeve.addObserver(this);
+            slmodel = new SleeveTableModel(managerSleeve.getSleevesByOrder(o));
             tblSleeve.setModel(slmodel);
-            omgr.addObserver(this);
-            smgr.addObserver(this);
+            managerOrder.addObserver(this);
+            managerStockItem.addObserver(this);
 
             tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
@@ -121,62 +122,39 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                     {
                         btnStart.setEnabled(true);
                     }
-
                 }
             });
-
-//                    try
-//                    {
-//                        if (!omgr.getOrdersBySleeve(s).isEmpty())
-//                        {
-//                            omodel2 = new OrderTablemodel(omgr.getOrdersBySleeve(s));
-//                            tblOrderList1.setModel(omodel2);
-//
-//                            if (!smgr.getItemBySleeve(s).isEmpty())
-//                            {
-//
-//                                tblStockList2.setModel(smodel2);
-//                            }
-//
-////                       tblOrderList1.getSelectionModel().addListSelectionListener(new ListSelect);                        
-//                        }
-////                    else
-////                    {
-//////                        omodel2.
-////                        tblOrderList1.setModel(omodel2);
-////                    }
-////                    Sleeve s = slmodel.getEventsByRow(selectedRow);
-//                    }
-//                    catch (Exception e)
-//                    {
-//                    }
-//                }
-//            });
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-
-//        txtDueDate.setText(o.printDate(o.getDueDate()));
-//        txtQuantity.setText("" + o.getQuantity());
     }
 
+    /**
+     * Metode der loader vores managers
+     */
+    //<editor-fold defaultstate="collapsed" desc="Load Managers">
     private void loadManagers()
     {
         try
         {
-            omgr = OrderManager.getInstance();
-            sllmgr = SleeveLogManager.getInstance();
-            smgr = StockItemManager.getInstance();
-            slmgr = SleeveManager.getInstance();
+            managerOrder = OrderManager.getInstance();
+            managerSleeveLog = SleeveLogManager.getInstance();
+            managerStockItem = StockItemManager.getInstance();
+            managerSleeve = SleeveManager.getInstance();
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            ex.printStackTrace();
+            e.printStackTrace();
         }
     }
+    //</editor-fold>
 
+    /**
+     * Metode der sætter vores tre knapper til disabled
+     */
+    //<editor-fold defaultstate="collapsed" desc="Initial button state">
     private void initialButtonState()
     {
         if (txtStartTime.getText().isEmpty())
@@ -185,14 +163,14 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             btnPause.setEnabled(false);
             btnFinish.setEnabled(false);
         }
-//        else
-//        {
-//            jButton1.setEnabled(false);
-//            jButton2.setEnabled(true);
-//            jButton3.setEnabled(true);
-//        }
     }
+    //</editor-fold>
 
+    /**
+     * Metode der tilføjer en windowListener til vores OrderInfo frame, der
+     * kalder closePressed(); hvis vinduet skulle blive lukket
+     */
+    //<editor-fold defaultstate="collapsed" desc="Windowlistener - Window closing">
     private void windowClose()
     {
         addWindowListener(new WindowAdapter()
@@ -204,13 +182,20 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             }
         });
     }
+    //</editor-fold>
 
+    /**
+     * Metode der viser en Error dialog hvis man prøver at lukke vinduet mens et
+     * klip stadig er igang ellers viser den en confirmDialog, med ja og nej
+     * muligheder
+     */
+    //<editor-fold defaultstate="collapsed" desc="Confirm dialog when closing the window">
     private void closePressed()
     {
         String option = "In progress";
         if (order.getStatus().equalsIgnoreCase(option))
         {
-            String error = "Order is still in progress";
+            String error = "Cut is still in progress";
             JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
         }
         else
@@ -222,9 +207,106 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 dispose();
             }
         }
+    }//</editor-fold>
 
+    /**
+     * Metode der får fat i teksten fra tekstfeltet Errors og prøver at gemme
+     * den i den valgte ordre, og viser en besked alt efter hvordan det gik
+     */
+    //<editor-fold defaultstate="collapsed" desc="Save errors comitted">
+    private void saveErrors()
+    {
+        String message = txtfErrors.getText();
+        try
+        {
+            managerOrder.updateErrorMessage(order, message);
+            order.setErrorOccured(message);
+        }
+        catch (Exception e)
+        {
+            String error = "Unable to update error message";
+            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        String popup = "The error message has been saved";
+        JOptionPane.showMessageDialog(this, popup, "Save successful", JOptionPane.INFORMATION_MESSAGE);
     }
+    //</editor-fold>
 
+    /**
+     * Metode der, når man trykker finish, sætter ordrens status til finished og
+     * sætter conducted quantity til det samme som quantity til den valgte ordre
+     */
+    //<editor-fold defaultstate="collapsed" desc="Finish open order">
+    private void finishOrder()
+    {
+        String status = "Finished";
+        order.setStatus(status.toUpperCase());
+        int quantity = order.getQuantity();
+        order.setConductedQuantity(quantity);
+        try
+        {
+            managerOrder.update(order);
+            dispose();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    //</editor-fold>
+
+    /**
+     * Metode der stopper timeren, sætter text field endTime til endTime og prøver
+     * at opdatere endTime på det valgte sleeve. Hvis status på den valgte sleeve
+     * er in progress bliver den sat til pause hvis muligt. Til sidst vil den
+     * lukke vinduet
+     */
+    //<editor-fold defaultstate="collapsed" desc="Pause Button / Pause Cut">
+    private void pauseCut()
+    {
+        timer.stop();
+        
+        try
+        {
+            txtEndTime.setText(jodaTimeFormat.print(endTime));
+            endTime = jodaTimeFormat.parseDateTime(txtEndTime.getText());
+            
+            GregorianCalendar endTimeCalendar = endTime.toGregorianCalendar();
+            
+            sleeve.setEndTime(endTimeCalendar);
+            managerSleeve.updateSleeveEndTime(sleeve);
+        }
+        catch (Exception e)
+        {
+            String message = "Unable to update sleeve with id " + sleeve.getId();
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        String option = "In Progress";
+        if (order.getStatus().equalsIgnoreCase(option))
+        {
+            String status = "Paused";
+            order.setStatus(status.toUpperCase());
+            try
+            {
+                managerOrder.updateStatus(order);
+            }
+            catch (Exception e)
+            {
+                String message = "Unable to update order";
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            new SleeveInfo(order, operator).setVisible(true);
+        }
+        else
+        {
+            String message = "Production Order " + order.getOrderId() + "'s status is not in progress or already paused.";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        dispose();
+    }
+    //</editor-fold>
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -569,17 +651,8 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
     {//GEN-HEADEREND:event_btnStartActionPerformed
-//        if (tblSleeve.getSelectedRow() == -1)
-//        {
-//            String message = "Please select a Sleeve to the left";
-//            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//        else
-//        {
         btnPause.setEnabled(true);
         btnFinish.setEnabled(true);
-
-//        endTime = new DateTime();
 
         try
         {
@@ -589,15 +662,13 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
 
             sleeve.setStartTime(startTimeCalendar);
-            slmgr.updateSleeveStartTime(sleeve);
+            managerSleeve.updateSleeveStartTime(sleeve);
         }
         catch (Exception e)
         {
             String message = "Unable to update sleeve with id " + sleeve.getId();
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-//        jTextField5.setText(DateFormat.(System.currentTimeMillis(), "MM/dd/yy HH:mm"));
 
         if (txtTimeSpent.getText().isEmpty())
         {
@@ -610,11 +681,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                 public void actionPerformed(ActionEvent e)
                 {
                     elapsedSec++;
-//                    if (elapsedMillisec > 999)
-//                    {
-//                        elapsedMillisec = 0;
-//                        elapsedSec++;
-//                    }
                     if (elapsedSec > 59)
                     {
                         elapsedSec = 0;
@@ -627,7 +693,6 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
                     }
                     String displayTimer = String.format("%02d:%02d:%02d", elapsedHour, elapsedMin, elapsedSec);
                     txtTimeSpent.setText(displayTimer);
-
                 }
             });
             timer.setInitialDelay(0);
@@ -646,7 +711,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             order.setStatus(status.toUpperCase());
             try
             {
-                omgr.updateStatus(order);
+                managerOrder.updateStatus(order);
             }
             catch (Exception e)
             {
@@ -659,62 +724,11 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
             String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
         }
-//        }
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPauseActionPerformed
     {//GEN-HEADEREND:event_btnPauseActionPerformed
-//        endTime = new DateTime();
-//        if (tblSleeve.getSelectedRow() == -1)
-//        {
-//            String message = "Please select a Sleeve to the left";
-//            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//        else
-//        {
-//            jButton1.setEnabled(true);
-
-        timer.stop();
-
-        try
-        {
-            txtEndTime.setText(jodaTimeFormat.print(endTime));
-            endTime = jodaTimeFormat.parseDateTime(txtEndTime.getText());
-
-            GregorianCalendar endTimeCalendar = endTime.toGregorianCalendar();
-
-            sleeve.setEndTime(endTimeCalendar);
-            slmgr.updateSleeveEndTime(sleeve);
-        }
-        catch (Exception e)
-        {
-            String message = "Unable to update sleeve with id " + sleeve.getId();
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        String option = "In Progress";
-        if (order.getStatus().equalsIgnoreCase(option))
-        {
-            String status = "Paused";
-            order.setStatus(status.toUpperCase());
-            try
-            {
-                omgr.updateStatus(order);
-            }
-            catch (Exception e)
-            {
-                String message = "Unable to update order";
-                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            new SleeveInfo(order, operator).setVisible(true);
-        }
-        else
-        {
-            String message = "Production Order " + order.getOrderId() + "'s status is not in progress or already paused.";
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        dispose();
-//        }
+        pauseCut();
     }//GEN-LAST:event_btnPauseActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
@@ -722,39 +736,12 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String message = txtfErrors.getText();
-        try
-        {
-            omgr.updateErrorMessage(order, message);
-            order.setErrorOccured(message);
-        }
-        catch (Exception e)
-        {
-            String error = "Unable to update error message";
-            JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        String popup = "The error message has been saved";
-        JOptionPane.showMessageDialog(this, popup, "Save successful", JOptionPane.INFORMATION_MESSAGE);
+        saveErrors();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnFinishActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnFinishActionPerformed
     {//GEN-HEADEREND:event_btnFinishActionPerformed
-
-        String status = "Finished";
-        order.setStatus(status.toUpperCase());
-        int quantity = order.getQuantity();
-        order.setConductedQuantity(quantity);
-        try
-        {
-            omgr.update(order);
-//            omgr.updateStatus(order);
-            dispose();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        finishOrder();
     }//GEN-LAST:event_btnFinishActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinish;

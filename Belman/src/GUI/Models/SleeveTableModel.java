@@ -70,11 +70,11 @@ public class SleeveTableModel extends AbstractTableModel
         return columnTypes[col];
     }
 
-//    @Override
-//    public boolean isCellEditable(int row, int col)
-//    {
-//        return (col > 0);
-//    }
+    @Override
+    public boolean isCellEditable(int row, int col)
+    {
+        return false;
+    }
 
     @Override
     public void setValueAt(Object o, int row, int col)

@@ -6,20 +6,14 @@ package GUI.Models;
 
 import BE.StockItem;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
-
 public class StockListTableModel extends AbstractTableModel
 {
-//    private final String[] header = {"ID","Event Name","Messege", "Date"};
-//    private final Class[] columnTypes = {Integer.class, String.class, String.class, String.class};
-    
     private final String[] header = {"Stock List", "Materiale"};
     private final Class[] columnTypes = {String.class, String.class};
 

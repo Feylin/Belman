@@ -1,4 +1,7 @@
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package GUI.Models;
 
 import BE.Order;
@@ -14,8 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 
 public class ProductionSleeveTableModel extends AbstractTableModel
-{
-    
+{    
     private final String[] header = {"Order", "DueDate", "MaterialName", "Thickness", "Circumference", "Width", "Quantity", "Cut", "Status", "Urgent"};
     private final Class[] columnTypes = {Integer.class, String.class, String.class, double.class, double.class, double.class, Integer.class, Integer.class, String.class, Boolean.class};
 
@@ -76,11 +78,11 @@ public class ProductionSleeveTableModel extends AbstractTableModel
         return columnTypes[col];
     }
 
-//    @Override
-//    public boolean isCellEditable(int row, int col)
-//    {
-//        return (col > 0);
-//    }
+    @Override
+    public boolean isCellEditable(int row, int col)
+    {
+        return false;
+    }
 
     @Override
     public void setValueAt(Object o, int row, int col)

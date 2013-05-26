@@ -36,54 +36,60 @@ import javax.swing.event.ListSelectionListener;
 // </editor-fold> 
 
 /**
- *
+ * Graphical User Interface Overview klassen
+ * 
  * @author Rashid, Daniel Mak og Klaus
  */
 public class Overview extends javax.swing.JFrame implements Observer
 {
-
-    static OrderManager omgr = null;
-    static StockItemManager smgr = null;
-    static SleeveManager slmgr = null;
-    static OperatorManager opmgr = null;
-    private OrderTablemodel omodel = null;
+    //<editor-fold defaultstate="collapsed" desc="Class Variables">
     private static Overview instance = null;
-    private StockListTableModel smodel4 = null;
     private ResourceBundle rb = null;
-    private StockListTableModel smodel2 = null;
-    private ProductionSleeveTableModel psmodel = null;
-    private StockList2TableModel smodel3 = null;
-    Order o;
-    Sleeve s;
-    Operator op;
+    static OrderManager managerOrder = null;
+    static StockItemManager managerStockItem = null;
+    static SleeveManager managerSleeve = null;
+    static OperatorManager managerOperator = null;
+    private OrderTablemodel modelOrder = null;    
+    private StockListTableModel modelEmptyStocklist = null;
+    private ProductionSleeveTableModel modelProduction = null;
+    private StockList2TableModel modelStocklist = null;
+    private Order o;
+    private Sleeve s;
+    private Operator op;
     private String operator = null;
+    //</editor-fold>
 
-    /**
-     * Creates new form Overview
+    /** 
+     * Opretter en nye form a Overview
      */
+    //<editor-fold defaultstate="collapsed" desc="Overview constructor">
     private Overview()
     {
         loadManagers();
         Locale locale = Locale.getDefault();
         rb = ResourceBundle.getBundle("GUI.Bundle");
-//        setExtendedState(MAXIMIZED_BOTH); MAXIMIZED WINDOW
+        //        setExtendedState(MAXIMIZED_BOTH); MAXIMIZED WINDOW
         initComponents();
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
         windowClose();
         setLocationRelativeTo(null);
         productionSleeveListSelectioner();
         pausedOrderTable();
-
         localeLanguage.setLocale(locale);
         mouseListener();
-//        mouseListener2();
+        //        mouseListener2();
         setTableColumnSize();
         setTableSelectionMode();
-        comboModel();
+        comboboxModel();
         operator = cbxOperator.getSelectedItem().toString();
         updateGUILanguage();
     }
+    //</editor-fold>
 
+    /**
+     * Metode til at returnere den eneste instans af denne klasse.
+     */
+    //<editor-fold defaultstate="collapsed" desc="Overview singleton getInstance();">
     public static Overview getInstance()
     {
         if (instance == null)
@@ -92,24 +98,33 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
         return instance;
     }
+    //</editor-fold>
 
+    /**
+     * Metode der loader vores managers
+     */
+    //<editor-fold defaultstate="collapsed" desc="Load Managers">
     private void loadManagers()
     {
         try
         {
-            omgr = OrderManager.getInstance();
-            opmgr = OperatorManager.getInstance();
-            smgr = StockItemManager.getInstance();
-            slmgr = SleeveManager.getInstance();
+            managerOrder = OrderManager.getInstance();
+            managerOperator = OperatorManager.getInstance();
+            managerStockItem = StockItemManager.getInstance();
+            managerSleeve = SleeveManager.getInstance();
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
     }
+    //</editor-fold>
 
-    private void setTableColumnSize()
-    // <editor-fold defaultstate="collapsed" desc="Set table column sizes">                          
+    /**
+     * Metode der sætter kolonne størrelse på vores tabeller
+     */
+    // <editor-fold defaultstate="collapsed" desc="Set table column sizes">
+    private void setTableColumnSize()     
     {
         tblProductionSleeve.getColumnModel().getColumn(0).setPreferredWidth(180);
         tblProductionSleeve.getColumnModel().getColumn(1).setPreferredWidth(120);
@@ -130,15 +145,23 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     }// </editor-fold> 
 
+    /**
+     * Metode der styrer selection mode på vores tabeller
+     */
+    //<editor-fold defaultstate="collapsed" desc="Set table selection mode">
     private void setTableSelectionMode()
     {
         tblOrderList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblProductionSleeve.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblStockList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
+    //</editor-fold>
 
-    private void updateGUILanguage()
-    // <editor-fold defaultstate="collapsed" desc="Updates fields and labels when the language is changed">                          
+    /**
+     * Metode der opdaterer sproget på overview
+     */
+    // <editor-fold defaultstate="collapsed" desc="Updates fields and labels when the language is changed"> 
+    private void updateGUILanguage()                             
     {
         btnClose.setText(rb.getString("Overview.btnClose.text"));
         btnReset.setText(rb.getString("Overview.btnReset.text"));
@@ -149,7 +172,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         itemExit.setText(rb.getString("Overview.itemExit.text"));
         itemHelp.setText(rb.getString("Overview.itemHelp.text_1"));
 
-        jTabbedPane1.setTitleAt(0, rb.getString("Overview.pnlCutting2.TabConstraints.tabTitle"));
+        tpaneOverview.setTitleAt(0, rb.getString("Overview.pnlCutting2.TabConstraints.tabTitle"));
         lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") + operator);
 
         itemSettings.setText(rb.getString("Overview.itemSettings.text"));
@@ -181,11 +204,21 @@ public class Overview extends javax.swing.JFrame implements Observer
 //     TitledBorder border5 = (TitledBorder) pnlOrderInfo.getBorder();
     }// </editor-fold> 
 
+    /**
+     * Metode der opdaterer vores LoggedIn label med vores operator string
+     */
+    //<editor-fold defaultstate="collapsed" desc="Update loggedIn label with Operator string">
     private void updateOperator()
     {
         lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") + operator);
     }
+    //</editor-fold>
 
+    /**
+     * Metode der opdaterer vores operator string med den valgte operator i vores operator kombobox
+     * Og derefter kalder updateOperator();
+     */
+    //<editor-fold defaultstate="collapsed" desc="Updates the Operator String from the Combobox">
     private void selectedOperator()
     {
         Operator selectedOperator = (Operator) cbxOperator.getSelectedItem();
@@ -195,14 +228,21 @@ public class Overview extends javax.swing.JFrame implements Observer
             updateOperator();
         }
     }
+    //</editor-fold>
 
-    private void comboModel()
+    /**
+     * Metode der styrer vores kombobox, som viser alle operators der hentes via
+     * operatorManager og derefter kalder selectedOperator(); hver gang der vælges
+     * en ny operator
+     */
+    //<editor-fold defaultstate="collapsed" desc="Combobox model">
+    private void comboboxModel()
     {
         try
         {
-            DefaultComboBoxModel model = new DefaultComboBoxModel(opmgr.getAllOperators().toArray());
+            DefaultComboBoxModel model = new DefaultComboBoxModel(managerOperator.getAllOperators().toArray());
             cbxOperator.setModel(model);
-
+            
             cbxOperator.addItemListener(new ItemListener()
             {
                 @Override
@@ -220,7 +260,12 @@ public class Overview extends javax.swing.JFrame implements Observer
             e.printStackTrace();
         }
     }
+    //</editor-fold>
 
+    /**
+     * Metode der viser en confirmDialog, med ja og nej muligheder
+     */
+    //<editor-fold defaultstate="collapsed" desc="Confirm dialog when closing the window">
     private void closePressed()
     {
         String message = "Are you sure you want to exit?";
@@ -230,7 +275,13 @@ public class Overview extends javax.swing.JFrame implements Observer
             System.exit(0);
         }
     }
+    //</editor-fold>
 
+    /**
+     * Metode der tilføjer en windowListener til vores Overview frame, der kalder 
+     * closePressed(); hvis vinduet skulle blive lukket
+     */
+    //<editor-fold defaultstate="collapsed" desc="Windowlistener - Window closing">
     private void windowClose()
     {
         addWindowListener(new WindowAdapter()
@@ -242,6 +293,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
     }
+    //</editor-fold>
 
     @Override
     public void update(Observable o, Object arg)
@@ -250,7 +302,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
             try
             {
-                omodel.setCollection(omgr.getAll());
+                modelOrder.setCollection(managerOrder.getAll());
             }
             catch (Exception e)
             {
@@ -263,10 +315,10 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
         try
         {
-            omgr.addObserver(this);
+            managerOrder.addObserver(this);
 
-            omodel = new OrderTablemodel(omgr.getPaused());
-            tblOrderList.setModel(omodel);
+            modelOrder = new OrderTablemodel(managerOrder.getPaused());
+            tblOrderList.setModel(modelOrder);
 
             tblOrderList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
@@ -287,7 +339,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtPhone.setText("");
                     }
 
-                    Order o = omodel.getEventsByRow(selectedRow);
+                    Order o = modelOrder.getEventsByRow(selectedRow);
 
                     try
                     {
@@ -319,14 +371,13 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
         try
         {
+            managerStockItem.addObserver(this);
+            modelStocklist = new StockList2TableModel(managerStockItem.getAll());
+            tblStockList.setModel(modelStocklist);
 
-            smgr.addObserver(this);
-            smodel3 = new StockList2TableModel(smgr.getAll());
-            tblStockList.setModel(smodel3);
-
-            omgr.addObserver(this);
-            psmodel = new ProductionSleeveTableModel(omgr.getAll());
-            tblProductionSleeve.setModel(psmodel);
+            managerOrder.addObserver(this);
+            modelProduction = new ProductionSleeveTableModel(managerOrder.getAll());
+            tblProductionSleeve.setModel(modelProduction);
 
             tblProductionSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
@@ -338,18 +389,18 @@ public class Overview extends javax.swing.JFrame implements Observer
                     {
                         return;
                     }
-                    Order o = psmodel.getEventsByRow(selectedRow);
+                    Order o = modelProduction.getEventsByRow(selectedRow);
                     try
                     {
-                        if (!smgr.getItemByOrder(o).isEmpty())
+                        if (!managerStockItem.getItemByOrder(o).isEmpty())
                         {
-                            smodel3 = new StockList2TableModel(smgr.getItemByOrder(o));
-                            tblStockList.setModel(smodel3);
+                            modelStocklist = new StockList2TableModel(managerStockItem.getItemByOrder(o));
+                            tblStockList.setModel(modelStocklist);
                         }
                         else
                         {
-                            smodel2 = new StockListTableModel();
-                            tblStockList.setModel(smodel2);
+                            modelEmptyStocklist = new StockListTableModel();
+                            tblStockList.setModel(modelEmptyStocklist);
                         }
                     }
                     catch (Exception e)
@@ -358,9 +409,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                     }
                 }
             });
-            smgr.addObserver(this);
-            smodel3 = new StockList2TableModel(smgr.getAll());
-            tblStockList.setModel(smodel3);
+            managerStockItem.addObserver(this);
+            modelStocklist = new StockList2TableModel(managerStockItem.getAll());
+            tblStockList.setModel(modelStocklist);
             tblStockList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
@@ -371,18 +422,18 @@ public class Overview extends javax.swing.JFrame implements Observer
                     {
                         return;
                     }
-                    StockItem s = smodel3.getEventsByRow(selectedRow);
+                    StockItem s = modelStocklist.getEventsByRow(selectedRow);
                     try
                     {
-                        if (!omgr.getOrderByStock(s).isEmpty())
+                        if (!managerOrder.getOrderByStock(s).isEmpty())
                         {
-                            psmodel = new ProductionSleeveTableModel(omgr.getOrderByStock(s));
-                            tblProductionSleeve.setModel(psmodel);
+                            modelProduction = new ProductionSleeveTableModel(managerOrder.getOrderByStock(s));
+                            tblProductionSleeve.setModel(modelProduction);
                         }
                         else
                         {
-                            smodel4 = new StockListTableModel();
-                            tblProductionSleeve.setModel(smodel4);
+                            modelEmptyStocklist = new StockListTableModel();
+                            tblProductionSleeve.setModel(modelEmptyStocklist);
                         }
                     }
                     catch (Exception e)
@@ -398,6 +449,12 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
     }
 
+    /**
+     * Metode der tilføjer en mouseListener til vores Production sleeve tabel, 
+     * som gør det muligt at dobbeltklikke i tabellen. Ved dobbeltklik åbner
+     * Orderinfo med tre parametre fra Overview (order, sleeve og operator).
+     */
+    //<editor-fold defaultstate="collapsed" desc="Mouse listener til Production Sleeve tabellen">
     private void mouseListener()
     {
         tblProductionSleeve.addMouseListener(new MouseAdapter()
@@ -408,10 +465,10 @@ public class Overview extends javax.swing.JFrame implements Observer
                 if (me.getClickCount() == 2)
                 {
                     int selectedRow = tblProductionSleeve.getSelectedRow();
-                    Order o = psmodel.getEventsByRow(selectedRow);
+                    o = modelProduction.getEventsByRow(selectedRow);
                     try
                     {
-                        op = opmgr.get(operator);
+                        op = managerOperator.get(operator);
                     }
                     catch (SQLException ex)
                     {
@@ -419,36 +476,57 @@ public class Overview extends javax.swing.JFrame implements Observer
                     }
                     new OrderInfo(o, s, op).setVisible(true);
                 }
-
+                
             }
         });
     }
-
-//    private void mouseListener2()
-//    {
-//        tblOrderList.addMouseListener(new MouseAdapter()
-//        {
-//            @Override
-//            public void mouseClicked(MouseEvent me)
-//            {
-//                if (me.getClickCount() == 2)
-//                {
-//                    int selectedRow = tblOrderList.getSelectedRow();
-//                    Order o = psmodel.getEventsByRow(selectedRow);
-//                    try
-//                    {
-//                        op = opmgr.get(operator);
-//                    }
-//                    catch (SQLException ex)
-//                    {
-//                        ex.printStackTrace();
-//                    }
-//                    new OrderInfo(o, s, op).setVisible(true);
-//                }
-//            }
-//        });
-//    }
-
+    //</editor-fold>
+    
+    /**
+     * Metode der nulstiller vores stocklist og productionsleeve tabeller til standard
+     * via vores getAll metode i StockItemManager og OrderManager og fjerner selection
+     * i de to tabeller
+     */
+    //<editor-fold defaultstate="collapsed" desc="Reset Stocklist and ProductionSleeve tables">
+    private void resetTables()
+    {
+        try
+        {
+            modelStocklist = new StockList2TableModel(managerStockItem.getAll());
+            tblStockList.setModel(modelStocklist);
+            modelProduction = new ProductionSleeveTableModel(managerOrder.getAll());
+            tblProductionSleeve.setModel(modelProduction);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        finally
+        {
+            tblProductionSleeve.clearSelection();
+            tblStockList.clearSelection();
+        }
+    }
+    //</editor-fold>
+    
+    /**
+     * Metode der styrer hvornår reset knappen skal vises, afhænger af hvilken
+     * tab der er valgt i vores tabbed pane
+     */
+    //<editor-fold defaultstate="collapsed" desc="Reset Button">
+    private void resetButton()
+    {
+        if (tpaneOverview.getSelectedIndex() == 0)
+        {
+            btnReset.setVisible(true);
+        }
+        if (tpaneOverview.getSelectedIndex() == 1)
+        {
+            btnReset.setVisible(false);
+        }
+    }
+    //</editor-fold>
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -460,7 +538,8 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        dateTime1 = new org.joda.time.DateTime();
+        tpaneOverview = new javax.swing.JTabbedPane();
         pnlCutting2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductionSleeve = new javax.swing.JTable();
@@ -515,11 +594,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         setPreferredSize(new java.awt.Dimension(1500, 650));
         setResizable(false);
 
-        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener()
+        tpaneOverview.addChangeListener(new javax.swing.event.ChangeListener()
         {
             public void stateChanged(javax.swing.event.ChangeEvent evt)
             {
-                jTabbedPane1StateChanged(evt);
+                tpaneOverviewStateChanged(evt);
             }
         });
 
@@ -588,7 +667,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab(bundle.getString("Overview.pnlCutting2.TabConstraints.tabTitle"), pnlCutting2); // NOI18N
+        tpaneOverview.addTab(bundle.getString("Overview.pnlCutting2.TabConstraints.tabTitle"), pnlCutting2); // NOI18N
 
         tblOrderList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -829,7 +908,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab(bundle.getString("Overview.pnlOrder.TabConstraints.tabTitle_1"), pnlOrder); // NOI18N
+        tpaneOverview.addTab(bundle.getString("Overview.pnlOrder.TabConstraints.tabTitle_1"), pnlOrder); // NOI18N
 
         btnClose.setText(bundle.getString("Overview.btnClose.text")); // NOI18N
         btnClose.addActionListener(new java.awt.event.ActionListener()
@@ -926,7 +1005,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnReset)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTabbedPane1)
+                    .addComponent(tpaneOverview)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlLoggedIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -950,7 +1029,7 @@ public class Overview extends javax.swing.JFrame implements Observer
                             .addComponent(lblChangeOperator))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tpaneOverview, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
@@ -977,49 +1056,27 @@ public class Overview extends javax.swing.JFrame implements Observer
         updateGUILanguage();
     }//GEN-LAST:event_localeLanguageActionPerformed
 
-    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jTabbedPane1StateChanged
-    {//GEN-HEADEREND:event_jTabbedPane1StateChanged
-        if (jTabbedPane1.getSelectedIndex() == 0)
-        {
-            btnReset.setVisible(true);
-        }
-        if (jTabbedPane1.getSelectedIndex() == 1)
-        {
-            btnReset.setVisible(false);
-        }
-    }//GEN-LAST:event_jTabbedPane1StateChanged
+    private void tpaneOverviewStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_tpaneOverviewStateChanged
+    {//GEN-HEADEREND:event_tpaneOverviewStateChanged
+        resetButton();
+    }//GEN-LAST:event_tpaneOverviewStateChanged
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnResetActionPerformed
     {//GEN-HEADEREND:event_btnResetActionPerformed
-        try
-        {
-            smodel3 = new StockList2TableModel(smgr.getAll());
-            tblStockList.setModel(smodel3);
-            psmodel = new ProductionSleeveTableModel(omgr.getAll());
-            tblProductionSleeve.setModel(psmodel);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        finally
-        {
-            tblProductionSleeve.clearSelection();
-            tblStockList.clearSelection();
-        }
+        resetTables();
     }//GEN-LAST:event_btnResetActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnReset;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cbxOperator;
+    private org.joda.time.DateTime dateTime1;
     private javax.swing.JMenuItem itemExit;
     private javax.swing.JMenuItem itemHelp;
     private javax.swing.JMenuItem itemLogOut;
     private javax.swing.JMenuItem itemSettings;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblChangeOperator;
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JLabel lblDate;
@@ -1049,6 +1106,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JTable tblOrderList;
     private javax.swing.JTable tblProductionSleeve;
     private javax.swing.JTable tblStockList;
+    private javax.swing.JTabbedPane tpaneOverview;
     private javax.swing.JTextField txtCustomerName;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtEmail;
