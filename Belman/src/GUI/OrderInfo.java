@@ -256,6 +256,88 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     //</editor-fold>
 
     /**
+     * Metode 
+     */
+    //<editor-fold defaultstate="collapsed" desc="Start Button / Start Cut">
+    private void startCut()
+    {
+        btnPause.setEnabled(true);
+        btnFinish.setEnabled(true);
+        
+        try
+        {
+            txtStartTime.setText(jodaTimeFormat.print(startTime));
+            startTime = jodaTimeFormat.parseDateTime(txtStartTime.getText());
+            
+            GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
+            
+            sleeve.setStartTime(startTimeCalendar);
+            managerSleeve.updateSleeveStartTime(sleeve);
+        }
+        catch (Exception e)
+        {
+            String message = "Unable to update sleeve with id " + sleeve.getId();
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if (txtTimeSpent.getText().isEmpty())
+        {
+            elapsedHour = 0;
+            elapsedMin = 0;
+            elapsedSec = 0;
+            timer = new Timer(1000, new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    elapsedSec++;
+                    if (elapsedSec > 59)
+                    {
+                        elapsedSec = 0;
+                        elapsedMin++;
+                    }
+                    if (elapsedMin > 59)
+                    {
+                        elapsedMin = 0;
+                        elapsedHour++;
+                    }
+                    String displayTimer = String.format("%02d:%02d:%02d", elapsedHour, elapsedMin, elapsedSec);
+                    txtTimeSpent.setText(displayTimer);
+                }
+            });
+            timer.setInitialDelay(0);
+            timer.start();
+        }
+        else
+        {
+            timer.start();
+        }
+        
+        String option = "Pending";
+        String option2 = "Paused";
+        if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
+        {
+            String status = "in Progress";
+            order.setStatus(status.toUpperCase());
+            try
+            {
+                managerOrder.updateStatus(order);
+            }
+            catch (Exception e)
+            {
+                String message = "Unable to update order";
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else
+        {
+            String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    //</editor-fold>
+    
+    /**
      * Metode der stopper timeren, sætter text field endTime til endTime og prøver
      * at opdatere endTime på det valgte sleeve. Hvis status på den valgte sleeve
      * er in progress bliver den sat til pause hvis muligt. Til sidst vil den
@@ -651,79 +733,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
     {//GEN-HEADEREND:event_btnStartActionPerformed
-        btnPause.setEnabled(true);
-        btnFinish.setEnabled(true);
-
-        try
-        {
-            txtStartTime.setText(jodaTimeFormat.print(startTime));
-            startTime = jodaTimeFormat.parseDateTime(txtStartTime.getText());
-
-            GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
-
-            sleeve.setStartTime(startTimeCalendar);
-            managerSleeve.updateSleeveStartTime(sleeve);
-        }
-        catch (Exception e)
-        {
-            String message = "Unable to update sleeve with id " + sleeve.getId();
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        if (txtTimeSpent.getText().isEmpty())
-        {
-            elapsedHour = 0;
-            elapsedMin = 0;
-            elapsedSec = 0;
-            timer = new Timer(1000, new ActionListener()
-            {
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    elapsedSec++;
-                    if (elapsedSec > 59)
-                    {
-                        elapsedSec = 0;
-                        elapsedMin++;
-                    }
-                    if (elapsedMin > 59)
-                    {
-                        elapsedMin = 0;
-                        elapsedHour++;
-                    }
-                    String displayTimer = String.format("%02d:%02d:%02d", elapsedHour, elapsedMin, elapsedSec);
-                    txtTimeSpent.setText(displayTimer);
-                }
-            });
-            timer.setInitialDelay(0);
-            timer.start();
-        }
-        else
-        {
-            timer.start();
-        }
-
-        String option = "Pending";
-        String option2 = "Paused";
-        if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
-        {
-            String status = "in Progress";
-            order.setStatus(status.toUpperCase());
-            try
-            {
-                managerOrder.updateStatus(order);
-            }
-            catch (Exception e)
-            {
-                String message = "Unable to update order";
-                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        else
-        {
-            String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        startCut();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPauseActionPerformed

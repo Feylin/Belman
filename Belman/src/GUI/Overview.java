@@ -973,6 +973,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         menuSettings.setText(bundle.getString("Overview.menuSettings.text")); // NOI18N
 
         itemHelp.setText(bundle.getString("Overview.itemHelp.text_1")); // NOI18N
+        itemHelp.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                itemHelpActionPerformed(evt);
+            }
+        });
         menuSettings.add(itemHelp);
 
         menuBar.add(menuSettings);
@@ -1051,6 +1058,12 @@ public class Overview extends javax.swing.JFrame implements Observer
     {//GEN-HEADEREND:event_btnResetActionPerformed
         resetTables();
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void itemHelpActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemHelpActionPerformed
+    {//GEN-HEADEREND:event_itemHelpActionPerformed
+        About.getInstance().setVisible(true);
+    }//GEN-LAST:event_itemHelpActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnReset;

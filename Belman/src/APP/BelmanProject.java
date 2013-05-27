@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 /**
  * Belman Project 2013
  * @author Daniel, Klaus, Mak, Rashid
- * @version 1.01a
+ * @version 1.0a
  */
 public class BelmanProject
 {
@@ -25,7 +25,6 @@ public class BelmanProject
                 try
                 {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//                    Login.getInstance().setVisible(true);
                     Overview.getInstance().setVisible(true);
                 }
                 catch (Exception e)

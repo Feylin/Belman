@@ -123,9 +123,6 @@
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lblJavaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtProduct">
       <Properties>
@@ -148,14 +145,11 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tie Break 1.01a (Build 120409002013)"/>
+        <Property name="text" type="java.lang.String" value="Belman Manager 1.0a (Build 091831052013)"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtVersionActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jspAbout">
       <Properties>
@@ -175,7 +169,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f0" green="f0" red="f0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="This program was developed by&#xa;Rashid Abdel-Majid, Mak Jakubovic, Kim Reenberg and Klaus Andresen"/>
+            <Property name="text" type="java.lang.String" value="This program was developed by&#xa;Rashid Abdel-Majid, Mak Jakubovic, Daniel Jensen and Klaus Andresen"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -206,9 +200,6 @@
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtJavaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="lblSystem">
       <Properties>
@@ -224,9 +215,6 @@
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lblSystemActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSystem">
       <Properties>
@@ -238,9 +226,6 @@
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSystemActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUserName">
       <Properties>
@@ -252,9 +237,6 @@
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUserNameActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUserHome">
       <Properties>
@@ -266,9 +248,6 @@
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUserHomeActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="lblUserName">
       <Properties>
@@ -284,9 +263,6 @@
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lblUserNameActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="lblUserHome">
       <Properties>
@@ -302,9 +278,6 @@
           <Border info="null"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lblUserHomeActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

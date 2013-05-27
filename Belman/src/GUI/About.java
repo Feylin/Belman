@@ -18,13 +18,13 @@ import javax.swing.KeyStroke;
 public class About extends JDialog
 {
     private static About instance = null;
-    String osArch = System.getProperty("os.arch");
-    String osVersion = System.getProperty("os.version");
-    String osName = System.getProperty("os.name");
-    String javaVendor = System.getProperty("java.vendor");
-    String javaVersion = System.getProperty("java.version");
-    String userName = System.getProperty("user.name");
-    String userHome = System.getProperty("user.home");
+    private String osArch = System.getProperty("os.arch");
+    private String osVersion = System.getProperty("os.version");
+    private String osName = System.getProperty("os.name");
+    private String javaVendor = System.getProperty("java.vendor");
+    private String javaVersion = System.getProperty("java.version");
+    private String userName = System.getProperty("user.name");
+    private String userHome = System.getProperty("user.home");
 
     /**
      * Creates new form About
@@ -97,13 +97,6 @@ public class About extends JDialog
         lblJava.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblJava.setText("Java: ");
         lblJava.setBorder(null);
-        lblJava.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                lblJavaActionPerformed(evt);
-            }
-        });
 
         txtProduct.setEditable(false);
         txtProduct.setBackground(new java.awt.Color(255, 255, 255));
@@ -113,21 +106,14 @@ public class About extends JDialog
 
         txtVersion.setEditable(false);
         txtVersion.setBackground(new java.awt.Color(255, 255, 255));
-        txtVersion.setText("Tie Break 1.01a (Build 120409002013)");
+        txtVersion.setText("Belman Manager 1.0a (Build 091831052013)");
         txtVersion.setBorder(null);
-        txtVersion.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtVersionActionPerformed(evt);
-            }
-        });
 
         jspAbout.setBorder(null);
 
         txtAbout.setEditable(false);
         txtAbout.setBackground(new java.awt.Color(240, 240, 240));
-        txtAbout.setText("This program was developed by\nRashid Abdel-Majid, Mak Jakubovic, Kim Reenberg and Klaus Andresen");
+        txtAbout.setText("This program was developed by\nRashid Abdel-Majid, Mak Jakubovic, Daniel Jensen and Klaus Andresen");
         jspAbout.setViewportView(txtAbout);
 
         btnClose.setText("Close");
@@ -145,85 +131,36 @@ public class About extends JDialog
         txtJava.setEditable(false);
         txtJava.setBackground(new java.awt.Color(255, 255, 255));
         txtJava.setBorder(null);
-        txtJava.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtJavaActionPerformed(evt);
-            }
-        });
 
         lblSystem.setEditable(false);
         lblSystem.setBackground(new java.awt.Color(255, 255, 255));
         lblSystem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblSystem.setText("System: ");
         lblSystem.setBorder(null);
-        lblSystem.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                lblSystemActionPerformed(evt);
-            }
-        });
 
         txtSystem.setEditable(false);
         txtSystem.setBackground(new java.awt.Color(255, 255, 255));
         txtSystem.setBorder(null);
-        txtSystem.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtSystemActionPerformed(evt);
-            }
-        });
 
         txtUserName.setEditable(false);
         txtUserName.setBackground(new java.awt.Color(255, 255, 255));
         txtUserName.setBorder(null);
-        txtUserName.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtUserNameActionPerformed(evt);
-            }
-        });
 
         txtUserHome.setEditable(false);
         txtUserHome.setBackground(new java.awt.Color(255, 255, 255));
         txtUserHome.setBorder(null);
-        txtUserHome.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                txtUserHomeActionPerformed(evt);
-            }
-        });
 
         lblUserName.setEditable(false);
         lblUserName.setBackground(new java.awt.Color(255, 255, 255));
         lblUserName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblUserName.setText("User Name: ");
         lblUserName.setBorder(null);
-        lblUserName.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                lblUserNameActionPerformed(evt);
-            }
-        });
 
         lblUserHome.setEditable(false);
         lblUserHome.setBackground(new java.awt.Color(255, 255, 255));
         lblUserHome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblUserHome.setText("User Home: ");
         lblUserHome.setBorder(null);
-        lblUserHome.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                lblUserHomeActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -299,104 +236,11 @@ public class About extends JDialog
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblJavaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lblJavaActionPerformed
-    {//GEN-HEADEREND:event_lblJavaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblJavaActionPerformed
-
-    private void txtVersionActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtVersionActionPerformed
-    {//GEN-HEADEREND:event_txtVersionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtVersionActionPerformed
-
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCloseActionPerformed
     {//GEN-HEADEREND:event_btnCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void txtJavaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtJavaActionPerformed
-    {//GEN-HEADEREND:event_txtJavaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtJavaActionPerformed
-
-    private void lblSystemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lblSystemActionPerformed
-    {//GEN-HEADEREND:event_lblSystemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblSystemActionPerformed
-
-    private void txtSystemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtSystemActionPerformed
-    {//GEN-HEADEREND:event_txtSystemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSystemActionPerformed
-
-    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtUserNameActionPerformed
-    {//GEN-HEADEREND:event_txtUserNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserNameActionPerformed
-
-    private void txtUserHomeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtUserHomeActionPerformed
-    {//GEN-HEADEREND:event_txtUserHomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserHomeActionPerformed
-
-    private void lblUserNameActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lblUserNameActionPerformed
-    {//GEN-HEADEREND:event_lblUserNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblUserNameActionPerformed
-
-    private void lblUserHomeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_lblUserHomeActionPerformed
-    {//GEN-HEADEREND:event_lblUserHomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblUserHomeActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[])
-    {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        }
-        catch (ClassNotFoundException ex)
-        {
-            java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (InstantiationException ex)
-        {
-            java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (IllegalAccessException ex)
-        {
-            java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
-            java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                new About().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JScrollPane jspAbout;
