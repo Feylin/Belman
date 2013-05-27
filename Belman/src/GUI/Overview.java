@@ -175,9 +175,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         tpaneOverview.setTitleAt(0, rb.getString("Overview.pnlCutting2.TabConstraints.tabTitle"));
         lblLoggedIn.setText(rb.getString("Overview.lblLoggedIn.text") + operator);
 
-        itemSettings.setText(rb.getString("Overview.itemSettings.text"));
-        itemLogOut.setText(rb.getString("Overview.itemLogOut.text_1"));
-
         lblProductionOrder.setText(rb.getString("Overview.lblProductionOrder.text"));
         lblStock.setText(rb.getString("Overview.lblStock.text"));
         lblChangeOperator.setText(rb.getString("Overview.lblChangeOperator.text"));
@@ -583,9 +580,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         menuFile = new javax.swing.JMenu();
         itemExit = new javax.swing.JMenuItem();
         menuSettings = new javax.swing.JMenu();
-        itemSettings = new javax.swing.JMenuItem();
-        itemLogOut = new javax.swing.JMenuItem();
-        seperatorSettings = new javax.swing.JPopupMenu.Separator();
         itemHelp = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -978,14 +972,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         menuSettings.setText(bundle.getString("Overview.menuSettings.text")); // NOI18N
 
-        itemSettings.setText(bundle.getString("Overview.itemSettings.text")); // NOI18N
-        menuSettings.add(itemSettings);
-
-        itemLogOut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        itemLogOut.setText(bundle.getString("Overview.itemLogOut.text_1")); // NOI18N
-        menuSettings.add(itemLogOut);
-        menuSettings.add(seperatorSettings);
-
         itemHelp.setText(bundle.getString("Overview.itemHelp.text_1")); // NOI18N
         menuSettings.add(itemHelp);
 
@@ -1073,8 +1059,6 @@ public class Overview extends javax.swing.JFrame implements Observer
     private org.joda.time.DateTime dateTime1;
     private javax.swing.JMenuItem itemExit;
     private javax.swing.JMenuItem itemHelp;
-    private javax.swing.JMenuItem itemLogOut;
-    private javax.swing.JMenuItem itemSettings;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblChangeOperator;
@@ -1102,7 +1086,6 @@ public class Overview extends javax.swing.JFrame implements Observer
     private javax.swing.JPanel pnlOrderInfo;
     private javax.swing.JPanel pnlOrderList;
     private javax.swing.JScrollPane scrOrderList;
-    private javax.swing.JPopupMenu.Separator seperatorSettings;
     private javax.swing.JTable tblOrderList;
     private javax.swing.JTable tblProductionSleeve;
     private javax.swing.JTable tblStockList;
