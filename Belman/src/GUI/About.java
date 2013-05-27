@@ -4,12 +4,14 @@
  */
 package GUI;
 
+//<editor-fold defaultstate="collapsed" desc="Imports">
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
+//</editor-fold>
 
 /**
  *
@@ -17,6 +19,7 @@ import javax.swing.KeyStroke;
  */
 public class About extends JDialog
 {
+    //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
     private static About instance = null;
     private String osArch = System.getProperty("os.arch");
     private String osVersion = System.getProperty("os.version");
@@ -25,10 +28,12 @@ public class About extends JDialog
     private String javaVersion = System.getProperty("java.version");
     private String userName = System.getProperty("user.name");
     private String userHome = System.getProperty("user.home");
+    //</editor-fold>
 
     /**
-     * Creates new form About
-     */
+     * Opretter en ny form af About
+     */    
+    //<editor-fold defaultstate="collapsed" desc="About Constructor">
     public About()
     {
         setModal(true);
@@ -41,7 +46,12 @@ public class About extends JDialog
         txtUserName.setText(userName);
         txtUserHome.setText(userHome);
     }
+    //</editor-fold>
     
+    /**
+     * Metode til at returnere den eneste instans af denne klasse.
+     */
+    //<editor-fold defaultstate="collapsed" desc="About Singleton getInstance();">
     public static About getInstance()
     {
         if (instance == null)
@@ -50,7 +60,13 @@ public class About extends JDialog
         }
         return instance;
     }
+    //</editor-fold>
     
+    /**
+     * Metode der tilføjer en close listener der gør det muligt at trykke escape
+     * for at lukke vinduet når vinduet er i fokus
+     */
+    //<editor-fold defaultstate="collapsed" desc="Close Listener">
     private void closeListener()
     {
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
@@ -64,6 +80,7 @@ public class About extends JDialog
             }
         });
     }
+    //</editor-fold>
 
     /**
      * This method is called from within the constructor to initialize the form.
