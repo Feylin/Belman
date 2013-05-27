@@ -56,6 +56,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      * @param sleeve s
      * @param operator op
      */
+    //<editor-fold defaultstate="collapsed" desc="OrderInfor Constructor">
     public OrderInfo(Order o, Sleeve s, Operator op)
     {
         order = o;
@@ -66,71 +67,10 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
         initialButtonState();
         windowClose();
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
-        txtOrderName.setText(o.getOrderName());
-        txtOrderId.setText(String.valueOf(o.getOrderId()));
-        txtId.setText(String.valueOf(op.getId()));
-        txtName.setText(String.valueOf(op.getFirstName()));
-        txtLastName.setText(String.valueOf(op.getLastName()));
-        txtfErrors.setText(o.getErrorOccured());
-        lblSleeves.setText(String.valueOf("Sleeves to be made " + o.getConductedQuantity() + " / " + o.getQuantity()));
-
-        try
-        {
-            txtHasCut.setText(String.valueOf(managerSleeveLog.getQuantity(order.getSleeve(), operator.getId())));
-            managerSleeve.addObserver(this);
-            slmodel = new SleeveTableModel(managerSleeve.getSleevesByOrder(o));
-            tblSleeve.setModel(slmodel);
-            managerOrder.addObserver(this);
-            managerStockItem.addObserver(this);
-
-            tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-            {
-                @Override
-                public void valueChanged(ListSelectionEvent es)
-                {
-                    int selectedRow = tblSleeve.getSelectedRow();
-                    if (selectedRow == -1)
-                    {
-                        return;
-                    }
-                    sleeve = slmodel.getEventsByRow(selectedRow);
-                    if (sleeve.getStartTime() != null)
-                    {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-                        txtStartTime.setText(sdf.format(sleeve.getStartTime().getTime()));
-                        txtEndTime.setText(sdf.format(sleeve.getEndTime().getTime()));
-
-                        btnPause.setEnabled(true);
-                        btnFinish.setEnabled(true);
-                        btnStart.setEnabled(true);
-
-                        String status = "Finished";
-                        if (order.getConductedQuantity() == order.getQuantity() && order.getStatus().equalsIgnoreCase(status))
-                        {
-                            btnPause.setEnabled(false);
-                            btnFinish.setEnabled(false);
-                            btnStart.setEnabled(false);
-                        }
-                        else if (order.getConductedQuantity() == order.getQuantity())
-                        {
-                            btnPause.setEnabled(false);
-                            btnFinish.setEnabled(true);
-                            btnStart.setEnabled(false);
-                        }
-                    }
-                    else
-                    {
-                        btnStart.setEnabled(true);
-                    }
-                }
-            });
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        selectedOrderSleeve();
     }
-
+    //</editor-fold>
+    
     /**
      * Metode der loader vores managers
      */
@@ -166,6 +106,81 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     }
     //</editor-fold>
 
+    /**
+     * Metode der udfylder tekstbokse i forhold til den valgte ordre, sleeve og
+     * operatør. Hvis den valgte sleeves start og slut tid er forskellig fra null
+     * bliver tekstboksene udyldt og knapperne gjort aktive. Knapperne styres
+     * af ordrens status og forskel mellem conductedQuantity og ordrens quantity
+     */
+    //<editor-fold defaultstate="collapsed" desc="Selected Order / Sleeve">
+    private void selectedOrderSleeve()
+    {
+        txtOrderName.setText(order.getOrderName());
+        txtOrderId.setText(String.valueOf(order.getOrderId()));
+        txtId.setText(String.valueOf(operator.getId()));
+        txtName.setText(String.valueOf(operator.getFirstName()));
+        txtLastName.setText(String.valueOf(operator.getLastName()));
+        txtfErrors.setText(order.getErrorOccured());
+        lblSleeves.setText(String.valueOf("Sleeves to be made " + order.getConductedQuantity() + " / " + order.getQuantity()));
+        
+        try
+        {
+            txtHasCut.setText(String.valueOf(managerSleeveLog.getQuantity(order.getSleeve(), operator.getId())));
+            managerSleeve.addObserver(this);
+            slmodel = new SleeveTableModel(managerSleeve.getSleevesByOrder(order));
+            tblSleeve.setModel(slmodel);
+            managerOrder.addObserver(this);
+            managerStockItem.addObserver(this);
+            
+            tblSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            {
+                @Override
+                public void valueChanged(ListSelectionEvent es)
+                {
+                    int selectedRow = tblSleeve.getSelectedRow();
+                    if (selectedRow == -1)
+                    {
+                        return;
+                    }
+                    sleeve = slmodel.getEventsByRow(selectedRow);
+                    if (sleeve.getStartTime() != null)
+                    {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
+                        txtStartTime.setText(sdf.format(sleeve.getStartTime().getTime()));
+                        txtEndTime.setText(sdf.format(sleeve.getEndTime().getTime()));
+                        
+                        btnPause.setEnabled(true);
+                        btnFinish.setEnabled(true);
+                        btnStart.setEnabled(true);
+                        
+                        String status = "Finished";
+                        if (order.getConductedQuantity() == order.getQuantity() && order.getStatus().equalsIgnoreCase(status))
+                        {
+                            btnPause.setEnabled(false);
+                            btnFinish.setEnabled(false);
+                            btnStart.setEnabled(false);
+                        }
+                        else if (order.getConductedQuantity() == order.getQuantity())
+                        {
+                            btnPause.setEnabled(false);
+                            btnFinish.setEnabled(true);
+                            btnStart.setEnabled(false);
+                        }
+                    }
+                    else
+                    {
+                        btnStart.setEnabled(true);
+                    }
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    //</editor-fold>
+    
     /**
      * Metode der tilføjer en windowListener til vores OrderInfo frame, der
      * kalder closePressed(); hvis vinduet skulle blive lukket
@@ -255,6 +270,92 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
     }
     //</editor-fold>
 
+    /**
+     * Metode der enabler pause og finish og prøver at opdatere den valgte sleeve
+     * med startTime, hvis den fejler vises en fejlmeddelelse. Hvis timeSpent
+     * er tom startes en timer som vises med det valgte format. Hvis status på
+     * den valgte ordre er pending eller paused ændres den til in progress hvis 
+     * muligt ellers vises der en fejl.
+     */
+    //<editor-fold defaultstate="collapsed" desc="Start Button / Start Cut">
+    private void startCut()
+    {
+        btnPause.setEnabled(true);
+        btnFinish.setEnabled(true);
+        
+        try
+        {
+            txtStartTime.setText(jodaTimeFormat.print(startTime));
+            startTime = jodaTimeFormat.parseDateTime(txtStartTime.getText());
+            
+            GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
+            
+            sleeve.setStartTime(startTimeCalendar);
+            managerSleeve.updateSleeveStartTime(sleeve);
+        }
+        catch (Exception e)
+        {
+            String message = "Unable to update sleeve with id " + sleeve.getId();
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if (txtTimeSpent.getText().isEmpty())
+        {
+            elapsedHour = 0;
+            elapsedMin = 0;
+            elapsedSec = 0;
+            timer = new Timer(1000, new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    elapsedSec++;
+                    if (elapsedSec > 59)
+                    {
+                        elapsedSec = 0;
+                        elapsedMin++;
+                    }
+                    if (elapsedMin > 59)
+                    {
+                        elapsedMin = 0;
+                        elapsedHour++;
+                    }
+                    String displayTimer = String.format("%02d:%02d:%02d", elapsedHour, elapsedMin, elapsedSec);
+                    txtTimeSpent.setText(displayTimer);
+                }
+            });
+            timer.setInitialDelay(0);
+            timer.start();
+        }
+        else
+        {
+            timer.start();
+        }
+        
+        String option = "Pending";
+        String option2 = "Paused";
+        if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
+        {
+            String status = "in Progress";
+            order.setStatus(status.toUpperCase());
+            try
+            {
+                managerOrder.updateStatus(order);
+            }
+            catch (Exception e)
+            {
+                String message = "Unable to update order";
+                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else
+        {
+            String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    //</editor-fold>
+    
     /**
      * Metode der stopper timeren, sætter text field endTime til endTime og prøver
      * at opdatere endTime på det valgte sleeve. Hvis status på den valgte sleeve
@@ -651,79 +752,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
     {//GEN-HEADEREND:event_btnStartActionPerformed
-        btnPause.setEnabled(true);
-        btnFinish.setEnabled(true);
-
-        try
-        {
-            txtStartTime.setText(jodaTimeFormat.print(startTime));
-            startTime = jodaTimeFormat.parseDateTime(txtStartTime.getText());
-
-            GregorianCalendar startTimeCalendar = startTime.toGregorianCalendar();
-
-            sleeve.setStartTime(startTimeCalendar);
-            managerSleeve.updateSleeveStartTime(sleeve);
-        }
-        catch (Exception e)
-        {
-            String message = "Unable to update sleeve with id " + sleeve.getId();
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        if (txtTimeSpent.getText().isEmpty())
-        {
-            elapsedHour = 0;
-            elapsedMin = 0;
-            elapsedSec = 0;
-            timer = new Timer(1000, new ActionListener()
-            {
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    elapsedSec++;
-                    if (elapsedSec > 59)
-                    {
-                        elapsedSec = 0;
-                        elapsedMin++;
-                    }
-                    if (elapsedMin > 59)
-                    {
-                        elapsedMin = 0;
-                        elapsedHour++;
-                    }
-                    String displayTimer = String.format("%02d:%02d:%02d", elapsedHour, elapsedMin, elapsedSec);
-                    txtTimeSpent.setText(displayTimer);
-                }
-            });
-            timer.setInitialDelay(0);
-            timer.start();
-        }
-        else
-        {
-            timer.start();
-        }
-
-        String option = "Pending";
-        String option2 = "Paused";
-        if (order.getStatus().equalsIgnoreCase(option) || order.getStatus().equalsIgnoreCase(option2))
-        {
-            String status = "in Progress";
-            order.setStatus(status.toUpperCase());
-            try
-            {
-                managerOrder.updateStatus(order);
-            }
-            catch (Exception e)
-            {
-                String message = "Unable to update order";
-                JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        else
-        {
-            String message = "Production Order " + order.getOrderId() + "'s status is already: In progress.";
-            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        startCut();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPauseActionPerformed

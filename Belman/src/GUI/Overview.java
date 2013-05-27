@@ -42,7 +42,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class Overview extends javax.swing.JFrame implements Observer
 {
-    //<editor-fold defaultstate="collapsed" desc="Class Variables">
+    //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
     private static Overview instance = null;
     private ResourceBundle rb = null;
     static OrderManager managerOrder = null;
@@ -290,33 +290,22 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         });
     }
-    //</editor-fold>
-
-    @Override
-    public void update(Observable o, Object arg)
-    {
-        if (o instanceof OrderManager)
-        {
-            try
-            {
-                modelOrder.setCollection(managerOrder.getAll());
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
+    //</editor-fold>  
+    
+    /**
+     * Metoder til at oprette en liste over alle paused ordre. Bruger en listener
+     * til at udfylde informationer i tekstbokse i forhold til den valgte ordre.
+     */
+    //<editor-fold defaultstate="collapsed" desc="Paused Order Table">
     private void pausedOrderTable()
     {
         try
         {
             managerOrder.addObserver(this);
-
+            
             modelOrder = new OrderTablemodel(managerOrder.getPaused());
             tblOrderList.setModel(modelOrder);
-
+            
             tblOrderList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
@@ -335,9 +324,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtEmail.setText("");
                         txtPhone.setText("");
                     }
-
+                    
                     Order o = modelOrder.getEventsByRow(selectedRow);
-
+                    
                     try
                     {
                         txtOrderId.setText(String.valueOf(o.getOrderId()));
@@ -349,7 +338,6 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtCustomerName.setText(String.valueOf(o.getSalesOrder().getCustName()));
                         txtEmail.setText(String.valueOf(o.getSalesOrder().getEmail()));
                         txtPhone.setText(String.valueOf(o.getSalesOrder().getPhone()));
-
                     }
                     catch (Exception ex)
                     {
@@ -363,7 +351,14 @@ public class Overview extends javax.swing.JFrame implements Observer
             e.printStackTrace();
         }
     }
+    //</editor-fold>
 
+    /**
+     * Metoder der udfylder lister med alle ordre og alle stockitems. De to lister
+     * opdateres afhængig af hinanden. Stocklist tabellen viser de stocks der passer
+     * til den valgte ordre og omvendt.
+     */
+    //<editor-fold defaultstate="collapsed" desc="Production Sleevelist Listener">
     private void productionSleeveListSelectioner()
     {
         try
@@ -371,11 +366,11 @@ public class Overview extends javax.swing.JFrame implements Observer
             managerStockItem.addObserver(this);
             modelStocklist = new StockList2TableModel(managerStockItem.getAll());
             tblStockList.setModel(modelStocklist);
-
+            
             managerOrder.addObserver(this);
             modelProduction = new ProductionSleeveTableModel(managerOrder.getAll());
             tblProductionSleeve.setModel(modelProduction);
-
+            
             tblProductionSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
@@ -445,6 +440,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             e.printStackTrace();
         }
     }
+    //</editor-fold>
 
     /**
      * Metode der tilføjer en mouseListener til vores Production sleeve tabel, 
@@ -523,6 +519,22 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
     }
     //</editor-fold>
+    
+    @Override
+    public void update(Observable o, Object arg)
+    {
+        if (o instanceof OrderManager)
+        {
+            try
+            {
+                modelOrder.setCollection(managerOrder.getAll());
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -973,6 +985,13 @@ public class Overview extends javax.swing.JFrame implements Observer
         menuSettings.setText(bundle.getString("Overview.menuSettings.text")); // NOI18N
 
         itemHelp.setText(bundle.getString("Overview.itemHelp.text_1")); // NOI18N
+        itemHelp.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                itemHelpActionPerformed(evt);
+            }
+        });
         menuSettings.add(itemHelp);
 
         menuBar.add(menuSettings);
@@ -1051,6 +1070,12 @@ public class Overview extends javax.swing.JFrame implements Observer
     {//GEN-HEADEREND:event_btnResetActionPerformed
         resetTables();
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void itemHelpActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_itemHelpActionPerformed
+    {//GEN-HEADEREND:event_itemHelpActionPerformed
+        About.getInstance().setVisible(true);
+    }//GEN-LAST:event_itemHelpActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnReset;
