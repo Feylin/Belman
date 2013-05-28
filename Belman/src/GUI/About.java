@@ -34,13 +34,13 @@ public class About extends JDialog
      * Opretter en ny form af About
      */    
     //<editor-fold defaultstate="collapsed" desc="About Constructor">
-    public About()
+    private About()
     {
         setModal(true);
         initComponents();
         setLocationRelativeTo(null);
         closeListener();
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/tennis_ball.png")).getImage());
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
         txtJava.setText(javaVersion +"; " +javaVendor);
         txtSystem.setText(osName +" version " +osVersion +" running on " +osArch);
         txtUserName.setText(userName);
@@ -107,7 +107,8 @@ public class About extends JDialog
         lblUserName = new javax.swing.JTextField();
         lblUserHome = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Belman Manager");
 
         lblJava.setEditable(false);
         lblJava.setBackground(new java.awt.Color(255, 255, 255));

@@ -43,7 +43,7 @@ import javax.swing.event.ListSelectionListener;
 public class Overview extends javax.swing.JFrame implements Observer
 {
     //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
-    private static Overview instance = null;
+    private static volatile Overview instance = null;
     private ResourceBundle rb = null;
     static OrderManager managerOrder = null;
     static StockItemManager managerStockItem = null;
@@ -94,8 +94,12 @@ public class Overview extends javax.swing.JFrame implements Observer
     {
         if (instance == null)
         {
+            synchronized (Overview.class){
+                if (instance == null)
+                {
             instance = new Overview();
-        }
+                }
+        }}
         return instance;
     }
     //</editor-fold>
@@ -528,6 +532,8 @@ public class Overview extends javax.swing.JFrame implements Observer
             try
             {
                 modelOrder.setCollection(managerOrder.getPaused());
+                modelProduction.setCollection(managerOrder.getAll());
+                modelStocklist.setCollection(managerStockItem.getAll());
             }
             catch (Exception e)
             {
