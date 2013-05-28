@@ -56,7 +56,7 @@ public class OrderInfo extends javax.swing.JFrame implements Observer
      * @param sleeve s
      * @param operator op
      */
-    //<editor-fold defaultstate="collapsed" desc="OrderInfor Constructor">
+    //<editor-fold defaultstate="collapsed" desc="OrderInfo Constructor">
     public OrderInfo(Order o, Sleeve s, Operator op)
     {
         order = o;
