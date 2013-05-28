@@ -78,7 +78,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         pausedOrderTable();
         localeLanguage.setLocale(locale);
         mouseListener();
-        //        mouseListener2();
         setTableColumnSize();
         setTableSelectionMode();
         comboboxModel();
