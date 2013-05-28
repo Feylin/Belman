@@ -116,7 +116,7 @@ public class SleeveDBManager
      * @param s
      * @throws SQLException
      */
-    public void updateSleeveStartTim(Sleeve s) throws SQLException
+    public void updateSleeveStartTime(Sleeve s) throws SQLException
     {
         try (Connection con = connector.getConnection())
         {

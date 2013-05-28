@@ -527,7 +527,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
             try
             {
-                modelOrder.setCollection(managerOrder.getAll());
+                modelOrder.setCollection(managerOrder.getPaused());
             }
             catch (Exception e)
             {
