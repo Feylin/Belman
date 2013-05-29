@@ -86,8 +86,8 @@ public class Overview extends javax.swing.JFrame implements Observer
     //</editor-fold>
 
     /**
-     * SingletonHolder is loaded on the first execution of
-     * Singleton.getInstance() or the first access to SingletonHolder.INSTANCE,
+     * OverviewHolder is loaded on the first execution of
+     * Overview.getInstance() or the first access to OverviewHolder.INSTANCE,
      * not before.
      */
     //<editor-fold defaultstate="collapsed" desc="Overview Holder">

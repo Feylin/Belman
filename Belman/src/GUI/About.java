@@ -17,7 +17,7 @@ import javax.swing.KeyStroke;
  *
  * @author Feylin
  */
-public class About extends JDialog
+public class About extends javax.swing.JDialog
 {
     //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
 
