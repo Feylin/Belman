@@ -44,7 +44,6 @@ public class Overview extends javax.swing.JFrame implements Observer
 {
     //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
 
-    private static volatile Overview instance = null;
     private ResourceBundle rb = null;
     static OrderManager managerOrder = null;
     static StockItemManager managerStockItem = null;
@@ -57,7 +56,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private Order o;
     private Sleeve s;
     private Operator op;
-    private String operator = null;
+    private String operator;
     //</editor-fold>
 
     /**
@@ -87,22 +86,24 @@ public class Overview extends javax.swing.JFrame implements Observer
     //</editor-fold>
 
     /**
+     * SingletonHolder is loaded on the first execution of
+     * Singleton.getInstance() or the first access to SingletonHolder.INSTANCE,
+     * not before.
+     */
+    //<editor-fold defaultstate="collapsed" desc="Overview Holder">
+    private static class OverviewHolder
+    {
+        public static final Overview INSTANCE = new Overview();
+    }
+    //</editor-fold>
+
+    /**
      * Metode til at returnere den eneste instans af denne klasse.
      */
     //<editor-fold defaultstate="collapsed" desc="Overview singleton getInstance();">
     public static Overview getInstance()
     {
-        if (instance == null)
-        {
-            synchronized (Overview.class)
-            {
-                if (instance == null)
-                {
-                    instance = new Overview();
-                }
-            }
-        }
-        return instance;
+        return OverviewHolder.INSTANCE;
     }
     //</editor-fold>
 
