@@ -10,6 +10,7 @@ import BE.Order;
 import BLL.OperatorManager;
 import BLL.OrderManager;
 import BLL.SleeveLogManager;
+import com.sun.java.accessibility.util.SwingEventMonitor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -24,7 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
-public class SleeveInfo extends JDialog
+public class SleeveInfo extends javax.swing.JDialog
 {
     //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
 
@@ -141,7 +142,7 @@ public class SleeveInfo extends JDialog
     //<editor-fold defaultstate="collapsed" desc="Numbers only key listener">
     private void numbersOnlyKeyListener()
     {
-        txtSleevesMade.addKeyListener(new gui.NumbersOnlyKeyListener());
+        txtSleevesMade.addKeyListener(new NumbersOnlyKeyListener());
     }
     //</editor-fold>
 
