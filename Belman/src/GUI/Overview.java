@@ -85,12 +85,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     }
     //</editor-fold>
 
-    /**
-     * OverviewHolder is loaded on the first execution of
-     * Overview.getInstance() or the first access to OverviewHolder.INSTANCE,
-     * not before.
-     */
-    //<editor-fold defaultstate="collapsed" desc="Overview Holder">
+    //<editor-fold defaultstate="collapsed" desc="Singleton Overview Holder">
     private static class OverviewHolder
     {
         public static final Overview INSTANCE = new Overview();
@@ -100,7 +95,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     /**
      * Metode til at returnere den eneste instans af denne klasse.
      */
-    //<editor-fold defaultstate="collapsed" desc="Overview singleton getInstance();">
+    //<editor-fold defaultstate="collapsed" desc="Singleton Overview getInstance();">
     public static Overview getInstance()
     {
         return OverviewHolder.INSTANCE;
