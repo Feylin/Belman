@@ -157,11 +157,12 @@ public class OrderManagerTest
         ArrayList<Order> o = odbmgr.getOrderByStock(s);
         assertNotNull(o);
         
+        System.out.println(o);
         for(int i = 0; i < o.size(); i++)
         {
-            assertEquals(s.getSleeveId(), o.get(i).getSleeve().getId());
+            assertEquals(s.getMaterial().getId(), o.get(i).getSleeve().getMaterialId());
         }
-        
+
         System.out.println("The amount of orders assosiated with order" + s.getId() + " is " + o.size());
         System.out.println("");
         System.out.println("");

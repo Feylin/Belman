@@ -212,4 +212,12 @@ public class Order
     {
         this.errorOccured = errorOccured;
     }
+
+    @Override
+    public String toString()
+    {
+       return String.format("%-5d %-20s %-20s %-29s %-29s", orderId, orderName, quantity, sleeve.getId(), status);
+    }
+    
+    
 }
