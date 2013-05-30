@@ -4,7 +4,12 @@
  */
 package BLL;
 
+import BE.CoilType;
+import BE.Material;
 import BE.Order;
+import BE.SalesOrder;
+import BE.Sleeve;
+import BE.StockItem;
 import DAL.ProductionOrderDBManager;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,6 +40,14 @@ public class OrderManagerTest
         System.out.println("-------Starting jUnittest-------");
         System.out.println("");
         System.out.println("");
+        try
+        {
+            odbmgr = ProductionOrderDBManager.getInstance();
+        }
+        catch (IOException ex)
+        {
+            ex.getMessage();
+        }
     }
 
     @AfterClass
@@ -53,25 +66,7 @@ public class OrderManagerTest
     @Test
     public void testGetInstance() throws Exception
     {
-        System.out.println("Testing getInstance : ");
-        try
-        {
-            odbmgr = ProductionOrderDBManager.getInstance();
-        }
-        catch (FileNotFoundException ex)
-        {
-            System.out.println("ERROR - omgr threw a fileNotFoundException: " + ex.getMessage());
-        }
-        catch (IOException ex)
-        {
-            System.out.println("ERROR - omgr threw a inputOutputException: " + ex.getMessage());
 
-        }
-        System.out.println("Number of orders : " + odbmgr.getAll().size());
-        assertNotNull(odbmgr);
-        
-        System.out.println("");
-        System.out.println("");
     }
 
     /**
@@ -88,7 +83,7 @@ public class OrderManagerTest
         
         for(int i = 0; i < odbmgr.getPaused().size(); i++)
         {
-            assertEquals("PAUSED", o.get(i).getStatus());
+            assertEquals("PAUSED", o.get(i).getStatus()); 
         }
         System.out.println("Amount of paused orders: " + o.size());
         
@@ -102,13 +97,6 @@ public class OrderManagerTest
     @Test
     public void testUpdate() throws Exception
     {
-        System.out.println("Testing update method: EMPTY");
-        
-        
-        System.out.println("");
-        System.out.println("");
-        
-        
     }
 
     /**
@@ -148,5 +136,35 @@ public class OrderManagerTest
     @Test
     public void testGetOrderByStock() throws Exception
     {
+        System.out.println("Testing getOrderByStock :" );
+        assertNotNull(odbmgr);
+
+        int id = 19296;
+        String chargeNo = "68400 3";
+        double length = 2500;
+        int stockQuantity = 150;
+        int coilTypeId = 1335;
+        int sleeveId = 1335;
+        String code = "RP-09/99";
+        double width = 1250;
+        double thickness = 0.4;
+        double density = 7.9;
+        String name = "14.541";
+        int materialId = 10;
+        
+        StockItem s = new StockItem(id, chargeNo, length, stockQuantity, coilTypeId, sleeveId, new CoilType(code, width, thickness, materialId), new Material(density, name));        
+        
+        ArrayList<Order> o = odbmgr.getOrderByStock(s);
+        assertNotNull(o);
+        
+        System.out.println(o);
+        for(int i = 0; i < o.size(); i++)
+        {
+            assertEquals(s.getMaterial().getId(), o.get(i).getSleeve().getMaterialId());
+        }
+
+        System.out.println("The amount of orders assosiated with order" + s.getId() + " is " + o.size());
+        System.out.println("");
+        System.out.println("");
     }
 }
