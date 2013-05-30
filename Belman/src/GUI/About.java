@@ -17,9 +17,10 @@ import javax.swing.KeyStroke;
  *
  * @author Feylin
  */
-public class About extends JDialog
+public class About extends javax.swing.JDialog
 {
     //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
+
     private static About instance = null;
     private String osArch = System.getProperty("os.arch");
     private String osVersion = System.getProperty("os.version");
@@ -32,22 +33,22 @@ public class About extends JDialog
 
     /**
      * Opretter en ny form af About
-     */    
+     */
     //<editor-fold defaultstate="collapsed" desc="About Constructor">
-    public About()
+    private About()
     {
         setModal(true);
         initComponents();
         setLocationRelativeTo(null);
         closeListener();
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/tennis_ball.png")).getImage());
-        txtJava.setText(javaVersion +"; " +javaVendor);
-        txtSystem.setText(osName +" version " +osVersion +" running on " +osArch);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
+        txtJava.setText(javaVersion + "; " + javaVendor);
+        txtSystem.setText(osName + " version " + osVersion + " running on " + osArch);
         txtUserName.setText(userName);
         txtUserHome.setText(userHome);
     }
     //</editor-fold>
-    
+
     /**
      * Metode til at returnere den eneste instans af denne klasse.
      */
@@ -61,7 +62,7 @@ public class About extends JDialog
         return instance;
     }
     //</editor-fold>
-    
+
     /**
      * Metode der tilføjer en close listener der gør det muligt at trykke escape
      * for at lukke vinduet når vinduet er i fokus
@@ -107,7 +108,8 @@ public class About extends JDialog
         lblUserName = new javax.swing.JTextField();
         lblUserHome = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Belman Manager");
 
         lblJava.setEditable(false);
         lblJava.setBackground(new java.awt.Color(255, 255, 255));
@@ -257,7 +259,6 @@ public class About extends JDialog
     {//GEN-HEADEREND:event_btnCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JScrollPane jspAbout;

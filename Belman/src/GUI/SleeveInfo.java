@@ -10,6 +10,7 @@ import BE.Order;
 import BLL.OperatorManager;
 import BLL.OrderManager;
 import BLL.SleeveLogManager;
+import com.sun.java.accessibility.util.SwingEventMonitor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -24,9 +25,9 @@ import javax.swing.JOptionPane;
  *
  * @author Daniel, Klaus, Mak, Rashid
  */
-public class SleeveInfo extends JDialog
+public class SleeveInfo extends javax.swing.JDialog
 {
-    //<editor-fold defaultstate="collapsed" desc="Class variables">
+    //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
 
     private Order order;
     private Operator operator;
@@ -76,7 +77,7 @@ public class SleeveInfo extends JDialog
         }
     }
     //</editor-fold>
-    
+
     /**
      * Metode der tilføjer en windowListener til vores OrderInfo frame, der
      * kalder closePressed(); hvis vinduet skulle blive lukket
@@ -94,7 +95,7 @@ public class SleeveInfo extends JDialog
         });
     }
     //</editor-fold>
-    
+
     /**
      * Metode der viser en Error dialog hvis man ikke har indtastet antal klip
      * ellers virker det som at trykke ok
@@ -141,10 +142,10 @@ public class SleeveInfo extends JDialog
     //<editor-fold defaultstate="collapsed" desc="Numbers only key listener">
     private void numbersOnlyKeyListener()
     {
-        txtSleevesMade.addKeyListener(new gui.NumbersOnlyKeyListener());
+        txtSleevesMade.addKeyListener(new NumbersOnlyKeyListener());
     }
     //</editor-fold>
-    
+
     /**
      * Metode der viser en fejl hvis tekstfeltet er tom ellers vil den valgte
      * ordre blive opdateret med amountCut hvis det er under det antal der skal
@@ -163,7 +164,7 @@ public class SleeveInfo extends JDialog
         else
         {
             int amountCut = Integer.parseInt(txtSleevesMade.getText()) + order.getConductedQuantity();
-            
+
             if (amountCut < order.getQuantity())
             {
                 order.setConductedQuantity(amountCut);

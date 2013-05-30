@@ -37,29 +37,29 @@ import javax.swing.event.ListSelectionListener;
 
 /**
  * Graphical User Interface Overview klassen
- * 
+ *
  * @author Rashid, Daniel Mak og Klaus
  */
 public class Overview extends javax.swing.JFrame implements Observer
 {
     //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
-    private static Overview instance = null;
+
     private ResourceBundle rb = null;
     static OrderManager managerOrder = null;
     static StockItemManager managerStockItem = null;
     static SleeveManager managerSleeve = null;
     static OperatorManager managerOperator = null;
-    private OrderTablemodel modelOrder = null;    
+    private OrderTablemodel modelOrder = null;
     private StockListTableModel modelEmptyStocklist = null;
     private ProductionSleeveTableModel modelProduction = null;
     private StockList2TableModel modelStocklist = null;
     private Order o;
     private Sleeve s;
     private Operator op;
-    private String operator = null;
+    private String operator;
     //</editor-fold>
 
-    /** 
+    /**
      * Opretter en nye form a Overview
      */
     //<editor-fold defaultstate="collapsed" desc="Overview constructor">
@@ -77,7 +77,6 @@ public class Overview extends javax.swing.JFrame implements Observer
         pausedOrderTable();
         localeLanguage.setLocale(locale);
         mouseListener();
-        //        mouseListener2();
         setTableColumnSize();
         setTableSelectionMode();
         comboboxModel();
@@ -87,16 +86,24 @@ public class Overview extends javax.swing.JFrame implements Observer
     //</editor-fold>
 
     /**
+     * OverviewHolder is loaded on the first execution of
+     * Overview.getInstance() or the first access to OverviewHolder.INSTANCE,
+     * not before.
+     */
+    //<editor-fold defaultstate="collapsed" desc="Overview Holder">
+    private static class OverviewHolder
+    {
+        public static final Overview INSTANCE = new Overview();
+    }
+    //</editor-fold>
+
+    /**
      * Metode til at returnere den eneste instans af denne klasse.
      */
     //<editor-fold defaultstate="collapsed" desc="Overview singleton getInstance();">
     public static Overview getInstance()
     {
-        if (instance == null)
-        {
-            instance = new Overview();
-        }
-        return instance;
+        return OverviewHolder.INSTANCE;
     }
     //</editor-fold>
 
@@ -124,7 +131,7 @@ public class Overview extends javax.swing.JFrame implements Observer
      * Metode der sætter kolonne størrelse på vores tabeller
      */
     // <editor-fold defaultstate="collapsed" desc="Set table column sizes">
-    private void setTableColumnSize()     
+    private void setTableColumnSize()
     {
         tblProductionSleeve.getColumnModel().getColumn(0).setPreferredWidth(180);
         tblProductionSleeve.getColumnModel().getColumn(1).setPreferredWidth(120);
@@ -161,7 +168,7 @@ public class Overview extends javax.swing.JFrame implements Observer
      * Metode der opdaterer sproget på overview
      */
     // <editor-fold defaultstate="collapsed" desc="Updates fields and labels when the language is changed"> 
-    private void updateGUILanguage()                             
+    private void updateGUILanguage()
     {
         btnClose.setText(rb.getString("Overview.btnClose.text"));
         btnReset.setText(rb.getString("Overview.btnReset.text"));
@@ -212,8 +219,8 @@ public class Overview extends javax.swing.JFrame implements Observer
     //</editor-fold>
 
     /**
-     * Metode der opdaterer vores operator string med den valgte operator i vores operator kombobox
-     * Og derefter kalder updateOperator();
+     * Metode der opdaterer vores operator string med den valgte operator i
+     * vores operator kombobox Og derefter kalder updateOperator();
      */
     //<editor-fold defaultstate="collapsed" desc="Updates the Operator String from the Combobox">
     private void selectedOperator()
@@ -229,8 +236,8 @@ public class Overview extends javax.swing.JFrame implements Observer
 
     /**
      * Metode der styrer vores kombobox, som viser alle operators der hentes via
-     * operatorManager og derefter kalder selectedOperator(); hver gang der vælges
-     * en ny operator
+     * operatorManager og derefter kalder selectedOperator(); hver gang der
+     * vælges en ny operator
      */
     //<editor-fold defaultstate="collapsed" desc="Combobox model">
     private void comboboxModel()
@@ -239,7 +246,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         {
             DefaultComboBoxModel model = new DefaultComboBoxModel(managerOperator.getAllOperators().toArray());
             cbxOperator.setModel(model);
-            
+
             cbxOperator.addItemListener(new ItemListener()
             {
                 @Override
@@ -275,8 +282,8 @@ public class Overview extends javax.swing.JFrame implements Observer
     //</editor-fold>
 
     /**
-     * Metode der tilføjer en windowListener til vores Overview frame, der kalder 
-     * closePressed(); hvis vinduet skulle blive lukket
+     * Metode der tilføjer en windowListener til vores Overview frame, der
+     * kalder closePressed(); hvis vinduet skulle blive lukket
      */
     //<editor-fold defaultstate="collapsed" desc="Windowlistener - Window closing">
     private void windowClose()
@@ -291,10 +298,11 @@ public class Overview extends javax.swing.JFrame implements Observer
         });
     }
     //</editor-fold>  
-    
+
     /**
-     * Metoder til at oprette en liste over alle paused ordre. Bruger en listener
-     * til at udfylde informationer i tekstbokse i forhold til den valgte ordre.
+     * Metoder til at oprette en liste over alle paused ordre. Bruger en
+     * listener til at udfylde informationer i tekstbokse i forhold til den
+     * valgte ordre.
      */
     //<editor-fold defaultstate="collapsed" desc="Paused Order Table">
     private void pausedOrderTable()
@@ -302,10 +310,10 @@ public class Overview extends javax.swing.JFrame implements Observer
         try
         {
             managerOrder.addObserver(this);
-            
+
             modelOrder = new OrderTablemodel(managerOrder.getPaused());
             tblOrderList.setModel(modelOrder);
-            
+
             tblOrderList.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
@@ -324,9 +332,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                         txtEmail.setText("");
                         txtPhone.setText("");
                     }
-                    
+
                     Order o = modelOrder.getEventsByRow(selectedRow);
-                    
+
                     try
                     {
                         txtOrderId.setText(String.valueOf(o.getOrderId()));
@@ -354,9 +362,9 @@ public class Overview extends javax.swing.JFrame implements Observer
     //</editor-fold>
 
     /**
-     * Metoder der udfylder lister med alle ordre og alle stockitems. De to lister
-     * opdateres afhængig af hinanden. Stocklist tabellen viser de stocks der passer
-     * til den valgte ordre og omvendt.
+     * Metoder der udfylder lister med alle ordre og alle stockitems. De to
+     * lister opdateres afhængig af hinanden. Stocklist tabellen viser de stocks
+     * der passer til den valgte ordre og omvendt.
      */
     //<editor-fold defaultstate="collapsed" desc="Production Sleevelist Listener">
     private void productionSleeveListSelectioner()
@@ -366,11 +374,11 @@ public class Overview extends javax.swing.JFrame implements Observer
             managerStockItem.addObserver(this);
             modelStocklist = new StockList2TableModel(managerStockItem.getAll());
             tblStockList.setModel(modelStocklist);
-            
+
             managerOrder.addObserver(this);
             modelProduction = new ProductionSleeveTableModel(managerOrder.getAll());
             tblProductionSleeve.setModel(modelProduction);
-            
+
             tblProductionSleeve.getSelectionModel().addListSelectionListener(new ListSelectionListener()
             {
                 @Override
@@ -443,7 +451,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     //</editor-fold>
 
     /**
-     * Metode der tilføjer en mouseListener til vores Production sleeve tabel, 
+     * Metode der tilføjer en mouseListener til vores Production sleeve tabel,
      * som gør det muligt at dobbeltklikke i tabellen. Ved dobbeltklik åbner
      * Orderinfo med tre parametre fra Overview (order, sleeve og operator).
      */
@@ -469,16 +477,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                     }
                     new OrderInfo(o, s, op).setVisible(true);
                 }
-                
+
             }
         });
     }
     //</editor-fold>
-    
+
     /**
-     * Metode der nulstiller vores stocklist og productionsleeve tabeller til standard
-     * via vores getAll metode i StockItemManager og OrderManager og fjerner selection
-     * i de to tabeller
+     * Metode der nulstiller vores stocklist og productionsleeve tabeller til
+     * standard via vores getAll metode i StockItemManager og OrderManager og
+     * fjerner selection i de to tabeller
      */
     //<editor-fold defaultstate="collapsed" desc="Reset Stocklist and ProductionSleeve tables">
     private void resetTables()
@@ -501,7 +509,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
     }
     //</editor-fold>
-    
+
     /**
      * Metode der styrer hvornår reset knappen skal vises, afhænger af hvilken
      * tab der er valgt i vores tabbed pane
@@ -519,7 +527,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         }
     }
     //</editor-fold>
-    
+
     @Override
     public void update(Observable o, Object arg)
     {
@@ -528,6 +536,8 @@ public class Overview extends javax.swing.JFrame implements Observer
             try
             {
                 modelOrder.setCollection(managerOrder.getPaused());
+                modelProduction.setCollection(managerOrder.getAll());
+                modelStocklist.setCollection(managerStockItem.getAll());
             }
             catch (Exception e)
             {
@@ -535,7 +545,7 @@ public class Overview extends javax.swing.JFrame implements Observer
             }
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1075,7 +1085,6 @@ public class Overview extends javax.swing.JFrame implements Observer
     {//GEN-HEADEREND:event_itemHelpActionPerformed
         About.getInstance().setVisible(true);
     }//GEN-LAST:event_itemHelpActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnReset;
