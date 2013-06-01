@@ -122,19 +122,18 @@ public class OrderManager extends Observable
      */
     public ArrayList<Order> getOrderByStock(StockItem s) throws IOException, SQLException
     {
-
-        ArrayList<Order> getOrderByStock = new ArrayList<>();
-        for (int i = 0; i < allOrders.size(); i++)
-        {
-            if (allOrders.get(i).getSleeve().getMaterial().getId() == s.getMaterial().getId())
-            {
-                if (allOrders.get(i).getSleeve().getThickness() == s.getCoilType().getThickness())
-                {
-                    getOrderByStock.add(allOrders.get(i));
-                }
-            }
-
-        }
-        return getOrderByStock;
+//        ArrayList<Order> orderlist = new ArrayList<>();
+//        for (int i = 0; i < allOrders.size(); i++)
+//        {
+//            if (allOrders.get(i).getSleeve().getMaterial().getId() == s.getMaterial().getId())
+//            {
+//                if (allOrders.get(i).getSleeve().getThickness() == s.getCoilType().getThickness())
+//                {
+//                    orderlist.add(allOrders.get(i));
+//                }
+//            }
+//
+//        }
+        return accessor.getOrderByStock(s);
     }
 }
