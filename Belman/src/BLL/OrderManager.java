@@ -17,12 +17,14 @@ import java.util.Observable;
 public class OrderManager extends Observable
 {
 
+    ArrayList<Order> allOrders;
     private ProductionOrderDBManager accessor;
     private static OrderManager instance;
 
-    private OrderManager() throws IOException
+    private OrderManager() throws IOException, SQLException
     {
         accessor = ProductionOrderDBManager.getInstance();
+        allOrders = accessor.getAll();
     }
 
     /**
@@ -31,7 +33,7 @@ public class OrderManager extends Observable
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static OrderManager getInstance() throws FileNotFoundException, IOException
+    public static OrderManager getInstance() throws FileNotFoundException, IOException, SQLException
     {
         if (instance == null)
         {
@@ -79,7 +81,9 @@ public class OrderManager extends Observable
      */
     public ArrayList<Order> getAll() throws IOException, SQLException
     {
-        return accessor.getAll();
+
+        return allOrders;
+
     }
 
     /**
@@ -118,6 +122,19 @@ public class OrderManager extends Observable
      */
     public ArrayList<Order> getOrderByStock(StockItem s) throws IOException, SQLException
     {
-        return accessor.getOrderByStock(s);
+
+        ArrayList<Order> getOrderByStock = new ArrayList<>();
+        for (int i = 0; i < allOrders.size(); i++)
+        {
+            if (allOrders.get(i).getSleeve().getMaterial().getId() == s.getMaterial().getId())
+            {
+                if (allOrders.get(i).getSleeve().getThickness() == s.getCoilType().getThickness())
+                {
+                    getOrderByStock.add(allOrders.get(i));
+                }
+            }
+
+        }
+        return getOrderByStock;
     }
 }

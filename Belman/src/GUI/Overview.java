@@ -17,6 +17,7 @@ import GUI.Models.OrderTablemodel;
 import GUI.Models.ProductionSleeveTableModel;
 import GUI.Models.StockList2TableModel;
 import GUI.Models.StockListTableModel;
+import java.awt.EventQueue;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
@@ -31,6 +32,7 @@ import java.util.ResourceBundle;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 // </editor-fold> 
@@ -70,6 +72,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         rb = ResourceBundle.getBundle("GUI.Bundle");
         //        setExtendedState(MAXIMIZED_BOTH); MAXIMIZED WINDOW
         initComponents();
+        this.pack();
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/belman.png")).getImage());
         windowClose();
         setLocationRelativeTo(null);
@@ -544,6 +547,30 @@ public class Overview extends javax.swing.JFrame implements Observer
                 e.printStackTrace();
             }
         }
+    }
+    
+     /**
+     * Belman Project main metode
+     * @param args the command line arguments
+     */
+    public static void main(String[] args)
+    {
+        EventQueue.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    Overview.getInstance().setVisible(true);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**

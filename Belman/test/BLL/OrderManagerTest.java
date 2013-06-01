@@ -162,8 +162,9 @@ public class OrderManagerTest
         {
             assertEquals(s.getMaterial().getId(), o.get(i).getSleeve().getMaterialId());
         }
-
-        System.out.println("The amount of orders assosiated with order" + s.getId() + " is " + o.size());
+        
+        System.out.println("");
+        System.out.println("The amount of orders assosiated with order [" + s.getId() + "] is " + o.size());
         System.out.println("");
         System.out.println("");
     }
