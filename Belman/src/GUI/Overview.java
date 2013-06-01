@@ -88,12 +88,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     }
     //</editor-fold>
 
-    /**
-     * OverviewHolder is loaded on the first execution of
-     * Overview.getInstance() or the first access to OverviewHolder.INSTANCE,
-     * not before.
-     */
-    //<editor-fold defaultstate="collapsed" desc="Overview Holder">
+    //<editor-fold defaultstate="collapsed" desc="Singleton Overview Holder">
     private static class OverviewHolder
     {
         public static final Overview INSTANCE = new Overview();
@@ -103,7 +98,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     /**
      * Metode til at returnere den eneste instans af denne klasse.
      */
-    //<editor-fold defaultstate="collapsed" desc="Overview singleton getInstance();">
+    //<editor-fold defaultstate="collapsed" desc="Singleton Overview getInstance();">
     public static Overview getInstance()
     {
         return OverviewHolder.INSTANCE;
@@ -177,7 +172,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         btnReset.setText(rb.getString("Overview.btnReset.text"));
 
         menuFile.setText(rb.getString("Overview.menuFile.text"));
-        menuSettings.setText(rb.getString("Overview.menuSettings.text"));
+        menuHelp.setText(rb.getString("Overview.menuHelp.text"));
 
         itemExit.setText(rb.getString("Overview.itemExit.text"));
         itemHelp.setText(rb.getString("Overview.itemHelp.text_1"));
@@ -628,7 +623,7 @@ public class Overview extends javax.swing.JFrame implements Observer
         menuBar = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         itemExit = new javax.swing.JMenuItem();
-        menuSettings = new javax.swing.JMenu();
+        menuHelp = new javax.swing.JMenu();
         itemHelp = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -1019,7 +1014,7 @@ public class Overview extends javax.swing.JFrame implements Observer
 
         menuBar.add(menuFile);
 
-        menuSettings.setText(bundle.getString("Overview.menuSettings.text")); // NOI18N
+        menuHelp.setText(bundle.getString("Overview.menuHelp.text")); // NOI18N
 
         itemHelp.setText(bundle.getString("Overview.itemHelp.text_1")); // NOI18N
         itemHelp.addActionListener(new java.awt.event.ActionListener()
@@ -1029,9 +1024,9 @@ public class Overview extends javax.swing.JFrame implements Observer
                 itemHelpActionPerformed(evt);
             }
         });
-        menuSettings.add(itemHelp);
+        menuHelp.add(itemHelp);
 
-        menuBar.add(menuSettings);
+        menuBar.add(menuHelp);
 
         setJMenuBar(menuBar);
 
@@ -1138,7 +1133,7 @@ public class Overview extends javax.swing.JFrame implements Observer
     private com.toedter.components.JLocaleChooser localeLanguage;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuFile;
-    private javax.swing.JMenu menuSettings;
+    private javax.swing.JMenu menuHelp;
     private javax.swing.JPanel pnlCustomerInfo;
     private javax.swing.JPanel pnlCutting2;
     private javax.swing.JPanel pnlLoggedIn;

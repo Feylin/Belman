@@ -10,13 +10,11 @@ import BE.Order;
 import BLL.OperatorManager;
 import BLL.OrderManager;
 import BLL.SleeveLogManager;
-import com.sun.java.accessibility.util.SwingEventMonitor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 //</editor-fold>
 

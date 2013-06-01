@@ -21,7 +21,6 @@ public class About extends javax.swing.JDialog
 {
     //<editor-fold defaultstate="collapsed" desc="Klasse Variabler">
 
-    private static About instance = null;
     private String osArch = System.getProperty("os.arch");
     private String osVersion = System.getProperty("os.version");
     private String osName = System.getProperty("os.name");
@@ -49,17 +48,20 @@ public class About extends javax.swing.JDialog
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Singleton About Holder">
+    private static class AboutHolder
+    {
+        public static final About INSTANCE = new About();
+    }
+    //</editor-fold>
+    
     /**
      * Metode til at returnere den eneste instans af denne klasse.
      */
-    //<editor-fold defaultstate="collapsed" desc="About Singleton getInstance();">
+    //<editor-fold defaultstate="collapsed" desc="Singleton About getInstance();">
     public static About getInstance()
     {
-        if (instance == null)
-        {
-            instance = new About();
-        }
-        return instance;
+        return AboutHolder.INSTANCE;
     }
     //</editor-fold>
 
