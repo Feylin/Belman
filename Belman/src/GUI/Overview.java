@@ -423,16 +423,16 @@ public class Overview extends javax.swing.JFrame implements Observer
                     StockItem s = modelStocklist.getEventsByRow(selectedRow);
                     try
                     {
-                        if (!managerOrder.getOrderByStock(s).isEmpty())
-                        {
+//                        if (!managerOrder.getOrderByStock(s).isEmpty())
+//                        {
                             modelProduction = new ProductionSleeveTableModel(managerOrder.getOrderByStock(s));
                             tblProductionSleeve.setModel(modelProduction);
-                        }
-                        else
-                        {
-                            modelEmptyStocklist = new StockListTableModel();
-                            tblProductionSleeve.setModel(modelEmptyStocklist);
-                        }
+//                        }
+//                        else
+//                        {
+//                            modelEmptyStocklist = new StockListTableModel();
+//                            tblProductionSleeve.setModel(modelEmptyStocklist);
+//                        }
                     }
                     catch (Exception e)
                     {
